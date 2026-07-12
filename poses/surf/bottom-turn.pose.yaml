@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: bottom-turn
 name: Bottom Turn
 english: Bottom Turn
@@ -6,42 +6,42 @@ discipline: surf
 family: turning
 difficulty: 4
 description: The turn at the base of the wave that sets up everything after it. The surfer compresses deep, drives the weight through the heels and the rail, and reaches the inside arm toward the wave face while the eyes go back up to the lip.
-tags: [surf, turning, rail, power]
+tags: [ surf, turning, rail, power ]
 cues:
   - Compress low and drive from the heels
   - Look where you want to go - back up at the lip
-contact: [toeL, toeR]
+contact: [ toeL, toeR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: 55
+    pitch: 35
   world:
-    spine: 45
-    neck: 68
-    head: 82
-    thighL: -25
-    shinL: -100
-    footL: -15
-    thighR: -60
-    shinR: -145
-    footR: -10
-    upperArmL: -5
-    forearmL: 15
-    handL: 20
-    upperArmR: -150
-    forearmR: -140
-    handR: -135
+    spine: { azimuth: 0, elevation: 45 }
+    neck: { azimuth: 0, elevation: 68 }
+    head: { azimuth: 0, elevation: 82 }
+    thighL: { azimuth: 0, elevation: -25 }
+    shinL: { azimuth: 180, elevation: -80 }
+    footL: { azimuth: 0, elevation: -15 }
+    thighR: { azimuth: 0, elevation: -60 }
+    shinR: { azimuth: 180, elevation: -35 }
+    footR: { azimuth: 0, elevation: -10 }
+    upperArmL: { azimuth: 0, elevation: -5 }
+    forearmL: { azimuth: 0, elevation: 15 }
+    handL: { azimuth: 0, elevation: 20 }
+    upperArmR: { azimuth: 180, elevation: -30 }
+    forearmR: { azimuth: 180, elevation: -40 }
+    handR: { azimuth: 180, elevation: -45 }
 props:
   - type: wave
     amplitude: 0.45
     length: 3.4
     y: -0.2
   - type: surfboard
-    under: [ankleL, ankleR]
+    under: [ ankleL, ankleR ]
     rotation: 10
     length: 1.15
-    offset: [0, -0.1]
+    offset: [ 0, -0.1 ]
 muscles:
-  engaged: [quadriceps, gluteus, obliques, erectorSpinae, adductors]
-  stretched: [hipFlexors, latissimus]
+  engaged: [ quadriceps, gluteus, obliques, erectorSpinae, adductors ]
+  stretched: [ hipFlexors, latissimus ]
+camera: side

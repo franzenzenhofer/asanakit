@@ -47,6 +47,19 @@ export const parseIntOption = (value: string, name: string): number => {
   return n;
 };
 
+const parseCameraPart = (part: string, named: Record<string, number>, bare: number[]): void => {
+  const [key, raw] = part.includes('=') ? part.split('=', 2) : [undefined, part];
+  const n = Number(raw);
+  if (!Number.isFinite(n)) throw new Error(`--camera: "${part}" is not a number`);
+  if (key === undefined) {
+    bare.push(n);
+  } else if (key === 'azimuth' || key === 'elevation' || key === 'roll') {
+    named[key] = n;
+  } else {
+    throw new Error(`--camera: unknown key "${key}" (use azimuth, elevation, roll)`);
+  }
+};
+
 /**
  * A camera flag is either a preset name or comma-separated orbit angles:
  * `--camera back`, `--camera "azimuth=30,elevation=15"`, `--camera 30,15`.
@@ -56,28 +69,17 @@ export const parseCamera = (value: string): CameraInput => {
 
   const named: Record<string, number> = {};
   const bare: number[] = [];
-  for (const part of value.split(',').map((p) => p.trim()).filter((p) => p.length > 0)) {
-    const [key, raw] = part.includes('=') ? part.split('=', 2) : [undefined, part];
-    const n = Number(raw);
-    if (!Number.isFinite(n)) throw new Error(`--camera: "${part}" is not a number`);
-    if (key === undefined) {
-      bare.push(n);
-    } else if (key === 'azimuth' || key === 'elevation' || key === 'roll') {
-      named[key] = n;
-    } else {
-      throw new Error(`--camera: unknown key "${key}" (use azimuth, elevation, roll)`);
-    }
-  }
+  const parts = value.split(',').map((p) => p.trim()).filter((p) => p.length > 0);
+  for (const part of parts) parseCameraPart(part, named, bare);
 
   if (bare.length > 3) throw new Error('--camera takes at most three angles: azimuth,elevation,roll');
+  if (bare.length === 0 && Object.keys(named).length === 0) {
+    throw new Error(`--camera: "${value}" is neither a preset (${CAMERA_PRESET_IDS.join(', ')}) nor angles`);
+  }
   const [azimuth, elevation, roll] = bare;
-  const merged = {
+  return {
     azimuth: named.azimuth ?? azimuth ?? 0,
     elevation: named.elevation ?? elevation ?? 0,
     roll: named.roll ?? roll ?? 0,
   };
-  if (bare.length === 0 && Object.keys(named).length === 0) {
-    throw new Error(`--camera: "${value}" is neither a preset (${CAMERA_PRESET_IDS.join(', ')}) nor angles`);
-  }
-  return merged;
 };

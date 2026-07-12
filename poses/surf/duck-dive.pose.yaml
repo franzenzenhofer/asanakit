@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: duck-dive
 name: Duck Dive
 english: Duck Dive
@@ -6,32 +6,31 @@ discipline: surf
 family: prone
 difficulty: 3
 description: How a shortboarder gets under a broken wave. Both arms straighten and drive the nose deep under the water, the head follows it down, and one knee then punches into the tail to sink the whole board while the wave passes overhead.
-tags: [surf, prone, paddling, defensive, shortboard]
+tags: [ surf, prone, paddling, defensive, shortboard ]
 cues:
   - Straight arms - push the nose down, do not pull it toward you
   - Knee into the tail only once the nose is already under
-contact: [handTipL, handTipR]
+contact: [ handTipL, handTipR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: -30
+    pitch: 120
   world:
-    spine: -38
-    neck: -34
-    head: -30
-    upperArmL: -56
-    forearmL: -56
-    handL: -56
-    upperArmR: -50
-    forearmR: -50
-    handR: -50
-    thighL: 168
-    shinL: 142
-    footL: 150
-    thighR: -175
-    shinR: 95
-    footR: 70
+    spine: { azimuth: 0, elevation: -38 }
+    neck: { azimuth: 0, elevation: -34 }
+    head: { azimuth: 0, elevation: -30 }
+    upperArmL: { azimuth: 0, elevation: -56 }
+    forearmL: { azimuth: 0, elevation: -56 }
+    handL: { azimuth: 0, elevation: -56 }
+    upperArmR: { azimuth: 0, elevation: -50 }
+    forearmR: { azimuth: 0, elevation: -50 }
+    handR: { azimuth: 0, elevation: -50 }
+    thighL: { azimuth: 180, elevation: 12 }
+    shinL: { azimuth: 180, elevation: 38 }
+    footL: { azimuth: 180, elevation: 30 }
+    thighR: { azimuth: 180, elevation: -5 }
+    shinR: { azimuth: 180, elevation: 85 }
+    footR: { azimuth: 0, elevation: 70 }
 props:
   - type: wave
     amplitude: 0.5
@@ -39,9 +38,10 @@ props:
     y: 0.55
     facing: left
   - type: surfboard
-    at: [0.023, 0.108]
+    at: [ 0.023, 0.108 ]
     rotation: -32
     length: 1.35
 muscles:
-  engaged: [triceps, deltoid, latissimus, rectusAbdominis, hipFlexors]
-  stretched: [pectoralis, quadriceps]
+  engaged: [ triceps, deltoid, latissimus, rectusAbdominis, hipFlexors ]
+  stretched: [ pectoralis, quadriceps ]
+camera: side

@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: balasana
 name: Child's Pose
 sanskrit: Bālāsana
@@ -7,37 +7,37 @@ discipline: yoga
 family: forward-fold
 difficulty: 1
 description: Kneeling, the hips sit back on the heels, the torso folds down over the thighs, the forehead rests on the floor and the arms stretch forward along the mat.
-tags: [ashtanga, finishing, forward-fold, restorative]
+tags: [ ashtanga, finishing, forward-fold, restorative ]
 breath: exhale
 drishti: nasagrai
 cues:
   - Let the hips settle back onto the heels
   - Soften the belly and breathe into the back ribs
-contact: [kneeL, kneeR, ankleL, ankleR, toeL, toeR, headTop, handTipL, handTipR]
+contact: [ kneeL, kneeR, ankleL, ankleR, toeL, toeR, headTop, handTipL, handTipR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: -10
+    pitch: 100
   world:
-    pelvis: -10
-    spine: -25
-    neck: -25
-    head: -25
-    upperArmL: -13
-    upperArmR: -13
-    forearmL: -13
-    forearmR: -13
-    handL: -13
-    handR: -13
-    thighL: -40
-    thighR: -40
-    shinL: 180
-    shinR: 180
-    footL: 180
-    footR: 180
+    pelvis: { azimuth: 0, elevation: -10 }
+    spine: { azimuth: 0, elevation: -25 }
+    neck: { azimuth: 0, elevation: -25 }
+    head: { azimuth: 0, elevation: -25 }
+    upperArmL: { azimuth: 0, elevation: -13 }
+    upperArmR: { azimuth: 0, elevation: -13 }
+    forearmL: { azimuth: 0, elevation: -13 }
+    forearmR: { azimuth: 0, elevation: -13 }
+    handL: { azimuth: 0, elevation: -13 }
+    handR: { azimuth: 0, elevation: -13 }
+    thighL: { azimuth: 0, elevation: -40 }
+    thighR: { azimuth: 0, elevation: -40 }
+    shinL: { azimuth: 180, elevation: 0 }
+    shinR: { azimuth: 180, elevation: 0 }
+    footL: { azimuth: 180, elevation: 0 }
+    footR: { azimuth: 180, elevation: 0 }
 props:
   - type: mat
 muscles:
-  engaged: [rectusAbdominis]
-  stretched: [erectorSpinae, latissimus, gluteus, quadriceps, tibialisAnterior]
+  engaged: [ rectusAbdominis ]
+  stretched: [ erectorSpinae, latissimus, gluteus, quadriceps, tibialisAnterior ]
+camera: side

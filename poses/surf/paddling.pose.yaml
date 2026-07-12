@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: paddling
 name: Paddling
 english: Paddling
@@ -6,32 +6,31 @@ discipline: surf
 family: prone
 difficulty: 1
 description: Where ninety percent of surfing actually happens. The surfer lies prone and centred on the deck, chest lifted off the board, legs together over the tail, and pulls through the water one long arm at a time while the other arm recovers.
-tags: [surf, prone, paddling, fundamental, endurance]
+tags: [ surf, prone, paddling, fundamental, endurance ]
 cues:
   - Chest up, back long - do not lie flat
   - Reach past your head and pull the water all the way to the hip
-contact: [hipCenter, kneeL, ankleL, ankleR]
+contact: [ hipCenter, kneeL, ankleL, ankleR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: 0
+    pitch: 90
   world:
-    spine: 34
-    neck: 44
-    head: 28
-    upperArmL: 4
-    forearmL: -2
-    handL: -8
-    upperArmR: 145
-    forearmR: 196
-    handR: 200
-    thighL: 180
-    shinL: 180
-    footL: 180
-    thighR: 177
-    shinR: 176
-    footR: 176
+    spine: { azimuth: 0, elevation: 34 }
+    neck: { azimuth: 0, elevation: 44 }
+    head: { azimuth: 0, elevation: 28 }
+    upperArmL: { azimuth: 0, elevation: 4 }
+    forearmL: { azimuth: 0, elevation: -2 }
+    handL: { azimuth: 0, elevation: -8 }
+    upperArmR: { azimuth: 180, elevation: 35 }
+    forearmR: { azimuth: 180, elevation: -16 }
+    handR: { azimuth: 180, elevation: -20 }
+    thighL: { azimuth: 180, elevation: 0 }
+    shinL: { azimuth: 180, elevation: 0 }
+    footL: { azimuth: 180, elevation: 0 }
+    thighR: { azimuth: 180, elevation: 3 }
+    shinR: { azimuth: 180, elevation: 4 }
+    footR: { azimuth: 180, elevation: 4 }
 props:
   - type: wave
     amplitude: 0.22
@@ -39,10 +38,11 @@ props:
     y: -0.35
     breaking: false
   - type: surfboard
-    under: [hipCenter, chest]
+    under: [ hipCenter, chest ]
     rotation: 0
     length: 1.5
-    offset: [-0.12, -0.13]
+    offset: [ -0.12, -0.13 ]
 muscles:
-  engaged: [latissimus, deltoid, trapezius, erectorSpinae, triceps]
-  stretched: [pectoralis, rectusAbdominis]
+  engaged: [ latissimus, deltoid, trapezius, erectorSpinae, triceps ]
+  stretched: [ pectoralis, rectusAbdominis ]
+camera: side

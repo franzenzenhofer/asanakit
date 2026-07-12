@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: prasarita-padottanasana-c
 name: Wide-Legged Forward Fold C
 sanskrit: Prasārita Pādottānāsana C
@@ -7,40 +7,40 @@ discipline: yoga
 family: standing
 difficulty: 3
 description: Feet wide and parallel, legs straight, the torso folds down between them. The hands are clasped behind the back and the straight arms sweep up over the head toward the floor, opening the shoulders. Held five breaths.
-tags: [ashtanga, standing, forward-fold, shoulder-opener, primary-series]
+tags: [ ashtanga, standing, forward-fold, shoulder-opener, primary-series ]
 breath: exhale
 drishti: nasagrai
 cues:
   - Clasp the hands and straighten the elbows before you fold
   - Let the arms fall over the head, shoulders away from the ears
-contact: [toeL, toeR, headTop]
+contact: [ toeL, toeR, headTop ]
 figure:
-  view: front
   grounded: true
   root:
-    rotation: -90
+    roll: -180
   world:
-    hipL: 0
-    hipR: 180
-    thighL: -62
-    shinL: -62
-    footL: -30
-    thighR: -118
-    shinR: -118
-    footR: -150
-    spine: -90
-    neck: -90
-    head: -90
-    clavicleL: 0
-    clavicleR: 180
-    upperArmL: 105
-    forearmL: 105
-    handL: 105
-    upperArmR: 75
-    forearmR: 75
-    handR: 75
+    hipL: { azimuth: 90, elevation: 0 }
+    hipR: { azimuth: -90, elevation: 0 }
+    thighL: { azimuth: 90, elevation: -62 }
+    shinL: { azimuth: 90, elevation: -62 }
+    footL: { azimuth: 90, elevation: -30 }
+    thighR: { azimuth: -90, elevation: -62 }
+    shinR: { azimuth: -90, elevation: -62 }
+    footR: { azimuth: -90, elevation: -30 }
+    spine: { azimuth: 90, elevation: -90 }
+    neck: { azimuth: 90, elevation: -90 }
+    head: { azimuth: 90, elevation: -90 }
+    clavicleL: { azimuth: 90, elevation: 0 }
+    clavicleR: { azimuth: -90, elevation: 0 }
+    upperArmL: { azimuth: -90, elevation: 75 }
+    forearmL: { azimuth: -90, elevation: 75 }
+    handL: { azimuth: -90, elevation: 75 }
+    upperArmR: { azimuth: 90, elevation: 75 }
+    forearmR: { azimuth: 90, elevation: 75 }
+    handR: { azimuth: 90, elevation: 75 }
 props:
   - type: mat
 muscles:
-  engaged: [quadriceps, deltoid, trapezius]
-  stretched: [hamstrings, adductors, pectoralis, deltoid]
+  engaged: [ quadriceps, deltoid, trapezius ]
+  stretched: [ hamstrings, adductors, pectoralis, deltoid ]
+camera: front

@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: salamba-sarvangasana
 name: Shoulderstand
 sanskrit: Sālamba Sarvāṅgāsana
@@ -7,37 +7,37 @@ discipline: yoga
 family: inversion
 difficulty: 3
 description: An inversion. The shoulders and upper arms rest on the floor, the body stacks vertically upside down, the legs point straight up and the hands support the mid back.
-tags: [ashtanga, finishing, inversion]
+tags: [ ashtanga, finishing, inversion ]
 breath: free
 drishti: nasagrai
 cues:
   - Stack hips over shoulders, lift through the balls of the feet
   - Keep the weight in the shoulders, never on the neck
-contact: [shoulderL, shoulderR, elbowL, elbowR, headTop]
+contact: [ shoulderL, shoulderR, elbowL, elbowR, headTop ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: -90
+    pitch: 180
   world:
-    pelvis: -90
-    spine: -90
-    neck: 180
-    head: 180
-    upperArmL: 0
-    upperArmR: 0
-    forearmL: 134
-    forearmR: 134
-    handL: 134
-    handR: 134
-    thighL: 90
-    thighR: 90
-    shinL: 90
-    shinR: 90
-    footL: 95
-    footR: 95
+    pelvis: { azimuth: 0, elevation: -90 }
+    spine: { azimuth: 0, elevation: -90 }
+    neck: { azimuth: 180, elevation: 0 }
+    head: { azimuth: 180, elevation: 0 }
+    upperArmL: { azimuth: 0, elevation: 0 }
+    upperArmR: { azimuth: 0, elevation: 0 }
+    forearmL: { azimuth: 180, elevation: 46 }
+    forearmR: { azimuth: 180, elevation: 46 }
+    handL: { azimuth: 180, elevation: 46 }
+    handR: { azimuth: 180, elevation: 46 }
+    thighL: { azimuth: 0, elevation: 90 }
+    thighR: { azimuth: 0, elevation: 90 }
+    shinL: { azimuth: 0, elevation: 90 }
+    shinR: { azimuth: 0, elevation: 90 }
+    footL: { azimuth: 180, elevation: 85 }
+    footR: { azimuth: 180, elevation: 85 }
 props:
   - type: mat
 muscles:
-  engaged: [rectusAbdominis, erectorSpinae, gluteus, quadriceps, triceps]
-  stretched: [trapezius, hamstrings]
+  engaged: [ rectusAbdominis, erectorSpinae, gluteus, quadriceps, triceps ]
+  stretched: [ trapezius, hamstrings ]
+camera: side

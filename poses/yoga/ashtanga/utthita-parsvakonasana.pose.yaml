@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: utthita-parsvakonasana
 name: Extended Side Angle
 sanskrit: Utthita Pārśvakoṇāsana
@@ -7,38 +7,38 @@ discipline: yoga
 family: standing
 difficulty: 3
 description: Legs wide, the front knee bends to a right angle, the bottom hand plants on the floor outside the front foot and the top arm reaches over the ear in one long line from the back heel to the fingertips. Held five breaths.
-tags: [ashtanga, standing, side-bend, primary-series]
+tags: [ ashtanga, standing, side-bend, primary-series ]
 breath: exhale
 drishti: hastagrai
 cues:
   - Front shin vertical, knee stacked over the ankle
   - Press the back heel down and stretch the top arm over the ear
-contact: [toeL, toeR, handTipL]
+contact: [ toeL, toeR, handTipL ]
 figure:
-  view: front
   grounded: true
   root:
-    rotation: 30
+    roll: -60
   world:
-    hipL: 0
-    hipR: 180
-    thighL: 0
-    shinL: -90
-    footL: -10
-    thighR: -150
-    shinR: -150
-    footR: -170
-    spine: 30
-    neck: 35
-    head: 55
-    upperArmL: -55
-    forearmL: -55
-    handL: -55
-    upperArmR: 30
-    forearmR: 30
-    handR: 30
+    hipL: { azimuth: 90, elevation: 0 }
+    hipR: { azimuth: -90, elevation: 0 }
+    thighL: { azimuth: 90, elevation: 0 }
+    shinL: { azimuth: 90, elevation: -90 }
+    footL: { azimuth: 90, elevation: -10 }
+    thighR: { azimuth: -90, elevation: -30 }
+    shinR: { azimuth: -90, elevation: -30 }
+    footR: { azimuth: -90, elevation: -10 }
+    spine: { azimuth: 90, elevation: 30 }
+    neck: { azimuth: 90, elevation: 35 }
+    head: { azimuth: 90, elevation: 55 }
+    upperArmL: { azimuth: 90, elevation: -55 }
+    forearmL: { azimuth: 90, elevation: -55 }
+    handL: { azimuth: 90, elevation: -55 }
+    upperArmR: { azimuth: 90, elevation: 30 }
+    forearmR: { azimuth: 90, elevation: 30 }
+    handR: { azimuth: 90, elevation: 30 }
 props:
   - type: mat
 muscles:
-  engaged: [quadriceps, gluteus, obliques, deltoid]
-  stretched: [adductors, latissimus, obliques, hipFlexors]
+  engaged: [ quadriceps, gluteus, obliques, deltoid ]
+  stretched: [ adductors, latissimus, obliques, hipFlexors ]
+camera: front

@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: paschimottanasana
 name: Seated Forward Fold
 sanskrit: Paścimottānāsana
@@ -7,36 +7,36 @@ discipline: yoga
 family: seated
 difficulty: 2
 description: From Staff Pose the torso hinges forward over straight legs, the hands catch the feet and the spine lengthens along the thighs. The whole back line of the body opens.
-tags: [ashtanga, seated, forward-fold, primary-series]
+tags: [ ashtanga, seated, forward-fold, primary-series ]
 breath: exhale
 drishti: padhayoragrai
 cues:
   - Hinge from the hip joints, lead with the chest not the chin
   - Draw the belly in and lengthen the spine on every inhale
-contact: [hipCenter, ankleL, ankleR]
+contact: [ hipCenter, ankleL, ankleR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: 40
+    pitch: 50
   world:
-    thighL: 0
-    thighR: 0
-    shinL: 0
-    shinR: 0
-    footL: 90
-    footR: 90
-    spine: 28
-    neck: 10
-    head: -5
-    upperArmL: -45
-    upperArmR: -45
-    forearmL: 23
-    forearmR: 23
-    handL: -45
-    handR: -45
+    thighL: { azimuth: 0, elevation: 0 }
+    thighR: { azimuth: 0, elevation: 0 }
+    shinL: { azimuth: 0, elevation: 0 }
+    shinR: { azimuth: 0, elevation: 0 }
+    footL: { azimuth: 0, elevation: 90 }
+    footR: { azimuth: 0, elevation: 90 }
+    spine: { azimuth: 0, elevation: 28 }
+    neck: { azimuth: 0, elevation: 10 }
+    head: { azimuth: 0, elevation: -5 }
+    upperArmL: { azimuth: 0, elevation: -45 }
+    upperArmR: { azimuth: 0, elevation: -45 }
+    forearmL: { azimuth: 0, elevation: 23 }
+    forearmR: { azimuth: 0, elevation: 23 }
+    handL: { azimuth: 0, elevation: -45 }
+    handR: { azimuth: 0, elevation: -45 }
 props:
   - type: mat
 muscles:
-  engaged: [quadriceps, rectusAbdominis, biceps]
-  stretched: [hamstrings, erectorSpinae, gastrocnemius, latissimus]
+  engaged: [ quadriceps, rectusAbdominis, biceps ]
+  stretched: [ hamstrings, erectorSpinae, gastrocnemius, latissimus ]
+camera: side

@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: marichyasana-a
 name: Pose Dedicated to the Sage Marichi A
 sanskrit: Marīcyāsana A
@@ -7,36 +7,36 @@ discipline: yoga
 family: seated
 difficulty: 3
 description: One leg reaches straight out in front, the other knee is drawn up with the sole flat on the floor beside the sit bone. The same-side arm wraps around the shin, the hands clasp behind the back and the torso folds over the straight leg.
-tags: [ashtanga, primary-series, seated, forward-fold, bind]
+tags: [ ashtanga, primary-series, seated, forward-fold, bind ]
 breath: exhale
 drishti: padhayoragrai
 cues:
   - Wrap the shoulder low around the shin before you reach for the bind
   - Keep the straight-leg foot flexed and the thigh pressing down
-contact: [hipCenter, hipJointL, hipJointR, kneeL, ankleL, ankleR, toeR]
+contact: [ hipCenter, hipJointL, hipJointR, kneeL, ankleL, ankleR, toeR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: 18
+    pitch: 72
   world:
-    thighL: 0
-    shinL: 0
-    footL: 75
-    thighR: 78
-    shinR: -78
-    footR: 0
-    spine: 24
-    neck: 8
-    head: -8
-    upperArmL: -175
-    forearmL: -168
-    handL: 180
-    upperArmR: -172
-    forearmR: -165
-    handR: 180
+    thighL: { azimuth: 0, elevation: 0 }
+    shinL: { azimuth: 0, elevation: 0 }
+    footL: { azimuth: 0, elevation: 75 }
+    thighR: { azimuth: 0, elevation: 78 }
+    shinR: { azimuth: 0, elevation: -78 }
+    footR: { azimuth: 0, elevation: 0 }
+    spine: { azimuth: 0, elevation: 24 }
+    neck: { azimuth: 0, elevation: 8 }
+    head: { azimuth: 0, elevation: -8 }
+    upperArmL: { azimuth: 180, elevation: -5 }
+    forearmL: { azimuth: 180, elevation: -12 }
+    handL: { azimuth: 180, elevation: 0 }
+    upperArmR: { azimuth: 180, elevation: -8 }
+    forearmR: { azimuth: 180, elevation: -15 }
+    handR: { azimuth: 180, elevation: 0 }
 props:
   - type: mat
 muscles:
-  engaged: [rectusAbdominis, deltoid, quadriceps]
-  stretched: [hamstrings, erectorSpinae, pectoralis]
+  engaged: [ rectusAbdominis, deltoid, quadriceps ]
+  stretched: [ hamstrings, erectorSpinae, pectoralis ]
+camera: side

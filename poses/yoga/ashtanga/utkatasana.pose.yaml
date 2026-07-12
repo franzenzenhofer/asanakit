@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: utkatasana
 name: Chair Pose
 sanskrit: Utkaṭāsana
@@ -7,36 +7,36 @@ discipline: yoga
 family: standing
 difficulty: 2
 description: Knees bend deeply, the hips sit back as if onto a chair, the torso leans forward and the arms reach overhead in line with the spine.
-tags: [ashtanga, surya-namaskara-b, standing]
+tags: [ ashtanga, surya-namaskara-b, standing ]
 breath: inhale
 drishti: angustha-ma-dyai
 cues:
   - Sit the hips back, keep the knees over the ankles
   - Reach the arms up alongside the ears
-contact: [toeL, toeR]
+contact: [ toeL, toeR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: 70
+    pitch: 20
   world:
-    thighL: -30
-    thighR: -30
-    shinL: -100
-    shinR: -100
-    footL: -18
-    footR: -18
-    spine: 65
-    neck: 70
-    head: 72
-    upperArmL: 78
-    upperArmR: 78
-    forearmL: 80
-    forearmR: 80
-    handL: 82
-    handR: 82
+    thighL: { azimuth: 0, elevation: -30 }
+    thighR: { azimuth: 0, elevation: -30 }
+    shinL: { azimuth: 180, elevation: -80 }
+    shinR: { azimuth: 180, elevation: -80 }
+    footL: { azimuth: 0, elevation: -18 }
+    footR: { azimuth: 0, elevation: -18 }
+    spine: { azimuth: 0, elevation: 65 }
+    neck: { azimuth: 0, elevation: 70 }
+    head: { azimuth: 0, elevation: 72 }
+    upperArmL: { azimuth: 0, elevation: 78 }
+    upperArmR: { azimuth: 0, elevation: 78 }
+    forearmL: { azimuth: 0, elevation: 80 }
+    forearmR: { azimuth: 0, elevation: 80 }
+    handL: { azimuth: 0, elevation: 82 }
+    handR: { azimuth: 0, elevation: 82 }
 props:
   - type: mat
 muscles:
-  engaged: [quadriceps, gluteus, erectorSpinae, deltoid]
-  stretched: [gastrocnemius, latissimus]
+  engaged: [ quadriceps, gluteus, erectorSpinae, deltoid ]
+  stretched: [ gastrocnemius, latissimus ]
+camera: side

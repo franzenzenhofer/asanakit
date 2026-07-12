@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: padahastasana
 name: Hand Under Foot Pose
 sanskrit: Pādahastāsana
@@ -7,36 +7,36 @@ discipline: yoga
 family: standing
 difficulty: 3
 description: The deepest of the standing folds. Legs stay straight, the palms slide under the soles of the feet, fingers toward the heels, and the head drops toward the shins.
-tags: [ashtanga, standing, forward-fold]
+tags: [ ashtanga, standing, forward-fold ]
 breath: exhale
 drishti: nasagrai
 cues:
   - Slide the palms under the feet, fingertips to the heels
   - Bend the elbows back and lengthen the spine down
-contact: [toeL, toeR, handTipL, handTipR]
+contact: [ toeL, toeR, handTipL, handTipR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: -78
+    pitch: 168
   world:
-    thighL: -90
-    thighR: -90
-    shinL: -90
-    shinR: -90
-    footL: -18
-    footR: -18
-    spine: -86
-    neck: -85
-    head: -75
-    upperArmL: -110
-    upperArmR: -110
-    forearmL: -43
-    forearmR: -43
-    handL: 180
-    handR: 180
+    thighL: { azimuth: 0, elevation: -90 }
+    thighR: { azimuth: 0, elevation: -90 }
+    shinL: { azimuth: 0, elevation: -90 }
+    shinR: { azimuth: 0, elevation: -90 }
+    footL: { azimuth: 0, elevation: -18 }
+    footR: { azimuth: 0, elevation: -18 }
+    spine: { azimuth: 0, elevation: -86 }
+    neck: { azimuth: 0, elevation: -85 }
+    head: { azimuth: 0, elevation: -75 }
+    upperArmL: { azimuth: 180, elevation: -70 }
+    upperArmR: { azimuth: 180, elevation: -70 }
+    forearmL: { azimuth: 0, elevation: -43 }
+    forearmR: { azimuth: 0, elevation: -43 }
+    handL: { azimuth: 180, elevation: 0 }
+    handR: { azimuth: 180, elevation: 0 }
 props:
   - type: mat
 muscles:
-  engaged: [biceps, quadriceps, rectusAbdominis]
-  stretched: [hamstrings, erectorSpinae, gastrocnemius, latissimus]
+  engaged: [ biceps, quadriceps, rectusAbdominis ]
+  stretched: [ hamstrings, erectorSpinae, gastrocnemius, latissimus ]
+camera: side

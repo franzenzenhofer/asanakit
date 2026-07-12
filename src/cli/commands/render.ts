@@ -49,7 +49,7 @@ const withCommonOptions = (cmd: Command): Command =>
     .option('-s, --style <style>', 'stick | anatomy | silhouette | blueprint | ink | poster | minimal', 'stick')
     .option('-w, --width <px>', 'canvas width', '600')
     .option('-h, --height <px>', 'canvas height', '800')
-    .option('-c, --camera <view>', 'front | back | left | right | side | three-quarter | top, or "azimuth=30,elevation=15"')
+    .option('--camera <view>', 'front | back | left | right | side | three-quarter | top, or "azimuth=30,elevation=15"')
     .option('--title', 'draw the pose name above the figure')
     .option('--caption', 'draw the teaching cues below the figure')
     .option('--muscles', 'force the muscle layer on')

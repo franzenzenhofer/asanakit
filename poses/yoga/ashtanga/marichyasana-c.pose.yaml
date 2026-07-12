@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: marichyasana-c
 name: Pose Dedicated to the Sage Marichi C
 sanskrit: Marīcyāsana C
@@ -7,36 +7,34 @@ discipline: yoga
 family: seated
 difficulty: 3
 description: A seated spinal twist. One leg stays straight on the floor, the other knee is drawn up with the sole flat. The opposite elbow levers against the outside of the bent knee, the back hand presses the floor and the spine turns tall.
-tags: [ashtanga, primary-series, seated, twist]
+tags: [ ashtanga, primary-series, seated, twist ]
 breath: exhale
 drishti: parsva
 cues:
   - Lengthen up on the inhale, turn on the exhale
   - Press the elbow against the knee and the knee back into the elbow
-contact: [hipCenter, hipJointL, hipJointR, kneeL, ankleL, ankleR, toeR, handTipR]
+contact: [ hipCenter, hipJointL, hipJointR, kneeL, ankleL, ankleR, toeR, handTipR ]
 figure:
-  view: side
   grounded: true
-  root:
-    rotation: 90
   world:
-    thighL: 0
-    shinL: 0
-    footL: 75
-    thighR: 78
-    shinR: -78
-    footR: 0
-    spine: 92
-    neck: 96
-    head: 105
-    upperArmL: -60
-    forearmL: 75
-    handL: 85
-    upperArmR: -132
-    forearmR: -132
-    handR: -132
+    thighL: { azimuth: 0, elevation: 0 }
+    shinL: { azimuth: 0, elevation: 0 }
+    footL: { azimuth: 0, elevation: 75 }
+    thighR: { azimuth: 0, elevation: 78 }
+    shinR: { azimuth: 0, elevation: -78 }
+    footR: { azimuth: 0, elevation: 0 }
+    spine: { azimuth: 180, elevation: 88 }
+    neck: { azimuth: 180, elevation: 84 }
+    head: { azimuth: 180, elevation: 75 }
+    upperArmL: { azimuth: 0, elevation: -60 }
+    forearmL: { azimuth: 0, elevation: 75 }
+    handL: { azimuth: 0, elevation: 85 }
+    upperArmR: { azimuth: 180, elevation: -48 }
+    forearmR: { azimuth: 180, elevation: -48 }
+    handR: { azimuth: 180, elevation: -48 }
 props:
   - type: mat
 muscles:
-  engaged: [obliques, erectorSpinae, deltoid]
-  stretched: [obliques, gluteus, trapezius]
+  engaged: [ obliques, erectorSpinae, deltoid ]
+  stretched: [ obliques, gluteus, trapezius ]
+camera: side

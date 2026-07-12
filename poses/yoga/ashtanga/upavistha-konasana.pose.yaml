@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: upavistha-konasana
 name: Wide-Angle Seated Forward Fold
 sanskrit: Upaviṣṭha Koṇāsana
@@ -7,36 +7,36 @@ discipline: yoga
 family: seated
 difficulty: 3
 description: Seated with the legs straight and spread wide on the floor. The torso hinges forward from the hips, the hands take hold of the outer edges of the feet and the chest travels toward the mat.
-tags: [ashtanga, primary-series, seated, forward-fold, hip-opener]
+tags: [ ashtanga, primary-series, seated, forward-fold, hip-opener ]
 breath: exhale
 drishti: nasagrai
 cues:
   - Roll the thighs open so the kneecaps point at the ceiling
   - Walk the hands out and lead with the chest, not the chin
-contact: [hipCenter, hipJointL, hipJointR, kneeR, ankleR]
+contact: [ hipCenter, hipJointL, hipJointR, kneeR, ankleR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: 32
+    pitch: 58
   world:
-    thighL: 8
-    shinL: 8
-    footL: 82
-    thighR: 0
-    shinR: 0
-    footR: 75
-    spine: 40
-    neck: 20
-    head: 5
-    upperArmL: -30
-    forearmL: -20
-    handL: -25
-    upperArmR: -30
-    forearmR: -20
-    handR: -25
+    thighL: { azimuth: 0, elevation: 8 }
+    shinL: { azimuth: 0, elevation: 8 }
+    footL: { azimuth: 0, elevation: 82 }
+    thighR: { azimuth: 0, elevation: 0 }
+    shinR: { azimuth: 0, elevation: 0 }
+    footR: { azimuth: 0, elevation: 75 }
+    spine: { azimuth: 0, elevation: 40 }
+    neck: { azimuth: 0, elevation: 20 }
+    head: { azimuth: 0, elevation: 5 }
+    upperArmL: { azimuth: 0, elevation: -30 }
+    forearmL: { azimuth: 0, elevation: -20 }
+    handL: { azimuth: 0, elevation: -25 }
+    upperArmR: { azimuth: 0, elevation: -30 }
+    forearmR: { azimuth: 0, elevation: -20 }
+    handR: { azimuth: 0, elevation: -25 }
 props:
   - type: mat
 muscles:
-  engaged: [quadriceps, rectusAbdominis]
-  stretched: [hamstrings, adductors, erectorSpinae]
+  engaged: [ quadriceps, rectusAbdominis ]
+  stretched: [ hamstrings, adductors, erectorSpinae ]
+camera: side

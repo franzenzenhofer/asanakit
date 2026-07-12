@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: karnapidasana
 name: Ear Pressure Pose
 sanskrit: Karṇapīḍāsana
@@ -7,37 +7,37 @@ discipline: yoga
 family: inversion
 difficulty: 3
 description: From plough the knees bend all the way down to the floor beside the ears, the shins rest along the floor and the arms stay flat.
-tags: [ashtanga, finishing, inversion, forward-fold]
+tags: [ ashtanga, finishing, inversion, forward-fold ]
 breath: exhale
 drishti: nasagrai
 cues:
   - Let the knees squeeze gently in beside the ears
   - Keep lifting the hips, breathe into the back body
-contact: [shoulderL, shoulderR, elbowL, elbowR, handTipL, handTipR, headTop, kneeL, kneeR, ankleL, ankleR, toeL, toeR]
+contact: [ shoulderL, shoulderR, elbowL, elbowR, handTipL, handTipR, headTop, kneeL, kneeR, ankleL, ankleR, toeL, toeR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: -60
+    pitch: 150
   world:
-    pelvis: -60
-    spine: -60
-    neck: 180
-    head: 180
-    upperArmL: 0
-    upperArmR: 0
-    forearmL: 0
-    forearmR: 0
-    handL: 0
-    handR: 0
-    thighL: -119
-    thighR: -119
-    shinL: 180
-    shinR: 180
-    footL: 185
-    footR: 185
+    pelvis: { azimuth: 0, elevation: -60 }
+    spine: { azimuth: 0, elevation: -60 }
+    neck: { azimuth: 180, elevation: 0 }
+    head: { azimuth: 180, elevation: 0 }
+    upperArmL: { azimuth: 0, elevation: 0 }
+    upperArmR: { azimuth: 0, elevation: 0 }
+    forearmL: { azimuth: 0, elevation: 0 }
+    forearmR: { azimuth: 0, elevation: 0 }
+    handL: { azimuth: 0, elevation: 0 }
+    handR: { azimuth: 0, elevation: 0 }
+    thighL: { azimuth: 180, elevation: -61 }
+    thighR: { azimuth: 180, elevation: -61 }
+    shinL: { azimuth: 180, elevation: 0 }
+    shinR: { azimuth: 180, elevation: 0 }
+    footL: { azimuth: 180, elevation: -5 }
+    footR: { azimuth: 180, elevation: -5 }
 props:
   - type: mat
 muscles:
-  engaged: [rectusAbdominis, deltoid]
-  stretched: [erectorSpinae, trapezius, gluteus, hamstrings]
+  engaged: [ rectusAbdominis, deltoid ]
+  stretched: [ erectorSpinae, trapezius, gluteus, hamstrings ]
+camera: side

@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: virabhadrasana-a
 name: Warrior I
 sanskrit: Vīrabhadrāsana A
@@ -7,36 +7,36 @@ discipline: yoga
 family: standing
 difficulty: 3
 description: A long lunge. The front knee bends over the ankle, the back leg drives straight to a grounded heel, the chest lifts and the arms reach overhead.
-tags: [ashtanga, standing, lunge, backbend]
+tags: [ ashtanga, standing, lunge, backbend ]
 breath: inhale
 drishti: angustha-ma-dyai
 cues:
   - Front knee tracks over the ankle, back leg straight and strong
   - Lift the chest, reach the fingertips up
-contact: [toeL, toeR]
+contact: [ toeL, toeR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: 88
+    pitch: 2
   world:
-    thighL: -15
-    shinL: -95
-    footL: -18
-    thighR: -142
-    shinR: -142
-    footR: -15
-    spine: 92
-    neck: 97
-    head: 100
-    upperArmL: 99
-    upperArmR: 99
-    forearmL: 97
-    forearmR: 97
-    handL: 95
-    handR: 95
+    thighL: { azimuth: 0, elevation: -15 }
+    shinL: { azimuth: 180, elevation: -85 }
+    footL: { azimuth: 0, elevation: -18 }
+    thighR: { azimuth: 180, elevation: -38 }
+    shinR: { azimuth: 180, elevation: -38 }
+    footR: { azimuth: 0, elevation: -15 }
+    spine: { azimuth: 180, elevation: 88 }
+    neck: { azimuth: 180, elevation: 83 }
+    head: { azimuth: 180, elevation: 80 }
+    upperArmL: { azimuth: 180, elevation: 81 }
+    upperArmR: { azimuth: 180, elevation: 81 }
+    forearmL: { azimuth: 180, elevation: 83 }
+    forearmR: { azimuth: 180, elevation: 83 }
+    handL: { azimuth: 180, elevation: 85 }
+    handR: { azimuth: 180, elevation: 85 }
 props:
   - type: mat
 muscles:
-  engaged: [quadriceps, gluteus, erectorSpinae, deltoid]
-  stretched: [hipFlexors, gastrocnemius, pectoralis]
+  engaged: [ quadriceps, gluteus, erectorSpinae, deltoid ]
+  stretched: [ hipFlexors, gastrocnemius, pectoralis ]
+camera: side

@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: adho-mukha-svanasana
 name: Downward-Facing Dog
 sanskrit: Adho Mukha Śvānāsana
@@ -7,36 +7,36 @@ discipline: yoga
 family: inversion
 difficulty: 2
 description: An inverted V. Hips lift back and up, heels press down, the spine lengthens from wrists to sit bones. Held five breaths.
-tags: [ashtanga, surya-namaskara-a, surya-namaskara-b, inversion, forward-fold]
+tags: [ ashtanga, surya-namaskara-a, surya-namaskara-b, inversion, forward-fold ]
 breath: exhale
 drishti: nabi-chakra
 cues:
   - Lift the sit bones, lengthen the spine
   - Press the floor away through the whole hand
-contact: [toeL, toeR, handTipL, handTipR]
+contact: [ toeL, toeR, handTipL, handTipR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: -48
+    pitch: 138
   world:
-    thighL: -125
-    thighR: -125
-    shinL: -125
-    shinR: -125
-    footL: -20
-    footR: -20
-    spine: -48
-    neck: -48
-    head: -48
-    upperArmL: -50
-    upperArmR: -50
-    forearmL: -50
-    forearmR: -50
-    handL: -8
-    handR: -8
+    thighL: { azimuth: 180, elevation: -55 }
+    thighR: { azimuth: 180, elevation: -55 }
+    shinL: { azimuth: 180, elevation: -55 }
+    shinR: { azimuth: 180, elevation: -55 }
+    footL: { azimuth: 0, elevation: -20 }
+    footR: { azimuth: 0, elevation: -20 }
+    spine: { azimuth: 0, elevation: -48 }
+    neck: { azimuth: 0, elevation: -48 }
+    head: { azimuth: 0, elevation: -48 }
+    upperArmL: { azimuth: 0, elevation: -50 }
+    upperArmR: { azimuth: 0, elevation: -50 }
+    forearmL: { azimuth: 0, elevation: -50 }
+    forearmR: { azimuth: 0, elevation: -50 }
+    handL: { azimuth: 0, elevation: -8 }
+    handR: { azimuth: 0, elevation: -8 }
 props:
   - type: mat
 muscles:
-  engaged: [deltoid, triceps, quadriceps, serratus]
-  stretched: [hamstrings, gastrocnemius, latissimus]
+  engaged: [ deltoid, triceps, quadriceps, serratus ]
+  stretched: [ hamstrings, gastrocnemius, latissimus ]
+camera: side

@@ -10,9 +10,7 @@ const mirrorJointId = (id: string): string => {
 };
 
 const swapSides = <V>(angles: Partial<Record<JointId, V>>): Partial<Record<JointId, V>> =>
-  Object.fromEntries(
-    Object.entries(angles).map(([id, value]) => [mirrorJointId(id), value]),
-  ) as Partial<Record<JointId, V>>;
+  Object.fromEntries(Object.entries(angles).map(([id, value]) => [mirrorJointId(id), value]));
 
 /**
  * Swap every left joint with its right counterpart; centre bones stay put.
@@ -35,7 +33,7 @@ export const mirrorWorld = (
       id,
       { ...dir, azimuth: -dir.azimuth, ...(dir.twist === undefined ? {} : { twist: -dir.twist }) },
     ]),
-  ) as Partial<Record<JointId, WorldDirection>>;
+  );
 
 /** Turn the declarative figure block of a pose file into a solvable kinematic pose. */
 export const resolveFigure = (figure: FigureSpec): KinematicPose => {

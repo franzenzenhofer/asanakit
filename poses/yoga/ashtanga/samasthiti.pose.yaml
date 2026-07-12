@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: samasthiti
 name: Samasthiti
 sanskrit: Samasthitiḥ
@@ -7,23 +7,23 @@ discipline: yoga
 family: standing
 difficulty: 1
 description: The starting and ending posture of every vinyasa. Feet together, weight even, spine long.
-tags: [ashtanga, surya-namaskara-a, surya-namaskara-b, standing]
+tags: [ ashtanga, surya-namaskara-a, surya-namaskara-b, standing ]
 breath: free
 drishti: nasagrai
 cues:
   - Feet together, weight even across both soles
   - Crown lifts, shoulders soften down
-contact: [toeL, toeR]
+contact: [ toeL, toeR ]
 figure:
-  view: side
   grounded: true
   world:
-    upperArmL: -88
-    upperArmR: -88
-    forearmL: -88
-    forearmR: -88
-    handL: -80
+    upperArmL: { azimuth: 0, elevation: -88 }
+    upperArmR: { azimuth: 0, elevation: -88 }
+    forearmL: { azimuth: 0, elevation: -88 }
+    forearmR: { azimuth: 0, elevation: -88 }
+    handL: { azimuth: 0, elevation: -80 }
 props:
   - type: mat
 muscles:
-  engaged: [quadriceps, erectorSpinae]
+  engaged: [ quadriceps, erectorSpinae ]
+camera: side

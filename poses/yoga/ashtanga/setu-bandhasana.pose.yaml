@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: setu-bandhasana
 name: Bridge Pose
 sanskrit: Setu Bandhāsana
@@ -7,36 +7,36 @@ discipline: yoga
 family: backbend
 difficulty: 3
 description: Lying on the back with the knees bent and the feet planted, the hips and chest lift while the crown of the head stays on the floor. The final posture of the primary series.
-tags: [ashtanga, backbend, primary-series, neck]
+tags: [ ashtanga, backbend, primary-series, neck ]
 breath: inhale
 drishti: broomadhya
 cues:
   - Press the feet down and lift the hips before the chest
   - Keep weight in the feet, never crank the neck
-contact: [headTop, toeL, toeR, handTipL, handTipR]
+contact: [ headTop, toeL, toeR, handTipL, handTipR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: 180
+    pitch: -90
   world:
-    thighL: -10
-    thighR: -10
-    shinL: -114
-    shinR: -114
-    footL: -18
-    footR: -18
-    spine: 225
-    neck: 240
-    head: 250
-    upperArmL: -83
-    upperArmR: -83
-    forearmL: -4
-    forearmR: -4
-    handL: 0
-    handR: 0
+    thighL: { azimuth: 0, elevation: -10 }
+    thighR: { azimuth: 0, elevation: -10 }
+    shinL: { azimuth: 180, elevation: -66 }
+    shinR: { azimuth: 180, elevation: -66 }
+    footL: { azimuth: 0, elevation: -18 }
+    footR: { azimuth: 0, elevation: -18 }
+    spine: { azimuth: 180, elevation: -45 }
+    neck: { azimuth: 180, elevation: -60 }
+    head: { azimuth: 180, elevation: -70 }
+    upperArmL: { azimuth: 0, elevation: -83 }
+    upperArmR: { azimuth: 0, elevation: -83 }
+    forearmL: { azimuth: 0, elevation: -4 }
+    forearmR: { azimuth: 0, elevation: -4 }
+    handL: { azimuth: 0, elevation: 0 }
+    handR: { azimuth: 0, elevation: 0 }
 props:
   - type: mat
 muscles:
-  engaged: [gluteus, hamstrings, erectorSpinae, quadriceps]
-  stretched: [rectusAbdominis, hipFlexors, pectoralis]
+  engaged: [ gluteus, hamstrings, erectorSpinae, quadriceps ]
+  stretched: [ rectusAbdominis, hipFlexors, pectoralis ]
+camera: side

@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: virabhadrasana-b
 name: Warrior II
 sanskrit: Vīrabhadrāsana B
@@ -7,36 +7,34 @@ discipline: yoga
 family: standing
 difficulty: 3
 description: A wide stance. The front knee bends to a right angle stacked over the ankle, the back leg stays straight, and the arms extend level with the floor.
-tags: [ashtanga, standing, lunge, hip-opener]
+tags: [ ashtanga, standing, lunge, hip-opener ]
 breath: exhale
 drishti: hastagrai
 cues:
   - Bend the front knee until the shin is vertical
   - Extend evenly through both fingertips, shoulders down
-contact: [toeL, toeR]
+contact: [ toeL, toeR ]
 figure:
-  view: front
   grounded: true
-  root:
-    rotation: 90
   world:
-    thighL: -10
-    shinL: -90
-    footL: -20
-    thighR: -144
-    shinR: -144
-    footR: -165
-    spine: 90
-    neck: 90
-    head: 90
-    upperArmL: 0
-    forearmL: 0
-    handL: 0
-    upperArmR: 180
-    forearmR: 180
-    handR: 180
+    thighL: { azimuth: 90, elevation: -10 }
+    shinL: { azimuth: 90, elevation: -90 }
+    footL: { azimuth: 90, elevation: -20 }
+    thighR: { azimuth: -90, elevation: -36 }
+    shinR: { azimuth: -90, elevation: -36 }
+    footR: { azimuth: -90, elevation: -15 }
+    spine: { azimuth: 90, elevation: 90 }
+    neck: { azimuth: 90, elevation: 90 }
+    head: { azimuth: 90, elevation: 90 }
+    upperArmL: { azimuth: 90, elevation: 0 }
+    forearmL: { azimuth: 90, elevation: 0 }
+    handL: { azimuth: 90, elevation: 0 }
+    upperArmR: { azimuth: -90, elevation: 0 }
+    forearmR: { azimuth: -90, elevation: 0 }
+    handR: { azimuth: -90, elevation: 0 }
 props:
   - type: mat
 muscles:
-  engaged: [quadriceps, gluteus, adductors, deltoid]
-  stretched: [adductors, hipFlexors, pectoralis]
+  engaged: [ quadriceps, gluteus, adductors, deltoid ]
+  stretched: [ adductors, hipFlexors, pectoralis ]
+camera: front

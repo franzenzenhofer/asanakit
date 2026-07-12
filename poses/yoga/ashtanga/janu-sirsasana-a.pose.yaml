@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: janu-sirsasana-a
 name: Head-to-Knee Pose A
 sanskrit: Jānu Śīrṣāsana A
@@ -7,36 +7,36 @@ discipline: yoga
 family: seated
 difficulty: 3
 description: One leg reaches straight out in front, the other knee folds out to the side with the sole of the foot against the inner thigh. The torso turns over the straight leg, the hands take the foot and the forehead travels toward the shin.
-tags: [ashtanga, primary-series, seated, forward-fold]
+tags: [ ashtanga, primary-series, seated, forward-fold ]
 breath: exhale
 drishti: padhayoragrai
 cues:
   - Square the chest over the straight leg before you fold
   - Press the bent knee back and keep the straight-leg thigh firm
-contact: [hipCenter, hipJointL, hipJointR, kneeL, ankleL]
+contact: [ hipCenter, hipJointL, hipJointR, kneeL, ankleL ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: 32
+    pitch: 58
   world:
-    thighL: 0
-    shinL: 0
-    footL: 75
-    thighR: 80
-    shinR: -60
-    footR: 170
-    spine: 40
-    neck: 20
-    head: 5
-    upperArmL: -30
-    forearmL: -20
-    handL: -25
-    upperArmR: -30
-    forearmR: -20
-    handR: -25
+    thighL: { azimuth: 0, elevation: 0 }
+    shinL: { azimuth: 0, elevation: 0 }
+    footL: { azimuth: 0, elevation: 75 }
+    thighR: { azimuth: 0, elevation: 80 }
+    shinR: { azimuth: 0, elevation: -60 }
+    footR: { azimuth: 180, elevation: 10 }
+    spine: { azimuth: 0, elevation: 40 }
+    neck: { azimuth: 0, elevation: 20 }
+    head: { azimuth: 0, elevation: 5 }
+    upperArmL: { azimuth: 0, elevation: -30 }
+    forearmL: { azimuth: 0, elevation: -20 }
+    handL: { azimuth: 0, elevation: -25 }
+    upperArmR: { azimuth: 0, elevation: -30 }
+    forearmR: { azimuth: 0, elevation: -20 }
+    handR: { azimuth: 0, elevation: -25 }
 props:
   - type: mat
 muscles:
-  engaged: [quadriceps, rectusAbdominis]
-  stretched: [hamstrings, erectorSpinae, adductors]
+  engaged: [ quadriceps, rectusAbdominis ]
+  stretched: [ hamstrings, erectorSpinae, adductors ]
+camera: side

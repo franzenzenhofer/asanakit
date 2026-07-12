@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: dandasana
 name: Staff Pose
 sanskrit: Daṇḍāsana
@@ -7,36 +7,34 @@ discipline: yoga
 family: seated
 difficulty: 1
 description: The seated base of the primary series. Sit on the sit bones with the legs straight along the floor, feet flexed, hands beside the hips, spine stacked vertically like a staff.
-tags: [ashtanga, seated, foundation, primary-series]
+tags: [ ashtanga, seated, foundation, primary-series ]
 breath: free
 drishti: nasagrai
 cues:
   - Press the hands down and lift the chest out of the waist
   - Flex the feet and press the thighs into the floor
-contact: [hipCenter, ankleL, ankleR, handTipL, handTipR]
+contact: [ hipCenter, ankleL, ankleR, handTipL, handTipR ]
 figure:
-  view: side
   grounded: true
-  root:
-    rotation: 90
   world:
-    thighL: 0
-    thighR: 0
-    shinL: 0
-    shinR: 0
-    footL: 90
-    footR: 90
-    spine: 90
-    neck: 90
-    head: 90
-    upperArmL: -117
-    upperArmR: -117
-    forearmL: -58
-    forearmR: -58
-    handL: 0
-    handR: 0
+    thighL: { azimuth: 0, elevation: 0 }
+    thighR: { azimuth: 0, elevation: 0 }
+    shinL: { azimuth: 0, elevation: 0 }
+    shinR: { azimuth: 0, elevation: 0 }
+    footL: { azimuth: 0, elevation: 90 }
+    footR: { azimuth: 0, elevation: 90 }
+    spine: { azimuth: 0, elevation: 90 }
+    neck: { azimuth: 0, elevation: 90 }
+    head: { azimuth: 0, elevation: 90 }
+    upperArmL: { azimuth: 180, elevation: -63 }
+    upperArmR: { azimuth: 180, elevation: -63 }
+    forearmL: { azimuth: 0, elevation: -58 }
+    forearmR: { azimuth: 0, elevation: -58 }
+    handL: { azimuth: 0, elevation: 0 }
+    handR: { azimuth: 0, elevation: 0 }
 props:
   - type: mat
 muscles:
-  engaged: [quadriceps, rectusAbdominis, erectorSpinae, triceps]
-  stretched: [hamstrings, gastrocnemius, pectoralis]
+  engaged: [ quadriceps, rectusAbdominis, erectorSpinae, triceps ]
+  stretched: [ hamstrings, gastrocnemius, pectoralis ]
+camera: side

@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: sirsasana
 name: Headstand
 sanskrit: Śīrṣāsana
@@ -7,37 +7,37 @@ discipline: yoga
 family: inversion
 difficulty: 4
 description: An inversion. The crown of the head and the forearms rest on the floor, the body stacks upside down in one vertical line and the legs reach straight up.
-tags: [ashtanga, finishing, inversion, balance]
+tags: [ ashtanga, finishing, inversion, balance ]
 breath: free
 drishti: nasagrai
 cues:
   - Press the forearms down and lift the shoulders away from the ears
   - Stack ankles over hips over shoulders, ribs in
-contact: [headTop, elbowL, elbowR, handTipL, handTipR]
+contact: [ headTop, elbowL, elbowR, handTipL, handTipR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: -90
+    pitch: 180
   world:
-    pelvis: -90
-    spine: -90
-    neck: -90
-    head: -90
-    upperArmL: -100
-    upperArmR: -100
-    forearmL: 0
-    forearmR: 0
-    handL: 0
-    handR: 0
-    thighL: 90
-    thighR: 90
-    shinL: 90
-    shinR: 90
-    footL: 95
-    footR: 95
+    pelvis: { azimuth: 0, elevation: -90 }
+    spine: { azimuth: 0, elevation: -90 }
+    neck: { azimuth: 0, elevation: -90 }
+    head: { azimuth: 0, elevation: -90 }
+    upperArmL: { azimuth: 180, elevation: -80 }
+    upperArmR: { azimuth: 180, elevation: -80 }
+    forearmL: { azimuth: 0, elevation: 0 }
+    forearmR: { azimuth: 0, elevation: 0 }
+    handL: { azimuth: 0, elevation: 0 }
+    handR: { azimuth: 0, elevation: 0 }
+    thighL: { azimuth: 0, elevation: 90 }
+    thighR: { azimuth: 0, elevation: 90 }
+    shinL: { azimuth: 0, elevation: 90 }
+    shinR: { azimuth: 0, elevation: 90 }
+    footL: { azimuth: 180, elevation: 85 }
+    footR: { azimuth: 180, elevation: 85 }
 props:
   - type: mat
 muscles:
-  engaged: [deltoid, trapezius, rectusAbdominis, erectorSpinae, quadriceps, adductors]
-  stretched: [hamstrings]
+  engaged: [ deltoid, trapezius, rectusAbdominis, erectorSpinae, quadriceps, adductors ]
+  stretched: [ hamstrings ]
+camera: side

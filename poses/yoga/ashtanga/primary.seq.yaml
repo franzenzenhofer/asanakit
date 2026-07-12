@@ -1,11 +1,9 @@
-asanakit: 1
+asanakit: 2
 id: ashtanga-primary
 name: Ashtanga Primary Series
 tradition: Ashtanga Vinyasa Yoga
 description: >-
-  Yoga Chikitsa, the first series of Ashtanga Vinyasa Yoga: the opening sun salutations,
-  the standing sequence, the seated sequence and the finishing sequence. Asymmetric
-  postures are marked "both" and render twice, once per side.
+  Yoga Chikitsa, the first series of Ashtanga Vinyasa Yoga: the opening sun salutations, the standing sequence, the seated sequence and the finishing sequence. Asymmetric postures are marked "both" and render twice, once per side.
 
 sections:
   - name: Surya Namaskara A

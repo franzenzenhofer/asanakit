@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: halasana
 name: Plough Pose
 sanskrit: Halāsana
@@ -7,37 +7,37 @@ discipline: yoga
 family: inversion
 difficulty: 3
 description: From shoulderstand the straight legs fold over the head until the toes touch the floor beyond the head, while the arms lie flat along the floor.
-tags: [ashtanga, finishing, inversion, forward-fold]
+tags: [ ashtanga, finishing, inversion, forward-fold ]
 breath: exhale
 drishti: nabi-chakra
 cues:
   - Keep the legs straight, lift the sit bones toward the ceiling
   - Weight stays in the shoulders, the neck stays soft
-contact: [shoulderL, shoulderR, elbowL, elbowR, handTipL, handTipR, headTop, toeL, toeR]
+contact: [ shoulderL, shoulderR, elbowL, elbowR, handTipL, handTipR, headTop, toeL, toeR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: -90
+    pitch: 180
   world:
-    pelvis: -90
-    spine: -90
-    neck: 180
-    head: 180
-    upperArmL: 0
-    upperArmR: 0
-    forearmL: 0
-    forearmR: 0
-    handL: 0
-    handR: 0
-    thighL: -147
-    thighR: -147
-    shinL: -147
-    shinR: -147
-    footL: 185
-    footR: 185
+    pelvis: { azimuth: 0, elevation: -90 }
+    spine: { azimuth: 0, elevation: -90 }
+    neck: { azimuth: 180, elevation: 0 }
+    head: { azimuth: 180, elevation: 0 }
+    upperArmL: { azimuth: 0, elevation: 0 }
+    upperArmR: { azimuth: 0, elevation: 0 }
+    forearmL: { azimuth: 0, elevation: 0 }
+    forearmR: { azimuth: 0, elevation: 0 }
+    handL: { azimuth: 0, elevation: 0 }
+    handR: { azimuth: 0, elevation: 0 }
+    thighL: { azimuth: 180, elevation: -33 }
+    thighR: { azimuth: 180, elevation: -33 }
+    shinL: { azimuth: 180, elevation: -33 }
+    shinR: { azimuth: 180, elevation: -33 }
+    footL: { azimuth: 180, elevation: -5 }
+    footR: { azimuth: 180, elevation: -5 }
 props:
   - type: mat
 muscles:
-  engaged: [rectusAbdominis, quadriceps, deltoid]
-  stretched: [hamstrings, erectorSpinae, trapezius, gastrocnemius]
+  engaged: [ rectusAbdominis, quadriceps, deltoid ]
+  stretched: [ hamstrings, erectorSpinae, trapezius, gastrocnemius ]
+camera: side

@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: baddha-konasana
 name: Bound Angle Pose
 sanskrit: Baddha Koṇāsana
@@ -7,36 +7,34 @@ discipline: yoga
 family: seated
 difficulty: 2
 description: Seated with the soles of the feet pressed together and the heels drawn in toward the perineum. The knees release wide toward the floor, the hands hold the feet and the spine lifts long from the sit bones.
-tags: [ashtanga, primary-series, seated, hip-opener]
+tags: [ ashtanga, primary-series, seated, hip-opener ]
 breath: free
 drishti: nasagrai
 cues:
   - Draw the heels in, let the knees fall wide
   - Lift the chest, hold the feet and open them like a book
-contact: [hipCenter, hipJointL, hipJointR, ankleL, ankleR]
+contact: [ hipCenter, hipJointL, hipJointR, ankleL, ankleR ]
 figure:
-  view: side
   grounded: true
-  root:
-    rotation: 90
   world:
-    thighL: 62
-    shinL: -62
-    footL: 55
-    thighR: 62
-    shinR: -62
-    footR: 55
-    spine: 88
-    neck: 90
-    head: 90
-    upperArmL: -65
-    forearmL: -40
-    handL: -10
-    upperArmR: -65
-    forearmR: -40
-    handR: -10
+    thighL: { azimuth: 0, elevation: 62 }
+    shinL: { azimuth: 0, elevation: -62 }
+    footL: { azimuth: 0, elevation: 55 }
+    thighR: { azimuth: 0, elevation: 62 }
+    shinR: { azimuth: 0, elevation: -62 }
+    footR: { azimuth: 0, elevation: 55 }
+    spine: { azimuth: 0, elevation: 88 }
+    neck: { azimuth: 0, elevation: 90 }
+    head: { azimuth: 0, elevation: 90 }
+    upperArmL: { azimuth: 0, elevation: -65 }
+    forearmL: { azimuth: 0, elevation: -40 }
+    handL: { azimuth: 0, elevation: -10 }
+    upperArmR: { azimuth: 0, elevation: -65 }
+    forearmR: { azimuth: 0, elevation: -40 }
+    handR: { azimuth: 0, elevation: -10 }
 props:
   - type: mat
 muscles:
-  engaged: [erectorSpinae, gluteus]
-  stretched: [adductors, hipFlexors]
+  engaged: [ erectorSpinae, gluteus ]
+  stretched: [ adductors, hipFlexors ]
+camera: side

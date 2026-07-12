@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: cutback
 name: Cutback
 english: Cutback
@@ -6,42 +6,42 @@ discipline: surf
 family: turning
 difficulty: 4
 description: The turn that takes the surfer back to the power source. Out on the shoulder the board is swung around by the torso - the chest and both arms lead the rotation back toward the breaking part of the wave, the weight settles over the tail and the front leg extends.
-tags: [surf, turning, rotation, flow]
+tags: [ surf, turning, rotation, flow ]
 cues:
   - Turn your chest and arms first, the board follows
   - Weight back over the tail to pivot, not the nose
-contact: [toeL, toeR]
+contact: [ toeL, toeR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: 82
+    pitch: 8
   world:
-    spine: 100
-    neck: 118
-    head: 145
-    thighL: -45
-    shinL: -105
-    footL: -20
-    thighR: -85
-    shinR: -135
-    footR: -15
-    upperArmL: -178
-    forearmL: -172
-    handL: -170
-    upperArmR: 132
-    forearmR: 158
-    handR: 162
+    spine: { azimuth: 180, elevation: 80 }
+    neck: { azimuth: 180, elevation: 62 }
+    head: { azimuth: 180, elevation: 35 }
+    thighL: { azimuth: 0, elevation: -45 }
+    shinL: { azimuth: 180, elevation: -75 }
+    footL: { azimuth: 0, elevation: -20 }
+    thighR: { azimuth: 0, elevation: -85 }
+    shinR: { azimuth: 180, elevation: -45 }
+    footR: { azimuth: 0, elevation: -15 }
+    upperArmL: { azimuth: 180, elevation: -2 }
+    forearmL: { azimuth: 180, elevation: -8 }
+    handL: { azimuth: 180, elevation: -10 }
+    upperArmR: { azimuth: 180, elevation: 48 }
+    forearmR: { azimuth: 180, elevation: 22 }
+    handR: { azimuth: 180, elevation: 18 }
 props:
   - type: wave
     amplitude: 0.42
     length: 3.4
     y: -0.22
   - type: surfboard
-    under: [ankleL, ankleR]
+    under: [ ankleL, ankleR ]
     rotation: 4
     length: 1.15
-    offset: [0, -0.1]
+    offset: [ 0, -0.1 ]
 muscles:
-  engaged: [obliques, erectorSpinae, gluteus, quadriceps, deltoid]
-  stretched: [pectoralis, hamstrings]
+  engaged: [ obliques, erectorSpinae, gluteus, quadriceps, deltoid ]
+  stretched: [ pectoralis, hamstrings ]
+camera: side

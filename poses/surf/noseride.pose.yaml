@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: noseride
 name: Noseride
 english: Noseride
@@ -6,32 +6,29 @@ discipline: surf
 family: trim
 difficulty: 4
 description: The longboard reward. With the tail held in the wave the surfer walks to the front of the board and stands tall and still on the nose, legs long, arms loose, doing as little as possible while the board trims along the face.
-tags: [surf, longboard, trim, nose, style]
+tags: [ surf, longboard, trim, nose, style ]
 cues:
   - Stand tall and quiet - do nothing and let the board trim
   - Stay behind the tail's hold, never lunge at the nose
-contact: [toeL, toeR]
+contact: [ toeL, toeR ]
 figure:
-  view: side
   grounded: true
-  root:
-    rotation: 90
   world:
-    spine: 95
-    neck: 90
-    head: 88
-    thighL: -80
-    shinL: -95
-    footL: -15
-    thighR: -100
-    shinR: -112
-    footR: -12
-    upperArmL: -60
-    forearmL: -50
-    handL: -45
-    upperArmR: -112
-    forearmR: -102
-    handR: -100
+    spine: { azimuth: 180, elevation: 85 }
+    neck: { azimuth: 0, elevation: 90 }
+    head: { azimuth: 0, elevation: 88 }
+    thighL: { azimuth: 0, elevation: -80 }
+    shinL: { azimuth: 180, elevation: -85 }
+    footL: { azimuth: 0, elevation: -15 }
+    thighR: { azimuth: 180, elevation: -80 }
+    shinR: { azimuth: 180, elevation: -68 }
+    footR: { azimuth: 0, elevation: -12 }
+    upperArmL: { azimuth: 0, elevation: -60 }
+    forearmL: { azimuth: 0, elevation: -50 }
+    handL: { azimuth: 0, elevation: -45 }
+    upperArmR: { azimuth: 180, elevation: -68 }
+    forearmR: { azimuth: 180, elevation: -78 }
+    handR: { azimuth: 180, elevation: -80 }
 props:
   - type: wave
     amplitude: 0.3
@@ -39,10 +36,11 @@ props:
     y: -0.18
     breaking: false
   - type: surfboard
-    under: [ankleL, ankleR]
+    under: [ ankleL, ankleR ]
     rotation: -2
     length: 1.7
-    offset: [-0.5, -0.1]
+    offset: [ -0.5, -0.1 ]
 muscles:
-  engaged: [gastrocnemius, tibialisAnterior, quadriceps, erectorSpinae]
-  stretched: [hamstrings, pectoralis]
+  engaged: [ gastrocnemius, tibialisAnterior, quadriceps, erectorSpinae ]
+  stretched: [ hamstrings, pectoralis ]
+camera: side

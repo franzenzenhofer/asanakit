@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: ardha-uttanasana
 name: Half Forward Fold
 sanskrit: Ardha Uttānāsana
@@ -7,36 +7,36 @@ discipline: yoga
 family: standing
 difficulty: 2
 description: From the fold, lift the chest to a flat back, fingertips to the floor, gaze forward.
-tags: [ashtanga, surya-namaskara-a, standing]
+tags: [ ashtanga, surya-namaskara-a, standing ]
 breath: inhale
 drishti: broomadhya
 cues:
   - Flat back, chest forward
   - Draw the shoulders away from the ears
-contact: [toeL, toeR, handTipL, handTipR]
+contact: [ toeL, toeR, handTipL, handTipR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: -42
+    pitch: 132
   world:
-    thighL: -90
-    thighR: -90
-    shinL: -90
-    shinR: -90
-    footL: -18
-    footR: -18
-    spine: -22
-    neck: -4
-    head: 0
-    upperArmL: -92
-    upperArmR: -92
-    forearmL: -92
-    forearmR: -92
-    handL: -80
-    handR: -80
+    thighL: { azimuth: 0, elevation: -90 }
+    thighR: { azimuth: 0, elevation: -90 }
+    shinL: { azimuth: 0, elevation: -90 }
+    shinR: { azimuth: 0, elevation: -90 }
+    footL: { azimuth: 0, elevation: -18 }
+    footR: { azimuth: 0, elevation: -18 }
+    spine: { azimuth: 0, elevation: -22 }
+    neck: { azimuth: 0, elevation: -4 }
+    head: { azimuth: 0, elevation: 0 }
+    upperArmL: { azimuth: 180, elevation: -88 }
+    upperArmR: { azimuth: 180, elevation: -88 }
+    forearmL: { azimuth: 180, elevation: -88 }
+    forearmR: { azimuth: 180, elevation: -88 }
+    handL: { azimuth: 0, elevation: -80 }
+    handR: { azimuth: 0, elevation: -80 }
 props:
   - type: mat
 muscles:
-  engaged: [erectorSpinae, quadriceps]
-  stretched: [hamstrings]
+  engaged: [ erectorSpinae, quadriceps ]
+  stretched: [ hamstrings ]
+camera: side

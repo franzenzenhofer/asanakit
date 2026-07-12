@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: navasana
 name: Boat Pose
 sanskrit: Nāvāsana
@@ -7,36 +7,36 @@ discipline: yoga
 family: core
 difficulty: 3
 description: Balance on the sit bones with the straight legs lifted to about forty-five degrees and the arms reaching forward beside the knees. Torso and legs form an open V.
-tags: [ashtanga, core, balance, primary-series]
+tags: [ ashtanga, core, balance, primary-series ]
 breath: inhale
 drishti: padhayoragrai
 cues:
   - Lift the chest, do not let the lower back round
   - Straighten the legs and reach the arms parallel to the floor
-contact: [hipCenter]
+contact: [ hipCenter ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: 135
+    pitch: -45
   world:
-    thighL: 45
-    thighR: 45
-    shinL: 45
-    shinR: 45
-    footL: 30
-    footR: 30
-    spine: 135
-    neck: 130
-    head: 115
-    upperArmL: 0
-    upperArmR: 0
-    forearmL: 0
-    forearmR: 0
-    handL: 0
-    handR: 0
+    thighL: { azimuth: 0, elevation: 45 }
+    thighR: { azimuth: 0, elevation: 45 }
+    shinL: { azimuth: 0, elevation: 45 }
+    shinR: { azimuth: 0, elevation: 45 }
+    footL: { azimuth: 0, elevation: 30 }
+    footR: { azimuth: 0, elevation: 30 }
+    spine: { azimuth: 180, elevation: 45 }
+    neck: { azimuth: 180, elevation: 50 }
+    head: { azimuth: 180, elevation: 65 }
+    upperArmL: { azimuth: 0, elevation: 0 }
+    upperArmR: { azimuth: 0, elevation: 0 }
+    forearmL: { azimuth: 0, elevation: 0 }
+    forearmR: { azimuth: 0, elevation: 0 }
+    handL: { azimuth: 0, elevation: 0 }
+    handR: { azimuth: 0, elevation: 0 }
 props:
   - type: mat
 muscles:
-  engaged: [rectusAbdominis, hipFlexors, quadriceps, erectorSpinae, deltoid]
-  stretched: [hamstrings]
+  engaged: [ rectusAbdominis, hipFlexors, quadriceps, erectorSpinae, deltoid ]
+  stretched: [ hamstrings ]
+camera: side

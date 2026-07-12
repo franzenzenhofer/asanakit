@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: chaturanga-dandasana
 name: Four-Limbed Staff Pose
 sanskrit: Caturaṅga Daṇḍāsana
@@ -7,35 +7,35 @@ discipline: yoga
 family: arm-support
 difficulty: 3
 description: A low plank. The body is one straight line from heel to crown, elbows bent to ninety degrees and hugged in.
-tags: [ashtanga, surya-namaskara-a, arm-support, core]
+tags: [ ashtanga, surya-namaskara-a, arm-support, core ]
 breath: exhale
 drishti: nasagrai
 cues:
   - Elbows stack over the wrists, hugged to the ribs
   - One straight line from heels to crown
-contact: [toeL, toeR, handTipL, handTipR]
+contact: [ toeL, toeR, handTipL, handTipR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: 4
+    pitch: 86
   world:
-    spine: 4
-    neck: 10
-    head: 12
-    thighL: -177
-    thighR: -177
-    shinL: -177
-    shinR: -177
-    footL: -118
-    footR: -118
-    upperArmL: 176
-    upperArmR: 176
-    forearmL: -88
-    forearmR: -88
-    handL: 0
-    handR: 0
+    spine: { azimuth: 0, elevation: 4 }
+    neck: { azimuth: 0, elevation: 10 }
+    head: { azimuth: 0, elevation: 12 }
+    thighL: { azimuth: 180, elevation: -3 }
+    thighR: { azimuth: 180, elevation: -3 }
+    shinL: { azimuth: 180, elevation: -3 }
+    shinR: { azimuth: 180, elevation: -3 }
+    footL: { azimuth: 180, elevation: -62 }
+    footR: { azimuth: 180, elevation: -62 }
+    upperArmL: { azimuth: 180, elevation: 4 }
+    upperArmR: { azimuth: 180, elevation: 4 }
+    forearmL: { azimuth: 0, elevation: -88 }
+    forearmR: { azimuth: 0, elevation: -88 }
+    handL: { azimuth: 0, elevation: 0 }
+    handR: { azimuth: 0, elevation: 0 }
 props:
   - type: mat
 muscles:
-  engaged: [triceps, pectoralis, rectusAbdominis, serratus, quadriceps]
+  engaged: [ triceps, pectoralis, rectusAbdominis, serratus, quadriceps ]
+camera: side

@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: urdhva-mukha-svanasana
 name: Upward-Facing Dog
 sanskrit: Ūrdhva Mukha Śvānāsana
@@ -7,36 +7,36 @@ discipline: yoga
 family: backbend
 difficulty: 3
 description: Arms straight, chest open, thighs lifted off the floor. Only the hands and the tops of the feet touch down.
-tags: [ashtanga, surya-namaskara-a, backbend, arm-support]
+tags: [ ashtanga, surya-namaskara-a, backbend, arm-support ]
 breath: inhale
 drishti: urdhva
 cues:
   - Press the floor away, lift the thighs
   - Draw the chest through the arms, shoulders back
-contact: [toeL, toeR, handTipL, handTipR]
+contact: [ toeL, toeR, handTipL, handTipR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: 30
+    pitch: 60
   world:
-    spine: 55
-    neck: 80
-    head: 105
-    thighL: -168
-    thighR: -168
-    shinL: -172
-    shinR: -172
-    footL: -160
-    footR: -160
-    upperArmL: -80
-    upperArmR: -80
-    forearmL: -86
-    forearmR: -86
-    handL: 0
-    handR: 0
+    spine: { azimuth: 0, elevation: 55 }
+    neck: { azimuth: 0, elevation: 80 }
+    head: { azimuth: 180, elevation: 75 }
+    thighL: { azimuth: 180, elevation: -12 }
+    thighR: { azimuth: 180, elevation: -12 }
+    shinL: { azimuth: 180, elevation: -8 }
+    shinR: { azimuth: 180, elevation: -8 }
+    footL: { azimuth: 180, elevation: -20 }
+    footR: { azimuth: 180, elevation: -20 }
+    upperArmL: { azimuth: 0, elevation: -80 }
+    upperArmR: { azimuth: 0, elevation: -80 }
+    forearmL: { azimuth: 0, elevation: -86 }
+    forearmR: { azimuth: 0, elevation: -86 }
+    handL: { azimuth: 0, elevation: 0 }
+    handR: { azimuth: 0, elevation: 0 }
 props:
   - type: mat
 muscles:
-  engaged: [erectorSpinae, triceps, gluteus, deltoid]
-  stretched: [rectusAbdominis, pectoralis, hipFlexors]
+  engaged: [ erectorSpinae, triceps, gluteus, deltoid ]
+  stretched: [ rectusAbdominis, pectoralis, hipFlexors ]
+camera: side

@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: padangusthasana
 name: Big Toe Pose
 sanskrit: Pādāṅguṣṭhāsana
@@ -7,36 +7,36 @@ discipline: yoga
 family: standing
 difficulty: 2
 description: Feet hip width, legs straight, fold deep from the hips and hook the first two fingers around the big toes. The elbows bend back and the crown drops toward the shins.
-tags: [ashtanga, standing, forward-fold]
+tags: [ ashtanga, standing, forward-fold ]
 breath: exhale
 drishti: nasagrai
 cues:
   - Hook the big toes, lift the kneecaps
   - Pull on the toes to draw the chest toward the shins
-contact: [toeL, toeR, handTipL, handTipR]
+contact: [ toeL, toeR, handTipL, handTipR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: -72
+    pitch: 162
   world:
-    thighL: -90
-    thighR: -90
-    shinL: -90
-    shinR: -90
-    footL: -18
-    footR: -18
-    spine: -82
-    neck: -85
-    head: -80
-    upperArmL: -133
-    upperArmR: -133
-    forearmL: -38
-    forearmR: -38
-    handL: -60
-    handR: -60
+    thighL: { azimuth: 0, elevation: -90 }
+    thighR: { azimuth: 0, elevation: -90 }
+    shinL: { azimuth: 0, elevation: -90 }
+    shinR: { azimuth: 0, elevation: -90 }
+    footL: { azimuth: 0, elevation: -18 }
+    footR: { azimuth: 0, elevation: -18 }
+    spine: { azimuth: 0, elevation: -82 }
+    neck: { azimuth: 0, elevation: -85 }
+    head: { azimuth: 0, elevation: -80 }
+    upperArmL: { azimuth: 180, elevation: -47 }
+    upperArmR: { azimuth: 180, elevation: -47 }
+    forearmL: { azimuth: 0, elevation: -38 }
+    forearmR: { azimuth: 0, elevation: -38 }
+    handL: { azimuth: 0, elevation: -60 }
+    handR: { azimuth: 0, elevation: -60 }
 props:
   - type: mat
 muscles:
-  engaged: [biceps, quadriceps, rectusAbdominis]
-  stretched: [hamstrings, erectorSpinae, gastrocnemius]
+  engaged: [ biceps, quadriceps, rectusAbdominis ]
+  stretched: [ hamstrings, erectorSpinae, gastrocnemius ]
+camera: side

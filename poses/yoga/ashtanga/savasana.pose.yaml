@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: savasana
 name: Corpse Pose
 sanskrit: Śavāsana
@@ -7,37 +7,37 @@ discipline: yoga
 family: supine
 difficulty: 1
 description: Lying flat on the back, the whole body rests along the floor. Legs are long and slightly apart, arms relax beside the body, palms soft, the breath is left alone.
-tags: [ashtanga, finishing, supine, restorative]
+tags: [ ashtanga, finishing, supine, restorative ]
 breath: free
 drishti: nasagrai
 cues:
   - Let the whole weight of the body drop into the floor
   - Release the jaw, the eyes and the breath
-contact: [headTop, shoulderL, shoulderR, hipCenter, handTipL, handTipR, kneeL, kneeR, ankleL, ankleR]
+contact: [ headTop, shoulderL, shoulderR, hipCenter, handTipL, handTipR, kneeL, kneeR, ankleL, ankleR ]
 figure:
-  view: side
   grounded: true
   root:
-    rotation: 180
+    pitch: -90
   world:
-    pelvis: 180
-    spine: 180
-    neck: 180
-    head: 180
-    upperArmL: 0
-    upperArmR: 0
-    forearmL: 0
-    forearmR: 0
-    handL: 0
-    handR: 0
-    thighL: 0
-    thighR: 0
-    shinL: 0
-    shinR: 0
-    footL: 40
-    footR: 40
+    pelvis: { azimuth: 180, elevation: 0 }
+    spine: { azimuth: 180, elevation: 0 }
+    neck: { azimuth: 180, elevation: 0 }
+    head: { azimuth: 180, elevation: 0 }
+    upperArmL: { azimuth: 0, elevation: 0 }
+    upperArmR: { azimuth: 0, elevation: 0 }
+    forearmL: { azimuth: 0, elevation: 0 }
+    forearmR: { azimuth: 0, elevation: 0 }
+    handL: { azimuth: 0, elevation: 0 }
+    handR: { azimuth: 0, elevation: 0 }
+    thighL: { azimuth: 0, elevation: 0 }
+    thighR: { azimuth: 0, elevation: 0 }
+    shinL: { azimuth: 0, elevation: 0 }
+    shinR: { azimuth: 0, elevation: 0 }
+    footL: { azimuth: 0, elevation: 40 }
+    footR: { azimuth: 0, elevation: 40 }
 props:
   - type: mat
 muscles:
   engaged: []
   stretched: []
+camera: side

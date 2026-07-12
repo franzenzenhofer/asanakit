@@ -1,4 +1,4 @@
-asanakit: 1
+asanakit: 2
 id: utthita-trikonasana
 name: Extended Triangle
 sanskrit: Utthita Trikoṇāsana
@@ -7,38 +7,38 @@ discipline: yoga
 family: standing
 difficulty: 2
 description: Legs wide and straight, the torso tilts sideways over the front leg, the bottom hand catches the big toe and the top arm reaches straight up. Held five breaths.
-tags: [ashtanga, standing, side-bend, primary-series]
+tags: [ ashtanga, standing, side-bend, primary-series ]
 breath: exhale
 drishti: hastagrai
 cues:
   - Reach sideways out of the waist before you tilt down
   - Stack both shoulders in one line, chest open to the side
-contact: [toeL, toeR, handTipL]
+contact: [ toeL, toeR, handTipL ]
 figure:
-  view: front
   grounded: true
   root:
-    rotation: 25
+    roll: -65
   world:
-    hipL: 0
-    hipR: 180
-    thighL: -45
-    shinL: -45
-    footL: -20
-    thighR: -135
-    shinR: -135
-    footR: -160
-    spine: 25
-    neck: 30
-    head: 55
-    upperArmL: -80
-    forearmL: -80
-    handL: -80
-    upperArmR: 100
-    forearmR: 100
-    handR: 100
+    hipL: { azimuth: 90, elevation: 0 }
+    hipR: { azimuth: -90, elevation: 0 }
+    thighL: { azimuth: 90, elevation: -45 }
+    shinL: { azimuth: 90, elevation: -45 }
+    footL: { azimuth: 90, elevation: 0 }
+    thighR: { azimuth: -90, elevation: -45 }
+    shinR: { azimuth: -90, elevation: -45 }
+    footR: { azimuth: -90, elevation: 0 }
+    spine: { azimuth: 90, elevation: 25 }
+    neck: { azimuth: 90, elevation: 30 }
+    head: { azimuth: 90, elevation: 55 }
+    upperArmL: { azimuth: 90, elevation: -80 }
+    forearmL: { azimuth: 90, elevation: -80 }
+    handL: { azimuth: 90, elevation: -80 }
+    upperArmR: { azimuth: -90, elevation: 80 }
+    forearmR: { azimuth: -90, elevation: 80 }
+    handR: { azimuth: -90, elevation: 80 }
 props:
   - type: mat
 muscles:
-  engaged: [quadriceps, obliques, deltoid, erectorSpinae]
-  stretched: [hamstrings, adductors, obliques, latissimus]
+  engaged: [ quadriceps, obliques, deltoid, erectorSpinae ]
+  stretched: [ hamstrings, adductors, obliques, latissimus ]
+camera: front
