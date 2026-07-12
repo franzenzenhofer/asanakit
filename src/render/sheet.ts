@@ -55,11 +55,11 @@ export const renderSheetNode = (poses: readonly PoseSpec[], options: SheetOption
             textEl(
               'text',
               {
-                x: cw * 0.06,
-                y: ch * 0.1,
+                x: cw * 0.04,
+                y: ch * 0.06,
                 fill: style.text.muted,
                 'font-family': style.text.fontFamily,
-                'font-size': ch * 0.06,
+                'font-size': ch * 0.038,
                 'font-weight': 600,
               },
               String(i + 1),

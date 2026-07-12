@@ -64,6 +64,13 @@ export interface BoneDef {
   readonly parent: BoneId | null;
   /** Which end of the parent bone this bone hangs off. */
   readonly attach: 'start' | 'end';
+  /**
+   * The bone whose direction this bone's rest angle is measured against, when
+   * that differs from the bone it hangs off. An upper arm *attaches* to the
+   * clavicle (which points sideways) but *aims* relative to the spine - keeping
+   * the two apart is what stops a profile figure's right arm pointing skyward.
+   */
+  readonly angleParent?: BoneId;
   /** Bone length as a fraction of the figure's stature (1.0 = full height). */
   readonly length: number;
   /** Angle in degrees relative to the parent bone's direction, in the neutral standing pose. */
@@ -75,10 +82,11 @@ export interface BoneDef {
   /** Foot bones foreshorten in front/back views. */
   readonly foot?: boolean;
   /**
-   * Directional bones point "forward" rather than "outward". They are only
-   * mirrored for the right side in views where forward is out of the picture plane.
+   * Which way a positive joint value bends this bone. -1 for the shin, so that
+   * "shinL: 90" means the knee is flexed 90 degrees - the way a knee actually
+   * bends - rather than hyperextended by 90.
    */
-  readonly directional?: boolean;
+  readonly flexSign?: number;
 }
 
 export interface Rig {
@@ -93,8 +101,14 @@ export interface ViewConfig {
   readonly lateralScale: number;
   /** Foreshortening applied to feet. */
   readonly footScale: number;
-  /** Whether directional bones (feet) mirror across the midline. */
-  readonly mirrorDirectional: boolean;
+  /**
+   * Whether the right limbs mirror the left ones.
+   *
+   * Facing the viewer, they do: a raised right arm goes one way and a raised
+   * left arm goes the other. Seen from the side, they do not - both arms swing
+   * the same way, because you are looking at both of them from the same side.
+   */
+  readonly mirrorLimbs: boolean;
 }
 
 export interface KinematicPose {
@@ -106,6 +120,13 @@ export interface KinematicPose {
     readonly scale: number;
   };
   readonly joints: Partial<Record<JointId, number>>;
+  /**
+   * Absolute bone directions in degrees. A bone listed here points exactly this
+   * way in world space, whatever its parent does - which is how a human (or a
+   * model) actually thinks about a posture: "the front thigh points down-left at
+   * -150 degrees", not "rotate the hip 60 degrees from neutral".
+   */
+  readonly world?: Partial<Record<JointId, number>>;
   /** Translate the solved figure so its lowest point sits on y = 0. */
   readonly grounded: boolean;
   /** Mirror the solved figure across the vertical axis (a figure facing the other way). */

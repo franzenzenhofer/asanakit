@@ -32,6 +32,10 @@ export const figureSchema = z.object({
     })
     .prefault({}),
   joints: jointsSchema.default({}),
+  world: z
+    .partialRecord(z.enum(BONE_IDS), z.number().min(-MAX_JOINT_DEG).max(MAX_JOINT_DEG))
+    .default({})
+    .describe('Absolute bone directions in degrees (0 = +x, 90 = up). Overrides `joints` for that bone.'),
 });
 
 const annotationBase = { label: z.string().optional(), color: z.string().optional() };
@@ -81,11 +85,11 @@ export const annotationSchema = z.discriminatedUnion('type', [
 ]);
 
 export const propSchema = z.discriminatedUnion('type', [
-  z.object({ type: z.literal('ground'), y: z.number().default(0), width: z.number().positive().default(2.4) }),
+  z.object({ type: z.literal('ground'), y: z.number().default(0), width: z.number().positive().default(1.6) }),
   z.object({
     type: z.literal('mat'),
     y: z.number().default(0),
-    width: z.number().positive().default(1.9),
+    width: z.number().positive().default(1.35),
     thickness: z.number().positive().default(0.022),
     rolled: z.boolean().default(false),
   }),
@@ -135,6 +139,10 @@ export const poseSchema = z.object({
   drishti: z.string().optional().describe('Gaze point (Ashtanga).'),
   breath: z.enum(['inhale', 'exhale', 'hold', 'free']).optional(),
   figure: figureSchema.prefault({}),
+  contact: z
+    .array(z.enum(LANDMARK_IDS))
+    .default([])
+    .describe('Landmarks that touch the floor in this posture. Validated against the solved figure.'),
   props: z.array(propSchema).default([]),
   annotations: z.array(annotationSchema).default([]),
   muscles: z

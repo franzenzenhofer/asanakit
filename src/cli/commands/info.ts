@@ -1,10 +1,11 @@
 import { readFile } from 'node:fs/promises';
 import type { Command } from 'commander';
 import { MUSCLES, MUSCLE_IDS } from '../../anatomy/muscles.js';
+import { validatePose } from '../../anatomy/validate.js';
 import { BONE_IDS, LANDMARK_IDS } from '../../core/types.js';
 import { parsePose, poseJsonSchema, sequenceJsonSchema } from '../../model/index.js';
 import { STYLES, STYLE_IDS } from '../../render/index.js';
-import { library } from '../resolve.js';
+import { library, resolvePose } from '../resolve.js';
 
 const json = (value: unknown): void => {
   process.stdout.write(`${JSON.stringify(value, null, 2)}\n`);
@@ -61,6 +62,29 @@ export const registerInfoCommands = (program: Command): void => {
         const pose = parsePose(await readFile(file, 'utf8'), file);
         process.stdout.write(`ok  ${file}  (${pose.id})\n`);
       }
+    });
+
+  program
+    .command('lint [poses...]')
+    .description('Check poses against the limits of a real body; defaults to the whole library')
+    .option('--lib <dir>', 'load poses from this directory')
+    .action(async (refs: string[], options: { lib?: string }) => {
+      const lib = await library(options.lib);
+      const targets = refs.length === 0 ? [...lib.poses.values()] : await Promise.all(refs.map((r) => resolvePose(r, options.lib)));
+
+      let failed = 0;
+      for (const pose of targets) {
+        const issues = validatePose(pose);
+        if (issues.length === 0) {
+          process.stdout.write(`ok    ${pose.id}\n`);
+          continue;
+        }
+        failed += 1;
+        for (const issue of issues) process.stdout.write(`FAIL  ${pose.id}: ${issue.message}\n`);
+      }
+
+      process.stdout.write(`\n${targets.length - failed}/${targets.length} poses sound\n`);
+      if (failed > 0) process.exitCode = 1;
     });
 
   program

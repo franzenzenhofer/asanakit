@@ -1,0 +1,41 @@
+posekit: 1
+id: chaturanga-dandasana
+name: Four-Limbed Staff Pose
+sanskrit: Caturaṅga Daṇḍāsana
+english: Four-Limbed Staff Pose
+discipline: yoga
+family: arm-support
+difficulty: 3
+description: A low plank. The body is one straight line from heel to crown, elbows bent to ninety degrees and hugged in.
+tags: [ashtanga, surya-namaskara-a, arm-support, core]
+breath: exhale
+drishti: nasagrai
+cues:
+  - Elbows stack over the wrists, hugged to the ribs
+  - One straight line from heels to crown
+contact: [toeL, toeR, handTipL, handTipR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: 4
+  world:
+    spine: 4
+    neck: 10
+    head: 12
+    thighL: -177
+    thighR: -177
+    shinL: -177
+    shinR: -177
+    footL: -118
+    footR: -118
+    upperArmL: 176
+    upperArmR: 176
+    forearmL: -88
+    forearmR: -88
+    handL: 0
+    handR: 0
+props:
+  - type: mat
+muscles:
+  engaged: [triceps, pectoralis, rectusAbdominis, serratus, quadriceps]

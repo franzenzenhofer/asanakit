@@ -29,7 +29,16 @@ const LEFT_BONES: readonly BoneDef[] = [
     group: 'torso',
     lateral: true,
   },
-  { id: 'upperArmL', parent: 'clavicleL', attach: 'end', length: 0.165, restAngle: -90, side: 'left', group: 'arm' },
+  {
+    id: 'upperArmL',
+    parent: 'clavicleL',
+    attach: 'end',
+    angleParent: 'spine',
+    length: 0.165,
+    restAngle: 180,
+    side: 'left',
+    group: 'arm',
+  },
   { id: 'forearmL', parent: 'upperArmL', attach: 'end', length: 0.145, restAngle: 0, side: 'left', group: 'arm' },
   { id: 'handL', parent: 'forearmL', attach: 'end', length: 0.055, restAngle: 0, side: 'left', group: 'arm' },
   {
@@ -42,8 +51,17 @@ const LEFT_BONES: readonly BoneDef[] = [
     group: 'torso',
     lateral: true,
   },
-  { id: 'thighL', parent: 'hipL', attach: 'end', length: 0.245, restAngle: -90, side: 'left', group: 'leg' },
-  { id: 'shinL', parent: 'thighL', attach: 'end', length: 0.245, restAngle: 0, side: 'left', group: 'leg' },
+  {
+    id: 'thighL',
+    parent: 'hipL',
+    attach: 'end',
+    angleParent: 'pelvis',
+    length: 0.245,
+    restAngle: 180,
+    side: 'left',
+    group: 'leg',
+  },
+  { id: 'shinL', parent: 'thighL', attach: 'end', length: 0.245, restAngle: 0, side: 'left', group: 'leg', flexSign: -1 },
   {
     id: 'footL',
     parent: 'shinL',
@@ -53,7 +71,6 @@ const LEFT_BONES: readonly BoneDef[] = [
     side: 'left',
     group: 'leg',
     foot: true,
-    directional: true,
   },
 ];
 
@@ -65,6 +82,7 @@ const mirrorBone = (bone: BoneDef): BoneDef => ({
   ...bone,
   id: mirrorId(bone.id) as BoneDef['id'],
   parent: bone.parent === null ? null : (mirrorId(bone.parent) as BoneDef['id']),
+  ...(bone.angleParent === undefined ? {} : { angleParent: mirrorId(bone.angleParent) as BoneDef['id'] }),
   side: 'right',
 });
 
@@ -79,8 +97,8 @@ export const DEFAULT_RIG: Rig = {
  * factors plus a rule for which way the feet point.
  */
 export const VIEWS: Record<ViewId, ViewConfig> = {
-  front: { lateralScale: 1, footScale: 0.45, mirrorDirectional: true },
-  back: { lateralScale: 1, footScale: 0.45, mirrorDirectional: true },
-  side: { lateralScale: 0.18, footScale: 1, mirrorDirectional: false },
-  'three-quarter': { lateralScale: 0.7, footScale: 0.8, mirrorDirectional: false },
+  front: { lateralScale: 1, footScale: 0.45, mirrorLimbs: true },
+  back: { lateralScale: 1, footScale: 0.45, mirrorLimbs: true },
+  side: { lateralScale: 0.18, footScale: 1, mirrorLimbs: false },
+  'three-quarter': { lateralScale: 0.7, footScale: 0.8, mirrorLimbs: false },
 };

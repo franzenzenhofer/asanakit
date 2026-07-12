@@ -88,8 +88,18 @@ const layoutFor = (pose: PoseSpec, options: RenderOptions, style: Style): Layout
   };
 };
 
+/**
+ * Shrink a title until it fits the canvas. A clipped pose name is a broken sheet,
+ * and "Parivrtta Parsvakonasana" is not a short word.
+ */
+const AVG_GLYPH_WIDTH = 0.56;
+const TITLE_SAFE_WIDTH = 0.84;
+
+const fitText = (text: string, size: number, width: number): number =>
+  Math.min(size, (width * TITLE_SAFE_WIDTH) / (Math.max(text.length, 1) * AVG_GLYPH_WIDTH));
+
 const titleBlock = (pose: PoseSpec, layout: Layout, style: Style): SvgNode => {
-  const size = layout.titleSize;
+  const size = fitText(pose.name, layout.titleSize, layout.width);
   return group({ 'data-layer': 'title' }, [
     textEl(
       'text',
@@ -111,11 +121,11 @@ const titleBlock = (pose: PoseSpec, layout: Layout, style: Style): SvgNode => {
             'text',
             {
               x: layout.width / 2,
-              y: size * 2,
+              y: layout.titleSize * 2,
               'text-anchor': 'middle',
               fill: style.text.muted,
               'font-family': style.text.fontFamily,
-              'font-size': size * 0.55,
+              'font-size': fitText(pose.sanskrit, layout.titleSize * 0.55, layout.width),
               'font-style': 'italic',
             },
             pose.sanskrit,

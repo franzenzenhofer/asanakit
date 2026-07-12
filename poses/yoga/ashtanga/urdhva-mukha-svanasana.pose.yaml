@@ -1,0 +1,42 @@
+posekit: 1
+id: urdhva-mukha-svanasana
+name: Upward-Facing Dog
+sanskrit: Ūrdhva Mukha Śvānāsana
+english: Upward-Facing Dog
+discipline: yoga
+family: backbend
+difficulty: 3
+description: Arms straight, chest open, thighs lifted off the floor. Only the hands and the tops of the feet touch down.
+tags: [ashtanga, surya-namaskara-a, backbend, arm-support]
+breath: inhale
+drishti: urdhva
+cues:
+  - Press the floor away, lift the thighs
+  - Draw the chest through the arms, shoulders back
+contact: [toeL, toeR, handTipL, handTipR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: 30
+  world:
+    spine: 55
+    neck: 80
+    head: 105
+    thighL: -168
+    thighR: -168
+    shinL: -172
+    shinR: -172
+    footL: -160
+    footR: -160
+    upperArmL: -80
+    upperArmR: -80
+    forearmL: -86
+    forearmR: -86
+    handL: 0
+    handR: 0
+props:
+  - type: mat
+muscles:
+  engaged: [erectorSpinae, triceps, gluteus, deltoid]
+  stretched: [rectusAbdominis, pectoralis, hipFlexors]

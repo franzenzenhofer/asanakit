@@ -7,6 +7,7 @@ const pose = (over: Partial<KinematicPose> = {}): KinematicPose => ({
   view: 'front',
   root: { position: [0, 0], rotation: 90, scale: 1 },
   joints: {},
+  world: {},
   grounded: false,
   ...over,
 });
@@ -67,10 +68,12 @@ describe('solveSkeleton - joint rotations', () => {
     expect(l.wristL[1]).toBeCloseTo(l.wristR[1], 8);
   });
 
-  test('bends the knee when the shin joint is rotated', () => {
+  test('a positive shin angle flexes the knee: the heel swings up and back', () => {
     const straight = solve();
     const bent = solve({ joints: { shinL: 90 } });
     expect(bent.ankleL[1]).toBeGreaterThan(straight.ankleL[1]);
+    // Flexion takes the heel behind the knee, never in front of it.
+    expect(bent.ankleL[0]).toBeLessThan(straight.ankleL[0]);
   });
 
   test('root rotation turns the whole figure', () => {
@@ -136,5 +139,59 @@ describe('solveSkeleton - views', () => {
     const l = solve({ view: 'front' });
     expect(l.toeL[0]).toBeGreaterThan(l.ankleL[0]);
     expect(l.toeR[0]).toBeLessThan(l.ankleR[0]);
+  });
+});
+
+describe('solveSkeleton - absolute world angles', () => {
+  test('points a bone in an absolute direction, ignoring its rest angle', () => {
+    const s = solveSkeleton(pose({ world: { thighL: -150 } }), DEFAULT_RIG);
+    expect(s.bones.thighL.worldAngle).toBeCloseTo(-150, 8);
+  });
+
+  test('children of a world-angled bone stay relative to it', () => {
+    // Thigh pinned down-and-back; 30 degrees of knee flexion folds the shin further back.
+    const s = solveSkeleton(pose({ world: { thighL: -150 }, joints: { shinL: 30 } }), DEFAULT_RIG);
+    expect(s.bones.shinL.worldAngle).toBeCloseTo(-180, 8);
+  });
+
+  test('a world angle on a right-side bone is not mirrored: it means what it says', () => {
+    const s = solveSkeleton(pose({ world: { thighR: -150 } }), DEFAULT_RIG);
+    expect(s.bones.thighR.worldAngle).toBeCloseTo(-150, 8);
+  });
+
+  test('world angles compose with root rotation rather than fighting it', () => {
+    const s = solveSkeleton(pose({ root: { position: [0, 0], rotation: -30, scale: 1 }, world: { spine: 0 } }), DEFAULT_RIG);
+    expect(s.bones.spine.worldAngle).toBeCloseTo(0, 8);
+    expect(s.bones.pelvis.worldAngle).toBeCloseTo(-30, 8);
+  });
+
+  test('rejects an unknown bone in the world block', () => {
+    const bad = { elbowL: 10 } as NonNullable<KinematicPose['world']>;
+    expect(() => solveSkeleton(pose({ world: bad }), DEFAULT_RIG)).toThrow(/elbowL/);
+  });
+});
+
+describe('solveSkeleton - lateral offset in profile views', () => {
+  test('keeps the two shoulders at the same height however the torso is rotated', () => {
+    // In profile, left/right separation points into the screen. It must project as a
+    // sideways nudge, never as a vertical one - otherwise a horizontal spine (plank,
+    // chaturanga) lifts one shoulder above the other and one hand misses the floor.
+    const l = solve({ view: 'side', root: { position: [0, 0], rotation: 0, scale: 1 } });
+    expect(l.shoulderL[1]).toBeCloseTo(l.shoulderR[1], 8);
+    expect(l.hipJointL[1]).toBeCloseTo(l.hipJointR[1], 8);
+  });
+
+  test('lands both hands at the same height in a horizontal profile pose', () => {
+    const l = solve({
+      view: 'side',
+      root: { position: [0, 0], rotation: 0, scale: 1 },
+      world: { upperArmL: -90, upperArmR: -90, forearmL: -90, forearmR: -90 },
+    });
+    expect(l.wristL[1]).toBeCloseTo(l.wristR[1], 8);
+  });
+
+  test('front view still tilts the shoulder line with the torso', () => {
+    const l = solve({ view: 'front', root: { position: [0, 0], rotation: 70, scale: 1 } });
+    expect(Math.abs(l.shoulderL[1] - l.shoulderR[1])).toBeGreaterThan(0.02);
   });
 });

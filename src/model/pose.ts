@@ -9,9 +9,13 @@ const mirrorJointId = (id: string): string => {
   return swapped === undefined ? id : `${id.slice(0, -1)}${swapped}`;
 };
 
-/** Swap every left joint angle with its right counterpart; centre joints stay put. */
-export const mirrorJoints = (joints: Partial<Record<JointId, number>>): Partial<Record<JointId, number>> =>
-  Object.fromEntries(Object.entries(joints).map(([id, angle]) => [mirrorJointId(id), angle]));
+/**
+ * Swap every left angle with its right counterpart; centre bones stay put.
+ * `mirror` swaps which limb plays which role. Reflecting the picture is `flip`'s
+ * job - together they give you the other side of an asymmetric asana.
+ */
+export const mirrorAngles = <T extends Partial<Record<JointId, number>>>(angles: T): T =>
+  Object.fromEntries(Object.entries(angles).map(([id, angle]) => [mirrorJointId(id), angle])) as T;
 
 /** Turn the declarative figure block of a pose file into a solvable kinematic pose. */
 export const resolveFigure = (figure: FigureSpec): KinematicPose => ({
@@ -21,7 +25,8 @@ export const resolveFigure = (figure: FigureSpec): KinematicPose => ({
     rotation: figure.root.rotation,
     scale: figure.root.scale,
   },
-  joints: figure.mirror ? mirrorJoints(figure.joints) : figure.joints,
+  joints: figure.mirror ? mirrorAngles(figure.joints) : figure.joints,
+  world: figure.mirror ? mirrorAngles(figure.world) : figure.world,
   grounded: figure.grounded,
   flip: figure.flip,
 });

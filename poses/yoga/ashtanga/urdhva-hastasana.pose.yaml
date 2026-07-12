@@ -1,0 +1,42 @@
+posekit: 1
+id: urdhva-hastasana
+name: Upward Salute
+sanskrit: Ūrdhva Hastāsana
+english: Upward Salute
+discipline: yoga
+family: standing
+difficulty: 1
+description: First movement of Surya Namaskara. Arms sweep overhead, palms meet, gaze to the thumbs.
+tags: [ashtanga, surya-namaskara-a, standing, backbend]
+breath: inhale
+drishti: angustha-ma-dyai
+cues:
+  - Sweep the arms wide and up on the inhale
+  - Lift the chest, keep the ribs knitted
+contact: [toeL, toeR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: 93
+  world:
+    thighL: -90
+    thighR: -90
+    shinL: -90
+    shinR: -90
+    footL: -18
+    footR: -18
+    spine: 97
+    neck: 105
+    head: 110
+    upperArmL: 100
+    upperArmR: 100
+    forearmL: 98
+    forearmR: 98
+    handL: 96
+    handR: 96
+props:
+  - type: mat
+muscles:
+  engaged: [deltoid, erectorSpinae, quadriceps]
+  stretched: [rectusAbdominis, latissimus]

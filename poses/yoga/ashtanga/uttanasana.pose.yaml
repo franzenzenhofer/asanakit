@@ -1,0 +1,42 @@
+posekit: 1
+id: uttanasana
+name: Standing Forward Fold
+sanskrit: Uttānāsana
+english: Intense Stretch Pose
+discipline: yoga
+family: standing
+difficulty: 2
+description: Fold from the hips with straight legs, hands to the floor beside the feet, head toward the shins.
+tags: [ashtanga, surya-namaskara-a, standing, forward-fold]
+breath: exhale
+drishti: nasagrai
+cues:
+  - Hinge from the hip joints, not the waist
+  - Lengthen the spine before rounding
+contact: [toeL, toeR, handTipL, handTipR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: -70
+  world:
+    thighL: -90
+    thighR: -90
+    shinL: -90
+    shinR: -90
+    footL: -18
+    footR: -18
+    spine: -80
+    neck: -90
+    head: -95
+    upperArmL: -95
+    upperArmR: -95
+    forearmL: -50
+    forearmR: -50
+    handL: -8
+    handR: -8
+props:
+  - type: mat
+muscles:
+  engaged: [quadriceps, rectusAbdominis]
+  stretched: [hamstrings, erectorSpinae, gastrocnemius]

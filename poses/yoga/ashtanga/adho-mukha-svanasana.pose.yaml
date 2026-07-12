@@ -1,0 +1,42 @@
+posekit: 1
+id: adho-mukha-svanasana
+name: Downward-Facing Dog
+sanskrit: Adho Mukha Śvānāsana
+english: Downward-Facing Dog
+discipline: yoga
+family: inversion
+difficulty: 2
+description: An inverted V. Hips lift back and up, heels press down, the spine lengthens from wrists to sit bones. Held five breaths.
+tags: [ashtanga, surya-namaskara-a, surya-namaskara-b, inversion, forward-fold]
+breath: exhale
+drishti: nabi-chakra
+cues:
+  - Lift the sit bones, lengthen the spine
+  - Press the floor away through the whole hand
+contact: [toeL, toeR, handTipL, handTipR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: -48
+  world:
+    thighL: -125
+    thighR: -125
+    shinL: -125
+    shinR: -125
+    footL: -20
+    footR: -20
+    spine: -48
+    neck: -48
+    head: -48
+    upperArmL: -50
+    upperArmR: -50
+    forearmL: -50
+    forearmR: -50
+    handL: -8
+    handR: -8
+props:
+  - type: mat
+muscles:
+  engaged: [deltoid, triceps, quadriceps, serratus]
+  stretched: [hamstrings, gastrocnemius, latissimus]

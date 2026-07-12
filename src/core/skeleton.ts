@@ -1,5 +1,15 @@
 import { VIEWS } from './rig.js';
-import type { BoneDef, BoneId, BoneSegment, Bounds, KinematicPose, LandmarkId, Rig, Skeleton } from './types.js';
+import type {
+  BoneDef,
+  BoneId,
+  BoneSegment,
+  Bounds,
+  KinematicPose,
+  LandmarkId,
+  Rig,
+  Skeleton,
+  ViewId,
+} from './types.js';
 import { add, fromPolar, midpoint, type Vec2 } from './vec2.js';
 
 const boneLength = (bone: BoneDef, pose: KinematicPose): number => {
@@ -9,22 +19,42 @@ const boneLength = (bone: BoneDef, pose: KinematicPose): number => {
 };
 
 /**
- * Right-side bones mirror their parent chain, which flips the sign of their
- * rest and joint angles. Directional bones (the feet) point *forward* rather
- * than outward, so they only mirror in views where forward leaves the picture
- * plane - otherwise a side-view figure would walk backwards on one leg.
+ * Which way a positive angle turns a right-side bone.
+ *
+ * Lateral bones (clavicle, hip) always mirror - that is what puts the right
+ * shoulder on the other side of the spine. Limbs only mirror when the figure
+ * faces us; in profile both arms swing the same way, because we are looking at
+ * both of them from the same side.
  */
-const sideSign = (bone: BoneDef, pose: KinematicPose): number => {
+export const sideSign = (bone: BoneDef, view: ViewId): number => {
   if (bone.side !== 'right') return 1;
-  if (bone.directional && !VIEWS[pose.view].mirrorDirectional) return 1;
-  return -1;
+  if (bone.lateral === true) return -1;
+  return VIEWS[view].mirrorLimbs ? -1 : 1;
+};
+
+/**
+ * Where the left/right offset points on screen.
+ *
+ * Facing the viewer it lies in the picture plane, so it swings with the torso: a
+ * tilted chest tilts the shoulder line. Seen from the side it points into the
+ * screen, so it must project as a small sideways nudge and nothing else - if it
+ * rotated with the torso, a figure in a horizontal plank would end up with one
+ * shoulder above the other and one hand hovering off the floor.
+ */
+const isDepthAxis = (bone: BoneDef, view: ViewId): boolean =>
+  bone.lateral === true && VIEWS[view].lateralScale < 1;
+
+const relativeAngle = (bone: BoneDef, pose: KinematicPose, parentAngle: number, joint: number): number => {
+  if (isDepthAxis(bone, pose.view)) return bone.side === 'right' ? 180 : 0;
+  return parentAngle + sideSign(bone, pose.view) * (bone.restAngle + joint);
 };
 
 const assertKnownJoints = (pose: KinematicPose, rig: Rig): void => {
   const known = new Set<string>(rig.bones.map((b) => b.id));
-  for (const joint of Object.keys(pose.joints)) {
+  const names = [...Object.keys(pose.joints), ...Object.keys(pose.world ?? {})];
+  for (const joint of names) {
     if (!known.has(joint)) {
-      throw new Error(`Unknown joint "${joint}". Known joints: ${[...known].sort().join(', ')}`);
+      throw new Error(`Unknown bone "${joint}". Known bones: ${[...known].sort().join(', ')}`);
     }
   }
 };
@@ -38,11 +68,13 @@ const solveBones = (pose: KinematicPose, rig: Rig): Record<BoneId, BoneSegment> 
       throw new Error(`Rig "${rig.name}" lists bone "${bone.id}" before its parent "${bone.parent}"`);
     }
 
-    const parentAngle = parent === null ? pose.root.rotation : parent.worldAngle;
+    const aimedAt = bone.angleParent === undefined ? parent : solved[bone.angleParent];
+    const parentAngle = aimedAt === null || aimedAt === undefined ? pose.root.rotation : aimedAt.worldAngle;
     const start: Vec2 = parent === null ? pose.root.position : bone.attach === 'start' ? parent.start : parent.end;
 
-    const joint = pose.joints[bone.id] ?? 0;
-    const worldAngle = parentAngle + sideSign(bone, pose) * (bone.restAngle + joint);
+    const absolute = pose.world?.[bone.id];
+    const joint = (pose.joints[bone.id] ?? 0) * (bone.flexSign ?? 1);
+    const worldAngle = absolute ?? relativeAngle(bone, pose, parentAngle, joint);
     const length = boneLength(bone, pose);
 
     solved[bone.id] = {
