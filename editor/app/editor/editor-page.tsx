@@ -9,13 +9,15 @@ import { LintChips } from './lint-chips.js';
 import { MetaPanel } from './meta-panel.js';
 import { MusclesPanel } from './muscles-panel.js';
 import { PosePanel } from './pose-panel.js';
+import { PropsPanel } from './props-panel.js';
 import { CubeIcon, FlatIcon, MoreIcon, RedoIcon, UndoIcon } from '../ui/icons.js';
 
-type Tab = 'joints' | 'pose' | 'body' | 'info';
+type Tab = 'joints' | 'pose' | 'props' | 'body' | 'info';
 
 const TABS: readonly { id: Tab; label: string }[] = [
   { id: 'joints', label: 'Joints' },
   { id: 'pose', label: 'Figure & view' },
+  { id: 'props', label: 'Props' },
   { id: 'body', label: 'Muscles & contact' },
   { id: 'info', label: 'Info' },
 ];
@@ -69,6 +71,7 @@ export const EditorPage = (): JSX.Element => {
         <div class="panel-body">
           {tab === 'joints' && <JointPanel />}
           {tab === 'pose' && <PosePanel />}
+          {tab === 'props' && <PropsPanel />}
           {tab === 'body' && <MusclesPanel />}
           {tab === 'info' && <MetaPanel />}
         </div>

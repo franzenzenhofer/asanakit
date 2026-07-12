@@ -9,6 +9,7 @@ import { parsed } from '../state/preview.js';
 import { toYaml } from '../state/serialize.js';
 import { can } from '../state/entitlements.js';
 import { downloadText, svgToPngBlob, downloadBlob } from '../lib/download.js';
+import { pickTextFile } from '../lib/upload.js';
 import { CloseIcon } from '../ui/icons.js';
 
 /** Save, export and import - the editor's way in and out. */
@@ -83,6 +84,34 @@ export const ExportMenu = ({ onClose }: { onClose: () => void }): JSX.Element =>
             }
           >
             Download PNG
+          </button>
+          <button
+            class="btn"
+            disabled={spec === undefined}
+            onClick={() =>
+              act(async () => {
+                if (spec === undefined) return;
+                const { poseToGlb } = await import('../three/glb.js');
+                downloadBlob(await poseToGlb({ ...spec, physics: 'none' }), `${id}.glb`);
+              })
+            }
+          >
+            Download GLB (3D)
+          </button>
+          <button
+            class="btn"
+            onClick={() =>
+              act(async () => {
+                const picked = await pickTextFile('.yaml,.yml,.json');
+                if (picked === null) return;
+                parsePose(picked.text, picked.name);
+                loadPose(parseYamlRaw(picked.text) as PoseSpecInput);
+                setMessage(`Loaded ${picked.name}.`);
+                onClose();
+              })
+            }
+          >
+            Upload .pose.yaml
           </button>
           <button class="btn" onClick={() => act(() => { loadPose(blankPose()); onClose(); })}>
             New blank pose

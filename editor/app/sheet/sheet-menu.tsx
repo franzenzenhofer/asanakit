@@ -1,8 +1,10 @@
 import { useState } from 'preact/hooks';
 import type { JSX } from 'preact';
-import type { SequenceSpec, SheetSpecInput } from '@asanakit/model/index.js';
+import { parse as parseYamlRaw } from 'yaml';
+import { parseSheet, type SequenceSpec, type SheetSpecInput } from '@asanakit/model/index.js';
 import { collection } from '../state/app.js';
 import { library } from '../state/library.js';
+import { pickTextFile } from '../lib/upload.js';
 import { CloseIcon } from '../ui/icons.js';
 
 export interface SheetMenuProps {
@@ -35,6 +37,24 @@ export const SheetMenu = (props: SheetMenuProps): JSX.Element => {
           <button class="btn" onClick={() => { props.onSave(); done('Saved to My sheets.'); }}>Save</button>
           <button class="btn" onClick={props.onDownloadYaml}>Download YAML</button>
           <button class="btn" onClick={() => void props.onDownloadPng().catch((e: unknown) => done(String(e)))}>PNG per page</button>
+          <button
+            class="btn"
+            onClick={() =>
+              void (async (): Promise<void> => {
+                try {
+                  const picked = await pickTextFile('.yaml,.yml,.json');
+                  if (picked === null) return;
+                  parseSheet(picked.text, picked.name);
+                  props.onLoad(parseYamlRaw(picked.text) as SheetSpecInput);
+                  props.onClose();
+                } catch (error) {
+                  done(error instanceof Error ? error.message : String(error));
+                }
+              })()
+            }
+          >
+            Upload .sheet.yaml
+          </button>
           <button class="btn" onClick={() => { props.onNew(); props.onClose(); }}>New empty sheet</button>
         </div>
 

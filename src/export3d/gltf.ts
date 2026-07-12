@@ -24,12 +24,16 @@ const exportScene = (skeleton: Skeleton, options: GltfExportOptions): Promise<Ar
   });
 };
 
-/** A solved skeleton as a binary GLB: one file any 3D viewer can orbit and zoom. */
-export const exportGlb = async (skeleton: Skeleton, options: GltfExportOptions = {}): Promise<Buffer> => {
+/** A solved skeleton as binary GLB bytes - browser-safe (no Buffer). */
+export const exportGlbBytes = async (skeleton: Skeleton, options: GltfExportOptions = {}): Promise<ArrayBuffer> => {
   const result = await exportScene(skeleton, { ...options, binary: true });
   if (!(result instanceof ArrayBuffer)) throw new Error('GLTFExporter did not return a binary buffer');
-  return Buffer.from(result);
+  return result;
 };
+
+/** A solved skeleton as a binary GLB: one file any 3D viewer can orbit and zoom. */
+export const exportGlb = async (skeleton: Skeleton, options: GltfExportOptions = {}): Promise<Buffer> =>
+  Buffer.from(await exportGlbBytes(skeleton, options));
 
 /** The same scene as embedded-buffer glTF JSON, for debugging and diffing. */
 export const exportGltf = async (skeleton: Skeleton, options: GltfExportOptions = {}): Promise<string> => {
