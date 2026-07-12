@@ -13,37 +13,37 @@
     <rect data-prop="mat" x="119.868" y="454.54" width="460.264" height="15.001" rx="7.501" fill="#e2ecf5" stroke="#1b3a5c" stroke-width="2.046"/>
   </g>
   <g data-layer="figure">
-    <line data-bone="hipL" x1="350" y1="343.913" x2="378.98" y2="343.913" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
-    <line data-bone="hipR" x1="350" y1="343.913" x2="321.02" y2="343.913" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
-    <line data-bone="pelvis" x1="350" y1="343.913" x2="380.899" y2="329.504" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
-    <line data-bone="spine" x1="380.899" y1="329.504" x2="433.428" y2="305.009" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
-    <line data-bone="thighL" x1="378.98" y1="343.913" x2="438.044" y2="402.977" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
-    <line data-bone="thighR" x1="321.02" y1="343.913" x2="261.956" y2="402.977" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
-    <line data-bone="upperArmL" x1="447.837" y1="335.909" x2="457.605" y2="391.309" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
-    <line data-bone="clavicleL" x1="433.428" y1="305.009" x2="447.837" y2="335.909" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
-    <line data-bone="forearmL" x1="457.605" y1="391.309" x2="466.19" y2="439.993" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
-    <line data-bone="handL" x1="466.19" y1="439.993" x2="469.446" y2="458.46" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
-    <line data-bone="neck" x1="433.428" y1="305.009" x2="451.144" y2="294.781" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
-    <line data-bone="clavicleR" x1="433.428" y1="305.009" x2="419.02" y2="274.11" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
-    <line data-bone="upperArmR" x1="419.02" y1="274.11" x2="409.251" y2="218.71" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
-    <line data-bone="head" x1="451.144" y1="294.781" x2="476.565" y2="258.475" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
+    <line data-bone="hipL" data-side="left" x1="350" y1="343.913" x2="378.98" y2="343.913" stroke="#7591b3" stroke-width="4.091" stroke-linecap="round"/>
+    <line data-bone="hipR" data-side="right" x1="350" y1="343.913" x2="321.02" y2="343.913" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
+    <line data-bone="pelvis" data-side="center" x1="350" y1="343.913" x2="380.899" y2="329.504" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
+    <line data-bone="spine" data-side="center" x1="380.899" y1="329.504" x2="433.428" y2="305.009" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
+    <line data-bone="thighL" data-side="left" x1="378.98" y1="343.913" x2="438.044" y2="402.977" stroke="#7591b3" stroke-width="4.091" stroke-linecap="round"/>
+    <line data-bone="thighR" data-side="right" x1="321.02" y1="343.913" x2="261.956" y2="402.977" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
+    <line data-bone="upperArmL" data-side="left" x1="447.837" y1="335.909" x2="457.605" y2="391.309" stroke="#7591b3" stroke-width="4.091" stroke-linecap="round"/>
+    <line data-bone="clavicleL" data-side="left" x1="433.428" y1="305.009" x2="447.837" y2="335.909" stroke="#7591b3" stroke-width="4.091" stroke-linecap="round"/>
+    <line data-bone="forearmL" data-side="left" x1="457.605" y1="391.309" x2="466.19" y2="439.993" stroke="#7591b3" stroke-width="4.091" stroke-linecap="round"/>
+    <line data-bone="handL" data-side="left" x1="466.19" y1="439.993" x2="469.446" y2="458.46" stroke="#7591b3" stroke-width="4.091" stroke-linecap="round"/>
+    <line data-bone="neck" data-side="center" x1="433.428" y1="305.009" x2="451.144" y2="294.781" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
+    <line data-bone="clavicleR" data-side="right" x1="433.428" y1="305.009" x2="419.02" y2="274.11" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
+    <line data-bone="upperArmR" data-side="right" x1="419.02" y1="274.11" x2="409.251" y2="218.71" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
+    <line data-bone="head" data-side="center" x1="451.144" y1="294.781" x2="476.565" y2="258.475" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
     <ellipse data-part="head" cx="463.855" cy="276.628" rx="17.047" ry="17.047" transform="rotate(35.000 463.855 276.628)" fill="none" stroke="#1b3a5c" stroke-width="4.091"/>
-    <line data-bone="forearmR" x1="409.251" y1="218.71" x2="400.667" y2="170.026" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
-    <line data-bone="shinL" x1="438.044" y1="402.977" x2="497.108" y2="462.041" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
-    <line data-bone="shinR" x1="261.956" y1="402.977" x2="202.892" y2="462.041" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
-    <line data-bone="handR" x1="400.667" y1="170.026" x2="397.41" y2="151.559" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
-    <line data-bone="footL" x1="497.108" y1="462.041" x2="527.792" y2="462.041" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
-    <line data-bone="footR" x1="202.892" y1="462.041" x2="172.208" y2="462.041" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
+    <line data-bone="forearmR" data-side="right" x1="409.251" y1="218.71" x2="400.667" y2="170.026" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
+    <line data-bone="shinL" data-side="left" x1="438.044" y1="402.977" x2="497.108" y2="462.041" stroke="#7591b3" stroke-width="4.091" stroke-linecap="round"/>
+    <line data-bone="shinR" data-side="right" x1="261.956" y1="402.977" x2="202.892" y2="462.041" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
+    <line data-bone="handR" data-side="right" x1="400.667" y1="170.026" x2="397.41" y2="151.559" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
+    <line data-bone="footL" data-side="left" x1="497.108" y1="462.041" x2="527.792" y2="462.041" stroke="#7591b3" stroke-width="4.091" stroke-linecap="round"/>
+    <line data-bone="footR" data-side="right" x1="202.892" y1="462.041" x2="172.208" y2="462.041" stroke="#1b3a5c" stroke-width="4.091" stroke-linecap="round"/>
     <g data-part="joints">
-      <circle data-joint="shoulderL" cx="447.837" cy="335.909" r="3.409" fill="#1b3a5c"/>
-      <circle data-joint="elbowL" cx="457.605" cy="391.309" r="3.409" fill="#1b3a5c"/>
-      <circle data-joint="wristL" cx="466.19" cy="439.993" r="3.409" fill="#1b3a5c"/>
+      <circle data-joint="shoulderL" cx="447.837" cy="335.909" r="3.409" fill="#7591b3"/>
+      <circle data-joint="elbowL" cx="457.605" cy="391.309" r="3.409" fill="#7591b3"/>
+      <circle data-joint="wristL" cx="466.19" cy="439.993" r="3.409" fill="#7591b3"/>
       <circle data-joint="shoulderR" cx="419.02" cy="274.11" r="3.409" fill="#1b3a5c"/>
       <circle data-joint="elbowR" cx="409.251" cy="218.71" r="3.409" fill="#1b3a5c"/>
       <circle data-joint="wristR" cx="400.667" cy="170.026" r="3.409" fill="#1b3a5c"/>
-      <circle data-joint="hipJointL" cx="378.98" cy="343.913" r="3.409" fill="#1b3a5c"/>
-      <circle data-joint="kneeL" cx="438.044" cy="402.977" r="3.409" fill="#1b3a5c"/>
-      <circle data-joint="ankleL" cx="497.108" cy="462.041" r="3.409" fill="#1b3a5c"/>
+      <circle data-joint="hipJointL" cx="378.98" cy="343.913" r="3.409" fill="#7591b3"/>
+      <circle data-joint="kneeL" cx="438.044" cy="402.977" r="3.409" fill="#7591b3"/>
+      <circle data-joint="ankleL" cx="497.108" cy="462.041" r="3.409" fill="#7591b3"/>
       <circle data-joint="hipJointR" cx="321.02" cy="343.913" r="3.409" fill="#1b3a5c"/>
       <circle data-joint="kneeR" cx="261.956" cy="402.977" r="3.409" fill="#1b3a5c"/>
       <circle data-joint="ankleR" cx="202.892" cy="462.041" r="3.409" fill="#1b3a5c"/>

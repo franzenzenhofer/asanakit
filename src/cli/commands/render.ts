@@ -11,6 +11,8 @@ import { library, parseCamera, parseIntOption, parseStyle, resolvePose } from '.
 
 interface CommonOptions {
   style: string;
+  leftColor?: string;
+  rightColor?: string;
   width: string;
   height: string;
   camera?: string;
@@ -24,16 +26,30 @@ interface CommonOptions {
   lib?: string;
 }
 
-const renderOptionsFrom = (o: CommonOptions): RenderOptions => ({
-  style: parseStyle(o.style),
-  width: parseIntOption(o.width, 'width'),
-  height: parseIntOption(o.height, 'height'),
-  title: o.title === true,
-  caption: o.caption === true,
-  ...(o.camera === undefined ? {} : { camera: parseCamera(o.camera) }),
-  ...(o.muscles === undefined ? {} : { muscles: o.muscles }),
-  ...(o.background === undefined ? {} : { background: o.background }),
-});
+const figureOverride = (o: CommonOptions): RenderOptions['styleOverride'] =>
+  o.leftColor === undefined && o.rightColor === undefined
+    ? undefined
+    : {
+        figure: {
+          ...(o.leftColor === undefined ? {} : { strokeLeft: o.leftColor }),
+          ...(o.rightColor === undefined ? {} : { stroke: o.rightColor }),
+        },
+      };
+
+const renderOptionsFrom = (o: CommonOptions): RenderOptions => {
+  const styleOverride = figureOverride(o);
+  return {
+    style: parseStyle(o.style),
+    ...(styleOverride === undefined ? {} : { styleOverride }),
+    width: parseIntOption(o.width, 'width'),
+    height: parseIntOption(o.height, 'height'),
+    title: o.title === true,
+    caption: o.caption === true,
+    ...(o.camera === undefined ? {} : { camera: parseCamera(o.camera) }),
+    ...(o.muscles === undefined ? {} : { muscles: o.muscles }),
+    ...(o.background === undefined ? {} : { background: o.background }),
+  };
+};
 
 const write = async (path: string, svg: string, o: CommonOptions): Promise<void> => {
   await mkdir(dirname(path), { recursive: true });
@@ -55,6 +71,8 @@ const withCommonOptions = (cmd: Command): Command =>
     .option('-h, --height <px>', 'canvas height', '800')
     .option('--camera <view>', 'front | back | left | right | side | three-quarter | top, or "azimuth=30,elevation=15"')
     .option('--settle', 'drop the figure onto the ground with the physics engine before rendering')
+    .option('--left-color <color>', 'stroke for LEFT-side bones (default: a dark gray, per style)')
+    .option('--right-color <color>', 'stroke for right-side and centre bones')
     .option('--title', 'draw the pose name above the figure')
     .option('--caption', 'draw the teaching cues below the figure')
     .option('--muscles', 'force the muscle layer on')

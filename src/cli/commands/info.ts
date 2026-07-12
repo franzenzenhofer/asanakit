@@ -102,7 +102,7 @@ export const registerInfoCommands = (program: Command): void => {
     .action(() => {
       json({
         joints: BONE_IDS,
-        jointAxes: ['flex', 'abduct', 'twist'],
+        jointAxes: ['flex', 'extend', 'abduct', 'adduct', 'twist', 'externalRotation', 'internalRotation'],
         landmarks: LANDMARK_IDS,
         muscles: MUSCLE_IDS.map((id) => ({ id, label: MUSCLES[id].label, region: MUSCLES[id].region })),
         styles: STYLE_IDS.map((id) => ({ id, label: STYLES[id].label })),

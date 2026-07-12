@@ -53,21 +53,47 @@ joints:
   shinR: 60             # knee bends 60° (backward - the only way a knee goes)
 ```
 
-The object form adds the other two anatomical axes:
+The object form speaks the full anatomical vocabulary - every axis by both of its names:
 
 ```yaml
 joints:
-  upperArmL: { abduct: 90 }              # arm straight out to the side
+  upperArmL: { abduct: 90 }                          # arm straight out to the side
   thighR:    { flex: 45, abduct: 30, twist: 20 }
+  upperArmR: { extend: 30 }                          # arm reaches behind the body
+  thighL:    { adduct: 15, internalRotation: 10 }
 ```
 
-- `flex` - forward bend for hips/arms/spine, backward for knees, toes-up for ankles.
-- `abduct` - away from the midline, on either side. Center bones lean toward the figure's left.
-- `twist` - about the bone: positive is **external rotation** (toes/palms turn outward);
-  for center bones, turning toward the figure's left.
+- `flex` / `extend` - flexion and extension. Flexion is forward bend for hips/arms/spine,
+  backward for knees, toes-up (dorsiflexion) for ankles; extension is its opposite.
+- `abduct` / `adduct` - away from / toward the midline, on either side. Center bones lean
+  toward the figure's left on positive `abduct` (lateral flexion).
+- `twist`, or `externalRotation` / `internalRotation` by name - rotation about the bone.
+  Positive `twist` is external rotation (toes/palms turn outward); for center bones,
+  turning toward the figure's left (axial rotation).
 
-The signs are per-side anatomical, so a mirrored pose is literally the same numbers with
-L and R swapped - which is what `mirror: true` does.
+Naming both directions of one axis (`flex` AND `extend`) is a contradiction and fails
+loudly. The signs are per-side anatomical, so a mirrored pose is literally the same
+numbers with L and R swapped - which is what `mirror: true` does.
+
+### How classic movement terms map onto the format
+
+| You say | You write |
+|---|---|
+| hip flexion / extension | `thighL: { flex: … }` / `{ extend: … }` |
+| knee flexion | `shinL: 60` (knees only flex; the validator rejects the other way) |
+| ankle dorsiflexion / plantarflexion | `footL: { flex: … }` / `{ extend: … }` |
+| foot turnout (out-toeing) | `footL: { abduct: … }` or `thighL: { externalRotation: … }` |
+| shoulder flexion (arm forward-up) | `upperArmL: { flex: … }` |
+| shoulder abduction (arm sideways-up) | `upperArmL: { abduct: … }` |
+| shoulder internal/external rotation | `upperArmL: { internalRotation: … }` / `{ externalRotation: … }` |
+| elbow flexion | `forearmL: 90` |
+| forearm pronation / supination | `forearmL: { internalRotation: … }` / `{ externalRotation: … }` |
+| scapular elevation (shrug) | `clavicleL: { abduct: … }` |
+| scapular protraction / retraction | `clavicleL: { flex: … }` / `{ extend: … }` |
+| spinal flexion (forward fold) / extension (backbend) | `spine: { flex: … }` / `{ extend: … }` |
+| spinal lateral flexion (side bend) | `spine: { abduct: … }` (positive = toward the figure's left) |
+| spinal / cervical rotation (twist) | `spine: { twist: … }`, `neck: { twist: … }` |
+| hip abduction / adduction | `thighL: { abduct: … }` / `{ adduct: … }` |
 
 ### The root
 

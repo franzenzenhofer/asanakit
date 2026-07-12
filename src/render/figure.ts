@@ -46,11 +46,12 @@ const boneLine = (bone: ViewBone, farOpacity: number | undefined, ctx: RenderCon
   const [x2, y2] = proj.p(bone.end);
   return el('line', {
     'data-bone': bone.id,
+    'data-side': bone.side,
     x1,
     y1,
     x2,
     y2,
-    stroke: style.figure.stroke,
+    stroke: bone.side === 'left' ? style.figure.strokeLeft : style.figure.stroke,
     'stroke-width': style.figure.strokeWidth * proj.s,
     'stroke-linecap': style.figure.lineCap,
     opacity: farOpacity,
@@ -114,7 +115,7 @@ const joints = ({ skeleton, proj, style }: RenderContext): SvgNode | null => {
         cx,
         cy,
         r: style.figure.jointRadius * proj.s * skeleton.scale,
-        fill: style.figure.stroke,
+        fill: id.endsWith('L') ? style.figure.strokeLeft : style.figure.stroke,
       });
     }),
   );

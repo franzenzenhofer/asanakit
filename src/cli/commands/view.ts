@@ -67,6 +67,7 @@ export const registerViewCommands = (program: Command): void => {
         camera,
         engaged: pose.muscles.engaged,
         stretched: pose.muscles.stretched,
+        props: pose.props,
       });
 
       const out = options.out ?? `${pose.id}.viewer.html`;

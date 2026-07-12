@@ -103,8 +103,25 @@ export interface JointRotation {
   readonly twist: number;
 }
 
+/**
+ * What an author may write: the three canonical axes plus their anatomical
+ * antonyms - `extend` is negative flexion, `adduct` negative abduction,
+ * `internalRotation` negative twist (and `externalRotation` spells the
+ * positive one out). Anatomy is spoken in these pairs; the format accepts
+ * both directions by name and rejects contradictions.
+ */
+export interface JointRotationInput {
+  readonly flex?: number | undefined;
+  readonly extend?: number | undefined;
+  readonly abduct?: number | undefined;
+  readonly adduct?: number | undefined;
+  readonly twist?: number | undefined;
+  readonly externalRotation?: number | undefined;
+  readonly internalRotation?: number | undefined;
+}
+
 /** A scalar is pure flexion - the common case reads like anatomy: "forearmL: 90" bends the elbow. */
-export type JointValue = number | Partial<JointRotation>;
+export type JointValue = number | JointRotationInput;
 
 /**
  * An absolute bone direction: where the bone points in world space, whatever

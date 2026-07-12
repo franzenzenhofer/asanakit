@@ -40,6 +40,7 @@ figure:
     handR: { azimuth: -90, elevation: -8 }
 props:
   - type: mat
+    yaw: 90
 muscles:
   engaged: [ quadriceps, rectusAbdominis, deltoid ]
   stretched: [ hamstrings, adductors, erectorSpinae, gastrocnemius ]

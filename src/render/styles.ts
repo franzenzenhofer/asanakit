@@ -10,6 +10,8 @@ export interface Style {
   readonly padding: number;
   readonly figure: {
     readonly stroke: string;
+    /** Left-side bones take this stroke, so a profile tells left from right. */
+    readonly strokeLeft: string;
     readonly strokeWidth: number;
     readonly lineCap: 'round' | 'butt' | 'square';
     readonly joints: 'none' | 'dots';
@@ -71,6 +73,7 @@ const stick: Style = {
   padding: 0.12,
   figure: {
     stroke: '#111111',
+    strokeLeft: '#6b6b6b',
     strokeWidth: 0.022,
     lineCap: 'round',
     joints: 'dots',
@@ -106,7 +109,7 @@ const anatomy: Style = {
   ...stick,
   id: 'anatomy',
   label: 'Anatomical infographic',
-  figure: { ...stick.figure, stroke: '#3d3d3d', strokeWidth: 0.012, joints: 'dots', jointRadius: 0.009 },
+  figure: { ...stick.figure, stroke: '#3d3d3d', strokeLeft: '#8f8f8f', strokeWidth: 0.012, joints: 'dots', jointRadius: 0.009 },
   head: { ...stick.head, fill: '#f5efe8', stroke: '#3d3d3d', strokeWidth: 0.012 },
   muscles: {
     show: true,
@@ -126,6 +129,7 @@ const silhouette: Style = {
   figure: {
     ...stick.figure,
     stroke: '#111111',
+    strokeLeft: '#4d4d4d',
     strokeWidth: 0.062,
     joints: 'none',
     jointRadius: 0,
@@ -140,7 +144,7 @@ const blueprint: Style = {
   id: 'blueprint',
   label: 'Blueprint',
   background: '#f3f7fb',
-  figure: { ...stick.figure, stroke: '#1b3a5c', strokeWidth: 0.012, jointRadius: 0.01 },
+  figure: { ...stick.figure, stroke: '#1b3a5c', strokeLeft: '#7591b3', strokeWidth: 0.012, jointRadius: 0.01 },
   head: { shape: 'circle', rx: 0.05, ry: 0.05, fill: 'none', stroke: '#1b3a5c', strokeWidth: 0.012 },
   props: { stroke: '#1b3a5c', fill: '#e2ecf5', strokeWidth: 0.006 },
   annotation: { ...stick.annotation, stroke: '#c1121f', accent: '#c1121f', color: '#1b3a5c', strokeWidth: 0.004 },
@@ -151,7 +155,7 @@ const ink: Style = {
   ...stick,
   id: 'ink',
   label: 'Brush ink',
-  figure: { ...stick.figure, strokeWidth: 0.038, joints: 'none', jointRadius: 0, torsoWidth: 0.03 },
+  figure: { ...stick.figure, strokeLeft: '#5d5d5d', strokeWidth: 0.038, joints: 'none', jointRadius: 0, torsoWidth: 0.03 },
   head: { ...stick.head, rx: 0.05, ry: 0.064, strokeWidth: 0.032 },
 };
 
@@ -160,7 +164,7 @@ const poster: Style = {
   id: 'poster',
   label: 'Poster',
   background: '#fdf6ec',
-  figure: { ...stick.figure, stroke: '#1d1d1b', strokeWidth: 0.03, torsoWidth: 0.05, jointRadius: 0.016 },
+  figure: { ...stick.figure, stroke: '#1d1d1b', strokeLeft: '#6e6e6a', strokeWidth: 0.03, torsoWidth: 0.05, jointRadius: 0.016 },
   head: { ...stick.head, fill: '#f4a259', stroke: '#1d1d1b', strokeWidth: 0.026, rx: 0.05, ry: 0.066 },
   props: { stroke: '#1d1d1b', fill: '#8cb369', strokeWidth: 0.012 },
   annotation: { ...stick.annotation, stroke: '#bc4b51', accent: '#bc4b51', color: '#1d1d1b' },
@@ -170,7 +174,7 @@ const minimal: Style = {
   ...stick,
   id: 'minimal',
   label: 'Minimal',
-  figure: { ...stick.figure, stroke: '#9aa0a6', strokeWidth: 0.01, joints: 'none', jointRadius: 0 },
+  figure: { ...stick.figure, stroke: '#9aa0a6', strokeLeft: '#c6cbd0', strokeWidth: 0.01, joints: 'none', jointRadius: 0 },
   head: { ...stick.head, stroke: '#9aa0a6', strokeWidth: 0.01 },
   annotation: { ...stick.annotation, stroke: '#9aa0a6', color: '#9aa0a6', accent: '#9aa0a6' },
 };

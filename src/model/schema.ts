@@ -19,18 +19,39 @@ const anchor = z.union([z.enum(LANDMARK_IDS), point]);
 
 const jointAngle = z.number().min(-MAX_JOINT_DEG).max(MAX_JOINT_DEG);
 
+const ANTONYMS = [
+  ['flex', 'extend'],
+  ['abduct', 'adduct'],
+  ['twist', 'externalRotation'],
+  ['twist', 'internalRotation'],
+  ['externalRotation', 'internalRotation'],
+] as const;
+
 /**
  * A joint rotation. A bare number is pure flexion - "forearmL: 90" bends the
- * elbow 90 degrees, the way anatomy says it. The object form adds abduction
- * (away from the midline) and twist (about the bone, positive = external).
+ * elbow 90 degrees, the way anatomy says it. The object form speaks full
+ * anatomical vocabulary: flex/extend, abduct/adduct, twist (positive =
+ * external rotation) or internalRotation/externalRotation by name. Naming
+ * both directions of the same axis is a contradiction and fails loudly.
  */
 const jointValue = z.union([
   jointAngle,
   z
     .object({
-      flex: jointAngle.default(0),
-      abduct: jointAngle.default(0),
-      twist: jointAngle.default(0),
+      flex: jointAngle.optional(),
+      extend: jointAngle.optional().describe('Extension: negative flexion, by its anatomical name.'),
+      abduct: jointAngle.optional(),
+      adduct: jointAngle.optional().describe('Adduction: toward the midline.'),
+      twist: jointAngle.optional().describe('About the bone; positive = external rotation.'),
+      externalRotation: jointAngle.optional(),
+      internalRotation: jointAngle.optional(),
+    })
+    .superRefine((joint, ctx) => {
+      for (const [a, b] of ANTONYMS) {
+        if (joint[a] !== undefined && joint[b] !== undefined) {
+          ctx.addIssue({ code: 'custom', message: `"${a}" and "${b}" name the same axis; give one or the other` });
+        }
+      }
     })
     .describe('Rotation in degrees about the bone\'s anatomical axes.'),
 ]);
@@ -130,9 +151,10 @@ export const propSchema = z.discriminatedUnion('type', [
   z.object({
     type: z.literal('mat'),
     y: z.number().default(0),
-    width: z.number().positive().default(1.35),
+    width: z.number().positive().default(0.38).describe('Across the practice direction, in stature units.'),
+    length: z.number().positive().default(1.35).describe('Along the practice direction.'),
     thickness: z.number().positive().default(0.022),
-    rolled: z.boolean().default(false),
+    yaw: z.number().default(0).describe('Turn the mat; 90 lays its length along the figure\'s left-right axis.'),
   }),
   z.object({
     type: z.literal('block'),
@@ -148,9 +170,11 @@ export const propSchema = z.discriminatedUnion('type', [
     /** Position the board under these landmarks (usually both feet), or pin it explicitly. */
     under: z.array(z.enum(LANDMARK_IDS)).default([]),
     at: point.optional(),
-    rotation: z.number().default(0),
+    rotation: z.number().default(0).describe('Nose-up pitch in degrees.'),
     length: z.number().positive().default(1.15),
-    offset: point.default([0, -0.03]),
+    width: z.number().positive().optional().describe('Defaults to a shortboard plan: length x 0.19.'),
+    thickness: z.number().positive().default(0.024),
+    offset: point.default([0, -0.03]).describe('[along the board, vertical]'),
   }),
   z.object({
     type: z.literal('wave'),

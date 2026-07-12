@@ -21,7 +21,7 @@ export const registerExportCommands = (program: Command): void => {
     .action(async (ref: string, options: { out: string; settle?: boolean; lib?: string }) => {
       const pose = await resolvePose(ref, options.lib);
       const skeleton = await solvePose(pose, options.settle === undefined ? {} : { settle: options.settle });
-      const sceneOptions = { engaged: pose.muscles.engaged, stretched: pose.muscles.stretched };
+      const sceneOptions = { engaged: pose.muscles.engaged, stretched: pose.muscles.stretched, props: pose.props };
 
       await mkdir(dirname(options.out), { recursive: true });
       if (extname(options.out).toLowerCase() === '.gltf') {

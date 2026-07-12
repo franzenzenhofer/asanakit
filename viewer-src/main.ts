@@ -25,6 +25,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import type { MuscleId } from '../src/anatomy/muscles.js';
 import type { CameraAngles } from '../src/core/camera.js';
 import type { Skeleton } from '../src/core/types.js';
+import type { Prop } from '../src/model/schema.js';
 import { buildFigureScene } from '../src/three/scene.js';
 
 interface ViewerPose {
@@ -34,6 +35,7 @@ interface ViewerPose {
   readonly skeleton: Skeleton;
   readonly engaged: readonly MuscleId[];
   readonly stretched: readonly MuscleId[];
+  readonly props: readonly Prop[];
 }
 
 interface ViewerPayload {
@@ -76,7 +78,7 @@ let current: Group | null = null;
 const figureFor = (pose: ViewerPose): Group => {
   let group = figures.get(pose.id);
   if (group === undefined) {
-    group = buildFigureScene(pose.skeleton, { engaged: pose.engaged, stretched: pose.stretched });
+    group = buildFigureScene(pose.skeleton, { engaged: pose.engaged, stretched: pose.stretched, props: pose.props });
     figures.set(pose.id, group);
   }
   return group;
@@ -130,6 +132,13 @@ const select = (id: string): void => {
 };
 
 window.ASANAKIT_SELECT = select;
+
+// The page never wires its own handlers: no inline onclick anywhere, so pose
+// data can never smuggle script through an attribute.
+document.querySelectorAll('[data-asanakit-pose], [data-pose-card]').forEach((element) => {
+  const id = element.getAttribute('data-asanakit-pose') ?? element.getAttribute('data-pose-card');
+  if (id !== null) element.addEventListener('click', () => { select(id); });
+});
 
 const resize = (): void => {
   const width = Math.max(mount.clientWidth, 1);

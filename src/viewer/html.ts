@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import type { MuscleId } from '../anatomy/muscles.js';
 import { resolveCamera, type CameraAngles, type CameraPresetId } from '../core/camera.js';
 import type { Skeleton } from '../core/types.js';
-import type { PoseSpec } from '../model/schema.js';
+import type { PoseSpec, Prop } from '../model/schema.js';
 import { renderSvg } from '../render/scene.js';
 
 export interface ViewerOptions {
@@ -11,6 +11,7 @@ export interface ViewerOptions {
   readonly camera: CameraAngles;
   readonly engaged?: readonly MuscleId[];
   readonly stretched?: readonly MuscleId[];
+  readonly props?: readonly Prop[];
 }
 
 /** A pose together with its solved (possibly physics-settled) skeleton. */
@@ -44,7 +45,12 @@ const loadBundle = async (): Promise<string> => {
 const inline = (text: string): string => text.replaceAll('</', '<\\/');
 
 const escapeHtml = (text: string): string =>
-  text.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+  text
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#39;');
 
 const payloadFor = (entries: readonly ShowcaseEntry[], camera: CameraAngles): string =>
   JSON.stringify({
@@ -55,6 +61,7 @@ const payloadFor = (entries: readonly ShowcaseEntry[], camera: CameraAngles): st
       skeleton,
       engaged: pose.muscles.engaged,
       stretched: pose.muscles.stretched,
+      props: pose.props,
     })),
     camera,
   });
@@ -88,7 +95,8 @@ const card = (entry: ShowcaseEntry, svg: string, label?: string): string => {
   const { pose } = entry;
   const caption =
     label ?? `${escapeHtml(pose.name)}${pose.sanskrit === undefined ? '' : `<em>${escapeHtml(pose.sanskrit)}</em>`}`;
-  return `<figure data-pose-card="${escapeHtml(pose.id)}" onclick="ASANAKIT_SELECT('${escapeHtml(pose.id)}')">${svg}<figcaption>${caption}</figcaption></figure>`;
+  // No inline handlers: the bundle binds clicks to [data-pose-card] itself.
+  return `<figure data-pose-card="${escapeHtml(pose.id)}">${svg}<figcaption>${caption}</figcaption></figure>`;
 };
 
 /** For a single pose the gallery is the orbit: the same body through five cameras. */
@@ -112,7 +120,7 @@ const navFor = (entries: readonly ShowcaseEntry[]): string =>
     : `<nav>${entries
         .map(
           ({ pose }) =>
-            `<button data-asanakit-pose="${escapeHtml(pose.id)}" onclick="ASANAKIT_SELECT('${escapeHtml(pose.id)}')">${escapeHtml(pose.name)}</button>`,
+            `<button data-asanakit-pose="${escapeHtml(pose.id)}">${escapeHtml(pose.name)}</button>`,
         )
         .join('')}</nav>`;
 
@@ -173,6 +181,7 @@ export const buildViewerHtml = async (skeleton: Skeleton, options: ViewerOptions
         skeleton,
         engaged: options.engaged ?? [],
         stretched: options.stretched ?? [],
+        props: options.props ?? [],
       },
     ],
     camera: options.camera,

@@ -25,6 +25,8 @@ export interface ViewBone {
 /** The solved skeleton projected through a camera: everything the SVG layers consume. */
 export interface ViewSkeleton {
   readonly camera: CameraAngles;
+  /** The world-space skeleton this projection came from - for layers that project 3D props themselves. */
+  readonly source: Skeleton;
   readonly scale: number;
   readonly bones: Record<BoneId, ViewBone>;
   readonly landmarks: Record<LandmarkId, Vec2>;
@@ -94,6 +96,7 @@ export const viewSkeleton = (skeleton: Skeleton, camera: CameraAngles): ViewSkel
 
   return {
     camera,
+    source: skeleton,
     scale: skeleton.scale,
     bones: Object.fromEntries(projected) as Record<BoneId, ViewBone>,
     landmarks,

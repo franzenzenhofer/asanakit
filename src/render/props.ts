@@ -1,11 +1,13 @@
 import { curveBasis, line } from 'd3-shape';
 import { path } from 'd3-path';
+import { rotateVec3 } from '../core/quat.js';
 import type { Bounds, LandmarkId } from '../core/types.js';
-import type { ViewSkeleton } from './camera.js';
 import { add, fromPolar, rotate, scale as scaleVec, type Vec2 } from '../core/vec2.js';
 import type { Anchor, Prop } from '../model/schema.js';
-import { boundsOfPoints, type Projection } from './project.js';
+import { BOARD_WIDTH_RATIO, matModel, type MatProp } from '../props/geometry.js';
+import { viewQuat, type ViewSkeleton } from './camera.js';
 import type { RenderContext } from './context.js';
+import { boundsOfPoints, type Projection } from './project.js';
 import { el, group, num, type SvgNode } from './svg.js';
 
 export const resolveAnchor = (anchor: Anchor, skeleton: ViewSkeleton): Vec2 =>
@@ -28,7 +30,17 @@ const smooth = line<Vec2>()
   .curve(curveBasis);
 
 const WAVE_STEPS = 48;
-const BOARD_WIDTH_RATIO = 0.19;
+
+/**
+ * The mat is a real 3D box; its picture-plane footprint is the projection of
+ * its top face through the active camera - a side camera sees the length, a
+ * front camera the width, a yawed mat whatever the yaw exposes.
+ */
+const matSpan = (prop: MatProp, skeleton: ViewSkeleton): readonly [number, number] => {
+  const q = viewQuat(skeleton.camera);
+  const xs = matModel(prop, skeleton.source).top.map((corner) => rotateVec3(q, corner)[0]);
+  return [Math.min(...xs), Math.max(...xs)];
+};
 
 const wavePoints = (prop: Extract<Prop, { type: 'wave' }>, cx: number): Vec2[] => {
   const dir = prop.facing === 'right' ? 1 : -1;
@@ -42,9 +54,9 @@ const wavePoints = (prop: Extract<Prop, { type: 'wave' }>, cx: number): Vec2[] =
   });
 };
 
-const boardOutline = (centre: Vec2, length: number, rotationDeg: number): Vec2[] => {
+const boardOutline = (centre: Vec2, length: number, rotationDeg: number, width?: number): Vec2[] => {
   const half = length / 2;
-  const w = length * BOARD_WIDTH_RATIO;
+  const w = width ?? length * BOARD_WIDTH_RATIO;
   const local: Vec2[] = [
     [half, 0],
     [half * 0.45, w / 2],
@@ -76,11 +88,13 @@ const propPoints = (prop: Prop, skeleton: ViewSkeleton): Vec2[] => {
         [cx - prop.width / 2, prop.y],
         [cx + prop.width / 2, prop.y],
       ];
-    case 'mat':
+    case 'mat': {
+      const [x1, x2] = matSpan(prop, skeleton);
       return [
-        [cx - prop.width / 2, prop.y - prop.thickness],
-        [cx + prop.width / 2, prop.y + prop.thickness],
+        [x1, prop.y - prop.thickness],
+        [x2, prop.y + prop.thickness],
       ];
+    }
     case 'block': {
       const at = resolveAnchor(prop.at, skeleton);
       return [
@@ -97,7 +111,7 @@ const propPoints = (prop: Prop, skeleton: ViewSkeleton): Vec2[] => {
       ];
     case 'surfboard': {
       const centre = prop.at ?? add(centroid(prop.under, skeleton), prop.offset);
-      return boardOutline(centre, prop.length, prop.rotation);
+      return boardOutline(centre, prop.length, prop.rotation, prop.width);
     }
     case 'wave':
       return wavePoints(prop, cx);
@@ -121,8 +135,9 @@ const renderProp = (prop: Prop, ctx: RenderContext): SvgNode => {
       return el('line', { 'data-prop': 'ground', x1, y1, x2, y2, ...attrs, 'stroke-linecap': 'round' });
     }
     case 'mat': {
-      const [x1, y1] = proj.p([cx - prop.width / 2, prop.y + prop.thickness]);
-      const [x2] = proj.p([cx + prop.width / 2, prop.y]);
+      const [mx1, mx2] = matSpan(prop, skeleton);
+      const [x1, y1] = proj.p([mx1, prop.y + prop.thickness]);
+      const [x2] = proj.p([mx2, prop.y]);
       return el('rect', {
         'data-prop': 'mat',
         x: x1,
@@ -164,7 +179,7 @@ const renderProp = (prop: Prop, ctx: RenderContext): SvgNode => {
     }
     case 'surfboard': {
       const centre = prop.at ?? add(centroid(prop.under, skeleton), prop.offset);
-      const outline = boardOutline(centre, prop.length, prop.rotation);
+      const outline = boardOutline(centre, prop.length, prop.rotation, prop.width);
       const stringerEnd = add(centre, fromPolar(prop.rotation, prop.length / 2));
       const stringerStart = add(centre, fromPolar(prop.rotation + 180, prop.length / 2));
       const [sx1, sy1] = proj.p(stringerStart);

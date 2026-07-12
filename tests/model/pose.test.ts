@@ -31,7 +31,32 @@ describe('parsePose', () => {
       'asanakit: 2\nid: x\nname: X\ndiscipline: yoga\nfigure:\n  joints:\n    upperArmL: { abduct: 90, twist: -15 }\n',
       'x.pose.yaml',
     );
-    expect(pose.figure.joints.upperArmL).toEqual({ flex: 0, abduct: 90, twist: -15 });
+    expect(pose.figure.joints.upperArmL).toEqual({ abduct: 90, twist: -15 });
+  });
+
+  test('speaks anatomical antonyms: extend, adduct, internal and external rotation', () => {
+    const pose = parsePose(
+      [
+        'asanakit: 2',
+        'id: x',
+        'name: X',
+        'discipline: yoga',
+        'figure:',
+        '  joints:',
+        '    upperArmL: { extend: 30, adduct: 10, internalRotation: 20 }',
+      ].join('\n'),
+      'x.pose.yaml',
+    );
+    expect(pose.figure.joints.upperArmL).toEqual({ extend: 30, adduct: 10, internalRotation: 20 });
+  });
+
+  test('rejects contradictions: both directions of one axis', () => {
+    expect(() =>
+      parsePose(
+        'asanakit: 2\nid: x\nname: X\ndiscipline: yoga\nfigure:\n  joints:\n    upperArmL: { flex: 30, extend: 10 }\n',
+        'x.pose.yaml',
+      ),
+    ).toThrow(/flex.*extend/);
   });
 
   test('parses a camera preset and camera angles', () => {

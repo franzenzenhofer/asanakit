@@ -43,9 +43,10 @@ function of it.
 
 ## What you get
 
-- **A pose format** (`.pose.yaml`) with a published JSON Schema. Anatomical joint rotations
-  (`flex` / `abduct` / `twist`), absolute bone directions (`azimuth` / `elevation`), a
-  default camera, props, annotations, muscle activation, teaching cues.
+- **A pose format** (`.pose.yaml`) with a published JSON Schema. Joint rotations in full
+  anatomical vocabulary (`flex`/`extend`, `abduct`/`adduct`, `twist` or
+  `internalRotation`/`externalRotation`), absolute bone directions (`azimuth` /
+  `elevation`), a default camera, 3D props, annotations, muscle activation, teaching cues.
 - **3D forward kinematics** over a 20-bone humanoid rig with anatomical proportions. The
   rotation axes live in the rig as data, so left and right are exact mirrors by construction.
 - **Any-angle 2D rendering.** Orthographic camera, depth-sorted painter's algorithm,
@@ -62,6 +63,12 @@ function of it.
   support. The authored pose is preserved exactly; only position and orientation change.
 - **An anatomical validator.** Knees and elbows that bend backwards are rejected. A pose
   declares which parts of the body touch the floor, and asanakit checks that they do.
+- **Left and right, told apart.** Left-side bones render in their own configurable color
+  (dark gray by default, `--left-color`/`--right-color` to taste) in 2D and 3D alike -
+  driven by the skeleton's bone sides, so a profile finally says which leg is forward.
+- **3D props.** The yoga mat (width x length x thickness, yaw) and the surfboard (length,
+  width, thickness, pitch) are real, configurable 3D models - correct in the viewer, the
+  GLB and every 2D projection.
 - **Seven styles**, all pure token data: `stick`, `anatomy`, `silhouette`, `blueprint`,
   `ink`, `poster`, `minimal`.
 - **Keypoint export** to MediaPipe-33 and COCO-17 - now with real z.
