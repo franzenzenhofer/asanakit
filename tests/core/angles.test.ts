@@ -16,8 +16,8 @@ describe('angles', () => {
 
   test('interiorAngle measures the joint angle at the middle point', () => {
     // Right angle: (1,0) -> (0,0) -> (0,1)
-    expect(interiorAngle({ x: 1, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 1 })).toBeCloseTo(90, 8);
+    expect(interiorAngle([1, 0], [0, 0], [0, 1])).toBeCloseTo(90, 8);
     // Straight line is 180 degrees (a fully extended limb)
-    expect(interiorAngle({ x: -1, y: 0 }, { x: 0, y: 0 }, { x: 1, y: 0 })).toBeCloseTo(180, 8);
+    expect(interiorAngle([-1, 0], [0, 0], [1, 0])).toBeCloseTo(180, 8);
   });
 });

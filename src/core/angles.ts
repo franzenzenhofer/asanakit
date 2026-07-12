@@ -1,3 +1,5 @@
+type Point = readonly [number, number];
+
 const DEG_PER_RAD = 180 / Math.PI;
 const HALF_TURN = 180;
 const FULL_TURN = 360;
@@ -12,20 +14,15 @@ export const normalizeDeg = (deg: number): number => {
   return wrapped > HALF_TURN ? wrapped - FULL_TURN : wrapped;
 };
 
-interface Point {
-  readonly x: number;
-  readonly y: number;
-}
-
 /**
  * Interior angle at `b` formed by the segments b->a and b->c, in [0, 180].
  * This is how anatomy reports joint angles: 180 = fully extended limb.
  */
 export const interiorAngle = (a: Point, b: Point, c: Point): number => {
-  const ux = a.x - b.x;
-  const uy = a.y - b.y;
-  const vx = c.x - b.x;
-  const vy = c.y - b.y;
+  const ux = a[0] - b[0];
+  const uy = a[1] - b[1];
+  const vx = c[0] - b[0];
+  const vy = c[1] - b[1];
   const lu = Math.hypot(ux, uy);
   const lv = Math.hypot(vx, vy);
   if (lu === 0 || lv === 0) return 0;
