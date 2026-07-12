@@ -4,6 +4,7 @@ import { PoseParseError } from '../model/index.js';
 import { registerExportCommands } from './commands/export.js';
 import { registerInfoCommands } from './commands/info.js';
 import { registerRenderCommands } from './commands/render.js';
+import { registerViewCommands } from './commands/view.js';
 
 const program = new Command();
 
@@ -16,6 +17,7 @@ program
 registerRenderCommands(program);
 registerInfoCommands(program);
 registerExportCommands(program);
+registerViewCommands(program);
 
 const fail = (error: unknown): never => {
   if (error instanceof PoseParseError) {
