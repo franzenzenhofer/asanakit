@@ -18,7 +18,17 @@ npx @franzenzenhofer/asanakit sheet --sequence ashtanga-primary -o primary-serie
 Every pose solves to a real **3D skeleton** (quaternion forward kinematics over a 20-bone
 rig). The 2D pictures are camera projections of that solve - front, back, side, any azimuth
 and elevation - rendered without a browser or a GPU, byte-identical on every machine. It
-ships with the **full Ashtanga Primary Series** - 37 asanas, 60 steps - plus 8 surf postures.
+ships with a **121-pose library** - the full Ashtanga Primary Series plus standing, seated,
+twist, backbend, inversion, arm-balance, core and restorative asanas, and 13 surf
+positions - and four bundled sequences.
+
+## asanakit Studio - the online editor
+
+**[asanakit.franzai.com](https://asanakit.franzai.com)** - the whole engine in the browser,
+mobile-first. Browse all 121 poses, fork any of them, edit every joint with tap-to-select
+bones and degree sliders (with live anatomical lint and an orbitable 3D view), save your own
+asanas, and compose practice sheets that print as exact, vector A4/Letter pages. Everything
+runs client-side; the editor is `editor/` in this repo (`npm run editor:dev`).
 
 ![The Ashtanga Primary Series rendered by asanakit](examples/ashtanga-primary-series.png)
 
