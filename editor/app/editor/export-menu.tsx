@@ -10,6 +10,7 @@ import { toYaml } from '../state/serialize.js';
 import { can } from '../state/entitlements.js';
 import { downloadText, svgToPngBlob, downloadBlob } from '../lib/download.js';
 import { pickTextFile } from '../lib/upload.js';
+import { encodeShare, SHARE_URL_BUDGET } from '../lib/share.js';
 import { CloseIcon } from '../ui/icons.js';
 
 /** Save, export and import - the editor's way in and out. */
@@ -97,6 +98,23 @@ export const ExportMenu = ({ onClose }: { onClose: () => void }): JSX.Element =>
             }
           >
             Download GLB (3D)
+          </button>
+          <button
+            class="btn"
+            disabled={spec === undefined}
+            onClick={() =>
+              act(async () => {
+                const link = `${location.origin}/#/p/${await encodeShare(toYaml(doc))}`;
+                if (link.length > SHARE_URL_BUDGET) {
+                  setMessage('This pose is too large for a link - download the YAML instead.');
+                  return;
+                }
+                await navigator.clipboard.writeText(link);
+                setMessage('Share link copied.');
+              })
+            }
+          >
+            Copy share link
           </button>
           <button
             class="btn"

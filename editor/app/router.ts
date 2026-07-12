@@ -4,11 +4,14 @@ export type Route =
   | { page: 'library' }
   | { page: 'editor' }
   | { page: 'sheet' }
-  | { page: 'pose'; id: string };
+  | { page: 'pose'; id: string }
+  | { page: 'shared'; kind: 'pose' | 'sheet'; data: string };
 
 const parse = (hash: string): Route => {
   const path = hash.replace(/^#\/?/, '');
   if (path.startsWith('pose/')) return { page: 'pose', id: decodeURIComponent(path.slice(5)) };
+  if (path.startsWith('p/')) return { page: 'shared', kind: 'pose', data: path.slice(2) };
+  if (path.startsWith('s/')) return { page: 'shared', kind: 'sheet', data: path.slice(2) };
   if (path === 'editor') return { page: 'editor' };
   if (path === 'sheet') return { page: 'sheet' };
   return { page: 'library' };

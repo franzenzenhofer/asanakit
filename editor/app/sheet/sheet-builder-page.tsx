@@ -11,6 +11,7 @@ import {
   renameSection, sheet, sheetFromSequence, stepCount,
 } from '../state/sheet-doc.js';
 import { downloadBlob, downloadText, printHtml, svgToPngBlob } from '../lib/download.js';
+import { encodeShare, SHARE_URL_BUDGET } from '../lib/share.js';
 import { MoreIcon, PlusIcon, PrintIcon } from '../ui/icons.js';
 import { StepRow } from './step-row.js';
 import { SheetOptions } from './sheet-options.js';
@@ -145,6 +146,12 @@ export const SheetBuilderPage = (): JSX.Element => {
         <SheetMenu
           onClose={() => setMenuOpen(false)}
           onPrint={print}
+          onShareLink={async () => {
+            const link = `${location.origin}/#/s/${await encodeShare(stringify(selfContained()))}`;
+            if (link.length > SHARE_URL_BUDGET) return 'Too large for a link - download the YAML instead.';
+            await navigator.clipboard.writeText(link);
+            return 'Share link copied.';
+          }}
           onDownloadYaml={() => downloadText(stringify(selfContained()), `${doc.id ?? 'sheet'}.sheet.yaml`, 'text/yaml')}
           onDownloadPng={async () => {
             const built = buildPreview(selfContained(), resolver);

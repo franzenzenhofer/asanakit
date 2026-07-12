@@ -10,6 +10,7 @@ import { CloseIcon } from '../ui/icons.js';
 export interface SheetMenuProps {
   readonly onClose: () => void;
   readonly onPrint: () => void;
+  readonly onShareLink: () => Promise<string>;
   readonly onDownloadYaml: () => void;
   readonly onDownloadPng: () => Promise<void>;
   readonly onSave: () => void;
@@ -35,6 +36,17 @@ export const SheetMenu = (props: SheetMenuProps): JSX.Element => {
         <div class="detail-actions" style="margin-top:0">
           <button class="btn primary" onClick={() => { props.onPrint(); props.onClose(); }}>Print / PDF</button>
           <button class="btn" onClick={() => { props.onSave(); done('Saved to My sheets.'); }}>Save</button>
+          <button
+            class="btn"
+            onClick={() =>
+              void props
+                .onShareLink()
+                .then((msg) => done(msg))
+                .catch((e: unknown) => done(String(e)))
+            }
+          >
+            Copy share link
+          </button>
           <button class="btn" onClick={props.onDownloadYaml}>Download YAML</button>
           <button class="btn" onClick={() => void props.onDownloadPng().catch((e: unknown) => done(String(e)))}>PNG per page</button>
           <button
