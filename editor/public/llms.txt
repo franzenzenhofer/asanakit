@@ -1,0 +1,22 @@
+# asanakit Studio
+
+> Free, mobile-first online editor for yoga asanas and surf postures. A 121-pose
+> library of anatomically validated stick figures, a full joint editor (every bone,
+> flex/abduct/twist or absolute world directions, live anatomical lint, 3D orbit
+> view), and a practice-sheet builder that prints exact vector A4/Letter pages.
+
+## What you can do here
+
+- Browse and search 121 poses (yoga families + surf positions) at /#/library
+- Fork any pose and edit every joint at /#/editor; save to the device, upload or
+  download .pose.yaml, export SVG, PNG or GLB (3D model)
+- Compose practice sheets at /#/sheet from library poses, bundled sequences
+  (Ashtanga Primary, Surya Namaskara A/B, Hatha Beginner) and your own poses;
+  print to PDF or export pages as SVG/PNG; share via URL
+- Everything runs client-side; the app works offline (PWA)
+
+## Data format
+
+Poses are declarative YAML (schema v2) solved by quaternion forward kinematics
+over a 20-bone rig. The engine is open source:
+https://github.com/franzenzenhofer/asanakit (npm: @franzenzenhofer/asanakit)
