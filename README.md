@@ -5,8 +5,8 @@
 Describe a posture as data. Get a correct, deterministic, machine-readable illustration.
 
 ```bash
-npx asanakit render adho-mukha-svanasana -o downdog.svg --style anatomy --title
-npx asanakit sheet --sequence ashtanga-primary -o primary-series.png --columns 6 --numbered
+npx @franzenzenhofer/asanakit render adho-mukha-svanasana -o downdog.svg --style anatomy --title
+npx @franzenzenhofer/asanakit sheet --sequence ashtanga-primary -o primary-series.png --columns 6 --numbered
 ```
 
 asanakit is CLI-first, has no browser and no DOM, and renders the same bytes on every
@@ -60,9 +60,12 @@ stretched muscles the other.
 ## Install
 
 ```bash
-npm install asanakit                       # once published to npm
-npx github:franzenzenhofer/asanakit --help # straight from source, today
+npm install -g @franzenzenhofer/asanakit   # the CLI is called `asanakit`
+npx @franzenzenhofer/asanakit --help       # or run it without installing
 ```
+
+The npm registry refuses the bare name `asanakit` (too close to the unrelated
+`asynckit`), so the package is scoped. The command it installs is `asanakit`.
 
 ## The format
 
@@ -121,7 +124,7 @@ Options: `--style`, `--width`, `--height`, `--title`, `--caption`, `--muscles`,
 ## Library API
 
 ```ts
-import { parsePose, renderSvg, renderPng, validatePose, solveSkeleton } from 'asanakit';
+import { parsePose, renderSvg, renderPng, validatePose, solveSkeleton } from '@franzenzenhofer/asanakit';
 
 const pose = parsePose(yamlSource, 'triangle.pose.yaml');
 

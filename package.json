@@ -1,5 +1,5 @@
 {
-  "name": "asanakit",
+  "name": "@franzenzenhofer/asanakit",
   "version": "0.1.0",
   "description": "Programmatic stick-figure and anatomical infographic engine for yoga and surf postures. Declarative pose format, deterministic SVG/PNG output, CLI-first, AI-driveable.",
   "keywords": [
