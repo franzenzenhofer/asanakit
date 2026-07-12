@@ -60,8 +60,8 @@ stretched muscles the other.
 ## Install
 
 ```bash
-npm install posekit          # library + CLI
-npx posekit --help
+npm install posekit                       # once published to npm
+npx github:franzenzenhofer/posekit --help # straight from source, today
 ```
 
 ## The format

@@ -4,7 +4,7 @@
  */
 import { mkdir, writeFile } from 'node:fs/promises';
 import { expandSequence, loadLibrary } from '../src/library/index.js';
-import { renderPng, renderSheet, renderSvg } from '../src/render/index.js';
+import { el, group, renderPng, renderSheet, renderSvg, renderSvgNode, serialize } from '../src/render/index.js';
 import type { StyleId } from '../src/render/styles.js';
 
 const OUT = 'examples';
@@ -42,18 +42,30 @@ if (primary !== undefined) {
   );
 }
 
-// One pose in every style.
+// One pose in every style. The sheet renderer applies a single style to every
+// cell, so this strip is composed a cell at a time - each with its own style.
 const STYLES: StyleId[] = ['stick', 'anatomy', 'silhouette', 'blueprint', 'ink', 'poster', 'minimal'];
-await write(
-  'styles',
-  renderSheet(
-    STYLES.map((s) => ({ ...pose('adho-mukha-svanasana'), id: s, name: s })),
-    { columns: 7, cellWidth: 300, cellHeight: 260, title: true, styleOverride: {}, style: 'stick' },
+const CELL = { w: 300, h: 280 };
+const downdog = pose('adho-mukha-svanasana');
+
+const strip = el(
+  'svg',
+  {
+    xmlns: 'http://www.w3.org/2000/svg',
+    viewBox: `0 0 ${CELL.w * STYLES.length} ${CELL.h}`,
+    width: CELL.w * STYLES.length,
+    height: CELL.h,
+  },
+  STYLES.map((style, i) =>
+    group({ transform: `translate(${i * CELL.w} 0)` }, [
+      renderSvgNode({ ...downdog, name: style }, { style, width: CELL.w, height: CELL.h, title: true }),
+    ]),
   ),
-  1400,
 );
+await write('styles', serialize(strip), CELL.w * STYLES.length);
+
 for (const style of STYLES) {
-  await write(`style-${style}`, renderSvg(pose('adho-mukha-svanasana'), { style, width: 400, height: 320 }), 400);
+  await write(`style-${style}`, renderSvg(downdog, { style, width: 400, height: 320 }), 400);
 }
 
 // The anatomy style doing what it is for.
