@@ -1,0 +1,44 @@
+asanakit: 2
+id: ananda-balasana
+name: Happy Baby Pose
+sanskrit: Ānanda Bālāsana
+english: Happy Baby Pose
+discipline: yoga
+family: restorative
+difficulty: 1
+description: A supine hip release. The back rests on the floor, the knees draw wide toward the armpits, the shins stand vertical and the hands reach up to hold the outer feet like a contented infant.
+tags: [ restorative, supine, hip-opener ]
+breath: free
+drishti: nasagrai
+cues:
+  - Draw the knees toward the armpits, shins vertical
+  - Hold the outer edges of the feet and pull gently down
+  - Keep the tailbone heavy on the floor
+contact: [ headTop, shoulderL, shoulderR, hipCenter ]
+camera: three-quarter
+figure:
+  grounded: true
+  root:
+    pitch: -90
+  world:
+    pelvis: { azimuth: 180, elevation: 0 }
+    spine: { azimuth: 180, elevation: 0 }
+    neck: { azimuth: 180, elevation: 0 }
+    head: { azimuth: 180, elevation: 0 }
+    thighL: { azimuth: 150, elevation: 50 }
+    thighR: { azimuth: -150, elevation: 50 }
+    shinL: { azimuth: 30, elevation: 82 }
+    shinR: { azimuth: -30, elevation: 82 }
+    footL: { azimuth: 180, elevation: 55 }
+    footR: { azimuth: -180, elevation: 55 }
+    upperArmL: { azimuth: 30, elevation: 55 }
+    upperArmR: { azimuth: -30, elevation: 55 }
+    forearmL: { azimuth: 20, elevation: 75 }
+    forearmR: { azimuth: -20, elevation: 75 }
+    handL: { azimuth: 20, elevation: 80 }
+    handR: { azimuth: -20, elevation: 80 }
+props:
+  - type: mat
+muscles:
+  engaged: [ hipFlexors, biceps ]
+  stretched: [ adductors, hamstrings, gluteus, erectorSpinae ]

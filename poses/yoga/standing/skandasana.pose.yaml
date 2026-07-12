@@ -1,0 +1,42 @@
+asanakit: 2
+id: skandasana
+name: Side Lunge
+sanskrit: Skandāsana
+english: Side Lunge
+discipline: yoga
+family: standing
+difficulty: 3
+description: A deep lateral lunge. The left knee bends fully so the hips hover by the left heel while the right leg extends straight out to the side, heel down and toes lifting.
+tags: [ standing, lunge, hip-opener, vinyasa ]
+breath: exhale
+drishti: nasagrai
+cues:
+  - Sink the hips toward the bent-side heel
+  - Keep the straight leg active, toes flexing up
+  - Stay tall in the chest, hands at the heart
+contact: [ toeL, ankleR ]
+camera: front
+figure:
+  grounded: true
+  world:
+    thighL: { azimuth: 90, elevation: -8 }
+    shinL: { azimuth: -90, elevation: -82 }
+    footL: { azimuth: 90, elevation: 5 }
+    thighR: { azimuth: -90, elevation: -33 }
+    shinR: { azimuth: -90, elevation: -33 }
+    footR: { azimuth: -90, elevation: 55 }
+    spine: { azimuth: 0, elevation: 72 }
+    neck: { azimuth: 0, elevation: 80 }
+    head: { azimuth: 0, elevation: 85 }
+    upperArmL: { azimuth: 15, elevation: -35 }
+    forearmL: { azimuth: -25, elevation: 42 }
+    handL: { azimuth: -5, elevation: 55 }
+    upperArmR: { azimuth: -15, elevation: -35 }
+    forearmR: { azimuth: 25, elevation: 42 }
+    handR: { azimuth: 5, elevation: 55 }
+props:
+  - type: mat
+    yaw: 90
+muscles:
+  engaged: [ quadriceps, gluteus, tibialisAnterior, erectorSpinae ]
+  stretched: [ adductors, hamstrings, gastrocnemius ]

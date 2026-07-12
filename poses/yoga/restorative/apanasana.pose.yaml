@@ -1,0 +1,44 @@
+asanakit: 2
+id: apanasana
+name: Knees-to-Chest Pose
+sanskrit: Apānāsana
+english: Knees-to-Chest Pose
+discipline: yoga
+family: restorative
+difficulty: 1
+description: A supine hug. The back rests along the floor, both knees draw in over the chest and the arms wrap around the shins, gently squeezing the thighs toward the ribs with each exhale.
+tags: [ restorative, supine, forward-fold ]
+breath: exhale
+drishti: nasagrai
+cues:
+  - Hug the shins, let the shoulders stay heavy
+  - Draw the knees closer on each exhale
+  - Keep the sacrum and the back of the head on the floor
+contact: [ headTop, shoulderL, shoulderR, hipCenter ]
+camera: side
+figure:
+  grounded: true
+  root:
+    pitch: -90
+  world:
+    pelvis: { azimuth: 180, elevation: 0 }
+    spine: { azimuth: 180, elevation: 0 }
+    neck: { azimuth: 180, elevation: 0 }
+    head: { azimuth: 180, elevation: 0 }
+    thighL: { azimuth: 178, elevation: 55 }
+    thighR: { azimuth: -178, elevation: 55 }
+    shinL: { azimuth: 2, elevation: 55 }
+    shinR: { azimuth: -2, elevation: 55 }
+    footL: { azimuth: 2, elevation: 75 }
+    footR: { azimuth: -2, elevation: 75 }
+    upperArmL: { azimuth: 10, elevation: 40 }
+    upperArmR: { azimuth: -10, elevation: 40 }
+    forearmL: { azimuth: 90, elevation: 55 }
+    forearmR: { azimuth: -90, elevation: 55 }
+    handL: { azimuth: 120, elevation: 45 }
+    handR: { azimuth: -120, elevation: 45 }
+props:
+  - type: mat
+muscles:
+  engaged: [ hipFlexors, biceps, rectusAbdominis ]
+  stretched: [ gluteus, erectorSpinae, hamstrings ]

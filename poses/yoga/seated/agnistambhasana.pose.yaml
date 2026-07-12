@@ -1,0 +1,41 @@
+asanakit: 2
+id: agnistambhasana
+name: Fire Log Pose
+sanskrit: Agnistambhāsana
+english: Fire Log Pose
+discipline: yoga
+family: seated
+difficulty: 3
+description: Seated with the shins stacked like two logs, the left shin resting on top of the right, each ankle over the opposite knee. The feet stay flexed, the spine lifts tall and the hands rest on the shins.
+tags: [ seated, hatha, yin, hip-opener ]
+breath: free
+drishti: nasagrai
+cues:
+  - Stack ankle over knee and knee over ankle, shins parallel to the front of the mat
+  - Flex both feet and hinge forward from the hips to deepen
+contact: [ kneeR, ankleR ]
+figure:
+  grounded: true
+  world:
+    pelvis: { azimuth: 0, elevation: 90 }
+    spine: { azimuth: 0, elevation: 90 }
+    neck: { azimuth: 0, elevation: 90 }
+    head: { azimuth: 0, elevation: 90 }
+    thighR: { azimuth: -45, elevation: -14, twist: 60 }
+    shinR: { azimuth: 88, elevation: 0 }
+    footR: { azimuth: 88, elevation: 60 }
+    thighL: { azimuth: 45, elevation: 5, twist: -60 }
+    shinL: { azimuth: -88, elevation: -2 }
+    footL: { azimuth: -88, elevation: 60 }
+    upperArmL: { azimuth: 20, elevation: -60 }
+    forearmL: { azimuth: 0, elevation: -45 }
+    handL: { azimuth: 0, elevation: -40 }
+    upperArmR: { azimuth: -20, elevation: -60 }
+    forearmR: { azimuth: 0, elevation: -45 }
+    handR: { azimuth: 0, elevation: -40 }
+props:
+  - type: mat
+muscles:
+  engaged: [ erectorSpinae, tibialisAnterior ]
+  stretched: [ gluteus, adductors, hipFlexors ]
+camera: three-quarter

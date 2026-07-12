@@ -1,0 +1,39 @@
+asanakit: 2
+id: vrksasana
+name: Tree Pose
+sanskrit: Vṛkṣāsana
+english: Tree Pose
+discipline: yoga
+family: standing
+difficulty: 2
+description: A one-legged balance. Standing tall on the left leg, the right sole presses into the inner left thigh with the knee opening to the side, and the arms grow overhead like branches.
+tags: [ standing, balance, hatha, vinyasa ]
+breath: free
+drishti: nasagrai
+cues:
+  - Press the sole and the inner thigh into each other
+  - Grow tall through the standing leg before you branch the arms up
+  - Fix the gaze on one still point
+contact: [ toeL ]
+camera: front
+figure:
+  grounded: true
+  joints:
+    thighR: { flex: 40, abduct: 40, externalRotation: 55 }
+    shinR: 110
+    footR: { extend: 25 }
+  world:
+    thighL: { azimuth: 0, elevation: -88 }
+    shinL: { azimuth: 0, elevation: -88 }
+    spine: { azimuth: 0, elevation: 88 }
+    upperArmL: { azimuth: 20, elevation: 75 }
+    upperArmR: { azimuth: -20, elevation: 75 }
+    forearmL: { azimuth: 8, elevation: 82 }
+    forearmR: { azimuth: -8, elevation: 82 }
+    handL: { azimuth: 0, elevation: 85 }
+    handR: { azimuth: 0, elevation: 85 }
+props:
+  - type: mat
+muscles:
+  engaged: [ gluteus, quadriceps, erectorSpinae, deltoid, tibialisAnterior ]
+  stretched: [ adductors, hipFlexors ]

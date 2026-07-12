@@ -1,0 +1,44 @@
+asanakit: 2
+id: astavakrasana
+name: Eight-Angle Pose
+sanskrit: Aṣṭāvakrāsana
+english: Eight-Angle Pose
+discipline: yoga
+family: arm-balance
+difficulty: 5
+description: An asymmetric arm balance. The hands root shoulder-width, the elbows bend the chest toward the floor and both legs squeeze the left arm, ankles crossed, shooting sideways as the body hovers in a zig-zag of eight angles.
+tags: [ arm-balance, twist, core, balance ]
+breath: free
+drishti: nasagrai
+cues:
+  - Hook the left leg high over the left shoulder
+  - Cross the ankles around the arm and squeeze
+  - Bend the elbows and tip the chest forward as the hips rise
+contact: [ handTipL, handTipR ]
+camera: three-quarter
+figure:
+  grounded: true
+  root:
+    pitch: 80
+  world:
+    pelvis: { azimuth: 0, elevation: 5, twist: 30 }
+    spine: { azimuth: 0, elevation: 5 }
+    neck: { azimuth: 0, elevation: 12 }
+    head: { azimuth: 0, elevation: 15 }
+    upperArmL: { azimuth: 180, elevation: -20 }
+    upperArmR: { azimuth: 180, elevation: -20 }
+    forearmL: { azimuth: 0, elevation: -85 }
+    forearmR: { azimuth: 0, elevation: -85 }
+    handL: { azimuth: 0, elevation: 0 }
+    handR: { azimuth: 0, elevation: 0 }
+    thighL: { azimuth: 60, elevation: 0 }
+    shinL: { azimuth: 60, elevation: -5 }
+    footL: { azimuth: 60, elevation: 10 }
+    thighR: { azimuth: 60, elevation: 8 }
+    shinR: { azimuth: 55, elevation: 3 }
+    footR: { azimuth: 55, elevation: 18 }
+props:
+  - type: mat
+muscles:
+  engaged: [ triceps, pectoralis, serratus, obliques, rectusAbdominis, adductors, quadriceps ]
+  stretched: [ hamstrings, gluteus, erectorSpinae ]

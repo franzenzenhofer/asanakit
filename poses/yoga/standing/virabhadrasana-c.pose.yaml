@@ -1,0 +1,43 @@
+asanakit: 2
+id: virabhadrasana-c
+name: Warrior III
+sanskrit: Vīrabhadrāsana C
+english: Warrior III
+discipline: yoga
+family: standing
+difficulty: 3
+description: A flying balance in one long line. The torso and the lifted back leg are parallel to the floor over a strong straight standing leg, arms reaching forward past the ears.
+tags: [ standing, balance, vinyasa ]
+breath: exhale
+drishti: nasagrai
+cues:
+  - One straight line from fingertips to lifted heel
+  - Square the hips toward the floor
+  - Flex the lifted foot and press back through the heel
+contact: [ toeL ]
+camera: side
+figure:
+  grounded: true
+  root:
+    pitch: 80
+  world:
+    thighL: { azimuth: 0, elevation: -85 }
+    shinL: { azimuth: 0, elevation: -85 }
+    footL: { azimuth: 0, elevation: -5 }
+    thighR: { azimuth: 180, elevation: 2 }
+    shinR: { azimuth: 180, elevation: 2 }
+    footR: { azimuth: 180, elevation: -20 }
+    spine: { azimuth: 0, elevation: 8 }
+    neck: { azimuth: 0, elevation: 5 }
+    head: { azimuth: 0, elevation: 5 }
+    upperArmL: { azimuth: 0, elevation: 8 }
+    upperArmR: { azimuth: 0, elevation: 8 }
+    forearmL: { azimuth: 0, elevation: 8 }
+    forearmR: { azimuth: 0, elevation: 8 }
+    handL: { azimuth: 0, elevation: 8 }
+    handR: { azimuth: 0, elevation: 8 }
+props:
+  - type: mat
+muscles:
+  engaged: [ gluteus, hamstrings, erectorSpinae, deltoid, quadriceps ]
+  stretched: [ hamstrings, gastrocnemius ]

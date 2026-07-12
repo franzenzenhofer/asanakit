@@ -1,0 +1,25 @@
+asanakit: 2
+id: surya-namaskara-b
+name: Surya Namaskara B
+tradition: Ashtanga Vinyasa Yoga
+description: >-
+  Sun Salutation B: Sun Salutation A extended with chair pose and Warrior I on
+  both sides. The heat-builder of the standing practice.
+
+sections:
+  - name: Surya Namaskara B
+    steps:
+      - { pose: samasthiti, breath: free, count: 1 }
+      - { pose: utkatasana, breath: inhale, count: 1 }
+      - { pose: uttanasana, breath: exhale, count: 1 }
+      - { pose: ardha-uttanasana, breath: inhale, count: 1 }
+      - { pose: chaturanga-dandasana, breath: exhale, count: 1 }
+      - { pose: urdhva-mukha-svanasana, breath: inhale, count: 1 }
+      - { pose: adho-mukha-svanasana, breath: exhale, count: 1 }
+      - { pose: virabhadrasana-a, breath: inhale, count: 1, side: both }
+      - { pose: chaturanga-dandasana, breath: exhale, count: 1 }
+      - { pose: urdhva-mukha-svanasana, breath: inhale, count: 1 }
+      - { pose: adho-mukha-svanasana, breath: exhale, count: 5 }
+      - { pose: uttanasana, breath: exhale, count: 1 }
+      - { pose: utkatasana, breath: inhale, count: 1 }
+      - { pose: samasthiti, breath: exhale, count: 1 }

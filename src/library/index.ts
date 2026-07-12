@@ -1,7 +1,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { parsePose, parseSequence, type PoseSpec, type SequenceSpec } from '../model/index.js';
+import { expandStep, parsePose, parseSequence, type ExpandedStep, type PoseSpec, type SequenceSpec } from '../model/index.js';
 
 export interface Library {
   readonly poses: ReadonlyMap<string, PoseSpec>;
@@ -52,46 +52,19 @@ export const loadLibrary = async (root: string = bundledLibraryPath()): Promise<
   return { poses, sequences, root };
 };
 
-export interface SequenceStep {
-  readonly pose: PoseSpec;
-  readonly label: string;
-  readonly section: string;
-  readonly breath?: 'inhale' | 'exhale' | 'hold' | 'free';
-  readonly count: number;
-  readonly side: 'left' | 'right' | 'both' | 'none';
-}
+export type SequenceStep = ExpandedStep;
 
 /**
  * Flatten a sequence into the poses it actually renders, expanding `side: both`
  * into a left and a mirrored right repetition - which is how the practice runs.
  */
-export const expandSequence = (sequence: SequenceSpec, library: Library): SequenceStep[] => {
-  const steps: SequenceStep[] = [];
-
-  for (const section of sequence.sections) {
-    for (const step of section.steps) {
+export const expandSequence = (sequence: SequenceSpec, library: Library): SequenceStep[] =>
+  sequence.sections.flatMap((section) =>
+    section.steps.flatMap((step) => {
       const pose = library.poses.get(step.pose);
       if (pose === undefined) {
         throw new Error(`Sequence "${sequence.id}" references unknown pose "${step.pose}"`);
       }
-
-      const sides = step.side === 'both' ? (['left', 'right'] as const) : ([step.side] as const);
-      for (const side of sides) {
-        // The second side is the true mirror of the asana: left and right
-        // joints swap and every absolute direction reflects across the
-        // sagittal plane. That is what `mirror` does.
-        const mirrored = side === 'right';
-        steps.push({
-          pose: mirrored ? { ...pose, figure: { ...pose.figure, mirror: !pose.figure.mirror } } : pose,
-          label: step.label ?? pose.name,
-          section: section.name,
-          ...(step.breath === undefined ? {} : { breath: step.breath }),
-          count: step.count,
-          side,
-        });
-      }
-    }
-  }
-
-  return steps;
-};
+      return expandStep(step, pose, section.name);
+    }),
+  );

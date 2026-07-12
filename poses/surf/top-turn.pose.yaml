@@ -1,0 +1,48 @@
+asanakit: 2
+id: top-turn
+name: Top Turn
+english: Top Turn
+discipline: surf
+family: turning
+difficulty: 4
+description: The hit at the top of the wave. The legs stay compressed from the projection off the bottom, the torso and leading shoulder rotate hard through the turn, and the arms swing with it as the board carves off the lip and back down the face.
+tags: [ surf, turning, lip, power, dynamic ]
+cues:
+  - Turn the head and shoulders first - the board follows
+  - Stay compressed through the hit, extend on the way back down
+contact: [ toeL, toeR ]
+figure:
+  grounded: true
+  root:
+    pitch: 22
+    yaw: -18
+  world:
+    spine: { azimuth: -25, elevation: 55, twist: -25 }
+    neck: { azimuth: -45, elevation: 60 }
+    head: { azimuth: -60, elevation: 55 }
+    thighL: { azimuth: 0, elevation: -22 }
+    shinL: { azimuth: 180, elevation: -78 }
+    footL: { azimuth: 0, elevation: -15 }
+    thighR: { azimuth: 0, elevation: -62 }
+    shinR: { azimuth: 180, elevation: -28 }
+    footR: { azimuth: 0, elevation: -12 }
+    upperArmL: { azimuth: -20, elevation: -10 }
+    forearmL: { azimuth: -40, elevation: 5 }
+    handL: { azimuth: -40, elevation: 8 }
+    upperArmR: { azimuth: 170, elevation: 35 }
+    forearmR: { azimuth: 170, elevation: 35 }
+    handR: { azimuth: 170, elevation: 35 }
+props:
+  - type: wave
+    amplitude: 0.5
+    length: 3.2
+    y: -0.48
+  - type: surfboard
+    under: [ ankleL, ankleR ]
+    rotation: -18
+    length: 1.1
+    offset: [ 0, -0.1 ]
+muscles:
+  engaged: [ quadriceps, gluteus, obliques, erectorSpinae, deltoid ]
+  stretched: [ hipFlexors, latissimus, pectoralis ]
+camera: side

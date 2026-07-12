@@ -1,0 +1,43 @@
+asanakit: 2
+id: urdhva-prasarita-eka-padasana
+name: Standing Split
+sanskrit: Ūrdhva Prasārita Eka Pādāsana
+english: Standing Split
+discipline: yoga
+family: standing
+difficulty: 4
+description: A folded balance. The torso drapes down the straight standing left leg with both hands on the floor while the right leg sweeps up behind toward the ceiling.
+tags: [ standing, balance, forward-fold, inversion, vinyasa ]
+breath: exhale
+drishti: nasagrai
+cues:
+  - Fold the chest toward the standing shin
+  - Lift the back leg from the inner thigh, hips level
+  - Let the head hang heavy
+contact: [ toeL, handTipL, handTipR ]
+camera: side
+figure:
+  grounded: true
+  root:
+    pitch: 50
+  world:
+    thighL: { azimuth: 0, elevation: -86 }
+    shinL: { azimuth: 0, elevation: -86 }
+    footL: { azimuth: 0, elevation: 0 }
+    thighR: { azimuth: 180, elevation: 55 }
+    shinR: { azimuth: 180, elevation: 55 }
+    footR: { azimuth: 180, elevation: 35 }
+    spine: { azimuth: 0, elevation: -75 }
+    neck: { azimuth: 0, elevation: -80 }
+    head: { azimuth: 0, elevation: -82 }
+    upperArmL: { azimuth: 0, elevation: -80 }
+    forearmL: { azimuth: 0, elevation: -80 }
+    handL: { azimuth: 0, elevation: -80 }
+    upperArmR: { azimuth: 0, elevation: -80 }
+    forearmR: { azimuth: 0, elevation: -80 }
+    handR: { azimuth: 0, elevation: -80 }
+props:
+  - type: mat
+muscles:
+  engaged: [ quadriceps, gluteus, hamstrings ]
+  stretched: [ hamstrings, gastrocnemius, gluteus, erectorSpinae ]

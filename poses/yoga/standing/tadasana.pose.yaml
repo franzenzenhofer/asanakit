@@ -1,0 +1,36 @@
+asanakit: 2
+id: tadasana
+name: Mountain Pose
+sanskrit: Tāḍāsana
+english: Mountain Pose
+discipline: yoga
+family: standing
+difficulty: 1
+description: The foundational standing posture. Feet root down hip-width apart, the legs are active, the spine is long and the arms rest alongside the body with the palms turned forward.
+tags: [ standing, hatha, vinyasa, foundation ]
+breath: free
+drishti: nasagrai
+cues:
+  - Root down through all four corners of both feet
+  - Lengthen the crown toward the sky, soften the shoulders
+  - Let the arms hang, palms open forward
+contact: [ toeL, toeR ]
+camera: front
+figure:
+  grounded: true
+  world:
+    thighL: { azimuth: 90, elevation: -87 }
+    thighR: { azimuth: -90, elevation: -87 }
+    shinL: { azimuth: 90, elevation: -87 }
+    shinR: { azimuth: -90, elevation: -87 }
+    upperArmL: { azimuth: 45, elevation: -85 }
+    upperArmR: { azimuth: -45, elevation: -85 }
+    forearmL: { azimuth: 45, elevation: -85 }
+    forearmR: { azimuth: -45, elevation: -85 }
+    handL: { azimuth: 45, elevation: -80 }
+    handR: { azimuth: -45, elevation: -80 }
+props:
+  - type: mat
+muscles:
+  engaged: [ quadriceps, erectorSpinae, rectusAbdominis ]
+  stretched: [ pectoralis ]

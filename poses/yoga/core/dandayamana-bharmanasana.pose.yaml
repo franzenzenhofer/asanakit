@@ -1,0 +1,43 @@
+asanakit: 2
+id: dandayamana-bharmanasana
+name: Bird-Dog
+sanskrit: Daṇḍāyamāna Bharmanāsana
+english: Balancing Tabletop
+discipline: yoga
+family: core
+difficulty: 2
+description: From tabletop, the left arm reaches forward and the right leg reaches back until both are level with the spine. Two limbs carry the table while the trunk refuses to tip or twist.
+tags: [ core, kneeling, balance, asymmetric ]
+breath: exhale
+drishti: nasagrai
+cues:
+  - Reach the left arm and the right heel away from each other
+  - Keep the hips and shoulders square to the floor
+  - Lengthen, do not lift - arm and leg stay in line with the spine
+contact: [ handTipR, kneeL, ankleL, toeL ]
+camera: side
+figure:
+  grounded: true
+  root:
+    pitch: 80
+  world:
+    thighL: { azimuth: 0, elevation: -86 }
+    shinL: { azimuth: 180, elevation: 0 }
+    footL: { azimuth: 180, elevation: 0 }
+    thighR: { azimuth: 180, elevation: 2 }
+    shinR: { azimuth: 180, elevation: 2 }
+    footR: { azimuth: 180, elevation: 0 }
+    spine: { azimuth: 0, elevation: 15 }
+    neck: { azimuth: 0, elevation: 10 }
+    head: { azimuth: 0, elevation: 10 }
+    upperArmR: { azimuth: 0, elevation: -84 }
+    forearmR: { azimuth: 0, elevation: -88 }
+    handR: { azimuth: 0, elevation: 0 }
+    upperArmL: { azimuth: 0, elevation: 15 }
+    forearmL: { azimuth: 0, elevation: 15 }
+    handL: { azimuth: 0, elevation: 15 }
+props:
+  - type: mat
+muscles:
+  engaged: [ rectusAbdominis, obliques, erectorSpinae, gluteus, deltoid ]
+  stretched: [ latissimus, hipFlexors ]

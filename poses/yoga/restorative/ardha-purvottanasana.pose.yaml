@@ -1,0 +1,44 @@
+asanakit: 2
+id: ardha-purvottanasana
+name: Reverse Tabletop
+sanskrit: Ardha Pūrvottānāsana
+english: Reverse Tabletop Pose
+discipline: yoga
+family: restorative
+difficulty: 1
+description: A gentle front-body opener. From sitting, the hands root behind the hips and the feet plant hip-width; the hips lift until the torso levels like a tabletop, shins and arms vertical, the chest broad.
+tags: [ restorative, backbend, arm-support, chest-opener ]
+breath: inhale
+drishti: nasagrai
+cues:
+  - Press evenly through the hands and the flat feet
+  - Lift the hips level with the knees and shoulders
+  - Broaden the collarbones and soften the throat
+contact: [ handTipL, handTipR, ankleL, ankleR, toeL, toeR ]
+camera: side
+figure:
+  grounded: true
+  root:
+    pitch: -90
+  world:
+    pelvis: { azimuth: 180, elevation: 0 }
+    spine: { azimuth: 180, elevation: 0 }
+    neck: { azimuth: 180, elevation: -20 }
+    head: { azimuth: 180, elevation: -35 }
+    upperArmL: { azimuth: 180, elevation: -80 }
+    upperArmR: { azimuth: 180, elevation: -80 }
+    forearmL: { azimuth: 180, elevation: -80 }
+    forearmR: { azimuth: 180, elevation: -80 }
+    handL: { azimuth: 180, elevation: -5 }
+    handR: { azimuth: -180, elevation: -5 }
+    thighL: { azimuth: 0, elevation: -15 }
+    thighR: { azimuth: 0, elevation: -15 }
+    shinL: { azimuth: 0, elevation: -88 }
+    shinR: { azimuth: 0, elevation: -88 }
+    footL: { azimuth: 0, elevation: 0 }
+    footR: { azimuth: 0, elevation: 0 }
+props:
+  - type: mat
+muscles:
+  engaged: [ gluteus, hamstrings, erectorSpinae, triceps, deltoid ]
+  stretched: [ pectoralis, hipFlexors, biceps, rectusAbdominis ]

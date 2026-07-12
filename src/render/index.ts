@@ -5,3 +5,7 @@ export * from './svg.js';
 export * from './project.js';
 export * from './raster.js';
 export * from './sheet.js';
+export * from './paper.js';
+export * from './sheet-layout.js';
+export * from './sheet-page.js';
+export * from './printable.js';

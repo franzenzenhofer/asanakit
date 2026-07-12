@@ -1,0 +1,40 @@
+asanakit: 2
+id: natarajasana
+name: Dancer Pose
+sanskrit: Naṭarājāsana
+english: Lord of the Dance Pose
+discipline: yoga
+family: standing
+difficulty: 4
+description: A standing backbend balance. On a straight left leg the torso tips gently forward while the right knee bends and lifts behind, the right hand catching the foot and the left arm reaching forward.
+tags: [ standing, balance, backbend, hatha ]
+breath: inhale
+drishti: hastagrai
+cues:
+  - Kick the lifted foot back and up into the hand
+  - Reach the front arm long to counterbalance
+  - Lift the chest as the leg rises
+contact: [ toeL ]
+camera: side
+figure:
+  grounded: true
+  world:
+    thighL: { azimuth: 0, elevation: -88 }
+    shinL: { azimuth: 0, elevation: -88 }
+    thighR: { azimuth: 180, elevation: -25 }
+    shinR: { azimuth: 180, elevation: 70 }
+    footR: { azimuth: 180, elevation: 60 }
+    spine: { azimuth: 0, elevation: 72 }
+    neck: { azimuth: 0, elevation: 60 }
+    head: { azimuth: 0, elevation: 55 }
+    upperArmL: { azimuth: 0, elevation: 25 }
+    forearmL: { azimuth: 0, elevation: 25 }
+    handL: { azimuth: 0, elevation: 25 }
+    upperArmR: { azimuth: 180, elevation: -30 }
+    forearmR: { azimuth: 180, elevation: -30 }
+    handR: { azimuth: 180, elevation: -30 }
+props:
+  - type: mat
+muscles:
+  engaged: [ gluteus, hamstrings, erectorSpinae, deltoid, quadriceps ]
+  stretched: [ hipFlexors, quadriceps, pectoralis, rectusAbdominis ]

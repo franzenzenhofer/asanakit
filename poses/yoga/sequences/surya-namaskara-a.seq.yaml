@@ -1,0 +1,22 @@
+asanakit: 2
+id: surya-namaskara-a
+name: Surya Namaskara A
+tradition: Ashtanga Vinyasa Yoga
+description: >-
+  Sun Salutation A: eleven breath-linked positions that open every vinyasa
+  practice. One breath per movement; five breaths in downward dog.
+
+sections:
+  - name: Surya Namaskara A
+    steps:
+      - { pose: samasthiti, breath: free, count: 1 }
+      - { pose: urdhva-hastasana, breath: inhale, count: 1 }
+      - { pose: uttanasana, breath: exhale, count: 1 }
+      - { pose: ardha-uttanasana, breath: inhale, count: 1 }
+      - { pose: chaturanga-dandasana, breath: exhale, count: 1 }
+      - { pose: urdhva-mukha-svanasana, breath: inhale, count: 1 }
+      - { pose: adho-mukha-svanasana, breath: exhale, count: 5 }
+      - { pose: ardha-uttanasana, breath: inhale, count: 1 }
+      - { pose: uttanasana, breath: exhale, count: 1 }
+      - { pose: urdhva-hastasana, breath: inhale, count: 1 }
+      - { pose: samasthiti, breath: exhale, count: 1 }

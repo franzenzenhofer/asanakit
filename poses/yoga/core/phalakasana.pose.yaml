@@ -1,0 +1,43 @@
+asanakit: 2
+id: phalakasana
+name: Plank
+sanskrit: Phalakāsana
+english: Plank Pose
+discipline: yoga
+family: core
+difficulty: 2
+description: The top of a push-up. Straight arms stack the shoulders over the wrists and the body holds one unbroken line from the heels to the crown of the head.
+tags: [ core, arm-support, strengthening ]
+breath: exhale
+drishti: nasagrai
+cues:
+  - Stack the shoulders over the wrists
+  - Press the heels back and reach the crown forward
+  - Draw the belly to the spine - no sagging, no piking
+contact: [ toeL, toeR, handTipL, handTipR ]
+camera: side
+figure:
+  grounded: true
+  root:
+    pitch: 72
+  world:
+    thighL: { azimuth: 180, elevation: -18 }
+    thighR: { azimuth: 180, elevation: -18 }
+    shinL: { azimuth: 180, elevation: -18 }
+    shinR: { azimuth: 180, elevation: -18 }
+    footL: { azimuth: 180, elevation: -65 }
+    footR: { azimuth: 180, elevation: -65 }
+    spine: { azimuth: 0, elevation: 18 }
+    neck: { azimuth: 0, elevation: 20 }
+    head: { azimuth: 0, elevation: 20 }
+    upperArmL: { azimuth: 0, elevation: -84 }
+    upperArmR: { azimuth: 0, elevation: -84 }
+    forearmL: { azimuth: 0, elevation: -88 }
+    forearmR: { azimuth: 0, elevation: -88 }
+    handL: { azimuth: 0, elevation: 0 }
+    handR: { azimuth: 0, elevation: 0 }
+props:
+  - type: mat
+muscles:
+  engaged: [ rectusAbdominis, serratus, quadriceps, triceps, deltoid ]
+  stretched: [ gastrocnemius ]

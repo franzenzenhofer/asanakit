@@ -1,0 +1,43 @@
+asanakit: 2
+id: dhanurasana
+name: Bow
+sanskrit: Dhanurāsana
+english: Bow Pose
+discipline: yoga
+family: backbend
+difficulty: 3
+description: Prone, the knees bend and the hands reach back to catch the ankles. Kicking the shins back into the hands lifts the chest and the thighs, bending the whole body into a bow strung by the arms.
+tags: [ backbend, prone, chest-opener ]
+breath: inhale
+drishti: urdhva
+cues:
+  - Catch the ankles, not the feet
+  - Kick the shins back into the hands to lift the chest
+  - Keep the knees no wider than the hips
+contact: [ hipCenter, waist ]
+camera: side
+figure:
+  grounded: true
+  root:
+    pitch: 92
+  world:
+    thighL: { azimuth: 180, elevation: 22 }
+    thighR: { azimuth: 180, elevation: 22 }
+    shinL: { azimuth: 0, elevation: 60 }
+    shinR: { azimuth: 0, elevation: 60 }
+    footL: { azimuth: 0, elevation: 45 }
+    footR: { azimuth: 0, elevation: 45 }
+    spine: { azimuth: 0, elevation: 35 }
+    neck: { azimuth: 0, elevation: 50 }
+    head: { azimuth: 180, elevation: 65 }
+    upperArmL: { azimuth: 180, elevation: 32 }
+    upperArmR: { azimuth: 180, elevation: 32 }
+    forearmL: { azimuth: 180, elevation: 32 }
+    forearmR: { azimuth: 180, elevation: 32 }
+    handL: { azimuth: 180, elevation: 38 }
+    handR: { azimuth: 180, elevation: 38 }
+props:
+  - type: mat
+muscles:
+  engaged: [ erectorSpinae, gluteus, hamstrings, trapezius ]
+  stretched: [ rectusAbdominis, pectoralis, hipFlexors, quadriceps ]

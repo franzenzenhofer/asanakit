@@ -1,0 +1,40 @@
+asanakit: 2
+id: marichyasana-d
+name: Pose Dedicated to the Sage Marichi D
+sanskrit: Marīcyāsana D
+english: Sage Marichi's Pose D
+discipline: yoga
+family: twist
+difficulty: 5
+description: The deepest of the Marichi poses. The left leg folds into half lotus, the right knee draws up with the sole flat, and the torso twists to the right - the left elbow levering outside the upright knee while the hands work toward a bind behind the back.
+tags: [ ashtanga, primary-series, seated, twist, bind, hip-opener ]
+breath: exhale
+drishti: parsva
+cues:
+  - Lengthen the spine on the inhale, revolve deeper on the exhale
+  - Press the elbow and the knee against each other to lever the twist
+contact: [ kneeL, ankleL, ankleR, toeR, handTipR ]
+figure:
+  grounded: true
+  world:
+    thighL: { azimuth: 8, elevation: -3 }
+    shinL: { azimuth: -152, elevation: -2 }
+    footL: { azimuth: -140, elevation: 12 }
+    thighR: { azimuth: 0, elevation: 76 }
+    shinR: { azimuth: 0, elevation: -76 }
+    footR: { azimuth: 0, elevation: 0 }
+    spine: { azimuth: 180, elevation: 86 }
+    neck: { azimuth: 180, elevation: 80 }
+    head: { azimuth: 180, elevation: 72 }
+    upperArmL: { azimuth: 0, elevation: -60 }
+    forearmL: { azimuth: 0, elevation: 75 }
+    handL: { azimuth: 0, elevation: 85 }
+    upperArmR: { azimuth: 180, elevation: -48 }
+    forearmR: { azimuth: 180, elevation: -48 }
+    handR: { azimuth: 180, elevation: -48 }
+props:
+  - type: mat
+muscles:
+  engaged: [ obliques, erectorSpinae, deltoid ]
+  stretched: [ obliques, gluteus, quadriceps, trapezius ]
+camera: three-quarter

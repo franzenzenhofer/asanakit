@@ -1,0 +1,43 @@
+asanakit: 2
+id: setu-bandha-sarvangasana
+name: Bridge
+sanskrit: Setu Bandha Sarvāṅgāsana
+english: Bridge Pose
+discipline: yoga
+family: backbend
+difficulty: 2
+description: Lying on the back with the knees bent and the feet planted hip-width, the hips lift while the shoulders, arms and the back of the head stay on the floor. A supported arc from knees to shoulders.
+tags: [ backbend, supine, beginner, chest-opener ]
+breath: inhale
+drishti: nasagrai
+cues:
+  - Press the feet down and roll the hips up vertebra by vertebra
+  - Keep the knees tracking over the ankles
+  - Weight rests on the shoulders, never on the neck
+contact: [ shoulderL, shoulderR, toeL, toeR, handTipL, handTipR ]
+camera: side
+figure:
+  grounded: true
+  root:
+    pitch: -90
+  world:
+    thighL: { azimuth: 0, elevation: 15 }
+    thighR: { azimuth: 0, elevation: 15 }
+    shinL: { azimuth: 180, elevation: -55 }
+    shinR: { azimuth: 180, elevation: -55 }
+    footL: { azimuth: 0, elevation: -18 }
+    footR: { azimuth: 0, elevation: -18 }
+    spine: { azimuth: 180, elevation: -55 }
+    neck: { azimuth: 180, elevation: -10 }
+    head: { azimuth: 180, elevation: 0 }
+    upperArmL: { azimuth: 0, elevation: -5 }
+    upperArmR: { azimuth: 0, elevation: -5 }
+    forearmL: { azimuth: 0, elevation: 0 }
+    forearmR: { azimuth: 0, elevation: 0 }
+    handL: { azimuth: 0, elevation: 0 }
+    handR: { azimuth: 0, elevation: 0 }
+props:
+  - type: mat
+muscles:
+  engaged: [ gluteus, hamstrings, erectorSpinae, quadriceps ]
+  stretched: [ hipFlexors, rectusAbdominis, pectoralis ]

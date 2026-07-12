@@ -1,0 +1,45 @@
+asanakit: 2
+id: bakasana
+name: Crow Pose
+sanskrit: Bakāsana
+english: Crow Pose
+discipline: yoga
+family: arm-balance
+difficulty: 4
+description: A compact arm balance. The hands root shoulder-width on the floor, the elbows soften back over the wrists, the knees perch high on the upper arms and the feet lift toward the sit bones.
+tags: [ arm-balance, core, balance ]
+breath: free
+drishti: nasagrai
+cues:
+  - Grip the floor with the fingers and round the upper back
+  - Snuggle the knees high onto the upper arms
+  - Shift the weight forward until the feet float
+contact: [ handTipL, handTipR ]
+camera: side
+figure:
+  grounded: true
+  root:
+    pitch: 70
+  world:
+    pelvis: { azimuth: 0, elevation: -20 }
+    spine: { azimuth: 0, elevation: -25 }
+    neck: { azimuth: 0, elevation: 5 }
+    head: { azimuth: 0, elevation: 15 }
+    upperArmL: { azimuth: 180, elevation: -60 }
+    upperArmR: { azimuth: 180, elevation: -60 }
+    forearmL: { azimuth: 0, elevation: -88 }
+    forearmR: { azimuth: 0, elevation: -88 }
+    handL: { azimuth: 0, elevation: -2 }
+    handR: { azimuth: 0, elevation: -2 }
+    thighL: { azimuth: 0, elevation: -35 }
+    thighR: { azimuth: 0, elevation: -35 }
+  joints:
+    shinL: 140
+    shinR: 140
+    footL: { extend: 20 }
+    footR: { extend: 20 }
+props:
+  - type: mat
+muscles:
+  engaged: [ rectusAbdominis, hipFlexors, adductors, serratus, biceps, forearmFlexors, pectoralis ]
+  stretched: [ erectorSpinae, trapezius, gluteus ]

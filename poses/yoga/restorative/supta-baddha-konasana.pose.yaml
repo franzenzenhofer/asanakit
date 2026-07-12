@@ -1,0 +1,45 @@
+asanakit: 2
+id: supta-baddha-konasana
+name: Reclining Bound Angle Pose
+sanskrit: Supta Baddha Koṇāsana
+english: Reclining Bound Angle Pose
+discipline: yoga
+family: restorative
+difficulty: 1
+description: A supine hip opener. The back rests along the floor, the soles of the feet press together near the pelvis and the knees release wide toward the ground. The arms lie open beside the body, palms up.
+tags: [ restorative, supine, hip-opener ]
+breath: free
+drishti: nasagrai
+cues:
+  - Draw the heels in, let the knees fall open by their own weight
+  - Soften the groins and the belly
+  - Let the floor carry the whole spine
+contact: [ headTop, shoulderL, shoulderR, hipCenter, handTipL, handTipR, kneeL, kneeR ]
+camera: top
+figure:
+  grounded: true
+  root:
+    pitch: -90
+  world:
+    pelvis: { azimuth: 180, elevation: 0 }
+    spine: { azimuth: 180, elevation: 0 }
+    neck: { azimuth: 180, elevation: 0 }
+    head: { azimuth: 180, elevation: 0 }
+    upperArmL: { azimuth: 30, elevation: 0 }
+    upperArmR: { azimuth: -30, elevation: 0 }
+    forearmL: { azimuth: 30, elevation: 0 }
+    forearmR: { azimuth: -30, elevation: 0 }
+    handL: { azimuth: 30, elevation: 0 }
+    handR: { azimuth: -30, elevation: 0 }
+  joints:
+    thighL: { flex: 8, abduct: 55, externalRotation: 78 }
+    thighR: { flex: 8, abduct: 55, externalRotation: 78 }
+    shinL: 115
+    shinR: 115
+    footL: { flex: 25 }
+    footR: { flex: 25 }
+props:
+  - type: mat
+muscles:
+  engaged: [ gluteus ]
+  stretched: [ adductors, hipFlexors, pectoralis ]

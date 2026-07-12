@@ -1,0 +1,43 @@
+asanakit: 2
+id: ardha-navasana
+name: Low Boat
+sanskrit: Ardha Nāvāsana
+english: Half Boat Pose
+discipline: yoga
+family: core
+difficulty: 3
+description: Balancing on the sacrum, the straight legs and the shoulders hover low over the floor while the lower back stays rounded into the mat. The arms reach forward alongside the legs.
+tags: [ core, supine, strengthening, balance ]
+breath: exhale
+drishti: padhayoragrai
+cues:
+  - Keep the lower back heavy and rounded into the mat
+  - Hover the legs and the shoulder blades just off the floor
+  - Reach the arms long toward the feet
+contact: [ hipCenter ]
+camera: side
+figure:
+  grounded: true
+  root:
+    pitch: -58
+  world:
+    thighL: { azimuth: 0, elevation: 22 }
+    thighR: { azimuth: 0, elevation: 22 }
+    shinL: { azimuth: 0, elevation: 22 }
+    shinR: { azimuth: 0, elevation: 22 }
+    footL: { azimuth: 0, elevation: 18 }
+    footR: { azimuth: 0, elevation: 18 }
+    spine: { azimuth: 180, elevation: 52 }
+    neck: { azimuth: 180, elevation: 45 }
+    head: { azimuth: 180, elevation: 40 }
+    upperArmL: { azimuth: 0, elevation: 5 }
+    upperArmR: { azimuth: 0, elevation: 5 }
+    forearmL: { azimuth: 0, elevation: 5 }
+    forearmR: { azimuth: 0, elevation: 5 }
+    handL: { azimuth: 0, elevation: 5 }
+    handR: { azimuth: 0, elevation: 5 }
+props:
+  - type: mat
+muscles:
+  engaged: [ rectusAbdominis, hipFlexors, obliques, quadriceps ]
+  stretched: [ erectorSpinae, hamstrings ]

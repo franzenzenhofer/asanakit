@@ -19,7 +19,10 @@
     "sourceMap": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@asanakit/*": ["./src/*"]
+    }
   },
   "include": ["src", "tests", "scripts", "*.config.ts"]
 }

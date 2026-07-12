@@ -1,0 +1,42 @@
+asanakit: 2
+id: bharmanasana
+name: Tabletop
+sanskrit: Bharmanāsana
+english: Tabletop Pose
+discipline: yoga
+family: core
+difficulty: 1
+description: Neutral hands-and-knees. The wrists stack under the shoulders, the knees under the hips, and the spine holds a long neutral line from tail to crown - the flat table every cat-cow and bird-dog starts from.
+tags: [ core, kneeling, neutral, beginner ]
+breath: exhale
+drishti: nasagrai
+cues:
+  - Wrists under shoulders, knees under hips
+  - Hold the spine long and neutral, crown reaching forward
+contact: [ kneeL, kneeR, ankleL, ankleR, toeL, toeR, handTipL, handTipR ]
+camera: side
+figure:
+  grounded: true
+  root:
+    pitch: 80
+  world:
+    thighL: { azimuth: 0, elevation: -86 }
+    thighR: { azimuth: 0, elevation: -86 }
+    shinL: { azimuth: 180, elevation: 0 }
+    shinR: { azimuth: 180, elevation: 0 }
+    footL: { azimuth: 180, elevation: 0 }
+    footR: { azimuth: 180, elevation: 0 }
+    spine: { azimuth: 0, elevation: 15 }
+    neck: { azimuth: 0, elevation: 10 }
+    head: { azimuth: 0, elevation: 10 }
+    upperArmL: { azimuth: 0, elevation: -84 }
+    upperArmR: { azimuth: 0, elevation: -84 }
+    forearmL: { azimuth: 0, elevation: -88 }
+    forearmR: { azimuth: 0, elevation: -88 }
+    handL: { azimuth: 0, elevation: 0 }
+    handR: { azimuth: 0, elevation: 0 }
+props:
+  - type: mat
+muscles:
+  engaged: [ rectusAbdominis, serratus, erectorSpinae ]
+  stretched: [ tibialisAnterior ]

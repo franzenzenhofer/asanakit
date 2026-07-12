@@ -1,8 +1,7 @@
-import { readFile } from 'node:fs/promises';
-import { basename } from 'node:path';
 import { parse as parseYaml } from 'yaml';
 import type { z } from 'zod';
 import { poseSchema, sequenceSchema, type PoseSpec, type SequenceSpec } from './schema.js';
+import { sheetSchema, type SheetSpec } from './sheet.js';
 
 /** Every failure asanakit raises on bad input, so a CLI can print it without a stack trace. */
 export class PoseParseError extends Error {
@@ -44,8 +43,4 @@ export const parsePose = (text: string, file = '<inline>'): PoseSpec => parseWit
 
 export const parseSequence = (text: string, file = '<inline>'): SequenceSpec => parseWith(sequenceSchema, text, file);
 
-export const loadPoseFile = async (path: string): Promise<PoseSpec> =>
-  parsePose(await readFile(path, 'utf8'), basename(path));
-
-export const loadSequenceFile = async (path: string): Promise<SequenceSpec> =>
-  parseSequence(await readFile(path, 'utf8'), basename(path));
+export const parseSheet = (text: string, file = '<inline>'): SheetSpec => parseWith(sheetSchema, text, file);

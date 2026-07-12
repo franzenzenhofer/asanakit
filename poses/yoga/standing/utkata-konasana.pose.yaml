@@ -1,0 +1,39 @@
+asanakit: 2
+id: utkata-konasana
+name: Goddess Pose
+sanskrit: Utkaṭa Koṇāsana
+english: Goddess Pose
+discipline: yoga
+family: standing
+difficulty: 2
+description: A wide, regal squat. The feet turn out in a broad stance, the knees bend directly over the ankles, and the arms lift into a cactus with the palms facing forward.
+tags: [ standing, squat, hip-opener, vinyasa ]
+breath: free
+drishti: nasagrai
+cues:
+  - Track the knees over the middle toes
+  - Drop the tailbone straight down, torso upright
+  - Cactus the arms, elbows at shoulder height
+contact: [ toeL, toeR ]
+camera: front
+figure:
+  grounded: true
+  world:
+    thighL: { azimuth: 70, elevation: -40 }
+    shinL: { azimuth: 78, elevation: -86 }
+    footL: { azimuth: 45, elevation: 0 }
+    thighR: { azimuth: -70, elevation: -40 }
+    shinR: { azimuth: -78, elevation: -86 }
+    footR: { azimuth: -45, elevation: 0 }
+    spine: { azimuth: 0, elevation: 88 }
+  joints:
+    upperArmL: { abduct: 85, externalRotation: 80 }
+    forearmL: 85
+    upperArmR: { abduct: 85, externalRotation: 80 }
+    forearmR: 85
+props:
+  - type: mat
+    yaw: 90
+muscles:
+  engaged: [ quadriceps, gluteus, adductors, deltoid, erectorSpinae ]
+  stretched: [ adductors, hipFlexors, pectoralis ]

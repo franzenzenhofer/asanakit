@@ -1,5 +1,3 @@
-import { create } from 'xmlbuilder2';
-
 export type AttrValue = string | number | undefined;
 
 export interface SvgNode {
@@ -33,24 +31,39 @@ export const textEl = (name: string, attrs: Record<string, AttrValue>, text: str
 export const group = (attrs: Record<string, AttrValue>, children: readonly SvgNode[]): SvgNode =>
   el('g', attrs, children.filter(Boolean));
 
-const build = (node: SvgNode, parent: ReturnType<typeof create> | ReturnType<typeof create>['ele']): void => {
-  const attrs = Object.fromEntries(
-    Object.entries(node.attrs)
-      .filter(([, v]) => v !== undefined)
-      .map(([k, v]) => [k, typeof v === 'number' ? String(num(v)) : String(v)]),
-  );
-  const child = (parent as ReturnType<typeof create>).ele(node.name, attrs);
-  if (node.text !== undefined) child.txt(node.text);
-  for (const c of node.children) build(c, child as never);
+const escapeText = (value: string): string =>
+  value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+
+const escapeAttr = (value: string): string => escapeText(value).replaceAll('"', '&quot;');
+
+const attrString = (attrs: Readonly<Record<string, AttrValue>>): string =>
+  Object.entries(attrs)
+    .filter((entry): entry is [string, string | number] => entry[1] !== undefined)
+    .map(([k, v]) => ` ${k}="${escapeAttr(typeof v === 'number' ? String(num(v)) : v)}"`)
+    .join('');
+
+const build = (node: SvgNode, depth: number, out: string[]): void => {
+  const pad = '  '.repeat(depth);
+  const open = `${pad}<${node.name}${attrString(node.attrs)}`;
+  if (node.text !== undefined) {
+    out.push(`${open}>${escapeText(node.text)}</${node.name}>`);
+  } else if (node.children.length === 0) {
+    out.push(`${open}/>`);
+  } else {
+    out.push(`${open}>`);
+    for (const child of node.children) build(child, depth + 1, out);
+    out.push(`${pad}</${node.name}>`);
+  }
 };
 
 /**
- * Serialise to a standalone SVG document. xmlbuilder2 entity-escapes text and
- * attributes, so the output is safe to inline into HTML - a pose name can never
- * break out of a <text> element.
+ * Serialise to a standalone SVG document. Text and attributes are
+ * entity-escaped, so the output is safe to inline into HTML - a pose name can
+ * never break out of a <text> element. Pure string building: byte-deterministic
+ * and browser-safe.
  */
 export const serialize = (root: SvgNode): string => {
-  const doc = create();
-  build(root, doc);
-  return doc.end({ prettyPrint: true, headless: true, indent: '  ' });
+  const out: string[] = [];
+  build(root, 0, out);
+  return `${out.join('\n')}\n`;
 };

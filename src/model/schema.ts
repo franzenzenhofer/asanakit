@@ -232,29 +232,31 @@ export type Annotation = z.output<typeof annotationSchema>;
 export type Prop = z.output<typeof propSchema>;
 export type Anchor = z.output<typeof anchor>;
 
+/** One practice step: a pose reference plus how it is practised. Shared by sequences and sheets. */
+export const stepSchema = z.object({
+  pose: z.string().describe('Pose id, resolved against the loaded pose library.'),
+  label: z.string().optional(),
+  breath: z.enum(['inhale', 'exhale', 'hold', 'free']).optional(),
+  count: z.number().int().positive().default(1).describe('Breaths held.'),
+  side: z.enum(['left', 'right', 'both', 'none']).default('none'),
+  note: z.string().optional(),
+});
+
+export const sectionSchema = z.object({
+  name: z.string(),
+  steps: z.array(stepSchema),
+});
+
+export type StepSpec = z.output<typeof stepSchema>;
+export type SectionSpec = z.output<typeof sectionSchema>;
+
 export const sequenceSchema = z.object({
   asanakit: z.literal(POSE_FORMAT_VERSION, VERSION_MESSAGE),
   id: z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/),
   name: z.string().min(1),
   tradition: z.string().optional(),
   description: z.string().optional(),
-  sections: z
-    .array(
-      z.object({
-        name: z.string(),
-        steps: z.array(
-          z.object({
-            pose: z.string().describe('Pose id, resolved against the loaded pose library.'),
-            label: z.string().optional(),
-            breath: z.enum(['inhale', 'exhale', 'hold', 'free']).optional(),
-            count: z.number().int().positive().default(1).describe('Breaths held.'),
-            side: z.enum(['left', 'right', 'both', 'none']).default('none'),
-            note: z.string().optional(),
-          }),
-        ),
-      }),
-    )
-    .default([]),
+  sections: z.array(sectionSchema).default([]),
 });
 
 export type SequenceSpec = z.output<typeof sequenceSchema>;

@@ -3,8 +3,19 @@ import { dirname, extname } from 'node:path';
 import type { Command } from 'commander';
 import { resolveCamera } from '../../core/camera.js';
 import { expandSequence } from '../../library/index.js';
-import type { PoseSpec } from '../../model/index.js';
-import { optimizeSvg, renderPng, renderSheet, renderSvg, type RenderOptions, type SheetOptions } from '../../render/index.js';
+import { PAPER_IDS, expandSheet, parseSheet, type PoseSpec, type SheetSpec } from '../../model/index.js';
+import {
+  buildPrintableHtml,
+  layoutSheet,
+  optimizeSvg,
+  renderPng,
+  renderSheet,
+  renderSheetPages,
+  renderSvg,
+  skeletonKey,
+  type RenderOptions,
+  type SheetOptions,
+} from '../../render/index.js';
 import { solvePose } from '../../solve.js';
 import { buildShowcaseHtml } from '../../viewer/index.js';
 import { library, parseCamera, parseIntOption, parseStyle, resolvePose } from '../resolve.js';
@@ -82,6 +93,47 @@ const withCommonOptions = (cmd: Command): Command =>
     .option('--scale <px>', 'PNG output width in pixels (defaults to the canvas width)')
     .option('--lib <dir>', 'load poses from this directory instead of the bundled library');
 
+const parsePaper = (value: string): SheetSpec['paper'] => {
+  if ((PAPER_IDS as readonly string[]).includes(value)) return value as SheetSpec['paper'];
+  throw new Error(`Unknown paper "${value}". Known: ${PAPER_IDS.join(', ')}`);
+};
+
+/** Render a .sheet.yaml to paper pages: printable .html, or per-page .svg/.png files. */
+const writeSheetSpec = async (
+  specPath: string,
+  options: CommonOptions & { out: string; paper?: string },
+  resolve: (id: string) => PoseSpec | undefined,
+): Promise<void> => {
+  const { readFile } = await import('node:fs/promises');
+  const parsed = parseSheet(await readFile(specPath, 'utf8'), specPath);
+  const sheet = options.paper === undefined ? parsed : { ...parsed, paper: parsePaper(options.paper) };
+
+  const skeletons = new Map(
+    await Promise.all(
+      expandSheet(sheet, resolve).map(
+        async (step) => [skeletonKey(step.pose), await solvePose(step.pose, { settle: options.settle === true })] as const,
+      ),
+    ),
+  );
+
+  const layout = layoutSheet(sheet, resolve);
+  const pages = renderSheetPages(layout, { skeletons });
+
+  if (extname(options.out).toLowerCase() === '.html') {
+    await mkdir(dirname(options.out), { recursive: true });
+    await writeFile(options.out, buildPrintableHtml(pages, layout.paper, sheet.name));
+    process.stdout.write(`${options.out}\n`);
+    return;
+  }
+
+  const pad = String(pages.length).length;
+  for (const [i, svg] of pages.entries()) {
+    const n = String(i + 1).padStart(pad, '0');
+    const path = pages.length === 1 ? options.out : options.out.replace(/(\.[a-z]+)$/i, `-${n}$1`);
+    await write(path, svg, options);
+  }
+};
+
 export const registerRenderCommands = (program: Command): void => {
   withCommonOptions(
     program
@@ -112,7 +164,9 @@ export const registerRenderCommands = (program: Command): void => {
       .option('--sequence <id>', 'lay out a whole sequence in practice order')
       .option('--all', 'every pose in the library')
       .option('--sheet-title <text>', 'title printed across the top')
-      .option('--numbered', 'number each cell'),
+      .option('--numbered', 'number each cell')
+      .option('--spec <file>', 'render a .sheet.yaml document to paginated paper pages instead of a contact sheet')
+      .option('--paper <size>', `override the sheet paper: ${PAPER_IDS.join(' | ')}`),
   ).action(
     async (
       refs: string[],
@@ -123,9 +177,16 @@ export const registerRenderCommands = (program: Command): void => {
         all?: boolean;
         sheetTitle?: string;
         numbered?: boolean;
+        spec?: string;
+        paper?: string;
       },
     ) => {
       const lib = await library(options.lib);
+
+      if (options.spec !== undefined) {
+        await writeSheetSpec(options.spec, options, (id) => lib.poses.get(id));
+        return;
+      }
       let poses: PoseSpec[];
 
       if (options.sequence !== undefined) {

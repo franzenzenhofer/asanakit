@@ -1,0 +1,43 @@
+asanakit: 2
+id: ardha-pincha-mayurasana
+name: Dolphin Pose
+sanskrit: Ardha Piñcha Mayūrāsana
+english: Dolphin Pose
+discipline: yoga
+family: inversion
+difficulty: 2
+description: An inverted V on the forearms. The forearms press parallel into the floor, the hips lift back and up, the legs stay long and the head hangs free between the upper arms.
+tags: [ inversion, forward-fold, shoulder-opener, preparation ]
+breath: free
+drishti: nabi-chakra
+cues:
+  - Press the forearms down and pull the shoulders away from the ears
+  - Lift the sit bones high, walk the feet in
+  - Let the head hang, gaze back toward the feet
+contact: [ toeL, toeR, elbowL, elbowR, handTipL, handTipR ]
+camera: side
+figure:
+  grounded: true
+  root:
+    pitch: 138
+  world:
+    thighL: { azimuth: 180, elevation: -50 }
+    thighR: { azimuth: 180, elevation: -50 }
+    shinL: { azimuth: 180, elevation: -50 }
+    shinR: { azimuth: 180, elevation: -50 }
+    footL: { azimuth: 0, elevation: -20 }
+    footR: { azimuth: 0, elevation: -20 }
+    spine: { azimuth: 0, elevation: -55 }
+    neck: { azimuth: 0, elevation: -60 }
+    head: { azimuth: 0, elevation: -65 }
+    upperArmL: { azimuth: 0, elevation: -75 }
+    upperArmR: { azimuth: 0, elevation: -75 }
+    forearmL: { azimuth: 0, elevation: 0 }
+    forearmR: { azimuth: 0, elevation: 0 }
+    handL: { azimuth: 0, elevation: 0 }
+    handR: { azimuth: 0, elevation: 0 }
+props:
+  - type: mat
+muscles:
+  engaged: [ deltoid, rotatorCuff, serratus, rectusAbdominis, quadriceps ]
+  stretched: [ hamstrings, gastrocnemius, latissimus, pectoralis ]

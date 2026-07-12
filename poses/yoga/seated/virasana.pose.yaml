@@ -1,0 +1,41 @@
+asanakit: 2
+id: virasana
+name: Hero Pose
+sanskrit: Vīrāsana
+english: Hero Pose
+discipline: yoga
+family: seated
+difficulty: 2
+description: Kneeling with the knees together and the feet drawn just outside the hips, the sit bones settle to the floor between the heels. The spine stacks tall and the hands rest quietly on the thighs.
+tags: [ seated, hatha, meditation, quad-stretch ]
+breath: free
+drishti: nasagrai
+cues:
+  - Point the feet straight back and sit between the heels
+  - Keep the knees close together and lengthen the tailbone down
+contact: [ hipCenter, kneeL, kneeR, ankleL, ankleR ]
+figure:
+  grounded: true
+  world:
+    pelvis: { azimuth: 0, elevation: 90 }
+    spine: { azimuth: 0, elevation: 90 }
+    neck: { azimuth: 0, elevation: 90 }
+    head: { azimuth: 0, elevation: 90 }
+    thighL: { azimuth: 5, elevation: -4 }
+    shinL: { azimuth: 157, elevation: -2 }
+    footL: { azimuth: 170, elevation: -5 }
+    thighR: { azimuth: -5, elevation: -4 }
+    shinR: { azimuth: -157, elevation: -2 }
+    footR: { azimuth: -170, elevation: -5 }
+    upperArmL: { azimuth: 10, elevation: -62 }
+    forearmL: { azimuth: 0, elevation: -40 }
+    handL: { azimuth: 0, elevation: -30 }
+    upperArmR: { azimuth: -10, elevation: -62 }
+    forearmR: { azimuth: 0, elevation: -40 }
+    handR: { azimuth: 0, elevation: -30 }
+props:
+  - type: mat
+muscles:
+  engaged: [ erectorSpinae, rectusAbdominis ]
+  stretched: [ quadriceps, tibialisAnterior, hipFlexors ]
+camera: side

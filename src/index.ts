@@ -10,6 +10,7 @@ export * from './core/angles.js';
 export * from './anatomy/muscles.js';
 export * from './anatomy/validate.js';
 export * from './model/index.js';
+export * from './model/load.js';
 export * from './render/index.js';
 export * from './three/index.js';
 export * from './export3d/index.js';

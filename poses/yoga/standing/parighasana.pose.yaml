@@ -1,0 +1,42 @@
+asanakit: 2
+id: parighasana
+name: Gate Pose
+sanskrit: Parighāsana
+english: Gate Pose
+discipline: yoga
+family: standing
+difficulty: 2
+description: A kneeling side bend. Kneeling on the right leg, the straight left leg reaches out to the side with the foot flat, the left hand rests down the left leg and the right arm arcs overhead like the beam of a gate.
+tags: [ standing, kneeling, side-bend, hatha ]
+breath: exhale
+drishti: hastagrai
+cues:
+  - Kneel tall before you tilt sideways
+  - Reach up and over, lengthening the top ribs
+  - Rest the lower hand lightly on the extended leg
+contact: [ kneeR, ankleR, toeR, toeL ]
+camera: front
+figure:
+  grounded: true
+  world:
+    thighR: { azimuth: 0, elevation: -86 }
+    shinR: { azimuth: 180, elevation: -3 }
+    footR: { azimuth: 180, elevation: -5 }
+    thighL: { azimuth: 90, elevation: -33 }
+    shinL: { azimuth: 90, elevation: -33 }
+    footL: { azimuth: 90, elevation: 0 }
+    spine: { azimuth: 90, elevation: 55 }
+    neck: { azimuth: 90, elevation: 45 }
+    head: { azimuth: 90, elevation: 40 }
+    upperArmL: { azimuth: 90, elevation: -42 }
+    forearmL: { azimuth: 90, elevation: -40 }
+    handL: { azimuth: 90, elevation: -38 }
+    upperArmR: { azimuth: 90, elevation: 62 }
+    forearmR: { azimuth: 90, elevation: 55 }
+    handR: { azimuth: 90, elevation: 50 }
+props:
+  - type: mat
+    yaw: 90
+muscles:
+  engaged: [ obliques, erectorSpinae, deltoid, quadriceps ]
+  stretched: [ obliques, latissimus, adductors, hamstrings ]

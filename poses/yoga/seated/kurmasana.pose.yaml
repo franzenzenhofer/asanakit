@@ -1,0 +1,42 @@
+asanakit: 2
+id: kurmasana
+name: Tortoise Pose
+sanskrit: Kūrmāsana
+english: Tortoise Pose
+discipline: yoga
+family: seated
+difficulty: 5
+description: A deep seated forward fold. The legs stretch wide and forward, the chest lowers between the thighs toward the floor, and the arms slide out to the sides beneath the knees like a tortoise drawing under its shell.
+tags: [ ashtanga, primary-series, seated, forward-fold, hip-opener ]
+breath: exhale
+drishti: nasagrai
+cues:
+  - Slide the shoulders under the knees one at a time
+  - Reach the chest and chin forward as the legs straighten
+contact: [ hipCenter, ankleL, ankleR, handTipL, handTipR ]
+figure:
+  grounded: true
+  root:
+    pitch: 78
+  world:
+    thighL: { azimuth: 20, elevation: 4 }
+    shinL: { azimuth: 20, elevation: -4 }
+    footL: { azimuth: 20, elevation: 70 }
+    thighR: { azimuth: -20, elevation: 4 }
+    shinR: { azimuth: -20, elevation: -4 }
+    footR: { azimuth: -20, elevation: 70 }
+    spine: { azimuth: 0, elevation: 6 }
+    neck: { azimuth: 0, elevation: 2 }
+    head: { azimuth: 0, elevation: 0 }
+    upperArmL: { azimuth: 105, elevation: -12 }
+    forearmL: { azimuth: 110, elevation: -8 }
+    handL: { azimuth: 110, elevation: -5 }
+    upperArmR: { azimuth: -105, elevation: -12 }
+    forearmR: { azimuth: -110, elevation: -8 }
+    handR: { azimuth: -110, elevation: -5 }
+props:
+  - type: mat
+muscles:
+  engaged: [ quadriceps, rectusAbdominis ]
+  stretched: [ hamstrings, erectorSpinae, adductors, latissimus, gluteus ]
+camera: three-quarter

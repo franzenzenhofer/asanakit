@@ -1,0 +1,42 @@
+asanakit: 2
+id: parivrtta-utkatasana
+name: Revolved Chair
+sanskrit: Parivṛtta Utkaṭāsana
+english: Revolved Chair Pose
+discipline: yoga
+family: twist
+difficulty: 3
+description: Chair pose with a twist. The knees stay bent and level as the torso revolves left, the right elbow hooking outside the left thigh with the palms pressed together at the heart.
+tags: [ twist, standing, squat, vinyasa ]
+breath: exhale
+drishti: parsva
+cues:
+  - Sit low and keep both knees side by side
+  - Turn from the ribs, not the hips
+  - Press palm into palm to lever the twist deeper
+contact: [ toeL, toeR ]
+camera: three-quarter
+figure:
+  grounded: true
+  root:
+    pitch: 20
+  world:
+    thighL: { azimuth: 0, elevation: -30 }
+    thighR: { azimuth: 0, elevation: -30 }
+    shinL: { azimuth: 180, elevation: -80 }
+    shinR: { azimuth: 180, elevation: -80 }
+    footL: { azimuth: 0, elevation: -18 }
+    footR: { azimuth: 0, elevation: -18 }
+    spine: { azimuth: 0, elevation: 55, twist: 55 }
+    neck: { azimuth: 0, elevation: 55 }
+    head: { azimuth: 35, elevation: 60 }
+  joints:
+    upperArmR: { flex: 65, adduct: 35 }
+    forearmR: 95
+    upperArmL: { flex: 15, adduct: 15 }
+    forearmL: 130
+props:
+  - type: mat
+muscles:
+  engaged: [ quadriceps, gluteus, obliques, erectorSpinae ]
+  stretched: [ obliques, latissimus, trapezius ]

@@ -1,0 +1,45 @@
+asanakit: 2
+id: parsva-bakasana
+name: Side Crow
+sanskrit: Pārśva Bakāsana
+english: Side Crow Pose
+discipline: yoga
+family: arm-balance
+difficulty: 5
+description: A twisting arm balance. The hands root shoulder-width on the floor, the trunk spirals over the arms and both bent legs stack together and float out to the left side of the body.
+tags: [ arm-balance, twist, core, balance ]
+breath: free
+drishti: nasagrai
+cues:
+  - Twist from the belly, hook the outer thigh high on the arm
+  - Keep both knees glued together as the feet float
+  - Shift forward until the weight pours into the hands
+contact: [ handTipL, handTipR ]
+camera: three-quarter
+figure:
+  grounded: true
+  root:
+    pitch: 70
+  world:
+    pelvis: { azimuth: 0, elevation: -18, twist: 65 }
+    spine: { azimuth: 0, elevation: -25, twist: 10 }
+    neck: { azimuth: 0, elevation: 5 }
+    head: { azimuth: 0, elevation: 15 }
+    upperArmL: { azimuth: 180, elevation: -60 }
+    upperArmR: { azimuth: 180, elevation: -60 }
+    forearmL: { azimuth: 0, elevation: -88 }
+    forearmR: { azimuth: 0, elevation: -88 }
+    handL: { azimuth: 0, elevation: -2 }
+    handR: { azimuth: 0, elevation: -2 }
+    thighL: { azimuth: 55, elevation: -25 }
+    thighR: { azimuth: 55, elevation: -20 }
+  joints:
+    shinL: 135
+    shinR: 135
+    footL: { extend: 20 }
+    footR: { extend: 20 }
+props:
+  - type: mat
+muscles:
+  engaged: [ obliques, rectusAbdominis, hipFlexors, adductors, serratus, biceps, forearmFlexors ]
+  stretched: [ erectorSpinae, gluteus, latissimus ]

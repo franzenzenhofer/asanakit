@@ -1,0 +1,41 @@
+asanakit: 2
+id: parivrtta-janu-sirsasana
+name: Revolved Head-to-Knee Pose
+sanskrit: Parivṛtta Jānu Śīrṣāsana
+english: Revolved Head-to-Knee Pose
+discipline: yoga
+family: twist
+difficulty: 3
+description: The left leg stretches out to the side while the right knee bends in toward the groin. The torso side-bends along the left leg, the left forearm reaching down the inside of the leg toward the foot while the right arm arcs overhead and the chest revolves open to the sky.
+tags: [ seated, twist, hatha, side-bend, forward-fold ]
+breath: exhale
+drishti: urdhva
+cues:
+  - Anchor the right sit bone as you slide down the left leg
+  - Spin the chest toward the ceiling, reach the top arm over the ear
+contact: [ hipCenter, kneeR, ankleR, kneeL, ankleL ]
+figure:
+  grounded: true
+  world:
+    pelvis: { azimuth: 0, elevation: 88 }
+    spine: { azimuth: 90, elevation: 32, twist: -50 }
+    neck: { azimuth: 90, elevation: 26, twist: -55 }
+    head: { azimuth: 90, elevation: 22, twist: -55 }
+    thighL: { azimuth: 70, elevation: 0 }
+    shinL: { azimuth: 70, elevation: 0 }
+    footL: { azimuth: 70, elevation: 70 }
+    thighR: { azimuth: -55, elevation: -5 }
+    shinR: { azimuth: 150, elevation: -2 }
+    footR: { azimuth: 140, elevation: 10 }
+    upperArmL: { azimuth: 80, elevation: -12 }
+    forearmL: { azimuth: 75, elevation: -4 }
+    handL: { azimuth: 72, elevation: 0 }
+    upperArmR: { azimuth: 90, elevation: 55 }
+    forearmR: { azimuth: 90, elevation: 38 }
+    handR: { azimuth: 90, elevation: 32 }
+props:
+  - type: mat
+muscles:
+  engaged: [ obliques, quadriceps, deltoid ]
+  stretched: [ hamstrings, obliques, latissimus, adductors ]
+camera: front

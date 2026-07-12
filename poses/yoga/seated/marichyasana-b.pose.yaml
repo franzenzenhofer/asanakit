@@ -1,0 +1,42 @@
+asanakit: 2
+id: marichyasana-b
+name: Pose Dedicated to the Sage Marichi B
+sanskrit: Marīcyāsana B
+english: Sage Marichi's Pose B
+discipline: yoga
+family: seated
+difficulty: 4
+description: The left leg folds into half lotus while the right knee draws up with the sole flat on the floor. The torso folds forward inside the upright knee, the right arm wraps around the shin and the hands clasp behind the back.
+tags: [ ashtanga, primary-series, seated, forward-fold, bind, hip-opener ]
+breath: exhale
+drishti: nasagrai
+cues:
+  - Settle the lotus knee toward the floor before folding
+  - Wrap the shoulder low around the shin and reach the chin forward
+contact: [ kneeL, ankleL, ankleR, toeR ]
+figure:
+  grounded: true
+  root:
+    pitch: 68
+  world:
+    thighL: { azimuth: 8, elevation: -3 }
+    shinL: { azimuth: -152, elevation: -2 }
+    footL: { azimuth: -140, elevation: 12 }
+    thighR: { azimuth: 0, elevation: 76 }
+    shinR: { azimuth: 0, elevation: -76 }
+    footR: { azimuth: 0, elevation: 0 }
+    spine: { azimuth: 0, elevation: 22 }
+    neck: { azimuth: 0, elevation: 6 }
+    head: { azimuth: 0, elevation: -8 }
+    upperArmL: { azimuth: 180, elevation: -5 }
+    forearmL: { azimuth: 180, elevation: -12 }
+    handL: { azimuth: 180, elevation: 0 }
+    upperArmR: { azimuth: 180, elevation: -8 }
+    forearmR: { azimuth: 180, elevation: -15 }
+    handR: { azimuth: 180, elevation: 0 }
+props:
+  - type: mat
+muscles:
+  engaged: [ rectusAbdominis, deltoid, hipFlexors ]
+  stretched: [ gluteus, erectorSpinae, quadriceps, hamstrings ]
+camera: side

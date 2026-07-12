@@ -1,0 +1,42 @@
+asanakit: 2
+id: viparita-virabhadrasana
+name: Reverse Warrior
+sanskrit: Viparīta Vīrabhadrāsana
+english: Reverse Warrior
+discipline: yoga
+family: standing
+difficulty: 2
+description: Warrior II legs with the torso spilling backward. The front knee stays deeply bent while the back arm slides down the straight back leg and the front arm arcs up and over.
+tags: [ standing, vinyasa, side-bend, lunge ]
+breath: inhale
+drishti: hastagrai
+cues:
+  - Keep the front knee bent as the torso reaches back
+  - Slide the back hand lightly down the back thigh
+  - Lift up and over through the top side ribs
+contact: [ toeL, toeR ]
+camera: front
+figure:
+  grounded: true
+  world:
+    thighL: { azimuth: 90, elevation: -10 }
+    shinL: { azimuth: 90, elevation: -90 }
+    footL: { azimuth: 90, elevation: -20 }
+    thighR: { azimuth: -90, elevation: -36 }
+    shinR: { azimuth: -90, elevation: -36 }
+    footR: { azimuth: -90, elevation: -15 }
+    spine: { azimuth: -90, elevation: 65 }
+    neck: { azimuth: -90, elevation: 55 }
+    head: { azimuth: -90, elevation: 50 }
+    upperArmL: { azimuth: -90, elevation: 72 }
+    forearmL: { azimuth: -90, elevation: 68 }
+    handL: { azimuth: -90, elevation: 65 }
+    upperArmR: { azimuth: -90, elevation: -55 }
+    forearmR: { azimuth: -90, elevation: -50 }
+    handR: { azimuth: -90, elevation: -45 }
+props:
+  - type: mat
+    yaw: 90
+muscles:
+  engaged: [ quadriceps, gluteus, obliques, deltoid ]
+  stretched: [ obliques, latissimus, adductors, hipFlexors ]

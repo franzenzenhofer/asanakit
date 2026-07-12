@@ -1,0 +1,44 @@
+asanakit: 2
+id: adho-mukha-vrksasana
+name: Handstand
+sanskrit: Adho Mukha Vṛkṣāsana
+english: Downward-Facing Tree Pose
+discipline: yoga
+family: inversion
+difficulty: 4
+description: A full inversion balanced on straight arms. The hands root shoulder-width on the floor, the body stacks upside down in one vertical line and the legs reach straight up through pointed feet.
+tags: [ inversion, balance, arm-support ]
+breath: free
+drishti: nasagrai
+cues:
+  - Stack wrists, shoulders, hips and ankles in one line
+  - Push the floor away and wrap the ribs in
+  - Squeeze the legs together and reach up through the toes
+contact: [ handTipL, handTipR ]
+camera: side
+figure:
+  grounded: true
+  root:
+    pitch: 180
+  world:
+    pelvis: { azimuth: 0, elevation: -90 }
+    spine: { azimuth: 0, elevation: -90 }
+    neck: { azimuth: 0, elevation: -90 }
+    head: { azimuth: 0, elevation: -75 }
+    upperArmL: { azimuth: 0, elevation: -88 }
+    upperArmR: { azimuth: 0, elevation: -88 }
+    forearmL: { azimuth: 0, elevation: -88 }
+    forearmR: { azimuth: 0, elevation: -88 }
+    handL: { azimuth: 0, elevation: -2 }
+    handR: { azimuth: 0, elevation: -2 }
+    thighL: { azimuth: 0, elevation: 90 }
+    thighR: { azimuth: 0, elevation: 90 }
+    shinL: { azimuth: 0, elevation: 90 }
+    shinR: { azimuth: 0, elevation: 90 }
+    footL: { azimuth: 180, elevation: 85 }
+    footR: { azimuth: 180, elevation: 85 }
+props:
+  - type: mat
+muscles:
+  engaged: [ deltoid, triceps, serratus, trapezius, rectusAbdominis, gluteus, quadriceps, forearmFlexors ]
+  stretched: [ latissimus, hamstrings ]

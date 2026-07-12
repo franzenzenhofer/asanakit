@@ -1,0 +1,43 @@
+asanakit: 2
+id: forearm-plank
+name: Forearm Plank
+sanskrit: Makara Phalakāsana
+english: Forearm Plank
+discipline: yoga
+family: core
+difficulty: 2
+description: Plank on the forearms. The elbows stack under the shoulders, the forearms press flat and forward, and the body holds one low straight line from heels to crown.
+tags: [ core, arm-support, strengthening ]
+breath: exhale
+drishti: nasagrai
+cues:
+  - Stack the elbows under the shoulders, forearms parallel
+  - Press the floor away and knit the front ribs in
+  - One line from the heels to the crown
+contact: [ toeL, toeR, elbowL, elbowR, handTipL, handTipR ]
+camera: side
+figure:
+  grounded: true
+  root:
+    pitch: 84
+  world:
+    thighL: { azimuth: 180, elevation: -6 }
+    thighR: { azimuth: 180, elevation: -6 }
+    shinL: { azimuth: 180, elevation: -6 }
+    shinR: { azimuth: 180, elevation: -6 }
+    footL: { azimuth: 180, elevation: -65 }
+    footR: { azimuth: 180, elevation: -65 }
+    spine: { azimuth: 0, elevation: 6 }
+    neck: { azimuth: 0, elevation: 8 }
+    head: { azimuth: 0, elevation: 8 }
+    upperArmL: { azimuth: 0, elevation: -78 }
+    upperArmR: { azimuth: 0, elevation: -78 }
+    forearmL: { azimuth: 0, elevation: 0 }
+    forearmR: { azimuth: 0, elevation: 0 }
+    handL: { azimuth: 0, elevation: 0 }
+    handR: { azimuth: 0, elevation: 0 }
+props:
+  - type: mat
+muscles:
+  engaged: [ rectusAbdominis, obliques, serratus, deltoid, quadriceps ]
+  stretched: [ gastrocnemius ]

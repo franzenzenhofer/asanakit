@@ -1,0 +1,43 @@
+asanakit: 2
+id: anjaneyasana
+name: Low Lunge
+sanskrit: Añjaneyāsana
+english: Low Lunge
+discipline: yoga
+family: standing
+difficulty: 2
+description: A kneeling lunge. The left foot steps far forward with the knee stacked over the ankle, the right knee and shin rest on the mat, and the arms sweep overhead as the hips sink forward.
+tags: [ standing, lunge, hip-opener, vinyasa, backbend ]
+breath: inhale
+drishti: urdhva
+cues:
+  - Sink the hips forward and down, knee over ankle
+  - Root the back shin, reach the arms alongside the ears
+  - Lift the chest without crunching the lower back
+contact: [ toeL, kneeR, ankleR, toeR ]
+camera: side
+figure:
+  grounded: true
+  root:
+    pitch: -5
+  world:
+    thighL: { azimuth: 0, elevation: 5 }
+    shinL: { azimuth: 180, elevation: -87 }
+    footL: { azimuth: 0, elevation: 0 }
+    thighR: { azimuth: 180, elevation: -55 }
+    shinR: { azimuth: 180, elevation: -2 }
+    footR: { azimuth: 180, elevation: -5 }
+    spine: { azimuth: 180, elevation: 82 }
+    neck: { azimuth: 180, elevation: 75 }
+    head: { azimuth: 180, elevation: 70 }
+    upperArmL: { azimuth: 180, elevation: 78 }
+    upperArmR: { azimuth: 180, elevation: 78 }
+    forearmL: { azimuth: 180, elevation: 80 }
+    forearmR: { azimuth: 180, elevation: 80 }
+    handL: { azimuth: 180, elevation: 82 }
+    handR: { azimuth: 180, elevation: 82 }
+props:
+  - type: mat
+muscles:
+  engaged: [ gluteus, quadriceps, erectorSpinae, deltoid ]
+  stretched: [ hipFlexors, quadriceps, rectusAbdominis ]

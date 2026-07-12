@@ -1,0 +1,40 @@
+asanakit: 2
+id: utthita-hasta-padangusthasana
+name: Hand-to-Big-Toe Pose
+sanskrit: Utthita Hasta Pādāṅguṣṭhāsana
+english: Extended Hand-to-Big-Toe Pose
+discipline: yoga
+family: standing
+difficulty: 4
+description: A standing balance. The right leg extends straight forward at hip height, the right hand catching the big toe while the left hand rests on the waist and the spine stays tall.
+tags: [ standing, balance, ashtanga, hamstring-stretch ]
+breath: free
+drishti: padhayoragrai
+cues:
+  - Stand tall, do not sink into the standing hip
+  - Kick the lifted heel forward into the grip
+  - Keep both shoulders level and relaxed
+contact: [ toeL ]
+camera: side
+figure:
+  grounded: true
+  world:
+    thighL: { azimuth: 0, elevation: -88 }
+    shinL: { azimuth: 0, elevation: -88 }
+    thighR: { azimuth: 0, elevation: 20 }
+    shinR: { azimuth: 0, elevation: 20 }
+    footR: { azimuth: 0, elevation: 55 }
+    spine: { azimuth: 180, elevation: 88 }
+    neck: { azimuth: 0, elevation: 85 }
+    head: { azimuth: 0, elevation: 80 }
+    upperArmR: { azimuth: 0, elevation: -20 }
+    forearmR: { azimuth: 0, elevation: -16 }
+    handR: { azimuth: 0, elevation: -10 }
+  joints:
+    upperArmL: { abduct: 20 }
+    forearmL: { flex: 105, internalRotation: 60 }
+props:
+  - type: mat
+muscles:
+  engaged: [ hipFlexors, quadriceps, rectusAbdominis, erectorSpinae ]
+  stretched: [ hamstrings, gastrocnemius, gluteus ]

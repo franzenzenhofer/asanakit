@@ -1,0 +1,45 @@
+asanakit: 2
+id: vasisthasana
+name: Side Plank
+sanskrit: Vasiṣṭhāsana
+english: Side Plank Pose
+discipline: yoga
+family: arm-balance
+difficulty: 4
+description: A one-armed lateral balance. The left hand roots under the shoulder, the body holds one straight line from crown to stacked feet, the hips lift high and the right arm reaches to the sky.
+tags: [ arm-balance, lateral, core, balance ]
+breath: free
+drishti: urdhva
+cues:
+  - Stack the top shoulder, hip and foot over the bottom ones
+  - Press the floor away and lift the hips out of the wrist
+  - Reach the top arm up, gaze past the top hand
+contact: [ handTipL, ankleL ]
+camera: side
+figure:
+  grounded: true
+  root:
+    pitch: 86
+    roll: -90
+  world:
+    pelvis: { azimuth: 0, elevation: 24 }
+    spine: { azimuth: 0, elevation: 24 }
+    neck: { azimuth: 0, elevation: 24 }
+    head: { azimuth: 0, elevation: 24 }
+    thighL: { azimuth: 180, elevation: -24 }
+    thighR: { azimuth: 180, elevation: -24 }
+    shinL: { azimuth: 180, elevation: -24 }
+    shinR: { azimuth: 180, elevation: -24 }
+    footL: { azimuth: 0, elevation: -20 }
+    footR: { azimuth: 0, elevation: -20 }
+    upperArmL: { azimuth: 0, elevation: -80 }
+    forearmL: { azimuth: 0, elevation: -80 }
+    handL: { azimuth: 0, elevation: -5 }
+    upperArmR: { azimuth: 0, elevation: 85 }
+    forearmR: { azimuth: 0, elevation: 85 }
+    handR: { azimuth: 0, elevation: 85 }
+props:
+  - type: mat
+muscles:
+  engaged: [ deltoid, rotatorCuff, serratus, obliques, gluteus, quadriceps, forearmFlexors ]
+  stretched: [ pectoralis, adductors ]

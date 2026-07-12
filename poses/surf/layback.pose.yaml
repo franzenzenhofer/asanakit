@@ -1,0 +1,47 @@
+asanakit: 2
+id: layback
+name: Layback
+english: Layback
+discipline: surf
+family: turning
+difficulty: 5
+description: The surfer drops low over the tail and lets the torso lean far back onto the wave, the rear hand dragging and bracing on the face while the front leg drives long toward the nose - committed past the point of standing back up without the wave's push.
+tags: [ surf, turning, layback, advanced, style ]
+cues:
+  - Sit back over the tail before you lean, never after
+  - Brace the trailing hand on the face and let it carry you
+contact: [ toeL, toeR, handTipR ]
+figure:
+  grounded: true
+  root:
+    pitch: -30
+  world:
+    spine: { azimuth: 180, elevation: 0 }
+    neck: { azimuth: 180, elevation: 40 }
+    head: { azimuth: 180, elevation: 45 }
+    thighL: { azimuth: 0, elevation: -33 }
+    shinL: { azimuth: 0, elevation: -33 }
+    footL: { azimuth: 0, elevation: -12 }
+    thighR: { azimuth: 0, elevation: -8 }
+    shinR: { azimuth: 180, elevation: -85 }
+    footR: { azimuth: 0, elevation: -14 }
+    upperArmL: { azimuth: 0, elevation: 18 }
+    forearmL: { azimuth: 0, elevation: 28 }
+    handL: { azimuth: 0, elevation: 30 }
+    upperArmR: { azimuth: 180, elevation: -80 }
+    forearmR: { azimuth: 180, elevation: -85 }
+    handR: { azimuth: 180, elevation: -88 }
+props:
+  - type: wave
+    amplitude: 0.45
+    length: 3.4
+    y: -0.2
+  - type: surfboard
+    under: [ ankleL, ankleR ]
+    rotation: 6
+    length: 1.1
+    offset: [ 0.05, -0.1 ]
+muscles:
+  engaged: [ quadriceps, gluteus, rectusAbdominis, obliques, triceps ]
+  stretched: [ hipFlexors, rectusAbdominis, pectoralis ]
+camera: side

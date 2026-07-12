@@ -1,0 +1,48 @@
+asanakit: 2
+id: aerial
+name: Aerial
+english: Aerial
+discipline: surf
+family: aerial
+difficulty: 5
+description: Airborne above the lip. The surfer leaves the wave with the board still glued to the feet, knees drawn up into the chest, trailing hand grabbing the rail to hold everything together, eyes already on the landing.
+tags: [ surf, aerial, air, advanced, dynamic ]
+cues:
+  - Draw the knees up and stay compact - a small shape spins and lands
+  - Grab the rail to keep the board with you, spot the landing
+contact: []
+figure:
+  grounded: false
+  root:
+    pitch: 24
+    position: [ 0, 0.25, 0 ]
+  world:
+    spine: { azimuth: 0, elevation: 60 }
+    neck: { azimuth: 0, elevation: 40 }
+    head: { azimuth: 0, elevation: 30 }
+    thighL: { azimuth: 0, elevation: 12 }
+    shinL: { azimuth: 180, elevation: -62 }
+    footL: { azimuth: 0, elevation: -18 }
+    thighR: { azimuth: 0, elevation: 2 }
+    shinR: { azimuth: 180, elevation: -70 }
+    footR: { azimuth: 0, elevation: -20 }
+    upperArmL: { azimuth: 0, elevation: 35 }
+    forearmL: { azimuth: 0, elevation: 45 }
+    handL: { azimuth: 0, elevation: 48 }
+    upperArmR: { azimuth: 180, elevation: -72 }
+    forearmR: { azimuth: 180, elevation: -82 }
+    handR: { azimuth: 180, elevation: -85 }
+props:
+  - type: wave
+    amplitude: 0.5
+    length: 3.4
+    y: -0.75
+  - type: surfboard
+    under: [ ankleL, ankleR ]
+    rotation: 14
+    length: 1.05
+    offset: [ 0, -0.1 ]
+muscles:
+  engaged: [ hipFlexors, rectusAbdominis, quadriceps, deltoid, forearmFlexors ]
+  stretched: [ gluteus, erectorSpinae ]
+camera: side

@@ -1,0 +1,41 @@
+asanakit: 2
+id: ardha-matsyendrasana
+name: Half Lord of the Fishes
+sanskrit: Ardha Matsyendrāsana
+english: Half Lord of the Fishes Pose
+discipline: yoga
+family: twist
+difficulty: 3
+description: A deep seated twist. The right leg folds along the floor while the left foot steps flat outside the right knee, the left knee pointing up. The torso revolves toward the upright knee - the right arm levers against it while the left hand presses the floor behind the sacrum.
+tags: [ seated, twist, hatha ]
+breath: exhale
+drishti: parsva
+cues:
+  - Inhale to grow tall, exhale to revolve around the spine
+  - Press the standing foot down and hug the knee toward the chest
+contact: [ kneeR, ankleR, ankleL, toeL, handTipL ]
+figure:
+  grounded: true
+  world:
+    pelvis: { azimuth: 0, elevation: 88 }
+    spine: { azimuth: 0, elevation: 88, twist: 40 }
+    neck: { azimuth: 0, elevation: 86, twist: 55 }
+    head: { azimuth: 0, elevation: 85, twist: 60 }
+    thighR: { azimuth: -40, elevation: -10 }
+    shinR: { azimuth: 160, elevation: -3 }
+    footR: { azimuth: 150, elevation: 20 }
+    thighL: { azimuth: -12, elevation: 65 }
+    shinL: { azimuth: 0, elevation: -85 }
+    footL: { azimuth: 0, elevation: 0 }
+    upperArmR: { azimuth: 25, elevation: -35 }
+    forearmR: { azimuth: 25, elevation: -35 }
+    handR: { azimuth: 25, elevation: -32 }
+    upperArmL: { azimuth: 180, elevation: -62 }
+    forearmL: { azimuth: 180, elevation: -66 }
+    handL: { azimuth: 180, elevation: -55 }
+props:
+  - type: mat
+muscles:
+  engaged: [ obliques, erectorSpinae, rotatorCuff ]
+  stretched: [ gluteus, obliques, pectoralis, trapezius ]
+camera: three-quarter

@@ -1,0 +1,47 @@
+asanakit: 2
+id: viparita-karani
+name: Legs-up-the-Wall Pose
+sanskrit: Viparīta Karaṇī
+english: Legs-up-the-Wall Pose
+discipline: yoga
+family: inversion
+difficulty: 1
+description: A gentle restorative inversion. The back rests flat on the floor, the sit bones nestle in at the wall and the legs rest straight up against it. The arms lie open beside the body and the breath is left alone.
+tags: [ inversion, restorative, supine, cooling ]
+breath: free
+drishti: nasagrai
+cues:
+  - Scoot the sit bones in close to the wall
+  - Let the thigh bones drop into the hip sockets
+  - Soften the throat, the belly and the breath
+contact: [ headTop, shoulderL, shoulderR, hipCenter, handTipL, handTipR ]
+camera: side
+figure:
+  grounded: true
+  root:
+    pitch: -90
+  world:
+    pelvis: { azimuth: 180, elevation: 0 }
+    spine: { azimuth: 180, elevation: 0 }
+    neck: { azimuth: 180, elevation: 0 }
+    head: { azimuth: 180, elevation: 0 }
+    upperArmL: { azimuth: 0, elevation: 0 }
+    upperArmR: { azimuth: 0, elevation: 0 }
+    forearmL: { azimuth: 0, elevation: 0 }
+    forearmR: { azimuth: 0, elevation: 0 }
+    handL: { azimuth: 0, elevation: 0 }
+    handR: { azimuth: 0, elevation: 0 }
+    thighL: { azimuth: 0, elevation: 90 }
+    thighR: { azimuth: 0, elevation: 90 }
+    shinL: { azimuth: 0, elevation: 90 }
+    shinR: { azimuth: 0, elevation: 90 }
+    footL: { azimuth: 180, elevation: 70 }
+    footR: { azimuth: 180, elevation: 70 }
+props:
+  - type: mat
+  - type: wall
+    x: 0.12
+    facing: left
+muscles:
+  engaged: [ hipFlexors ]
+  stretched: [ hamstrings, gastrocnemius ]

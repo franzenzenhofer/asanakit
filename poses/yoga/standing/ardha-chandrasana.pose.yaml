@@ -1,0 +1,46 @@
+asanakit: 2
+id: ardha-chandrasana
+name: Half Moon Pose
+sanskrit: Ardha Candrāsana
+english: Half Moon Pose
+discipline: yoga
+family: standing
+difficulty: 3
+description: A sideways balance. The left leg stands straight while the right leg lifts to hip height behind, the left fingertips touch the floor and the chest opens sideways under the raised right arm.
+tags: [ standing, balance, hip-opener, vinyasa ]
+breath: exhale
+drishti: hastagrai
+cues:
+  - Stack the top hip over the bottom hip
+  - Reach out through the lifted heel, flex the foot
+  - Let the bottom hand carry almost no weight
+contact: [ toeL, handTipL ]
+camera: front
+figure:
+  grounded: true
+  root:
+    roll: -80
+  world:
+    hipL: { azimuth: 90, elevation: 0 }
+    hipR: { azimuth: -90, elevation: 0 }
+    thighL: { azimuth: 90, elevation: -85 }
+    shinL: { azimuth: 90, elevation: -85 }
+    footL: { azimuth: 90, elevation: 0 }
+    thighR: { azimuth: -90, elevation: 5 }
+    shinR: { azimuth: -90, elevation: 5 }
+    footR: { azimuth: -90, elevation: 45 }
+    spine: { azimuth: 90, elevation: -8 }
+    neck: { azimuth: 90, elevation: 0 }
+    head: { azimuth: 90, elevation: 10 }
+    upperArmL: { azimuth: 90, elevation: -80 }
+    forearmL: { azimuth: 90, elevation: -80 }
+    handL: { azimuth: 90, elevation: -80 }
+    upperArmR: { azimuth: -90, elevation: 82 }
+    forearmR: { azimuth: -90, elevation: 82 }
+    handR: { azimuth: -90, elevation: 82 }
+props:
+  - type: mat
+    yaw: 90
+muscles:
+  engaged: [ gluteus, quadriceps, obliques, deltoid ]
+  stretched: [ hamstrings, adductors ]

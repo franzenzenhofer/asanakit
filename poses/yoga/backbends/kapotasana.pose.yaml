@@ -1,0 +1,43 @@
+asanakit: 2
+id: kapotasana
+name: King Pigeon
+sanskrit: Kapotāsana
+english: King Pigeon Pose
+discipline: yoga
+family: backbend
+difficulty: 5
+description: A kneeling backbend of the deepest kind. From the knees, the hips press forward while the spine arcs all the way over until the hands land on the floor by the feet and the head drops toward the heels.
+tags: [ backbend, kneeling, advanced, ashtanga-intermediate ]
+breath: inhale
+drishti: nasagrai
+cues:
+  - Keep the hips pressing forward over the knees as the spine arcs back
+  - Walk the hands toward the heels only as the chest opens
+  - Distribute the bend along the whole spine, not just the lower back
+contact: [ kneeL, kneeR, ankleL, ankleR, toeL, toeR, handTipL, handTipR ]
+camera: side
+figure:
+  grounded: true
+  root:
+    pitch: -45
+  world:
+    thighL: { azimuth: 180, elevation: -65 }
+    thighR: { azimuth: 180, elevation: -65 }
+    shinL: { azimuth: 180, elevation: -2 }
+    shinR: { azimuth: 180, elevation: -2 }
+    footL: { azimuth: 180, elevation: 0 }
+    footR: { azimuth: 180, elevation: 0 }
+    spine: { azimuth: 180, elevation: 8 }
+    neck: { azimuth: 180, elevation: -30 }
+    head: { azimuth: 180, elevation: -50 }
+    upperArmL: { azimuth: 180, elevation: -62 }
+    upperArmR: { azimuth: 180, elevation: -62 }
+    forearmL: { azimuth: 180, elevation: -62 }
+    forearmR: { azimuth: 180, elevation: -62 }
+    handL: { azimuth: 180, elevation: -62 }
+    handR: { azimuth: 180, elevation: -62 }
+props:
+  - type: mat
+muscles:
+  engaged: [ erectorSpinae, gluteus, quadriceps, trapezius ]
+  stretched: [ rectusAbdominis, pectoralis, hipFlexors, deltoid, latissimus ]

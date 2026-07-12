@@ -1,0 +1,41 @@
+asanakit: 2
+id: utthita-hasta-padangusthasana-b
+name: Extended Hand-to-Big-Toe Pose B
+sanskrit: Utthita Hasta Pādāṅguṣṭhāsana B
+english: Extended Hand-to-Big-Toe Pose B
+discipline: yoga
+family: standing
+difficulty: 4
+description: Balancing on the right leg, the left leg extends straight out to the side, the left hand holding the big toe. The right hand rests on the waist, the standing leg stays firm and the gaze goes over the opposite shoulder. Held five breaths.
+tags: [ ashtanga, standing, balance, primary-series ]
+breath: inhale
+drishti: parsva
+cues:
+  - Root down through the standing leg before the leg opens sideways
+  - Keep both hips level, open the leg from the hip socket
+contact: [ toeR ]
+figure:
+  grounded: true
+  world:
+    spine: { azimuth: 90, elevation: 72 }
+    neck: { azimuth: 90, elevation: 80 }
+    head: { azimuth: 90, elevation: 82, twist: -40 }
+    thighR: { azimuth: 0, elevation: -89 }
+    shinR: { azimuth: 0, elevation: -89 }
+    footR: { azimuth: 0, elevation: 0 }
+    thighL: { azimuth: 90, elevation: 18 }
+    shinL: { azimuth: 90, elevation: 18 }
+    footL: { azimuth: 90, elevation: 5 }
+    upperArmL: { azimuth: 90, elevation: -10 }
+    forearmL: { azimuth: 90, elevation: -10 }
+    handL: { azimuth: 90, elevation: -20 }
+  joints:
+    upperArmR: { extend: 30, abduct: 25 }
+    forearmR: 115
+props:
+  - type: mat
+    yaw: 90
+muscles:
+  engaged: [ quadriceps, gluteus, hipFlexors, erectorSpinae, forearmFlexors ]
+  stretched: [ hamstrings, adductors, gastrocnemius ]
+camera: front

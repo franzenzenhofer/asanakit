@@ -1,0 +1,42 @@
+asanakit: 2
+id: ashtanga-namaskara
+name: Knees-Chest-Chin
+sanskrit: Aṣṭāṅga Namaskāra
+english: Eight-Limbed Salutation
+discipline: yoga
+family: core
+difficulty: 2
+description: Eight points touch the floor - two feet, two knees, two hands, the chest and the chin - while the hips stay lifted. The gentle sun-salutation alternative to chaturanga.
+tags: [ core, prone, sun-salutation, beginner ]
+breath: exhale
+drishti: nasagrai
+cues:
+  - Lower the knees, then the chest and the chin together
+  - Keep the hips high and the elbows hugging the ribs
+contact: [ kneeL, kneeR, toeL, toeR, chest, handTipL, handTipR ]
+camera: side
+figure:
+  grounded: true
+  root:
+    pitch: 120
+  world:
+    thighL: { azimuth: 180, elevation: -68 }
+    thighR: { azimuth: 180, elevation: -68 }
+    shinL: { azimuth: 180, elevation: 16 }
+    shinR: { azimuth: 180, elevation: 16 }
+    footL: { azimuth: 180, elevation: -50 }
+    footR: { azimuth: 180, elevation: -50 }
+    spine: { azimuth: 0, elevation: -63 }
+    neck: { azimuth: 0, elevation: -15 }
+    head: { azimuth: 0, elevation: 5 }
+    upperArmL: { azimuth: 180, elevation: 45 }
+    upperArmR: { azimuth: 180, elevation: 45 }
+    forearmL: { azimuth: 0, elevation: -80 }
+    forearmR: { azimuth: 0, elevation: -80 }
+    handL: { azimuth: 0, elevation: 0 }
+    handR: { azimuth: 0, elevation: 0 }
+props:
+  - type: mat
+muscles:
+  engaged: [ triceps, pectoralis, serratus, rectusAbdominis ]
+  stretched: [ erectorSpinae, gluteus ]

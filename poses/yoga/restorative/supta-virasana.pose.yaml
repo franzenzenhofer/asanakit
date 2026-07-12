@@ -1,0 +1,45 @@
+asanakit: 2
+id: supta-virasana
+name: Reclining Hero Pose
+sanskrit: Supta Vīrāsana
+english: Reclining Hero Pose
+discipline: yoga
+family: restorative
+difficulty: 1
+description: A reclined kneel. From hero pose the torso lies back along the floor, the knees stay together on the ground and the shins fold beside the thighs, feet by the hips. The arms rest at the sides.
+tags: [ restorative, supine, quad-stretch, kneeling ]
+breath: free
+drishti: nasagrai
+cues:
+  - Keep the knees on the floor and close together
+  - Lengthen the tailbone toward the knees
+  - Recline only as far as the front thighs allow
+contact: [ headTop, shoulderL, shoulderR, kneeL, kneeR, handTipL, handTipR ]
+camera: top
+figure:
+  grounded: true
+  root:
+    pitch: -90
+  world:
+    pelvis: { azimuth: 180, elevation: 0 }
+    spine: { azimuth: 180, elevation: 0 }
+    neck: { azimuth: 180, elevation: 0 }
+    head: { azimuth: 180, elevation: 0 }
+    upperArmL: { azimuth: 30, elevation: 0 }
+    upperArmR: { azimuth: -30, elevation: 0 }
+    forearmL: { azimuth: 30, elevation: 0 }
+    forearmR: { azimuth: -30, elevation: 0 }
+    handL: { azimuth: 30, elevation: 0 }
+    handR: { azimuth: -30, elevation: 0 }
+    thighL: { azimuth: 5, elevation: 2, twist: 88 }
+    thighR: { azimuth: -5, elevation: 2, twist: -88 }
+  joints:
+    shinL: 150
+    shinR: 150
+    footL: { extend: 15 }
+    footR: { extend: 15 }
+props:
+  - type: mat
+muscles:
+  engaged: [ erectorSpinae ]
+  stretched: [ quadriceps, hipFlexors, tibialisAnterior, rectusAbdominis ]

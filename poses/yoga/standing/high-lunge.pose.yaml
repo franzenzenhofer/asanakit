@@ -1,0 +1,41 @@
+asanakit: 2
+id: high-lunge
+name: High Lunge
+sanskrit: Utthita Aśva Sañcālanāsana
+english: Crescent High Lunge
+discipline: yoga
+family: standing
+difficulty: 2
+description: A strong lunge on a lifted back heel. The left knee bends over the ankle, the straight right leg drives back through the ball of the foot, and the arms reach up in a crescent.
+tags: [ standing, lunge, vinyasa, balance ]
+breath: inhale
+drishti: urdhva
+cues:
+  - Press back through the lifted heel, leg straight
+  - Bend the front knee toward a right angle
+  - Reach up through both arms, ribs knitted in
+contact: [ toeL, toeR ]
+camera: side
+figure:
+  grounded: true
+  world:
+    thighL: { azimuth: 0, elevation: -20 }
+    shinL: { azimuth: 180, elevation: -88 }
+    footL: { azimuth: 0, elevation: -10 }
+    thighR: { azimuth: 180, elevation: -36 }
+    shinR: { azimuth: 180, elevation: -36 }
+    footR: { azimuth: 0, elevation: -50 }
+    spine: { azimuth: 180, elevation: 87 }
+    neck: { azimuth: 180, elevation: 82 }
+    head: { azimuth: 180, elevation: 80 }
+    upperArmL: { azimuth: 180, elevation: 80 }
+    upperArmR: { azimuth: 180, elevation: 80 }
+    forearmL: { azimuth: 180, elevation: 82 }
+    forearmR: { azimuth: 180, elevation: 82 }
+    handL: { azimuth: 180, elevation: 84 }
+    handR: { azimuth: 180, elevation: 84 }
+props:
+  - type: mat
+muscles:
+  engaged: [ quadriceps, gluteus, erectorSpinae, deltoid, gastrocnemius ]
+  stretched: [ hipFlexors, gastrocnemius ]

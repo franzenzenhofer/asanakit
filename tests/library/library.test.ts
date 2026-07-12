@@ -19,8 +19,9 @@ describe('bundled pose library', () => {
     expect(renderSvg(pose, { style: 'stick' })).toContain('</svg>');
   });
 
-  test('every pose declares at least one contact point with the floor', () => {
-    const missing = poses.filter((p) => p.contact.length === 0).map((p) => p.id);
+  test('every grounded pose declares at least one contact point with the floor', () => {
+    // An airborne figure (grounded: false, e.g. a surf aerial) honestly has none.
+    const missing = poses.filter((p) => p.figure.grounded && p.contact.length === 0).map((p) => p.id);
     expect(missing).toEqual([]);
   });
 });

@@ -1,0 +1,46 @@
+asanakit: 2
+id: lineup-sit
+name: Sitting in the Lineup
+english: Sitting in the Lineup
+discipline: surf
+family: waiting
+difficulty: 1
+description: Where the waiting happens. The surfer sits upright astride the board out on flat water, a leg hanging into the sea on either side, hands resting on the deck, eyes on the horizon reading the next set.
+tags: [ surf, waiting, lineup, rest, fundamental ]
+cues:
+  - Sit back enough that the nose lifts clear of the water
+  - Keep the eyes on the horizon, not on the board
+contact: [ toeL, toeR ]
+figure:
+  grounded: true
+  world:
+    spine: { azimuth: 0, elevation: 84 }
+    neck: { azimuth: 0, elevation: 88 }
+    head: { azimuth: 0, elevation: 86 }
+    thighL: { azimuth: 75, elevation: -32 }
+    shinL: { azimuth: 90, elevation: -84 }
+    footL: { azimuth: 90, elevation: -55 }
+    thighR: { azimuth: -75, elevation: -32 }
+    shinR: { azimuth: -90, elevation: -84 }
+    footR: { azimuth: -90, elevation: -55 }
+    upperArmL: { azimuth: 25, elevation: -70 }
+    forearmL: { azimuth: 15, elevation: -50 }
+    handL: { azimuth: 10, elevation: -45 }
+    upperArmR: { azimuth: -25, elevation: -70 }
+    forearmR: { azimuth: -15, elevation: -50 }
+    handR: { azimuth: -10, elevation: -45 }
+props:
+  - type: wave
+    amplitude: 0.12
+    length: 3.6
+    y: -0.04
+    breaking: false
+  - type: surfboard
+    under: [ hipCenter ]
+    rotation: 4
+    length: 1.6
+    offset: [ 0.1, -0.13 ]
+muscles:
+  engaged: [ erectorSpinae, rectusAbdominis, hipFlexors ]
+  stretched: [ adductors ]
+camera: front

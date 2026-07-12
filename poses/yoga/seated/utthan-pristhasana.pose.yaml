@@ -1,0 +1,42 @@
+asanakit: 2
+id: utthan-pristhasana
+name: Lizard Pose
+sanskrit: Utthan Pṛṣṭhāsana
+english: Lizard Pose
+discipline: yoga
+family: seated
+difficulty: 3
+description: A deep lunge hip opener. The left foot steps wide outside the hands, the right leg stretches back with the knee on the mat, and the torso lowers so the forearms rest on the floor inside the front foot.
+tags: [ seated, hatha, yin, hip-opener, lunge ]
+breath: free
+drishti: nasagrai
+cues:
+  - Walk the front foot wide and let the knee track over the ankle
+  - Lower to the forearms and keep the chest reaching forward
+contact: [ ankleL, toeL, kneeR, ankleR, elbowL, elbowR, handTipL, handTipR ]
+figure:
+  grounded: true
+  root:
+    pitch: 62
+  world:
+    thighL: { azimuth: 30, elevation: 25 }
+    shinL: { azimuth: -160, elevation: -80 }
+    footL: { azimuth: 10, elevation: 0 }
+    thighR: { azimuth: 180, elevation: -30 }
+    shinR: { azimuth: 180, elevation: 0 }
+    footR: { azimuth: 180, elevation: -5 }
+    spine: { azimuth: 0, elevation: 3 }
+    neck: { azimuth: 0, elevation: 5 }
+    head: { azimuth: 0, elevation: 0 }
+    upperArmL: { azimuth: 5, elevation: -85 }
+    forearmL: { azimuth: 0, elevation: 0 }
+    handL: { azimuth: 0, elevation: 0 }
+    upperArmR: { azimuth: -5, elevation: -85 }
+    forearmR: { azimuth: 0, elevation: 0 }
+    handR: { azimuth: 0, elevation: 0 }
+props:
+  - type: mat
+muscles:
+  engaged: [ quadriceps, rectusAbdominis, deltoid ]
+  stretched: [ hipFlexors, adductors, hamstrings, gluteus ]
+camera: side

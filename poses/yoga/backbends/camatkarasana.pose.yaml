@@ -1,0 +1,43 @@
+asanakit: 2
+id: camatkarasana
+name: Wild Thing
+sanskrit: Camatkārāsana
+english: Wild Thing
+discipline: yoga
+family: backbend
+difficulty: 3
+description: A one-armed side arch flipped open from downward dog. The right hand and both feet root down, the hips and chest sweep up toward the ceiling, and the left arm reaches free over the head.
+tags: [ backbend, arm-support, asymmetric, vinyasa ]
+breath: inhale
+drishti: hastagrai
+cues:
+  - Root through the supporting hand and both feet
+  - Sweep the hips high and open the chest to the sky
+  - Let the free arm reach past the ear, following the arc
+contact: [ handTipR, toeL, toeR ]
+camera: side
+figure:
+  grounded: true
+  root:
+    pitch: -65
+  world:
+    thighR: { azimuth: 0, elevation: -32 }
+    shinR: { azimuth: 180, elevation: -62 }
+    footR: { azimuth: 0, elevation: -12 }
+    thighL: { azimuth: 0, elevation: -25 }
+    shinL: { azimuth: 0, elevation: -50 }
+    footL: { azimuth: 0, elevation: -45 }
+    spine: { azimuth: 180, elevation: -35 }
+    neck: { azimuth: 180, elevation: -50 }
+    head: { azimuth: 180, elevation: -60 }
+    upperArmR: { azimuth: 0, elevation: -85 }
+    forearmR: { azimuth: 0, elevation: -85 }
+    handR: { azimuth: 0, elevation: 0 }
+    upperArmL: { azimuth: 180, elevation: 5 }
+    forearmL: { azimuth: 180, elevation: 5 }
+    handL: { azimuth: 180, elevation: 5 }
+props:
+  - type: mat
+muscles:
+  engaged: [ deltoid, triceps, gluteus, erectorSpinae, obliques ]
+  stretched: [ pectoralis, rectusAbdominis, hipFlexors, latissimus ]

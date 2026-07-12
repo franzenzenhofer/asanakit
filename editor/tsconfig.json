@@ -1,0 +1,18 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
+    "noEmit": true,
+    "rootDir": "..",
+    "types": ["vite/client"],
+    "paths": {
+      "@asanakit/*": ["../src/*"],
+      "virtual:asanakit-poses": ["./app/types/virtual-poses.d.ts"]
+    }
+  },
+  "include": ["app", "vite.config.ts", "vite-plugin-poses.ts", "../src"]
+}

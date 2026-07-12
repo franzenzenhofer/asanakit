@@ -1,0 +1,47 @@
+asanakit: 2
+id: prasarita-padottanasana-d
+name: Wide-Legged Forward Fold D
+sanskrit: Prasārita Pādottānāsana D
+english: Wide-Legged Intense Stretch D
+discipline: yoga
+family: forward-fold
+difficulty: 3
+description: Feet wide and parallel, legs straight, the torso folds down between them. The first two fingers of each hand hook the big toe on the same side, the elbows bend out and the crown of the head reaches the mat. Held five breaths.
+tags: [ ashtanga, standing, forward-fold, primary-series ]
+breath: exhale
+drishti: nasagrai
+cues:
+  - Hook the big toes and pull, elbows bending wide
+  - Draw the crown to the floor between the feet
+contact: [ toeL, toeR, headTop ]
+figure:
+  grounded: true
+  root:
+    roll: -180
+  world:
+    hipL: { azimuth: 90, elevation: 0 }
+    hipR: { azimuth: -90, elevation: 0 }
+    thighL: { azimuth: 90, elevation: -62 }
+    shinL: { azimuth: 90, elevation: -62 }
+    footL: { azimuth: 90, elevation: -30 }
+    thighR: { azimuth: -90, elevation: -62 }
+    shinR: { azimuth: -90, elevation: -62 }
+    footR: { azimuth: -90, elevation: -30 }
+    spine: { azimuth: 90, elevation: -90 }
+    neck: { azimuth: 90, elevation: -90 }
+    head: { azimuth: 90, elevation: -90 }
+    clavicleL: { azimuth: 90, elevation: 0 }
+    clavicleR: { azimuth: -90, elevation: 0 }
+    upperArmL: { azimuth: 90, elevation: -30 }
+    forearmL: { azimuth: 90, elevation: -25 }
+    handL: { azimuth: 90, elevation: -45 }
+    upperArmR: { azimuth: -90, elevation: -30 }
+    forearmR: { azimuth: -90, elevation: -25 }
+    handR: { azimuth: -90, elevation: -45 }
+props:
+  - type: mat
+    yaw: 90
+muscles:
+  engaged: [ quadriceps, biceps, rectusAbdominis ]
+  stretched: [ hamstrings, adductors, erectorSpinae, gastrocnemius ]
+camera: front

@@ -1,0 +1,41 @@
+asanakit: 2
+id: sukhasana
+name: Easy Seat
+sanskrit: Sukhāsana
+english: Easy Pose
+discipline: yoga
+family: seated
+difficulty: 1
+description: The simple cross-legged seat. The shins cross at mid-line, each foot resting beneath the opposite knee, the knees release toward the floor and the spine rises tall with the hands resting on the knees.
+tags: [ seated, hatha, meditation, hip-opener ]
+breath: free
+drishti: nasagrai
+cues:
+  - Root both sit bones evenly and grow tall through the crown
+  - Let the knees be heavy, soften the shoulders away from the ears
+contact: [ kneeL, kneeR, ankleL, ankleR ]
+figure:
+  grounded: true
+  world:
+    pelvis: { azimuth: 0, elevation: 90 }
+    spine: { azimuth: 0, elevation: 90 }
+    neck: { azimuth: 0, elevation: 90 }
+    head: { azimuth: 0, elevation: 90 }
+    thighL: { azimuth: 40, elevation: -18 }
+    shinL: { azimuth: -150, elevation: -4 }
+    footL: { azimuth: -150, elevation: 25 }
+    thighR: { azimuth: -40, elevation: -18 }
+    shinR: { azimuth: 150, elevation: -4 }
+    footR: { azimuth: 150, elevation: 25 }
+    upperArmL: { azimuth: 20, elevation: -60 }
+    forearmL: { azimuth: 0, elevation: -45 }
+    handL: { azimuth: 0, elevation: -40 }
+    upperArmR: { azimuth: -20, elevation: -60 }
+    forearmR: { azimuth: 0, elevation: -45 }
+    handR: { azimuth: 0, elevation: -40 }
+props:
+  - type: mat
+muscles:
+  engaged: [ erectorSpinae, rectusAbdominis ]
+  stretched: [ adductors, gluteus, hipFlexors ]
+camera: three-quarter

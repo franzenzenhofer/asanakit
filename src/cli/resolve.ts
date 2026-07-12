@@ -1,7 +1,8 @@
 import { stat } from 'node:fs/promises';
 import { CAMERA_PRESET_IDS, isCameraPresetId, type CameraInput } from '../core/camera.js';
 import { loadLibrary, type Library } from '../library/index.js';
-import { loadPoseFile, type PoseSpec } from '../model/index.js';
+import { loadPoseFile } from '../model/load.js';
+import type { PoseSpec } from '../model/index.js';
 import { isStyleId, STYLE_IDS, type StyleId } from '../render/index.js';
 
 let cached: Library | null = null;

@@ -1,0 +1,35 @@
+asanakit: 2
+id: hatha-beginner
+name: Hatha Beginner Flow
+tradition: Hatha Yoga
+description: >-
+  A gentle first practice: ground, warm the spine, stand tall, open the hips,
+  twist, and rest. Around thirty minutes at five breaths per posture.
+
+sections:
+  - name: Arriving
+    steps:
+      - { pose: sukhasana, breath: free, count: 10 }
+      - { pose: marjaryasana, breath: exhale, count: 1 }
+      - { pose: bitilasana, breath: inhale, count: 1 }
+      - { pose: balasana, breath: free, count: 5 }
+      - { pose: adho-mukha-svanasana, breath: free, count: 5 }
+
+  - name: Standing
+    steps:
+      - { pose: tadasana, breath: free, count: 5 }
+      - { pose: anjaneyasana, breath: inhale, count: 5, side: both }
+      - { pose: virabhadrasana-b, breath: exhale, count: 5, side: both }
+      - { pose: utthita-trikonasana, breath: exhale, count: 5, side: both }
+      - { pose: vrksasana, breath: free, count: 5, side: both }
+      - { pose: uttanasana, breath: exhale, count: 5 }
+
+  - name: Floor
+    steps:
+      - { pose: baddha-konasana, breath: exhale, count: 5 }
+      - { pose: janu-sirsasana-a, breath: exhale, count: 5, side: both }
+      - { pose: ardha-matsyendrasana, breath: exhale, count: 5, side: both }
+      - { pose: setu-bandha-sarvangasana, breath: inhale, count: 5 }
+      - { pose: apanasana, breath: exhale, count: 5 }
+      - { pose: supta-matsyendrasana, breath: exhale, count: 5, side: both }
+      - { pose: savasana, breath: free, count: 25 }

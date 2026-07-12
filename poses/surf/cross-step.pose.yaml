@@ -1,0 +1,46 @@
+asanakit: 2
+id: cross-step
+name: Cross-Step
+english: Cross-Step
+discipline: surf
+family: riding
+difficulty: 4
+description: The longboard walk. Weight settles quietly over the back foot while the other foot crosses over it toward the nose, torso tall and relaxed, arms loose for balance - footwork like a dance, never a lunge.
+tags: [ surf, longboard, riding, footwork, style ]
+cues:
+  - Stay tall and quiet - the board must not feel your steps
+  - Cross one foot fully over the other before you commit the weight
+contact: [ toeR ]
+figure:
+  grounded: true
+  world:
+    spine: { azimuth: 0, elevation: 86 }
+    neck: { azimuth: 0, elevation: 88 }
+    head: { azimuth: 0, elevation: 87 }
+    thighR: { azimuth: 180, elevation: -84 }
+    shinR: { azimuth: 180, elevation: -82 }
+    footR: { azimuth: 0, elevation: -18 }
+    thighL: { azimuth: -22, elevation: -58 }
+    shinL: { azimuth: -22, elevation: -78 }
+    footL: { azimuth: -22, elevation: -35 }
+    upperArmL: { azimuth: 0, elevation: -42 }
+    forearmL: { azimuth: 0, elevation: -20 }
+    handL: { azimuth: 0, elevation: -15 }
+    upperArmR: { azimuth: 180, elevation: -48 }
+    forearmR: { azimuth: 180, elevation: -58 }
+    handR: { azimuth: 180, elevation: -60 }
+props:
+  - type: wave
+    amplitude: 0.28
+    length: 3.6
+    y: -0.18
+    breaking: false
+  - type: surfboard
+    under: [ ankleL, ankleR ]
+    rotation: -2
+    length: 1.7
+    offset: [ 0.35, -0.12 ]
+muscles:
+  engaged: [ gastrocnemius, tibialisAnterior, quadriceps, gluteus, erectorSpinae ]
+  stretched: [ adductors, hipFlexors ]
+camera: side
