@@ -10,6 +10,7 @@ positioning when you ask for it.
 npx @franzenzenhofer/asanakit render adho-mukha-svanasana -o downdog.svg --style anatomy --title
 npx @franzenzenhofer/asanakit render virabhadrasana-b --camera three-quarter -o warrior.png
 npx @franzenzenhofer/asanakit view utthita-trikonasana --open      # orbit it in 3D, offline
+npx @franzenzenhofer/asanakit html --all -o library.html --open    # the whole library in ONE page
 npx @franzenzenhofer/asanakit gltf navasana -o boat.glb            # a model any 3D viewer opens
 npx @franzenzenhofer/asanakit sheet --sequence ashtanga-primary -o primary-series.png --columns 6 --numbered
 ```
@@ -51,6 +52,9 @@ function of it.
   deterministic SVG/PNG with `data-bone` / `data-muscle` / `data-annotation` hooks. No GPU.
 - **An interactive 3D viewer.** `asanakit view` writes ONE self-contained offline HTML file
   (three.js inlined): drag to orbit, scroll to zoom, white background.
+- **Showcase pages.** `asanakit html` (and `render -o pose.html`) embed EVERYTHING in one
+  offline file: the interactive viewer with a pose picker plus a gallery of deterministic
+  inline SVG renders - a whole sequence, the whole library, or one pose orbited.
 - **GLB / glTF export** via three.js - open the posture in any 3D viewer, rotatable and
   zoomable, muscles colored.
 - **Physics when necessary.** `--settle` (or `physics: settle` in the pose) drops the figure
@@ -131,6 +135,8 @@ Full guide: **[docs/AUTHORING.md](docs/AUTHORING.md)**.
 | `asanakit render <pose> -o out.svg` | render one pose (`.svg` or `.png`) |
 | `asanakit render <pose> --camera back` | ...from any preset or `"azimuth=30,elevation=15"` |
 | `asanakit view <pose> --open` | interactive 3D viewer: one offline HTML file |
+| `asanakit html --sequence ashtanga-primary -o series.html` | ONE self-contained page: 3D viewer with pose picker + SVG gallery |
+| `asanakit render <pose> -o pose.html` | single-pose showcase: 3D viewer + the orbit strip |
 | `asanakit gltf <pose> -o pose.glb` | export a 3D model (`.glb` or `.gltf`) |
 | `asanakit sheet --all -o sheet.png` | contact sheet of many poses |
 | `asanakit sequence <id> -o dir/` | every pose of a sequence, in practice order |

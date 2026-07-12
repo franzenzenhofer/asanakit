@@ -6,7 +6,7 @@ import { BONE_IDS, LANDMARK_IDS } from '../core/types.js';
 /** Current version of the .pose file format. Bumped only on breaking changes. */
 export const POSE_FORMAT_VERSION = 2;
 
-const VERSION_MESSAGE = `Unsupported "asanakit" format version (expected ${POSE_FORMAT_VERSION}). Format 1 files are 2D; re-author the figure in 3D or run scripts/migrate-poses.ts.`;
+const VERSION_MESSAGE = `Unsupported "asanakit" format version (expected ${POSE_FORMAT_VERSION}). Format 1 was the retired 2D era; re-author the figure in 3D (see docs/AUTHORING.md).`;
 
 const MAX_JOINT_DEG = 360;
 

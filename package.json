@@ -1,6 +1,6 @@
 {
   "name": "@franzenzenhofer/asanakit",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Programmatic stick-figure and body-posture visualization engine for yoga and surf. Declarative 3D pose format, deterministic any-angle SVG/PNG, interactive three.js viewer, GLB export, Rapier physics settling. CLI-first, AI-driveable.",
   "keywords": [
     "yoga",
@@ -102,7 +102,6 @@
     "vitest": "^3.2.4"
   },
   "allowScripts": {
-    "sharp@0.34.5": true,
     "esbuild@0.28.1": true,
     "@resvg/resvg-js@2.6.2": true
   }

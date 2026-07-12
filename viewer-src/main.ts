@@ -3,9 +3,14 @@
  * IIFE (three.js included) and inlined into the generated HTML, so the file
  * works offline, from file://, with no CDN and no install.
  *
- * The page carries the solved skeleton as JSON on `window.ASANAKIT_VIEWER`;
- * the figure itself comes from the same scene builder the GLB export uses.
+ * The page carries one or more solved skeletons as JSON on
+ * `window.ASANAKIT_VIEWER`; the figures come from the same scene builder the
+ * GLB export uses. The viewer mounts into `#asanakit-3d` (fullscreen pages
+ * just size that element to the window) and exposes
+ * `window.ASANAKIT_SELECT(id)` so a showcase page can switch poses.
  */
+import type {
+  Group} from 'three';
 import {
   AmbientLight,
   Color,
@@ -13,6 +18,7 @@ import {
   GridHelper,
   PerspectiveCamera,
   Scene,
+  Vector3,
   WebGLRenderer,
 } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -21,16 +27,24 @@ import type { CameraAngles } from '../src/core/camera.js';
 import type { Skeleton } from '../src/core/types.js';
 import { buildFigureScene } from '../src/three/scene.js';
 
-interface ViewerPayload {
+interface ViewerPose {
+  readonly id: string;
+  readonly name: string;
+  readonly sanskrit?: string;
   readonly skeleton: Skeleton;
-  readonly camera: CameraAngles;
   readonly engaged: readonly MuscleId[];
   readonly stretched: readonly MuscleId[];
+}
+
+interface ViewerPayload {
+  readonly poses: readonly ViewerPose[];
+  readonly camera: CameraAngles;
 }
 
 declare global {
   interface Window {
     ASANAKIT_VIEWER: ViewerPayload;
+    ASANAKIT_SELECT: (id: string) => void;
   }
 }
 
@@ -39,14 +53,13 @@ const BACKGROUND = '#ffffff';
 const DISTANCE = 2.3;
 
 const payload = window.ASANAKIT_VIEWER;
+const mount = document.getElementById('asanakit-3d');
+if (mount === null) throw new Error('asanakit viewer: no #asanakit-3d element to mount into');
 
 const scene = new Scene();
 scene.background = new Color(BACKGROUND);
 
-scene.add(buildFigureScene(payload.skeleton, { engaged: payload.engaged, stretched: payload.stretched }));
-
 const grid = new GridHelper(2.4, 24, 0xd0d0d0, 0xe8e8e8);
-grid.position.y = 0;
 scene.add(grid);
 
 scene.add(new AmbientLight(0xffffff, 1.1));
@@ -57,35 +70,83 @@ const fill = new DirectionalLight(0xffffff, 0.5);
 fill.position.set(-2, 1, -1.5);
 scene.add(fill);
 
-const target = [0, payload.skeleton.height / 2, 0] as const;
+const figures = new Map<string, Group>();
+let current: Group | null = null;
 
-const camera = new PerspectiveCamera(40, window.innerWidth / window.innerHeight, 0.01, 50);
-const az = payload.camera.azimuth * DEG;
-const el = payload.camera.elevation * DEG;
-camera.position.set(
-  target[0] + DISTANCE * Math.sin(az) * Math.cos(el),
-  target[1] + DISTANCE * Math.sin(el),
-  target[2] + DISTANCE * Math.cos(az) * Math.cos(el),
-);
+const figureFor = (pose: ViewerPose): Group => {
+  let group = figures.get(pose.id);
+  if (group === undefined) {
+    group = buildFigureScene(pose.skeleton, { engaged: pose.engaged, stretched: pose.stretched });
+    figures.set(pose.id, group);
+  }
+  return group;
+};
 
+const camera = new PerspectiveCamera(40, 1, 0.01, 50);
 const renderer = new WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.body.appendChild(renderer.domElement);
+mount.appendChild(renderer.domElement);
 
 const controls = new OrbitControls(camera, renderer.domElement);
-controls.target.set(target[0], target[1], target[2]);
 controls.enableDamping = true;
 controls.dampingFactor = 0.08;
 controls.minDistance = 0.3;
 controls.maxDistance = 12;
-controls.update();
 
-window.addEventListener('resize', () => {
-  camera.aspect = window.innerWidth / window.innerHeight;
+const centreOf = (skeleton: Skeleton): [number, number, number] => {
+  const b = skeleton.bounds;
+  return [(b.minX + b.maxX) / 2, (b.minY + b.maxY) / 2, (b.minZ + b.maxZ) / 2];
+};
+
+const aimAt = (skeleton: Skeleton): void => {
+  const [cx, cy, cz] = centreOf(skeleton);
+  const az = payload.camera.azimuth * DEG;
+  const el = payload.camera.elevation * DEG;
+  camera.position.set(
+    cx + DISTANCE * Math.sin(az) * Math.cos(el),
+    cy + DISTANCE * Math.sin(el),
+    cz + DISTANCE * Math.cos(az) * Math.cos(el),
+  );
+  controls.target.set(cx, cy, cz);
+  controls.update();
+};
+
+const select = (id: string): void => {
+  const pose = payload.poses.find((p) => p.id === id) ?? payload.poses[0];
+  if (pose === undefined) return;
+  if (current !== null) scene.remove(current);
+  current = figureFor(pose);
+  scene.add(current);
+
+  // Keep the user's orbit direction, but glide the pivot to the new figure.
+  const [cx, cy, cz] = centreOf(pose.skeleton);
+  camera.position.add(new Vector3(cx - controls.target.x, cy - controls.target.y, cz - controls.target.z));
+  controls.target.set(cx, cy, cz);
+  controls.update();
+
+  document.querySelectorAll('[data-asanakit-pose]').forEach((button) => {
+    button.classList.toggle('active', button.getAttribute('data-asanakit-pose') === pose.id);
+  });
+};
+
+window.ASANAKIT_SELECT = select;
+
+const resize = (): void => {
+  const width = Math.max(mount.clientWidth, 1);
+  const height = Math.max(mount.clientHeight, 1);
+  camera.aspect = width / height;
   camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-});
+  renderer.setSize(width, height);
+};
+
+new ResizeObserver(resize).observe(mount);
+resize();
+
+const first = payload.poses[0];
+if (first !== undefined) {
+  select(first.id);
+  aimAt(first.skeleton);
+}
 
 renderer.setAnimationLoop(() => {
   controls.update();

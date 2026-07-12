@@ -1,10 +1,12 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, extname } from 'node:path';
 import type { Command } from 'commander';
+import { resolveCamera } from '../../core/camera.js';
 import { expandSequence } from '../../library/index.js';
 import type { PoseSpec } from '../../model/index.js';
 import { optimizeSvg, renderPng, renderSheet, renderSvg, type RenderOptions, type SheetOptions } from '../../render/index.js';
 import { solvePose } from '../../solve.js';
+import { buildShowcaseHtml } from '../../viewer/index.js';
 import { library, parseCamera, parseIntOption, parseStyle, resolvePose } from '../resolve.js';
 
 interface CommonOptions {
@@ -67,10 +69,19 @@ export const registerRenderCommands = (program: Command): void => {
     program
       .command('render <pose>')
       .description('Render one pose (a .pose.yaml file, or a library id) to SVG or PNG')
-      .requiredOption('-o, --out <file>', 'output path; the extension picks the format (.svg or .png)'),
+      .requiredOption('-o, --out <file>', 'output path; the extension picks the format (.svg, .png, or .html showcase with embedded 3D viewer)'),
   ).action(async (ref: string, options: CommonOptions & { out: string }) => {
     const pose = await resolvePose(ref, options.lib);
     const skeleton = await solvePose(pose, options.settle === undefined ? {} : { settle: options.settle });
+
+    if (extname(options.out).toLowerCase() === '.html') {
+      const camera = options.camera === undefined ? undefined : { camera: resolveCamera(parseCamera(options.camera)) };
+      await mkdir(dirname(options.out), { recursive: true });
+      await writeFile(options.out, await buildShowcaseHtml([{ pose, skeleton }], camera ?? {}));
+      process.stdout.write(`${options.out}\n`);
+      return;
+    }
+
     await write(options.out, renderSvg(pose, { ...renderOptionsFrom(options), skeleton }), options);
   });
 

@@ -39,4 +39,4 @@ props:
 muscles:
   engaged: [ deltoid, erectorSpinae, quadriceps ]
   stretched: [ rectusAbdominis, latissimus ]
-camera: side
+camera: front

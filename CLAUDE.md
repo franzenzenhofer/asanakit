@@ -45,7 +45,7 @@ npx tsx src/cli/index.ts lint    # every bundled pose must be anatomically sound
 | `src/render` | camera + orthographic projection, depth-sorted SVG layers (figure, muscles, props, annotations), styles, rasterising |
 | `src/three` | Skeleton → three.js scene graph (shared by GLB export and the viewer) |
 | `src/export3d` | GLB/glTF export via three's GLTFExporter (Node shims live here) |
-| `src/viewer` | self-contained offline interactive HTML viewer (three + OrbitControls) |
+| `src/viewer` | self-contained offline HTML: fullscreen viewer and showcase pages (three + OrbitControls, pose picker, inline SVG gallery) |
 | `src/physics` | Rapier settling. Lazy-loaded: importing asanakit never touches WASM. |
 | `src/standards` | MediaPipe-33 / COCO-17 keypoint export (with real z) |
 | `src/library` | loading bundled poses and sequences |

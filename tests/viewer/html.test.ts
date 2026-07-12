@@ -53,7 +53,10 @@ describe('buildViewerHtml', () => {
 
   test('escapes the pose name so it cannot inject markup', () => {
     expect(html).toContain('Mountain &lt;Pose&gt;');
-    expect(html).not.toContain('Mountain <Pose>');
+    // The raw name may appear inside the JSON payload (harmless there, since
+    // every `</` is escaped) but never in the HTML itself.
+    const markup = html.slice(0, html.indexOf('<script>'));
+    expect(markup).not.toContain('Mountain <Pose>');
   });
 
   test('never closes a script tag early, even with </script> in the data', () => {
