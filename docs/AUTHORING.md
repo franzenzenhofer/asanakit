@@ -1,6 +1,6 @@
 # Authoring poses
 
-A pose is a YAML file. Nothing is drawn imperatively: you describe a body, and posekit
+A pose is a YAML file. Nothing is drawn imperatively: you describe a body, and asanakit
 solves and renders it. This guide is written to be followed by a person or by a model.
 
 ## The coordinate system
@@ -76,7 +76,7 @@ Set `flip: true` to face the other way. Set `mirror: true` to swap which limb do
 contact: [toeL, toeR, handTipL, handTipR]
 ```
 
-This is the pose's claim about which parts of the body are on the floor. `posekit lint`
+This is the pose's claim about which parts of the body are on the floor. `asanakit lint`
 checks it against the solved figure and fails if a hand that was supposed to reach the mat
 is hovering 9 cm above it. **Every pose must declare its contact points.**
 
@@ -93,7 +93,7 @@ it is the right posture. Iterate until both agree.
 ## A complete example
 
 ```yaml
-posekit: 1
+asanakit: 1
 id: adho-mukha-svanasana
 name: Downward-Facing Dog
 sanskrit: Adho Mukha Śvānāsana
@@ -137,8 +137,8 @@ muscles:
 
 ## Reference
 
-- `posekit vocab` prints every joint, landmark, muscle, style and view name.
-- `posekit schema` prints the JSON Schema for the format.
+- `asanakit vocab` prints every joint, landmark, muscle, style and view name.
+- `asanakit schema` prints the JSON Schema for the format.
 - Props: `mat`, `ground`, `block`, `strap`, `wall`, `surfboard`, `wave`.
 - Annotations: `angle`, `line`, `plumb`, `arrow`, `label`, `point`.
-- Muscles for `engaged`/`stretched`: run `posekit vocab`.
+- Muscles for `engaged`/`stretched`: run `asanakit vocab`.

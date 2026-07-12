@@ -6,7 +6,7 @@ import type { StyleId } from '../src/render/styles.js';
 const OUT = 'out/preview';
 mkdirSync(OUT, { recursive: true });
 
-const p = (yaml: string): PoseSpec => parsePose(`posekit: 1\n${yaml}`, 'preview.yaml');
+const p = (yaml: string): PoseSpec => parsePose(`asanakit: 1\n${yaml}`, 'preview.yaml');
 
 const poses: Array<{ pose: PoseSpec; style: StyleId }> = [
   { pose: p('id: rest\nname: Neutral\ndiscipline: yoga\nfigure:\n  view: front\n'), style: 'stick' },

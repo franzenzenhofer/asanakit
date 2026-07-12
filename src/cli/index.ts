@@ -8,7 +8,7 @@ import { registerRenderCommands } from './commands/render.js';
 const program = new Command();
 
 program
-  .name('posekit')
+  .name('asanakit')
   .description('Programmatic stick-figure and anatomical infographics for yoga and surf postures.')
   .version('0.1.0')
   .showHelpAfterError();
@@ -21,7 +21,7 @@ const fail = (error: unknown): never => {
   if (error instanceof PoseParseError) {
     process.stderr.write(`${error.message}\n`);
   } else {
-    process.stderr.write(`posekit: ${error instanceof Error ? error.message : String(error)}\n`);
+    process.stderr.write(`asanakit: ${error instanceof Error ? error.message : String(error)}\n`);
   }
   process.exit(1);
 };

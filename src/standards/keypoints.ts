@@ -1,11 +1,11 @@
 /**
- * Export a solved skeleton as keypoints in the two standard layouts, so posekit
+ * Export a solved skeleton as keypoints in the two standard layouts, so asanakit
  * output can feed anything that already speaks pose-estimation data.
  *
  * The landmark NAMES and EDGE lists below restate the public layouts of
  * MediaPipe BlazePose (33) and COCO (17), as published in the Apache-2.0
  * licensed tfjs-models / mediapipe projects. Only the layout is reused; the
- * geometry is posekit's own.
+ * geometry is asanakit's own.
  */
 import type { Skeleton } from '../core/types.js';
 import { add, fromPolar, lerp, sub, type Vec2 } from '../core/vec2.js';

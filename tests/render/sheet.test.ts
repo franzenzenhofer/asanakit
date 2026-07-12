@@ -3,7 +3,7 @@ import { parsePose, type PoseSpec } from '../../src/model/index.js';
 import { renderSheet } from '../../src/render/index.js';
 
 const pose = (id: string): PoseSpec =>
-  parsePose(`posekit: 1\nid: ${id}\nname: ${id}\ndiscipline: yoga\n`, `${id}.pose.yaml`);
+  parsePose(`asanakit: 1\nid: ${id}\nname: ${id}\ndiscipline: yoga\n`, `${id}.pose.yaml`);
 
 const POSES = ['a', 'b', 'c', 'd', 'e'].map(pose);
 

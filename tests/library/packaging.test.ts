@@ -10,7 +10,7 @@ describe('published package', () => {
   });
 
   test('ships the compiled CLI the bin entry points at', () => {
-    expect(pkg.files.some((f) => pkg.bin.posekit?.startsWith(f))).toBe(true);
+    expect(pkg.files.some((f) => pkg.bin.asanakit?.startsWith(f))).toBe(true);
   });
 
   test('the bundled library path resolves to a directory that actually has poses in it', async () => {

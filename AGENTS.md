@@ -1,4 +1,4 @@
-# Working on posekit
+# Working on asanakit
 
 ## The one rule
 
@@ -35,6 +35,6 @@ npx tsx src/cli/index.ts lint    # every bundled pose must be anatomically sound
 
 ## Authoring poses
 
-Read `docs/AUTHORING.md`. The loop is: write the YAML, run `posekit lint` until it is clean,
+Read `docs/AUTHORING.md`. The loop is: write the YAML, run `asanakit lint` until it is clean,
 render a PNG, and **look at it**. Lint proves the posture is physically possible; only your
 eye proves it is the right posture.

@@ -6,7 +6,7 @@ import { parsePose, parseSequence, resolveFigure } from '../../src/model/index.j
 
 const pose = parsePose(
   [
-    'posekit: 1',
+    'asanakit: 1',
     'id: lunge',
     'name: Lunge',
     'discipline: yoga',
@@ -23,7 +23,7 @@ const pose = parsePose(
 
 const sequence = parseSequence(
   [
-    'posekit: 1',
+    'asanakit: 1',
     'id: s',
     'name: S',
     'sections:',

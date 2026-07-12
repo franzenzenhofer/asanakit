@@ -1,5 +1,5 @@
 {
-  "name": "posekit",
+  "name": "asanakit",
   "version": "0.1.0",
   "description": "Programmatic stick-figure and anatomical infographic engine for yoga and surf postures. Declarative pose format, deterministic SVG/PNG output, CLI-first, AI-driveable.",
   "keywords": [
@@ -21,18 +21,18 @@
   "author": "Franz Enzenhofer",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/franzenzenhofer/posekit.git"
+    "url": "git+https://github.com/franzenzenhofer/asanakit.git"
   },
-  "homepage": "https://github.com/franzenzenhofer/posekit#readme",
+  "homepage": "https://github.com/franzenzenhofer/asanakit#readme",
   "bugs": {
-    "url": "https://github.com/franzenzenhofer/posekit/issues"
+    "url": "https://github.com/franzenzenhofer/asanakit/issues"
   },
   "type": "module",
   "engines": {
     "node": ">=20"
   },
   "bin": {
-    "posekit": "dist/cli/index.js"
+    "asanakit": "dist/cli/index.js"
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

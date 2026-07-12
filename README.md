@@ -1,19 +1,19 @@
-# posekit
+# asanakit
 
 **Programmatic stick-figure and anatomical infographics for yoga and surf postures.**
 
 Describe a posture as data. Get a correct, deterministic, machine-readable illustration.
 
 ```bash
-npx posekit render adho-mukha-svanasana -o downdog.svg --style anatomy --title
-npx posekit sheet --sequence ashtanga-primary -o primary-series.png --columns 6 --numbered
+npx asanakit render adho-mukha-svanasana -o downdog.svg --style anatomy --title
+npx asanakit sheet --sequence ashtanga-primary -o primary-series.png --columns 6 --numbered
 ```
 
-posekit is CLI-first, has no browser and no DOM, and renders the same bytes on every
+asanakit is CLI-first, has no browser and no DOM, and renders the same bytes on every
 machine. It ships with the **full Ashtanga Primary Series** - 37 asanas, 60 steps - authored
 in its own pose format, plus 8 surf postures.
 
-![The Ashtanga Primary Series rendered by posekit](examples/ashtanga-primary-series.png)
+![The Ashtanga Primary Series rendered by asanakit](examples/ashtanga-primary-series.png)
 
 ---
 
@@ -24,7 +24,7 @@ datasets give you keypoints scraped from photos, with no joint angles, no licenc
 use, and no way to say "now bend that knee ten degrees more". 3D mannequin libraries are
 GPL, or need a GPU, or both.
 
-posekit takes the third path: a **20-bone kinematic rig** plus a **declarative pose format**.
+asanakit takes the third path: a **20-bone kinematic rig** plus a **declarative pose format**.
 The posture is the data. The picture is a pure function of it.
 
 ## What you get
@@ -33,7 +33,7 @@ The posture is the data. The picture is a pure function of it.
   directions, props, annotations, muscle activation, teaching cues.
 - **Forward kinematics** over a 20-bone humanoid rig with anatomical proportions.
 - **An anatomical validator.** Knees and elbows that bend backwards are rejected. A pose
-  declares which parts of the body touch the floor, and posekit checks that they do.
+  declares which parts of the body touch the floor, and asanakit checks that they do.
 - **Seven styles**, all pure token data: `stick`, `anatomy`, `silhouette`, `blueprint`,
   `ink`, `poster`, `minimal`.
 - **SVG and PNG.** Deterministic, HTML-safe, and every element carries `data-bone`,
@@ -60,14 +60,14 @@ stretched muscles the other.
 ## Install
 
 ```bash
-npm install posekit                       # once published to npm
-npx github:franzenzenhofer/posekit --help # straight from source, today
+npm install asanakit                       # once published to npm
+npx github:franzenzenhofer/asanakit --help # straight from source, today
 ```
 
 ## The format
 
 ```yaml
-posekit: 1
+asanakit: 1
 id: utthita-trikonasana
 name: Extended Triangle
 sanskrit: Utthita Trikoṇāsana
@@ -105,15 +105,15 @@ Full guide: **[docs/AUTHORING.md](docs/AUTHORING.md)**.
 
 | Command | What it does |
 |---|---|
-| `posekit render <pose> -o out.svg` | render one pose (`.svg` or `.png`) |
-| `posekit sheet --all -o sheet.png` | contact sheet of many poses |
-| `posekit sequence <id> -o dir/` | every pose of a sequence, in practice order |
-| `posekit lint [poses...]` | check poses against the limits of a real body |
-| `posekit list` | what is in the library |
-| `posekit vocab` | every joint, landmark, muscle and style name |
-| `posekit schema` | the JSON Schema for the pose format |
-| `posekit keypoints <pose>` | export as MediaPipe-33 / COCO-17 keypoints |
-| `posekit landmarks <pose>` | the solved skeleton, as JSON |
+| `asanakit render <pose> -o out.svg` | render one pose (`.svg` or `.png`) |
+| `asanakit sheet --all -o sheet.png` | contact sheet of many poses |
+| `asanakit sequence <id> -o dir/` | every pose of a sequence, in practice order |
+| `asanakit lint [poses...]` | check poses against the limits of a real body |
+| `asanakit list` | what is in the library |
+| `asanakit vocab` | every joint, landmark, muscle and style name |
+| `asanakit schema` | the JSON Schema for the pose format |
+| `asanakit keypoints <pose>` | export as MediaPipe-33 / COCO-17 keypoints |
+| `asanakit landmarks <pose>` | the solved skeleton, as JSON |
 
 Options: `--style`, `--width`, `--height`, `--title`, `--caption`, `--muscles`,
 `--background`, `--optimize`, `--scale`, `--lib <dir>`.
@@ -121,7 +121,7 @@ Options: `--style`, `--width`, `--height`, `--title`, `--caption`, `--muscles`,
 ## Library API
 
 ```ts
-import { parsePose, renderSvg, renderPng, validatePose, solveSkeleton } from 'posekit';
+import { parsePose, renderSvg, renderPng, validatePose, solveSkeleton } from 'asanakit';
 
 const pose = parsePose(yamlSource, 'triangle.pose.yaml');
 
@@ -133,9 +133,9 @@ const png = renderPng(svg, { width: 1200 });
 ## Built for machines as well as people
 
 - Errors name the field and the file, and report every problem at once.
-- `posekit schema` and `posekit vocab` are the full contract - a model can discover the
+- `asanakit schema` and `asanakit vocab` are the full contract - a model can discover the
   entire vocabulary without reading the source.
-- `posekit lint` turns "does this look right" into a check that either passes or fails.
+- `asanakit lint` turns "does this look right" into a check that either passes or fails.
 - Rendering is deterministic, so output diffs are meaningful in review.
 
 ## Licence

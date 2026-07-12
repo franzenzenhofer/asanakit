@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 import { validatePose } from '../../src/anatomy/validate.js';
 import { parsePose } from '../../src/model/index.js';
 
-const pose = (body: string) => parsePose(`posekit: 1\nid: t\nname: T\ndiscipline: yoga\n${body}`, 't.pose.yaml');
+const pose = (body: string) => parsePose(`asanakit: 1\nid: t\nname: T\ndiscipline: yoga\n${body}`, 't.pose.yaml');
 
 const codes = (body: string): string[] => validatePose(pose(body)).map((i) => i.code);
 

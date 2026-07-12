@@ -30,7 +30,7 @@ export const resolvePose = async (ref: string, libRoot?: string): Promise<PoseSp
   const pose = lib.poses.get(ref);
   if (pose === undefined) {
     const known = [...lib.poses.keys()].slice(0, 8).join(', ');
-    throw new Error(`No pose file or library id "${ref}". Try: ${known}... (run "posekit list")`);
+    throw new Error(`No pose file or library id "${ref}". Try: ${known}... (run "asanakit list")`);
   }
   return pose;
 };

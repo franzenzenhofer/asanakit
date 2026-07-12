@@ -3,7 +3,7 @@
   <g transform="translate(0 0)" data-cell="1">
     <svg viewBox="0 0 320 260" width="320" height="260" data-pose="paddling" data-style="silhouette" role="img" aria-label="Paddling">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -51,7 +51,7 @@
   <g transform="translate(320 0)" data-cell="2">
     <svg viewBox="0 0 320 260" width="320" height="260" data-pose="pop-up" data-style="silhouette" role="img" aria-label="Pop-Up">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -99,7 +99,7 @@
   <g transform="translate(640 0)" data-cell="3">
     <svg viewBox="0 0 320 260" width="320" height="260" data-pose="takeoff" data-style="silhouette" role="img" aria-label="Takeoff">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -147,7 +147,7 @@
   <g transform="translate(960 0)" data-cell="4">
     <svg viewBox="0 0 320 260" width="320" height="260" data-pose="bottom-turn" data-style="silhouette" role="img" aria-label="Bottom Turn">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -195,7 +195,7 @@
   <g transform="translate(0 260)" data-cell="5">
     <svg viewBox="0 0 320 260" width="320" height="260" data-pose="cutback" data-style="silhouette" role="img" aria-label="Cutback">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -243,7 +243,7 @@
   <g transform="translate(320 260)" data-cell="6">
     <svg viewBox="0 0 320 260" width="320" height="260" data-pose="tube-stance" data-style="silhouette" role="img" aria-label="Tube Stance">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -291,7 +291,7 @@
   <g transform="translate(640 260)" data-cell="7">
     <svg viewBox="0 0 320 260" width="320" height="260" data-pose="noseride" data-style="silhouette" role="img" aria-label="Noseride">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -339,7 +339,7 @@
   <g transform="translate(960 260)" data-cell="8">
     <svg viewBox="0 0 320 260" width="320" height="260" data-pose="duck-dive" data-style="silhouette" role="img" aria-label="Duck Dive">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>

@@ -4,7 +4,7 @@
   <g transform="translate(0 72.60000000000001)" data-cell="1">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="samasthiti" data-style="stick" role="img" aria-label="Samasthiti (Samasthitiḥ)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -65,7 +65,7 @@
   <g transform="translate(250 72.60000000000001)" data-cell="2">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="urdhva-hastasana" data-style="stick" role="img" aria-label="Upward Salute (Ūrdhva Hastāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -126,7 +126,7 @@
   <g transform="translate(500 72.60000000000001)" data-cell="3">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="uttanasana" data-style="stick" role="img" aria-label="Standing Forward Fold (Uttānāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -187,7 +187,7 @@
   <g transform="translate(750 72.60000000000001)" data-cell="4">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="ardha-uttanasana" data-style="stick" role="img" aria-label="Half Forward Fold (Ardha Uttānāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -248,7 +248,7 @@
   <g transform="translate(1000 72.60000000000001)" data-cell="5">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="chaturanga-dandasana" data-style="stick" role="img" aria-label="Four-Limbed Staff Pose (Caturaṅga Daṇḍāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -309,7 +309,7 @@
   <g transform="translate(1250 72.60000000000001)" data-cell="6">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="urdhva-mukha-svanasana" data-style="stick" role="img" aria-label="Upward-Facing Dog (Ūrdhva Mukha Śvānāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -370,7 +370,7 @@
   <g transform="translate(1500 72.60000000000001)" data-cell="7">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="adho-mukha-svanasana" data-style="stick" role="img" aria-label="Downward-Facing Dog (Adho Mukha Śvānāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -431,7 +431,7 @@
   <g transform="translate(0 372.6)" data-cell="8">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="ardha-uttanasana" data-style="stick" role="img" aria-label="Half Forward Fold (Ardha Uttānāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -492,7 +492,7 @@
   <g transform="translate(250 372.6)" data-cell="9">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="uttanasana" data-style="stick" role="img" aria-label="Standing Forward Fold (Uttānāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -553,7 +553,7 @@
   <g transform="translate(500 372.6)" data-cell="10">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="urdhva-hastasana" data-style="stick" role="img" aria-label="Upward Salute (Ūrdhva Hastāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -614,7 +614,7 @@
   <g transform="translate(750 372.6)" data-cell="11">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="samasthiti" data-style="stick" role="img" aria-label="Samasthiti (Samasthitiḥ)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -675,7 +675,7 @@
   <g transform="translate(1000 372.6)" data-cell="12">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="utkatasana" data-style="stick" role="img" aria-label="Chair Pose (Utkaṭāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -736,7 +736,7 @@
   <g transform="translate(1250 372.6)" data-cell="13">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="chaturanga-dandasana" data-style="stick" role="img" aria-label="Four-Limbed Staff Pose (Caturaṅga Daṇḍāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -797,7 +797,7 @@
   <g transform="translate(1500 372.6)" data-cell="14">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="urdhva-mukha-svanasana" data-style="stick" role="img" aria-label="Upward-Facing Dog (Ūrdhva Mukha Śvānāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -858,7 +858,7 @@
   <g transform="translate(0 672.6)" data-cell="15">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="adho-mukha-svanasana" data-style="stick" role="img" aria-label="Downward-Facing Dog (Adho Mukha Śvānāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -919,7 +919,7 @@
   <g transform="translate(250 672.6)" data-cell="16">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="virabhadrasana-a" data-style="stick" role="img" aria-label="Warrior I (Vīrabhadrāsana A)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -980,7 +980,7 @@
   <g transform="translate(500 672.6)" data-cell="17">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="virabhadrasana-a" data-style="stick" role="img" aria-label="Warrior I (Vīrabhadrāsana A)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -1041,7 +1041,7 @@
   <g transform="translate(750 672.6)" data-cell="18">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="chaturanga-dandasana" data-style="stick" role="img" aria-label="Four-Limbed Staff Pose (Caturaṅga Daṇḍāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -1102,7 +1102,7 @@
   <g transform="translate(1000 672.6)" data-cell="19">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="adho-mukha-svanasana" data-style="stick" role="img" aria-label="Downward-Facing Dog (Adho Mukha Śvānāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -1163,7 +1163,7 @@
   <g transform="translate(1250 672.6)" data-cell="20">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="samasthiti" data-style="stick" role="img" aria-label="Samasthiti (Samasthitiḥ)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -1224,7 +1224,7 @@
   <g transform="translate(1500 672.6)" data-cell="21">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="padangusthasana" data-style="stick" role="img" aria-label="Big Toe Pose (Pādāṅguṣṭhāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -1285,7 +1285,7 @@
   <g transform="translate(0 972.6)" data-cell="22">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="padahastasana" data-style="stick" role="img" aria-label="Hand Under Foot Pose (Pādahastāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -1346,7 +1346,7 @@
   <g transform="translate(250 972.6)" data-cell="23">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="utthita-trikonasana" data-style="stick" role="img" aria-label="Extended Triangle (Utthita Trikoṇāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -1406,7 +1406,7 @@
   <g transform="translate(500 972.6)" data-cell="24">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="utthita-trikonasana" data-style="stick" role="img" aria-label="Extended Triangle (Utthita Trikoṇāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -1466,7 +1466,7 @@
   <g transform="translate(750 972.6)" data-cell="25">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="utthita-parsvakonasana" data-style="stick" role="img" aria-label="Extended Side Angle (Utthita Pārśvakoṇāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -1526,7 +1526,7 @@
   <g transform="translate(1000 972.6)" data-cell="26">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="utthita-parsvakonasana" data-style="stick" role="img" aria-label="Extended Side Angle (Utthita Pārśvakoṇāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -1586,7 +1586,7 @@
   <g transform="translate(1250 972.6)" data-cell="27">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="prasarita-padottanasana-a" data-style="stick" role="img" aria-label="Wide-Legged Forward Fold A (Prasārita Pādottānāsana A)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -1646,7 +1646,7 @@
   <g transform="translate(1500 972.6)" data-cell="28">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="prasarita-padottanasana-c" data-style="stick" role="img" aria-label="Wide-Legged Forward Fold C (Prasārita Pādottānāsana C)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -1706,7 +1706,7 @@
   <g transform="translate(0 1272.6)" data-cell="29">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="parsvottanasana" data-style="stick" role="img" aria-label="Intense Side Stretch (Pārśvottānāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -1767,7 +1767,7 @@
   <g transform="translate(250 1272.6)" data-cell="30">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="parsvottanasana" data-style="stick" role="img" aria-label="Intense Side Stretch (Pārśvottānāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -1828,7 +1828,7 @@
   <g transform="translate(500 1272.6)" data-cell="31">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="utkatasana" data-style="stick" role="img" aria-label="Chair Pose (Utkaṭāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -1889,7 +1889,7 @@
   <g transform="translate(750 1272.6)" data-cell="32">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="virabhadrasana-a" data-style="stick" role="img" aria-label="Warrior I (Vīrabhadrāsana A)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -1950,7 +1950,7 @@
   <g transform="translate(1000 1272.6)" data-cell="33">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="virabhadrasana-a" data-style="stick" role="img" aria-label="Warrior I (Vīrabhadrāsana A)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -2011,7 +2011,7 @@
   <g transform="translate(1250 1272.6)" data-cell="34">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="virabhadrasana-b" data-style="stick" role="img" aria-label="Warrior II (Vīrabhadrāsana B)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -2071,7 +2071,7 @@
   <g transform="translate(1500 1272.6)" data-cell="35">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="virabhadrasana-b" data-style="stick" role="img" aria-label="Warrior II (Vīrabhadrāsana B)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -2131,7 +2131,7 @@
   <g transform="translate(0 1572.6)" data-cell="36">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="dandasana" data-style="stick" role="img" aria-label="Staff Pose (Daṇḍāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -2192,7 +2192,7 @@
   <g transform="translate(250 1572.6)" data-cell="37">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="paschimottanasana" data-style="stick" role="img" aria-label="Seated Forward Fold (Paścimottānāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -2253,7 +2253,7 @@
   <g transform="translate(500 1572.6)" data-cell="38">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="purvottanasana" data-style="stick" role="img" aria-label="Upward Plank (Pūrvottānāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -2314,7 +2314,7 @@
   <g transform="translate(750 1572.6)" data-cell="39">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="janu-sirsasana-a" data-style="stick" role="img" aria-label="Head-to-Knee Pose A (Jānu Śīrṣāsana A)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -2375,7 +2375,7 @@
   <g transform="translate(1000 1572.6)" data-cell="40">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="janu-sirsasana-a" data-style="stick" role="img" aria-label="Head-to-Knee Pose A (Jānu Śīrṣāsana A)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -2436,7 +2436,7 @@
   <g transform="translate(1250 1572.6)" data-cell="41">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="marichyasana-a" data-style="stick" role="img" aria-label="Pose Dedicated to the Sage Marichi A (Marīcyāsana A)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -2497,7 +2497,7 @@
   <g transform="translate(1500 1572.6)" data-cell="42">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="marichyasana-a" data-style="stick" role="img" aria-label="Pose Dedicated to the Sage Marichi A (Marīcyāsana A)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -2558,7 +2558,7 @@
   <g transform="translate(0 1872.6)" data-cell="43">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="marichyasana-c" data-style="stick" role="img" aria-label="Pose Dedicated to the Sage Marichi C (Marīcyāsana C)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -2619,7 +2619,7 @@
   <g transform="translate(250 1872.6)" data-cell="44">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="marichyasana-c" data-style="stick" role="img" aria-label="Pose Dedicated to the Sage Marichi C (Marīcyāsana C)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -2680,7 +2680,7 @@
   <g transform="translate(500 1872.6)" data-cell="45">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="navasana" data-style="stick" role="img" aria-label="Boat Pose (Nāvāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -2741,7 +2741,7 @@
   <g transform="translate(750 1872.6)" data-cell="46">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="baddha-konasana" data-style="stick" role="img" aria-label="Bound Angle Pose (Baddha Koṇāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -2802,7 +2802,7 @@
   <g transform="translate(1000 1872.6)" data-cell="47">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="upavistha-konasana" data-style="stick" role="img" aria-label="Wide-Angle Seated Forward Fold (Upaviṣṭha Koṇāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -2863,7 +2863,7 @@
   <g transform="translate(1250 1872.6)" data-cell="48">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="supta-padangusthasana" data-style="stick" role="img" aria-label="Reclining Big Toe Pose (Supta Pādāṅguṣṭhāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -2924,7 +2924,7 @@
   <g transform="translate(1500 1872.6)" data-cell="49">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="supta-padangusthasana" data-style="stick" role="img" aria-label="Reclining Big Toe Pose (Supta Pādāṅguṣṭhāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -2985,7 +2985,7 @@
   <g transform="translate(0 2172.6)" data-cell="50">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="setu-bandhasana" data-style="stick" role="img" aria-label="Bridge Pose (Setu Bandhāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -3046,7 +3046,7 @@
   <g transform="translate(250 2172.6)" data-cell="51">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="urdhva-dhanurasana" data-style="stick" role="img" aria-label="Upward Bow (Ūrdhva Dhanurāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -3107,7 +3107,7 @@
   <g transform="translate(500 2172.6)" data-cell="52">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="paschimottanasana" data-style="stick" role="img" aria-label="Seated Forward Fold (Paścimottānāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -3168,7 +3168,7 @@
   <g transform="translate(750 2172.6)" data-cell="53">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="salamba-sarvangasana" data-style="stick" role="img" aria-label="Shoulderstand (Sālamba Sarvāṅgāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -3229,7 +3229,7 @@
   <g transform="translate(1000 2172.6)" data-cell="54">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="halasana" data-style="stick" role="img" aria-label="Plough Pose (Halāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -3290,7 +3290,7 @@
   <g transform="translate(1250 2172.6)" data-cell="55">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="karnapidasana" data-style="stick" role="img" aria-label="Ear Pressure Pose (Karṇapīḍāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -3351,7 +3351,7 @@
   <g transform="translate(1500 2172.6)" data-cell="56">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="matsyasana" data-style="stick" role="img" aria-label="Fish Pose (Matsyāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -3412,7 +3412,7 @@
   <g transform="translate(0 2472.6)" data-cell="57">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="sirsasana" data-style="stick" role="img" aria-label="Headstand (Śīrṣāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -3473,7 +3473,7 @@
   <g transform="translate(250 2472.6)" data-cell="58">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="balasana" data-style="stick" role="img" aria-label="Child's Pose (Bālāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -3534,7 +3534,7 @@
   <g transform="translate(500 2472.6)" data-cell="59">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="padmasana" data-style="stick" role="img" aria-label="Lotus Pose (Padmāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>
@@ -3595,7 +3595,7 @@
   <g transform="translate(750 2472.6)" data-cell="60">
     <svg viewBox="0 0 250 300" width="250" height="300" data-pose="savasana" data-style="stick" role="img" aria-label="Corpse Pose (Śavāsana)">
       <defs>
-        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+        <marker id="asanakit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
         </marker>
       </defs>

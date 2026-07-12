@@ -122,7 +122,7 @@ export const propSchema = z.discriminatedUnion('type', [
 ]);
 
 export const poseSchema = z.object({
-  posekit: z.literal(POSE_FORMAT_VERSION, `Unsupported "posekit" format version (expected ${POSE_FORMAT_VERSION}).`),
+  asanakit: z.literal(POSE_FORMAT_VERSION, `Unsupported "asanakit" format version (expected ${POSE_FORMAT_VERSION}).`),
   id: z
     .string()
     .regex(/^[a-z0-9]+(-[a-z0-9]+)*$/, 'id must be a lowercase kebab-case slug')
@@ -162,7 +162,7 @@ export type Prop = z.output<typeof propSchema>;
 export type Anchor = z.output<typeof anchor>;
 
 export const sequenceSchema = z.object({
-  posekit: z.literal(POSE_FORMAT_VERSION),
+  asanakit: z.literal(POSE_FORMAT_VERSION),
   id: z.string().regex(/^[a-z0-9]+(-[a-z0-9]+)*$/),
   name: z.string().min(1),
   tradition: z.string().optional(),
@@ -190,14 +190,14 @@ export type SequenceSpec = z.output<typeof sequenceSchema>;
 
 export const poseJsonSchema = (): Record<string, unknown> => ({
   $schema: 'https://json-schema.org/draft/2020-12/schema',
-  $id: 'https://posekit.dev/schema/pose-v1.json',
-  title: 'posekit pose',
+  $id: 'https://asanakit.dev/schema/pose-v1.json',
+  title: 'asanakit pose',
   ...z.toJSONSchema(poseSchema, { io: 'input' }),
 });
 
 export const sequenceJsonSchema = (): Record<string, unknown> => ({
   $schema: 'https://json-schema.org/draft/2020-12/schema',
-  $id: 'https://posekit.dev/schema/sequence-v1.json',
-  title: 'posekit sequence',
+  $id: 'https://asanakit.dev/schema/sequence-v1.json',
+  title: 'asanakit sequence',
   ...z.toJSONSchema(sequenceSchema, { io: 'input' }),
 });

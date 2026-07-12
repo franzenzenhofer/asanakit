@@ -8,7 +8,7 @@ import { boundsOfPoints } from './project.js';
 import { resolveAnchor } from './props.js';
 import { el, group, num, textEl, type SvgNode } from './svg.js';
 
-export const ARROW_MARKER_ID = 'posekit-arrow';
+export const ARROW_MARKER_ID = 'asanakit-arrow';
 
 export const arrowMarker = (color: string): SvgNode =>
   el('defs', {}, [

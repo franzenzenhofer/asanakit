@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 import { parsePose, poseJsonSchema, resolveFigure } from '../../src/model/index.js';
 
 const MINIMAL = `
-posekit: 1
+asanakit: 1
 id: tadasana
 name: Mountain Pose
 discipline: yoga
@@ -25,27 +25,27 @@ describe('parsePose', () => {
   });
 
   test('parses JSON as well as YAML', () => {
-    const pose = parsePose(JSON.stringify({ posekit: 1, id: 'x', name: 'X', discipline: 'surf' }), 'x.pose.json');
+    const pose = parsePose(JSON.stringify({ asanakit: 1, id: 'x', name: 'X', discipline: 'surf' }), 'x.pose.json');
     expect(pose.discipline).toBe('surf');
   });
 
   test('reports the offending field when validation fails', () => {
-    expect(() => parsePose('posekit: 1\nid: x\nname: X\ndiscipline: knitting\n', 'x.pose.yaml')).toThrow(
+    expect(() => parsePose('asanakit: 1\nid: x\nname: X\ndiscipline: knitting\n', 'x.pose.yaml')).toThrow(
       /discipline/,
     );
   });
 
   test('rejects an unknown joint name with a helpful message', () => {
-    const src = 'posekit: 1\nid: x\nname: X\ndiscipline: yoga\nfigure:\n  joints:\n    kneecapL: 20\n';
+    const src = 'asanakit: 1\nid: x\nname: X\ndiscipline: yoga\nfigure:\n  joints:\n    kneecapL: 20\n';
     expect(() => parsePose(src, 'x.pose.yaml')).toThrow(/kneecapL/);
   });
 
   test('rejects an unsupported format version', () => {
-    expect(() => parsePose('posekit: 99\nid: x\nname: X\ndiscipline: yoga\n', 'x.pose.yaml')).toThrow(/posekit/);
+    expect(() => parsePose('asanakit: 99\nid: x\nname: X\ndiscipline: yoga\n', 'x.pose.yaml')).toThrow(/asanakit/);
   });
 
   test('names the file in the error message', () => {
-    expect(() => parsePose('posekit: 1\n', 'broken.pose.yaml')).toThrow(/broken\.pose\.yaml/);
+    expect(() => parsePose('asanakit: 1\n', 'broken.pose.yaml')).toThrow(/broken\.pose\.yaml/);
   });
 });
 
@@ -60,7 +60,7 @@ describe('resolveFigure', () => {
 
   test('mirror swaps left and right joint angles', () => {
     const pose = parsePose(
-      'posekit: 1\nid: x\nname: X\ndiscipline: yoga\nfigure:\n  mirror: true\n  joints:\n    thighL: 40\n    thighR: 10\n',
+      'asanakit: 1\nid: x\nname: X\ndiscipline: yoga\nfigure:\n  mirror: true\n  joints:\n    thighL: 40\n    thighR: 10\n',
       'x.pose.yaml',
     );
     const kin = resolveFigure(pose.figure);
@@ -70,7 +70,7 @@ describe('resolveFigure', () => {
 
   test('mirror leaves centre joints untouched', () => {
     const pose = parsePose(
-      'posekit: 1\nid: x\nname: X\ndiscipline: yoga\nfigure:\n  mirror: true\n  joints:\n    spine: 25\n',
+      'asanakit: 1\nid: x\nname: X\ndiscipline: yoga\nfigure:\n  mirror: true\n  joints:\n    spine: 25\n',
       'x.pose.yaml',
     );
     expect(resolveFigure(pose.figure).joints.spine).toBe(25);

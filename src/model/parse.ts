@@ -4,7 +4,7 @@ import { parse as parseYaml } from 'yaml';
 import type { z } from 'zod';
 import { poseSchema, sequenceSchema, type PoseSpec, type SequenceSpec } from './schema.js';
 
-/** Every failure posekit raises on bad input, so a CLI can print it without a stack trace. */
+/** Every failure asanakit raises on bad input, so a CLI can print it without a stack trace. */
 export class PoseParseError extends Error {
   constructor(
     readonly file: string,
