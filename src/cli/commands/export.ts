@@ -1,6 +1,9 @@
+import { mkdir, writeFile } from 'node:fs/promises';
+import { dirname, extname } from 'node:path';
 import type { Command } from 'commander';
 import { DEFAULT_RIG } from '../../core/rig.js';
 import { solveSkeleton } from '../../core/skeleton.js';
+import { exportGlb, exportGltf } from '../../export3d/index.js';
 import { resolveFigure } from '../../model/index.js';
 import { toKeypoints, type KeypointFormat } from '../../standards/keypoints.js';
 import { resolvePose } from '../resolve.js';
@@ -8,6 +11,24 @@ import { resolvePose } from '../resolve.js';
 const FORMATS: readonly string[] = ['mediapipe33', 'coco17'];
 
 export const registerExportCommands = (program: Command): void => {
+  program
+    .command('gltf <pose>')
+    .description('Export a pose as a 3D model any glTF viewer can orbit and zoom (.glb or .gltf)')
+    .requiredOption('-o, --out <file>', 'output path; the extension picks binary .glb or JSON .gltf')
+    .option('--lib <dir>', 'load poses from this directory')
+    .action(async (ref: string, options: { out: string; lib?: string }) => {
+      const pose = await resolvePose(ref, options.lib);
+      const skeleton = solveSkeleton(resolveFigure(pose.figure), DEFAULT_RIG);
+      const sceneOptions = { engaged: pose.muscles.engaged, stretched: pose.muscles.stretched };
+
+      await mkdir(dirname(options.out), { recursive: true });
+      if (extname(options.out).toLowerCase() === '.gltf') {
+        await writeFile(options.out, await exportGltf(skeleton, sceneOptions));
+      } else {
+        await writeFile(options.out, await exportGlb(skeleton, sceneOptions));
+      }
+      process.stdout.write(`${options.out}\n`);
+    });
   program
     .command('keypoints <pose>')
     .description('Export a pose as pose-estimation keypoints (MediaPipe 33 or COCO 17)')
