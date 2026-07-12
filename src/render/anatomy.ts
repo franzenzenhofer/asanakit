@@ -1,5 +1,5 @@
 import { path } from 'd3-path';
-import { MUSCLES, MUSCLE_IDS, muscleBones, type MuscleDef, type MuscleId } from '../anatomy/muscles.js';
+import { MUSCLES, MUSCLE_IDS, muscleInstances, type MuscleDef, type MuscleId } from '../anatomy/muscles.js';
 import type { BoneSegment } from '../core/types.js';
 import { along, sub, type Vec2 } from '../core/vec2.js';
 import type { RenderContext } from './context.js';
@@ -28,13 +28,15 @@ const fillFor = (state: MuscleState, style: Style): string => {
  * as a thick round-capped stroke, that reads as a muscle without needing traced
  * anatomical artwork.
  */
-const bellyPath = (bone: BoneSegment, muscle: MuscleDef, offsetSign: number, ctx: RenderContext): string => {
+const bellyPath = (bone: BoneSegment, muscle: MuscleDef, rawOffset: number, ctx: RenderContext): string => {
   const { proj } = ctx;
   const scale = ctx.skeleton.scale;
-  const offset = muscle.offset * offsetSign * scale;
+  const offset = rawOffset * scale;
+  // Bow the belly away from the bone, on whichever side of it the muscle sits.
+  const bulge = offset === 0 ? 0 : Math.sign(offset) * muscle.width * BULGE * scale;
   const a: Vec2 = along(bone.start, bone.end, muscle.t0, offset);
   const b: Vec2 = along(bone.start, bone.end, muscle.t1, offset);
-  const mid: Vec2 = along(bone.start, bone.end, (muscle.t0 + muscle.t1) / 2, offset + muscle.width * BULGE * offsetSign * scale);
+  const mid: Vec2 = along(bone.start, bone.end, (muscle.t0 + muscle.t1) / 2, offset + bulge);
 
   const [ax, ay] = proj.p(a);
   const [bx, by] = proj.p(b);
@@ -66,14 +68,14 @@ export const renderMuscles = (
   for (const id of MUSCLE_IDS) {
     const muscle = MUSCLES[id];
     const state = stateOf(id, engaged, stretched);
-    for (const { bone: boneId, offsetSign } of muscleBones(muscle)) {
+    for (const { bone: boneId, offset } of muscleInstances(muscle, skeleton.view)) {
       const bone = skeleton.bones[boneId];
       if (isDegenerate(bone)) continue;
       shapes.push(
         el('path', {
           'data-muscle': id,
           'data-muscle-state': state,
-          d: bellyPath(bone, muscle, offsetSign, ctx),
+          d: bellyPath(bone, muscle, offset, ctx),
           fill: 'none',
           stroke: fillFor(state, style),
           'stroke-width': muscle.width * proj.s * skeleton.scale,

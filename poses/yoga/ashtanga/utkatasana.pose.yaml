@@ -1,0 +1,42 @@
+posekit: 1
+id: utkatasana
+name: Chair Pose
+sanskrit: Utkaṭāsana
+english: Fierce Pose
+discipline: yoga
+family: standing
+difficulty: 2
+description: Knees bend deeply, the hips sit back as if onto a chair, the torso leans forward and the arms reach overhead in line with the spine.
+tags: [ashtanga, surya-namaskara-b, standing]
+breath: inhale
+drishti: angustha-ma-dyai
+cues:
+  - Sit the hips back, keep the knees over the ankles
+  - Reach the arms up alongside the ears
+contact: [toeL, toeR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: 60
+  world:
+    thighL: -30
+    thighR: -30
+    shinL: -100
+    shinR: -100
+    footL: -18
+    footR: -18
+    spine: 55
+    neck: 60
+    head: 62
+    upperArmL: 58
+    upperArmR: 58
+    forearmL: 60
+    forearmR: 60
+    handL: 62
+    handR: 62
+props:
+  - type: mat
+muscles:
+  engaged: [quadriceps, gluteus, erectorSpinae, deltoid]
+  stretched: [gastrocnemius, latissimus]

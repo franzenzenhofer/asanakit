@@ -1,0 +1,42 @@
+posekit: 1
+id: virabhadrasana-a
+name: Warrior I
+sanskrit: Vīrabhadrāsana A
+english: Warrior I
+discipline: yoga
+family: standing
+difficulty: 3
+description: A long lunge. The front knee bends over the ankle, the back leg drives straight to a grounded heel, the chest lifts and the arms reach overhead.
+tags: [ashtanga, standing, lunge, backbend]
+breath: inhale
+drishti: angustha-ma-dyai
+cues:
+  - Front knee tracks over the ankle, back leg straight and strong
+  - Lift the chest, reach the fingertips up
+contact: [toeL, toeR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: 88
+  world:
+    thighL: -15
+    shinL: -95
+    footL: -18
+    thighR: -142
+    shinR: -142
+    footR: -15
+    spine: 92
+    neck: 95
+    head: 95
+    upperArmL: 95
+    upperArmR: 95
+    forearmL: 95
+    forearmR: 95
+    handL: 95
+    handR: 95
+props:
+  - type: mat
+muscles:
+  engaged: [quadriceps, gluteus, erectorSpinae, deltoid]
+  stretched: [hipFlexors, gastrocnemius, pectoralis]

@@ -1,0 +1,42 @@
+posekit: 1
+id: padangusthasana
+name: Big Toe Pose
+sanskrit: Pādāṅguṣṭhāsana
+english: Big Toe Pose
+discipline: yoga
+family: standing
+difficulty: 2
+description: Feet hip width, legs straight, fold deep from the hips and hook the first two fingers around the big toes. The elbows bend back and the crown drops toward the shins.
+tags: [ashtanga, standing, forward-fold]
+breath: exhale
+drishti: nasagrai
+cues:
+  - Hook the big toes, lift the kneecaps
+  - Pull on the toes to draw the chest toward the shins
+contact: [toeL, toeR, handTipL, handTipR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: -85
+  world:
+    thighL: -90
+    thighR: -90
+    shinL: -90
+    shinR: -90
+    footL: -18
+    footR: -18
+    spine: -88
+    neck: -95
+    head: -95
+    upperArmL: -123
+    upperArmR: -123
+    forearmL: -27
+    forearmR: -27
+    handL: -60
+    handR: -60
+props:
+  - type: mat
+muscles:
+  engaged: [biceps, quadriceps, rectusAbdominis]
+  stretched: [hamstrings, erectorSpinae, gastrocnemius]

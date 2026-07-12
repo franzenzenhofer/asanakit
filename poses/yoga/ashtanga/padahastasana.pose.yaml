@@ -1,0 +1,42 @@
+posekit: 1
+id: padahastasana
+name: Hand Under Foot Pose
+sanskrit: Pādahastāsana
+english: Hand Under Foot Pose
+discipline: yoga
+family: standing
+difficulty: 3
+description: The deepest of the standing folds. Legs stay straight, the palms slide under the soles of the feet, fingers toward the heels, and the head drops toward the shins.
+tags: [ashtanga, standing, forward-fold]
+breath: exhale
+drishti: nasagrai
+cues:
+  - Slide the palms under the feet, fingertips to the heels
+  - Bend the elbows back and lengthen the spine down
+contact: [toeL, toeR, handTipL, handTipR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: -88
+  world:
+    thighL: -90
+    thighR: -90
+    shinL: -90
+    shinR: -90
+    footL: -18
+    footR: -18
+    spine: -92
+    neck: -95
+    head: -85
+    upperArmL: -101
+    upperArmR: -101
+    forearmL: -38
+    forearmR: -38
+    handL: 180
+    handR: 180
+props:
+  - type: mat
+muscles:
+  engaged: [biceps, quadriceps, rectusAbdominis]
+  stretched: [hamstrings, erectorSpinae, gastrocnemius, latissimus]

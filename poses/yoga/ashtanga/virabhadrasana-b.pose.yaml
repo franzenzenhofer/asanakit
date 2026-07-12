@@ -1,0 +1,42 @@
+posekit: 1
+id: virabhadrasana-b
+name: Warrior II
+sanskrit: Vīrabhadrāsana B
+english: Warrior II
+discipline: yoga
+family: standing
+difficulty: 3
+description: A wide stance. The front knee bends to a right angle stacked over the ankle, the back leg stays straight, and the arms extend level with the floor.
+tags: [ashtanga, standing, lunge, hip-opener]
+breath: exhale
+drishti: hastagrai
+cues:
+  - Bend the front knee until the shin is vertical
+  - Extend evenly through both fingertips, shoulders down
+contact: [toeL, toeR]
+figure:
+  view: front
+  grounded: true
+  root:
+    rotation: 90
+  world:
+    thighL: -10
+    shinL: -90
+    footL: -20
+    thighR: -144
+    shinR: -144
+    footR: -165
+    spine: 90
+    neck: 90
+    head: 90
+    upperArmL: 0
+    forearmL: 0
+    handL: 0
+    upperArmR: 180
+    forearmR: 180
+    handR: 180
+props:
+  - type: mat
+muscles:
+  engaged: [quadriceps, gluteus, adductors, deltoid]
+  stretched: [adductors, hipFlexors, pectoralis]

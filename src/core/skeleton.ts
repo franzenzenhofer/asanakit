@@ -59,35 +59,43 @@ const assertKnownJoints = (pose: KinematicPose, rig: Rig): void => {
   }
 };
 
-const solveBones = (pose: KinematicPose, rig: Rig): Record<BoneId, BoneSegment> => {
-  const solved = {} as Record<BoneId, BoneSegment>;
+/** Where a bone begins: the start or the end of the bone it hangs off. */
+const originOf = (bone: BoneDef, parent: BoneSegment | null, pose: KinematicPose): Vec2 => {
+  if (parent === null) return pose.root.position;
+  return bone.attach === 'start' ? parent.start : parent.end;
+};
 
-  for (const bone of rig.bones) {
-    const parent = bone.parent === null ? null : solved[bone.parent];
-    if (bone.parent !== null && parent === undefined) {
-      throw new Error(`Rig "${rig.name}" lists bone "${bone.id}" before its parent "${bone.parent}"`);
-    }
+/** Which direction this bone's rest angle is measured against. */
+const aimOf = (bone: BoneDef, parent: BoneSegment | null, solved: Record<BoneId, BoneSegment>, pose: KinematicPose): number => {
+  const aimedAt = bone.angleParent === undefined ? parent : solved[bone.angleParent];
+  return aimedAt === null || aimedAt === undefined ? pose.root.rotation : aimedAt.worldAngle;
+};
 
-    const aimedAt = bone.angleParent === undefined ? parent : solved[bone.angleParent];
-    const parentAngle = aimedAt === null || aimedAt === undefined ? pose.root.rotation : aimedAt.worldAngle;
-    const start: Vec2 = parent === null ? pose.root.position : bone.attach === 'start' ? parent.start : parent.end;
-
-    const absolute = pose.world?.[bone.id];
-    const joint = (pose.joints[bone.id] ?? 0) * (bone.flexSign ?? 1);
-    const worldAngle = absolute ?? relativeAngle(bone, pose, parentAngle, joint);
-    const length = boneLength(bone, pose);
-
-    solved[bone.id] = {
-      id: bone.id,
-      start,
-      end: add(start, fromPolar(worldAngle, length)),
-      worldAngle,
-      length,
-      side: bone.side,
-      group: bone.group,
-    };
+const solveBone = (bone: BoneDef, solved: Record<BoneId, BoneSegment>, pose: KinematicPose): BoneSegment => {
+  const parent = bone.parent === null ? null : solved[bone.parent];
+  if (bone.parent !== null && parent === undefined) {
+    throw new Error(`Bone "${bone.id}" is listed before its parent "${bone.parent}"`);
   }
 
+  const joint = (pose.joints[bone.id] ?? 0) * (bone.flexSign ?? 1);
+  const worldAngle = pose.world?.[bone.id] ?? relativeAngle(bone, pose, aimOf(bone, parent ?? null, solved, pose), joint);
+  const start = originOf(bone, parent ?? null, pose);
+  const length = boneLength(bone, pose);
+
+  return {
+    id: bone.id,
+    start,
+    end: add(start, fromPolar(worldAngle, length)),
+    worldAngle,
+    length,
+    side: bone.side,
+    group: bone.group,
+  };
+};
+
+const solveBones = (pose: KinematicPose, rig: Rig): Record<BoneId, BoneSegment> => {
+  const solved = {} as Record<BoneId, BoneSegment>;
+  for (const bone of rig.bones) solved[bone.id] = solveBone(bone, solved, pose);
   return solved;
 };
 
