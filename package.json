@@ -1,7 +1,7 @@
 {
   "name": "@franzenzenhofer/asanakit",
-  "version": "0.1.0",
-  "description": "Programmatic stick-figure and anatomical infographic engine for yoga and surf postures. Declarative pose format, deterministic SVG/PNG output, CLI-first, AI-driveable.",
+  "version": "0.2.0",
+  "description": "Programmatic stick-figure and body-posture visualization engine for yoga and surf. Declarative 3D pose format, deterministic any-angle SVG/PNG, interactive three.js viewer, GLB export, Rapier physics settling. CLI-first, AI-driveable.",
   "keywords": [
     "yoga",
     "surf",
@@ -15,7 +15,14 @@
     "skeleton",
     "kinematics",
     "cli",
-    "typescript"
+    "typescript",
+    "3d",
+    "three.js",
+    "gltf",
+    "glb",
+    "physics",
+    "rapier",
+    "camera"
   ],
   "license": "MIT",
   "author": "Franz Enzenhofer",

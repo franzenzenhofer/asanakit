@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { readFile } from 'node:fs/promises';
 import { Command } from 'commander';
 import { PoseParseError } from '../model/index.js';
 import { registerExportCommands } from './commands/export.js';
@@ -6,12 +7,17 @@ import { registerInfoCommands } from './commands/info.js';
 import { registerRenderCommands } from './commands/render.js';
 import { registerViewCommands } from './commands/view.js';
 
+// Both dist/cli/index.js and src/cli/index.ts sit two levels below the root.
+const pkg = JSON.parse(await readFile(new URL('../../package.json', import.meta.url), 'utf8')) as {
+  version: string;
+};
+
 const program = new Command();
 
 program
   .name('asanakit')
-  .description('Programmatic stick-figure and anatomical infographics for yoga and surf postures.')
-  .version('0.1.0')
+  .description('Programmatic stick-figure and body-posture visualization for yoga and surf, in 2D and 3D.')
+  .version(pkg.version)
   .showHelpAfterError();
 
 registerRenderCommands(program);

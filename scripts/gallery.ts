@@ -68,6 +68,25 @@ for (const style of STYLES) {
   await write(`style-${style}`, renderSvg(downdog, { style, width: 400, height: 320 }), 400);
 }
 
+// One pose, orbited: what a 3D core buys - any viewpoint from the same data.
+const CAMERAS = ['front', 'three-quarter', 'side', 'back', 'top'] as const;
+const orbitPose = pose('virabhadrasana-b');
+const orbit = el(
+  'svg',
+  {
+    xmlns: 'http://www.w3.org/2000/svg',
+    viewBox: `0 0 ${CELL.w * CAMERAS.length} ${CELL.h}`,
+    width: CELL.w * CAMERAS.length,
+    height: CELL.h,
+  },
+  CAMERAS.map((camera, i) =>
+    group({ transform: `translate(${i * CELL.w} 0)` }, [
+      renderSvgNode({ ...orbitPose, name: camera }, { camera, width: CELL.w, height: CELL.h, title: true }),
+    ]),
+  ),
+);
+await write('orbit', serialize(orbit), CELL.w * CAMERAS.length);
+
 // The anatomy style doing what it is for.
 await write(
   'anatomy',
