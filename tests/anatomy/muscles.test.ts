@@ -71,8 +71,8 @@ describe('muscleInstances - in profile', () => {
     expect(muscleInstances(MUSCLES.quadriceps, SIDE).map((i) => i.bone).sort()).toEqual(['thighL', 'thighR']);
   });
 
-  test('the two profiles place the same muscle on opposite sides of the bone', () => {
-    const fromRight = muscleInstances(MUSCLES.quadriceps, SIDE)[0];
+  test('the two exact profiles place the same muscle on opposite sides of the bone', () => {
+    const fromRight = muscleInstances(MUSCLES.quadriceps, CAMERA_PRESETS.right.azimuth)[0];
     const fromLeft = muscleInstances(MUSCLES.quadriceps, CAMERA_PRESETS.left.azimuth)[0];
     expect(fromRight?.offset).toBeCloseTo(-(fromLeft?.offset as number), 8);
   });

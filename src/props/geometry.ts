@@ -38,11 +38,13 @@ export interface MatModel {
 /**
  * The mat lies on the floor under the figure's footprint centre: `length`
  * runs along the figure's sagittal axis (+z), `width` across it, `yaw` turns
- * the whole mat (90 = length along x, for wide standing poses).
+ * the whole mat (90 = length along x, for wide standing poses). `y` is the
+ * TOP surface - the figure stands and lies ON it - so the box extends
+ * downward by `thickness`.
  */
 export const matModel = (prop: MatProp, skeleton: Skeleton): MatModel => {
   const [cx, cz] = centreOf(skeleton.bounds);
-  const topY = prop.y + prop.thickness;
+  const topY = prop.y;
   const hw = prop.width / 2;
   const hl = prop.length / 2;
   const corners: [Vec3, Vec3, Vec3, Vec3] = [
@@ -52,7 +54,7 @@ export const matModel = (prop: MatProp, skeleton: Skeleton): MatModel => {
     [cx - hw, topY, cz + hl],
   ];
   return {
-    centre: [cx, prop.y + prop.thickness / 2, cz],
+    centre: [cx, prop.y - prop.thickness / 2, cz],
     top: corners.map((p) => rotateY(p, prop.yaw, cx, cz)) as [Vec3, Vec3, Vec3, Vec3],
     width: prop.width,
     length: prop.length,

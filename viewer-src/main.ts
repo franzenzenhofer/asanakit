@@ -62,6 +62,7 @@ const scene = new Scene();
 scene.background = new Color(BACKGROUND);
 
 const grid = new GridHelper(2.4, 24, 0xd0d0d0, 0xe8e8e8);
+grid.position.y = -0.002; // just below any mat top at y = 0
 scene.add(grid);
 
 scene.add(new AmbientLight(0xffffff, 1.1));

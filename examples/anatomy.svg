@@ -10,78 +10,78 @@
     <text x="310" y="69" text-anchor="middle" fill="#666666" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18.975" font-style="italic">Adho Mukha Śvānāsana</text>
   </g>
   <g data-layer="props">
-    <rect data-prop="mat" x="61.608" y="305.719" width="496.783" height="16.191" rx="8.096" fill="#f0f0f0" stroke="#111111" stroke-width="2.944"/>
+    <rect data-prop="mat" x="52.5" y="313.814" width="515.001" height="16.191" rx="8.096" fill="#f0f0f0" stroke="#111111" stroke-width="2.944"/>
   </g>
   <g data-layer="muscles">
-    <path data-muscle="deltoid" data-muscle-state="engaged" d="M345.146,219.889Q352.952,229.192,360.758,238.494" fill="none" stroke="#d1495b" stroke-width="21.343" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="deltoid" data-muscle-state="engaged" d="M345.146,219.889Q352.952,229.192,360.758,238.494" fill="none" stroke="#d1495b" stroke-width="21.343" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="rotatorCuff" data-muscle-state="resting" d="M342.934,224.123Q342.305,231.388,349.569,232.03" fill="none" stroke="#e0cfc2" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="rotatorCuff" data-muscle-state="resting" d="M342.934,224.123Q342.305,231.388,349.569,232.03" fill="none" stroke="#e0cfc2" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="biceps" data-muscle-state="resting" d="M360.932,227.252Q379.319,241.15,389.813,261.671" fill="none" stroke="#e0cfc2" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="biceps" data-muscle-state="resting" d="M360.932,227.252Q379.319,241.15,389.813,261.671" fill="none" stroke="#e0cfc2" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="triceps" data-muscle-state="engaged" d="M348.485,235.318Q360.15,257.234,379.708,272.528" fill="none" stroke="#d1495b" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="triceps" data-muscle-state="engaged" d="M348.485,235.318Q360.15,257.234,379.708,272.528" fill="none" stroke="#d1495b" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="forearmFlexors" data-muscle-state="resting" d="M392.395,269.328Q408.611,281.841,418.119,299.984" fill="none" stroke="#e0cfc2" stroke-width="12.512" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="forearmFlexors" data-muscle-state="resting" d="M392.395,269.328Q408.611,281.841,418.119,299.984" fill="none" stroke="#e0cfc2" stroke-width="12.512" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="pectoralis" data-muscle-state="resting" d="M320.681,210.569Q322.491,224.513,336.169,227.77" fill="none" stroke="#e0cfc2" stroke-width="22.815" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="latissimus" data-muscle-state="stretched" d="M330.743,182.148Q345.156,188.531,349.998,203.533" fill="none" stroke="#3d7ea6" stroke-width="18.399" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="trapezius" data-muscle-state="resting" d="M348.101,206.925Q357.91,208.195,358.147,218.083" fill="none" stroke="#e0cfc2" stroke-width="18.399" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="serratus" data-muscle-state="engaged" d="M322.511,200.503Q324.872,208.9,332.976,212.126" fill="none" stroke="#d1495b" stroke-width="11.04" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="erectorSpinae" data-muscle-state="resting" d="M314.357,171.648Q335.419,188.881,350.356,211.629" fill="none" stroke="#e0cfc2" stroke-width="11.776" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="rectusAbdominis" data-muscle-state="resting" d="M298.205,184.507Q304.662,202.265,321.646,210.542" fill="none" stroke="#e0cfc2" stroke-width="20.239" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="obliques" data-muscle-state="resting" d="M305.221,182.4Q310.81,196.307,324.057,203.32" fill="none" stroke="#e0cfc2" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="gluteus" data-muscle-state="resting" d="M275.846,139.011Q261.126,145.213,260.332,161.166" fill="none" stroke="#e0cfc2" stroke-width="24.287" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="gluteus" data-muscle-state="resting" d="M275.846,139.011Q261.126,145.213,260.332,161.166" fill="none" stroke="#e0cfc2" stroke-width="24.287" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="hipFlexors" data-muscle-state="resting" d="M292.898,153.152Q286.871,169.843,273.247,181.216" fill="none" stroke="#e0cfc2" stroke-width="13.248" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="hipFlexors" data-muscle-state="resting" d="M292.898,153.152Q286.871,169.843,273.247,181.216" fill="none" stroke="#e0cfc2" stroke-width="13.248" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="quadriceps" data-muscle-state="engaged" d="M281.781,165.179Q266.065,199.3,239.377,225.738" fill="none" stroke="#d1495b" stroke-width="19.135" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="quadriceps" data-muscle-state="engaged" d="M281.781,165.179Q266.065,199.3,239.377,225.738" fill="none" stroke="#d1495b" stroke-width="19.135" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="hamstrings" data-muscle-state="stretched" d="M267.743,153.148Q241.477,179.882,225.34,213.707" fill="none" stroke="#3d7ea6" stroke-width="17.663" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="hamstrings" data-muscle-state="stretched" d="M267.743,153.148Q241.477,179.882,225.34,213.707" fill="none" stroke="#3d7ea6" stroke-width="17.663" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="adductors" data-muscle-state="resting" d="M277.649,155.682Q259.55,181.53,241.451,207.378" fill="none" stroke="#e0cfc2" stroke-width="11.04" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="adductors" data-muscle-state="resting" d="M277.649,155.682Q259.55,181.53,241.451,207.378" fill="none" stroke="#e0cfc2" stroke-width="11.04" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="gastrocnemius" data-muscle-state="stretched" d="M220.771,221.514Q200.922,239.533,190.778,264.349" fill="none" stroke="#3d7ea6" stroke-width="16.927" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="gastrocnemius" data-muscle-state="stretched" d="M220.771,221.514Q200.922,239.533,190.778,264.349" fill="none" stroke="#3d7ea6" stroke-width="16.927" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="tibialisAnterior" data-muscle-state="resting" d="M231.794,231.434Q217.895,258.022,197.665,280.177" fill="none" stroke="#e0cfc2" stroke-width="11.04" stroke-linecap="round" opacity="0.95"/>
-    <path data-muscle="tibialisAnterior" data-muscle-state="resting" d="M231.794,231.434Q217.895,258.022,197.665,280.177" fill="none" stroke="#e0cfc2" stroke-width="11.04" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="deltoid" data-muscle-state="engaged" d="M352.029,219.889Q359.664,229.192,367.3,238.494" fill="none" stroke="#d1495b" stroke-width="21.343" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="deltoid" data-muscle-state="engaged" d="M336.727,219.889Q344.363,229.192,351.998,238.494" fill="none" stroke="#d1495b" stroke-width="21.343" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="rotatorCuff" data-muscle-state="resting" d="M349.836,224.025Q349.098,231.247,356.326,231.932" fill="none" stroke="#e0cfc2" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="rotatorCuff" data-muscle-state="resting" d="M334.534,224.025Q333.797,231.247,341.024,231.932" fill="none" stroke="#e0cfc2" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="biceps" data-muscle-state="resting" d="M367.52,227.415Q385.627,241.356,395.77,261.835" fill="none" stroke="#e0cfc2" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="biceps" data-muscle-state="resting" d="M352.218,227.415Q370.325,241.356,380.468,261.835" fill="none" stroke="#e0cfc2" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="triceps" data-muscle-state="engaged" d="M355.245,235.154Q366.533,257.028,385.786,272.364" fill="none" stroke="#d1495b" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="triceps" data-muscle-state="engaged" d="M339.943,235.154Q351.231,257.028,370.484,272.364" fill="none" stroke="#d1495b" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="forearmFlexors" data-muscle-state="resting" d="M398.275,269.426Q414.241,281.976,423.437,300.082" fill="none" stroke="#e0cfc2" stroke-width="12.512" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="forearmFlexors" data-muscle-state="resting" d="M382.974,269.426Q398.939,281.976,408.135,300.082" fill="none" stroke="#e0cfc2" stroke-width="12.512" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="pectoralis" data-muscle-state="resting" d="M320.363,210.303Q321.946,224.181,335.513,227.504" fill="none" stroke="#e0cfc2" stroke-width="22.815" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="latissimus" data-muscle-state="stretched" d="M330.395,182.481Q344.645,188.917,349.229,203.866" fill="none" stroke="#3d7ea6" stroke-width="18.399" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="trapezius" data-muscle-state="resting" d="M347.347,207.175Q357.093,208.498,357.174,218.333" fill="none" stroke="#e0cfc2" stroke-width="18.399" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="serratus" data-muscle-state="engaged" d="M322.212,200.42Q324.43,208.785,332.448,212.042" fill="none" stroke="#d1495b" stroke-width="11.04" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="erectorSpinae" data-muscle-state="resting" d="M314.33,171.865Q335.029,189.131,349.542,211.846" fill="none" stroke="#e0cfc2" stroke-width="11.776" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="rectusAbdominis" data-muscle-state="resting" d="M298.384,184.258Q304.533,201.957,321.313,210.292" fill="none" stroke="#e0cfc2" stroke-width="20.239" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="obliques" data-muscle-state="resting" d="M305.294,182.3Q310.64,196.165,323.719,203.22" fill="none" stroke="#e0cfc2" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="gluteus" data-muscle-state="resting" d="M283.032,139.241Q268.431,145.515,267.857,161.396" fill="none" stroke="#e0cfc2" stroke-width="24.287" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="gluteus" data-muscle-state="resting" d="M270.025,139.241Q255.425,145.515,254.851,161.396" fill="none" stroke="#e0cfc2" stroke-width="24.287" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="hipFlexors" data-muscle-state="resting" d="M299.838,152.922Q294.053,169.574,280.617,180.985" fill="none" stroke="#e0cfc2" stroke-width="13.248" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="hipFlexors" data-muscle-state="resting" d="M286.832,152.922Q281.047,169.574,267.611,180.985" fill="none" stroke="#e0cfc2" stroke-width="13.248" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="quadriceps" data-muscle-state="engaged" d="M288.952,164.995Q273.739,199.059,247.475,225.553" fill="none" stroke="#d1495b" stroke-width="19.135" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="quadriceps" data-muscle-state="engaged" d="M275.945,164.995Q260.732,199.059,234.468,225.553" fill="none" stroke="#d1495b" stroke-width="19.135" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="hamstrings" data-muscle-state="stretched" d="M275.115,153.348Q249.276,180.134,233.638,213.907" fill="none" stroke="#3d7ea6" stroke-width="17.663" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="hamstrings" data-muscle-state="stretched" d="M262.108,153.348Q236.269,180.134,220.631,213.907" fill="none" stroke="#3d7ea6" stroke-width="17.663" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="adductors" data-muscle-state="resting" d="M284.859,155.682Q267.156,181.53,249.452,207.378" fill="none" stroke="#e0cfc2" stroke-width="11.04" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="adductors" data-muscle-state="resting" d="M271.853,155.682Q254.149,181.53,236.446,207.378" fill="none" stroke="#e0cfc2" stroke-width="11.04" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="gastrocnemius" data-muscle-state="stretched" d="M229.173,221.699Q209.617,239.768,199.836,264.533" fill="none" stroke="#3d7ea6" stroke-width="16.927" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="gastrocnemius" data-muscle-state="stretched" d="M216.167,221.699Q196.61,239.768,186.829,264.533" fill="none" stroke="#3d7ea6" stroke-width="16.927" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="tibialisAnterior" data-muscle-state="resting" d="M240.041,231.311Q226.536,257.866,206.657,280.054" fill="none" stroke="#e0cfc2" stroke-width="11.04" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="tibialisAnterior" data-muscle-state="resting" d="M227.034,231.311Q213.53,257.866,193.65,280.054" fill="none" stroke="#e0cfc2" stroke-width="11.04" stroke-linecap="round" opacity="0.95"/>
   </g>
   <g data-layer="figure">
-    <line data-bone="upperArmL" data-side="left" x1="348.269" y1="223.61" x2="387.297" y2="270.123" stroke="#8f8f8f" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
-    <line data-bone="forearmL" data-side="left" x1="387.297" y1="270.123" x2="421.595" y2="310.997" stroke="#8f8f8f" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
-    <line data-bone="handL" data-side="left" x1="421.595" y1="310.997" x2="441.638" y2="313.814" stroke="#8f8f8f" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
-    <line data-bone="footL" data-side="left" x1="178.362" y1="297.478" x2="209.484" y2="308.806" stroke="#8f8f8f" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
-    <line data-bone="shinL" data-side="left" x1="230.074" y1="223.626" x2="178.362" y2="297.478" stroke="#8f8f8f" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
-    <line data-bone="thighL" data-side="left" x1="281.786" y1="149.774" x2="230.074" y2="223.626" stroke="#8f8f8f" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
-    <line data-bone="clavicleL" data-side="left" x1="348.269" y1="223.61" x2="348.269" y2="223.61" stroke="#8f8f8f" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
-    <line data-bone="hipL" data-side="left" x1="281.786" y1="149.774" x2="281.786" y2="149.774" stroke="#8f8f8f" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
-    <line data-bone="pelvis" data-side="center" x1="281.786" y1="149.774" x2="306.409" y2="177.121" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
-    <line data-bone="spine" data-side="center" x1="306.409" y1="177.121" x2="348.269" y2="223.61" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
-    <line data-bone="neck" data-side="center" x1="348.269" y1="223.61" x2="363.043" y2="240.018" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
-    <line data-bone="head" data-side="center" x1="363.043" y1="240.018" x2="395.053" y2="275.569" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
-    <ellipse data-part="head" cx="379.048" cy="257.794" rx="16.927" ry="22.815" transform="rotate(138.000 379.048 257.794)" fill="#f5efe8" stroke="#3d3d3d" stroke-width="4.416"/>
-    <line data-bone="hipR" data-side="right" x1="281.786" y1="149.774" x2="281.786" y2="149.774" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
-    <line data-bone="clavicleR" data-side="right" x1="348.269" y1="223.61" x2="348.269" y2="223.61" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
-    <line data-bone="footR" data-side="right" x1="178.362" y1="297.478" x2="209.484" y2="308.806" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
-    <line data-bone="shinR" data-side="right" x1="230.074" y1="223.626" x2="178.362" y2="297.478" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
-    <line data-bone="thighR" data-side="right" x1="281.786" y1="149.774" x2="230.074" y2="223.626" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
-    <line data-bone="upperArmR" data-side="right" x1="348.269" y1="223.61" x2="387.297" y2="270.123" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
-    <line data-bone="forearmR" data-side="right" x1="387.297" y1="270.123" x2="421.595" y2="310.997" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
-    <line data-bone="handR" data-side="right" x1="421.595" y1="310.997" x2="441.638" y2="313.814" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+    <line data-bone="footL" data-side="left" x1="187.742" y1="297.478" x2="218.184" y2="308.806" stroke="#8f8f8f" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
+    <line data-bone="shinL" data-side="left" x1="238.324" y1="223.626" x2="187.742" y2="297.478" stroke="#8f8f8f" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
+    <line data-bone="thighL" data-side="left" x1="288.906" y1="149.774" x2="238.324" y2="223.626" stroke="#8f8f8f" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
+    <line data-bone="upperArmL" data-side="left" x1="355.083" y1="223.61" x2="393.259" y2="270.123" stroke="#8f8f8f" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
+    <line data-bone="hipL" data-side="left" x1="282.403" y1="149.774" x2="288.906" y2="149.774" stroke="#8f8f8f" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
+    <line data-bone="forearmL" data-side="left" x1="393.259" y1="270.123" x2="426.808" y2="310.997" stroke="#8f8f8f" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
+    <line data-bone="handL" data-side="left" x1="426.808" y1="310.997" x2="446.412" y2="313.814" stroke="#8f8f8f" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
+    <line data-bone="clavicleL" data-side="left" x1="347.432" y1="223.61" x2="355.083" y2="223.61" stroke="#8f8f8f" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
+    <line data-bone="pelvis" data-side="center" x1="282.403" y1="149.774" x2="306.488" y2="177.121" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+    <line data-bone="spine" data-side="center" x1="306.488" y1="177.121" x2="347.432" y2="223.61" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+    <line data-bone="footR" data-side="right" x1="174.736" y1="297.478" x2="205.177" y2="308.806" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+    <line data-bone="shinR" data-side="right" x1="225.317" y1="223.626" x2="174.736" y2="297.478" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+    <line data-bone="hipR" data-side="right" x1="282.403" y1="149.774" x2="275.899" y2="149.774" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+    <line data-bone="neck" data-side="center" x1="347.432" y1="223.61" x2="361.883" y2="240.018" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+    <line data-bone="head" data-side="center" x1="361.883" y1="240.018" x2="393.194" y2="275.569" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+    <ellipse data-part="head" cx="377.539" cy="257.794" rx="16.927" ry="22.815" transform="rotate(138.629 377.539 257.794)" fill="#f5efe8" stroke="#3d3d3d" stroke-width="4.416"/>
+    <line data-bone="thighR" data-side="right" x1="275.899" y1="149.774" x2="225.317" y2="223.626" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+    <line data-bone="clavicleR" data-side="right" x1="347.432" y1="223.61" x2="339.781" y2="223.61" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+    <line data-bone="upperArmR" data-side="right" x1="339.781" y1="223.61" x2="377.957" y2="270.123" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+    <line data-bone="forearmR" data-side="right" x1="377.957" y1="270.123" x2="411.506" y2="310.997" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+    <line data-bone="handR" data-side="right" x1="411.506" y1="310.997" x2="431.11" y2="313.814" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
     <g data-part="joints">
-      <circle data-joint="shoulderL" cx="348.269" cy="223.61" r="3.312" fill="#8f8f8f"/>
-      <circle data-joint="elbowL" cx="387.297" cy="270.123" r="3.312" fill="#8f8f8f"/>
-      <circle data-joint="wristL" cx="421.595" cy="310.997" r="3.312" fill="#8f8f8f"/>
-      <circle data-joint="shoulderR" cx="348.269" cy="223.61" r="3.312" fill="#3d3d3d"/>
-      <circle data-joint="elbowR" cx="387.297" cy="270.123" r="3.312" fill="#3d3d3d"/>
-      <circle data-joint="wristR" cx="421.595" cy="310.997" r="3.312" fill="#3d3d3d"/>
-      <circle data-joint="hipJointL" cx="281.786" cy="149.774" r="3.312" fill="#8f8f8f"/>
-      <circle data-joint="kneeL" cx="230.074" cy="223.626" r="3.312" fill="#8f8f8f"/>
-      <circle data-joint="ankleL" cx="178.362" cy="297.478" r="3.312" fill="#8f8f8f"/>
-      <circle data-joint="hipJointR" cx="281.786" cy="149.774" r="3.312" fill="#3d3d3d"/>
-      <circle data-joint="kneeR" cx="230.074" cy="223.626" r="3.312" fill="#3d3d3d"/>
-      <circle data-joint="ankleR" cx="178.362" cy="297.478" r="3.312" fill="#3d3d3d"/>
-      <circle data-joint="chest" cx="348.269" cy="223.61" r="3.312" fill="#3d3d3d"/>
-      <circle data-joint="hipCenter" cx="281.786" cy="149.774" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="shoulderL" cx="355.083" cy="223.61" r="3.312" fill="#8f8f8f"/>
+      <circle data-joint="elbowL" cx="393.259" cy="270.123" r="3.312" fill="#8f8f8f"/>
+      <circle data-joint="wristL" cx="426.808" cy="310.997" r="3.312" fill="#8f8f8f"/>
+      <circle data-joint="shoulderR" cx="339.781" cy="223.61" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="elbowR" cx="377.957" cy="270.123" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="wristR" cx="411.506" cy="310.997" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="hipJointL" cx="288.906" cy="149.774" r="3.312" fill="#8f8f8f"/>
+      <circle data-joint="kneeL" cx="238.324" cy="223.626" r="3.312" fill="#8f8f8f"/>
+      <circle data-joint="ankleL" cx="187.742" cy="297.478" r="3.312" fill="#8f8f8f"/>
+      <circle data-joint="hipJointR" cx="275.899" cy="149.774" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="kneeR" cx="225.317" cy="223.626" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="ankleR" cx="174.736" cy="297.478" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="chest" cx="347.432" cy="223.61" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="hipCenter" cx="282.403" cy="149.774" r="3.312" fill="#3d3d3d"/>
     </g>
   </g>
   <g data-layer="caption">

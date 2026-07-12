@@ -114,7 +114,7 @@ export interface MuscleInstance {
 const isTorsoMuscle = (muscle: MuscleDef): boolean => TORSO_BONES.includes(muscle.bone);
 
 /** A pair of bellies this close together reads as one; draw it once. */
-const PAIR_MERGE = 0.01;
+const PAIR_MERGE = 0.015;
 
 /**
  * Resolve a muscle to the concrete bellies drawn for a camera azimuth.

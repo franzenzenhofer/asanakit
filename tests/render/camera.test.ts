@@ -38,13 +38,20 @@ describe('viewSkeleton - projections', () => {
     expect(v.landmarks.shoulderL[0]).toBeLessThan(v.landmarks.shoulderR[0]);
   });
 
-  test('the side view collapses the shoulder span and faces the figure picture-right', () => {
+  test('the side view is a near-profile: the span collapses but the far side still peeks out', () => {
     const front = viewSkeleton(SKELETON, CAMERA_PRESETS.front);
     const side = viewSkeleton(SKELETON, CAMERA_PRESETS.side);
     const frontSpan = Math.abs(front.landmarks.shoulderL[0] - front.landmarks.shoulderR[0]);
     const sideSpan = Math.abs(side.landmarks.shoulderL[0] - side.landmarks.shoulderR[0]);
-    expect(sideSpan).toBeLessThan(frontSpan * 0.05);
+    expect(sideSpan).toBeLessThan(frontSpan * 0.3);
+    expect(sideSpan).toBeGreaterThan(frontSpan * 0.1); // the slight turn that shows the gray side
     expect(side.landmarks.toeL[0]).toBeGreaterThan(side.landmarks.ankleL[0]);
+  });
+
+  test('an exact profile is still one flag away', () => {
+    const exact = viewSkeleton(SKELETON, CAMERA_PRESETS.right);
+    const span = Math.abs(exact.landmarks.shoulderL[0] - exact.landmarks.shoulderR[0]);
+    expect(span).toBeLessThan(1e-6);
   });
 
   test('height survives any horizontal orbit', () => {

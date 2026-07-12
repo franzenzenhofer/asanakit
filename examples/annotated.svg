@@ -10,7 +10,7 @@
     <text x="350" y="78" text-anchor="middle" fill="#5c7998" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="21.45" font-style="italic">Utthita Trikoṇāsana</text>
   </g>
   <g data-layer="props">
-    <rect data-prop="mat" x="119.868" y="454.54" width="460.264" height="15.001" rx="7.501" fill="#e2ecf5" stroke="#1b3a5c" stroke-width="2.046"/>
+    <rect data-prop="mat" x="119.868" y="462.041" width="460.264" height="15.001" rx="7.501" fill="#e2ecf5" stroke="#1b3a5c" stroke-width="2.046"/>
   </g>
   <g data-layer="figure">
     <line data-bone="hipL" data-side="left" x1="350" y1="343.913" x2="378.98" y2="343.913" stroke="#7591b3" stroke-width="4.091" stroke-linecap="round"/>

@@ -91,8 +91,8 @@ const propPoints = (prop: Prop, skeleton: ViewSkeleton): Vec2[] => {
     case 'mat': {
       const [x1, x2] = matSpan(prop, skeleton);
       return [
-        [x1, prop.y - prop.thickness],
-        [x2, prop.y + prop.thickness],
+        [x1, prop.y - 2 * prop.thickness],
+        [x2, prop.y],
       ];
     }
     case 'block': {
@@ -136,8 +136,8 @@ const renderProp = (prop: Prop, ctx: RenderContext): SvgNode => {
     }
     case 'mat': {
       const [mx1, mx2] = matSpan(prop, skeleton);
-      const [x1, y1] = proj.p([mx1, prop.y + prop.thickness]);
-      const [x2] = proj.p([mx2, prop.y]);
+      const [x1, y1] = proj.p([mx1, prop.y]);
+      const [x2] = proj.p([mx2, prop.y - prop.thickness]);
       return el('rect', {
         'data-prop': 'mat',
         x: x1,

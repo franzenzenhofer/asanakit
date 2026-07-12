@@ -54,11 +54,12 @@ describe('matModel - a configurable 3D yoga mat', () => {
     expect(Math.max(...xs) - Math.min(...xs)).toBeCloseTo(1.35, 8);
   });
 
-  test('every dimension is configurable', () => {
+  test('every dimension is configurable, and y is the TOP surface the figure lies on', () => {
     const m = matModel(mat({ width: 0.5, length: 2, thickness: 0.05 }), SKELETON);
     expect(m.width).toBe(0.5);
     expect(m.length).toBe(2);
-    expect(m.top[0]?.[1]).toBeCloseTo(0.05, 8);
+    expect(m.top[0]?.[1]).toBeCloseTo(0, 8); // top at prop.y...
+    expect(m.centre[1]).toBeCloseTo(-0.025, 8); // ...the box extends downward
   });
 });
 
@@ -107,13 +108,13 @@ describe('props in every output', () => {
     expect((gltf.nodes ?? []).map((n) => n.name)).toContain('prop:mat');
   });
 
-  test('the 2D mat is camera-aware: a side camera sees the length, a front camera the width', () => {
-    const span = (cameraId: 'side' | 'front'): number => {
+  test('the 2D mat is camera-aware: a profile sees the length, a front camera the width', () => {
+    const span = (cameraId: 'right' | 'front'): number => {
       const q = viewQuat(CAMERA_PRESETS[cameraId]);
       const xs = matModel(mat(), SKELETON).top.map((corner) => rotateVec3(q, corner)[0]);
       return Math.max(...xs) - Math.min(...xs);
     };
-    expect(span('side')).toBeCloseTo(1.35, 6);
+    expect(span('right')).toBeCloseTo(1.35, 6);
     expect(span('front')).toBeCloseTo(0.38, 6);
   });
 });

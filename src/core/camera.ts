@@ -15,8 +15,12 @@ export const CAMERA_PRESETS = {
   back: { azimuth: 180, elevation: 0, roll: 0 },
   left: { azimuth: 90, elevation: 0, roll: 0 },
   right: { azimuth: -90, elevation: 0, roll: 0 },
-  /** The classic profile of a yoga diagram: the figure faces picture-right. */
-  side: { azimuth: -90, elevation: 0, roll: 0 },
+  /**
+   * The classic profile of a yoga diagram: the figure faces picture-right -
+   * turned a whisker off dead-on, so the far (left, gray) side peeks out
+   * beside the near side instead of hiding exactly behind it.
+   */
+  side: { azimuth: -78, elevation: 0, roll: 0 },
   'three-quarter': { azimuth: -45, elevation: 10, roll: 0 },
   top: { azimuth: 0, elevation: 90, roll: 0 },
 } as const satisfies Record<string, CameraAngles>;
