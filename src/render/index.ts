@@ -1,3 +1,4 @@
+export * from './camera.js';
 export * from './scene.js';
 export * from './styles.js';
 export * from './svg.js';

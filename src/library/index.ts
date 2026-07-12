@@ -77,12 +77,12 @@ export const expandSequence = (sequence: SequenceSpec, library: Library): Sequen
 
       const sides = step.side === 'both' ? (['left', 'right'] as const) : ([step.side] as const);
       for (const side of sides) {
-        // The second side is the mirror image, and reflecting the picture is all
-        // that takes. Swapping the joints as well would reflect it twice and hand
-        // you back the pose you started with.
+        // The second side is the true mirror of the asana: left and right
+        // joints swap and every absolute direction reflects across the
+        // sagittal plane. That is what `mirror` does.
         const mirrored = side === 'right';
         steps.push({
-          pose: mirrored ? { ...pose, figure: { ...pose.figure, flip: !pose.figure.flip } } : pose,
+          pose: mirrored ? { ...pose, figure: { ...pose.figure, mirror: !pose.figure.mirror } } : pose,
           label: step.label ?? pose.name,
           section: section.name,
           ...(step.breath === undefined ? {} : { breath: step.breath }),

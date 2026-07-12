@@ -1,7 +1,7 @@
 import { path } from 'd3-path';
 import { MUSCLES, MUSCLE_IDS, muscleInstances, type MuscleDef, type MuscleId } from '../anatomy/muscles.js';
-import type { BoneSegment } from '../core/types.js';
 import { along, sub, type Vec2 } from '../core/vec2.js';
+import type { ViewBone } from './camera.js';
 import type { RenderContext } from './context.js';
 import type { Style } from './styles.js';
 import { el, group, num, type SvgNode } from './svg.js';
@@ -28,7 +28,7 @@ const fillFor = (state: MuscleState, style: Style): string => {
  * as a thick round-capped stroke, that reads as a muscle without needing traced
  * anatomical artwork.
  */
-const bellyPath = (bone: BoneSegment, muscle: MuscleDef, rawOffset: number, ctx: RenderContext): string => {
+const bellyPath = (bone: ViewBone, muscle: MuscleDef, rawOffset: number, ctx: RenderContext): string => {
   const { proj } = ctx;
   const scale = ctx.skeleton.scale;
   const offset = rawOffset * scale;
@@ -47,7 +47,7 @@ const bellyPath = (bone: BoneSegment, muscle: MuscleDef, rawOffset: number, ctx:
   return p.toString();
 };
 
-const isDegenerate = (bone: BoneSegment): boolean => {
+const isDegenerate = (bone: ViewBone): boolean => {
   const d = sub(bone.end, bone.start);
   return Math.hypot(d[0], d[1]) < 1e-6;
 };
@@ -68,7 +68,7 @@ export const renderMuscles = (
   for (const id of MUSCLE_IDS) {
     const muscle = MUSCLES[id];
     const state = stateOf(id, engaged, stretched);
-    for (const { bone: boneId, offset } of muscleInstances(muscle, skeleton.view)) {
+    for (const { bone: boneId, offset } of muscleInstances(muscle, skeleton.camera.azimuth)) {
       const bone = skeleton.bones[boneId];
       if (isDegenerate(bone)) continue;
       shapes.push(

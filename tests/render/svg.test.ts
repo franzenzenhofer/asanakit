@@ -3,7 +3,7 @@ import { parsePose } from '../../src/model/index.js';
 import { renderSvg } from '../../src/render/index.js';
 import { STYLES } from '../../src/render/styles.js';
 
-const pose = (body: string) => parsePose(`asanakit: 1\nid: t\nname: T\ndiscipline: yoga\n${body}`, 't.pose.yaml');
+const pose = (body: string) => parsePose(`asanakit: 2\nid: t\nname: T\ndiscipline: yoga\n${body}`, 't.pose.yaml');
 
 const PLAIN = pose('');
 
@@ -27,7 +27,7 @@ describe('renderSvg', () => {
   });
 
   test('escapes text so a pose name cannot inject markup', () => {
-    const nasty = parsePose('asanakit: 1\nid: t\nname: "</svg><script>x</script>"\ndiscipline: yoga\n', 't.yaml');
+    const nasty = parsePose('asanakit: 2\nid: t\nname: "</svg><script>x</script>"\ndiscipline: yoga\n', 't.yaml');
     const svg = renderSvg(nasty, { title: true });
     expect(svg).not.toContain('<script>');
     expect(svg).toContain('&lt;/svg&gt;');

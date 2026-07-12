@@ -40,14 +40,13 @@ export const registerExportCommands = (program: Command): void => {
         `${JSON.stringify(
           {
             pose: pose.id,
-            view: skeleton.view,
             height: skeleton.height,
             bounds: skeleton.bounds,
             landmarks: skeleton.landmarks,
             bones: Object.fromEntries(
               Object.entries(skeleton.bones).map(([id, b]) => [
                 id,
-                { start: b.start, end: b.end, angle: b.worldAngle, length: b.length },
+                { start: b.start, end: b.end, orientation: b.orientation, length: b.length },
               ]),
             ),
           },

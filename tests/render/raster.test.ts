@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 import { parsePose } from '../../src/model/index.js';
 import { optimizeSvg, renderPng, renderSvg } from '../../src/render/index.js';
 
-const POSE = parsePose('asanakit: 1\nid: t\nname: Tadasana\nsanskrit: Tāḍāsana\ndiscipline: yoga\n', 't.pose.yaml');
+const POSE = parsePose('asanakit: 2\nid: t\nname: Tadasana\nsanskrit: Tāḍāsana\ndiscipline: yoga\n', 't.pose.yaml');
 
 const PNG_MAGIC = Buffer.from([0x89, 0x50, 0x4e, 0x47]);
 

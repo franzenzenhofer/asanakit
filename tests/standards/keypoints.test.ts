@@ -5,9 +5,9 @@ import { COCO_17, MEDIAPIPE_33, toKeypoints } from '../../src/standards/keypoint
 import type { KinematicPose } from '../../src/core/types.js';
 
 const POSE: KinematicPose = {
-  view: 'front',
-  root: { position: [0, 0], rotation: 90, scale: 1 },
+  root: { position: [0, 0, 0], yaw: 0, pitch: 0, roll: 0, scale: 1 },
   joints: {},
+  world: {},
   grounded: true,
 };
 
@@ -32,6 +32,13 @@ describe('keypoint export', () => {
     expect(at('left_shoulder')?.y).toBeGreaterThan(at('left_hip')?.y as number);
     expect(at('left_hip')?.y).toBeGreaterThan(at('left_ankle')?.y as number);
     expect(at('nose')?.y).toBeGreaterThan(at('left_shoulder')?.y as number);
+  });
+
+  test('carries a real z: the nose sits in front of the ears', () => {
+    const kp = toKeypoints(skeleton, 'mediapipe33');
+    const at = (name: string) => kp.keypoints.find((k) => k.name === name);
+    expect(at('nose')?.z).toBeGreaterThan(at('left_ear')?.z as number);
+    expect(at('left_foot_index')?.z).toBeGreaterThan(at('left_ankle')?.z as number);
   });
 
   test('normalised export uses image coordinates: 0..1 with y pointing down', () => {

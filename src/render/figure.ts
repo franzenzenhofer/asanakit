@@ -1,25 +1,9 @@
 import { curveCatmullRomClosed, line } from 'd3-shape';
-import type { BoneId, BoneSegment, Skeleton, ViewId } from '../core/types.js';
+import type { BoneId } from '../core/types.js';
 import type { Vec2 } from '../core/vec2.js';
+import type { ViewBone, ViewSkeleton } from './camera.js';
 import type { RenderContext } from './context.js';
 import { el, group, type SvgNode } from './svg.js';
-
-const LIMB_BONES: readonly BoneId[] = [
-  'upperArmL',
-  'forearmL',
-  'handL',
-  'thighL',
-  'shinL',
-  'footL',
-  'upperArmR',
-  'forearmR',
-  'handR',
-  'thighR',
-  'shinR',
-  'footR',
-];
-
-const TORSO_BONES: readonly BoneId[] = ['pelvis', 'spine', 'neck', 'clavicleL', 'clavicleR', 'hipL', 'hipR'];
 
 const JOINT_LANDMARKS = [
   'shoulderL',
@@ -38,14 +22,26 @@ const JOINT_LANDMARKS = [
   'hipCenter',
 ] as const;
 
-/** In a profile view the far-side limbs sit behind the body and read as lighter. */
-const FAR_SIDE_VIEWS: readonly ViewId[] = ['side', 'three-quarter'];
+const TORSO_BONES: readonly BoneId[] = ['pelvis', 'spine', 'neck', 'clavicleL', 'clavicleR', 'hipL', 'hipR'];
 
-const isFar = (bone: BoneSegment, view: ViewId): boolean => FAR_SIDE_VIEWS.includes(view) && bone.side === 'right';
+/** A limb this far behind the torso reads as "the far side" and gets the lighter stroke. */
+const FAR_DEPTH = 0.02;
 
-const boneLine = (bone: BoneSegment, ctx: RenderContext): SvgNode => {
+/** Something to paint, at a depth. Farther primitives go down first. */
+interface Primitive {
+  readonly depth: number;
+  /** Stable tiebreak so equal depths never reorder between runs. */
+  readonly key: string;
+  readonly node: SvgNode;
+}
+
+const torsoDepth = (skeleton: ViewSkeleton): number => {
+  const depths = TORSO_BONES.map((id) => skeleton.bones[id].depth);
+  return depths.reduce((sum, d) => sum + d, 0) / depths.length;
+};
+
+const boneLine = (bone: ViewBone, farOpacity: number | undefined, ctx: RenderContext): SvgNode => {
   const { proj, style } = ctx;
-  const view = ctx.skeleton.view;
   const [x1, y1] = proj.p(bone.start);
   const [x2, y2] = proj.p(bone.end);
   return el('line', {
@@ -57,7 +53,7 @@ const boneLine = (bone: BoneSegment, ctx: RenderContext): SvgNode => {
     stroke: style.figure.stroke,
     'stroke-width': style.figure.strokeWidth * proj.s,
     'stroke-linecap': style.figure.lineCap,
-    opacity: isFar(bone, view) ? style.figure.farOpacity : undefined,
+    opacity: farOpacity,
   });
 };
 
@@ -124,32 +120,34 @@ const joints = ({ skeleton, proj, style }: RenderContext): SvgNode | null => {
   );
 };
 
-const bonesOf = (skeleton: Skeleton, ids: readonly BoneId[], side: 'far' | 'near' | 'all'): BoneSegment[] =>
-  ids
-    .map((id) => skeleton.bones[id])
-    .filter((bone) => {
-      if (side === 'all') return true;
-      const far = isFar(bone, skeleton.view);
-      return side === 'far' ? far : !far;
-    });
-
 /**
- * Draw the figure back-to-front: far limbs, trunk, head, near limbs. That single
- * ordering is what makes a profile pose read as a body rather than a tangle.
+ * Draw the figure farthest-first: every bone, the trunk and the head are
+ * depth-sorted primitives from the camera projection, so any viewpoint reads
+ * as a body rather than a tangle. Limbs well behind the torso take the
+ * lighter "far" stroke - real depth doing what the old per-view flag faked.
  */
 export const renderFigure = (ctx: RenderContext): SvgNode => {
-  const { skeleton } = ctx;
-  const draw = (bones: BoneSegment[]): SvgNode[] => bones.map((b) => boneLine(b, ctx));
+  const { skeleton, style } = ctx;
+  const centre = torsoDepth(skeleton);
   const optional = (node: SvgNode | null): SvgNode[] => (node === null ? [] : [node]);
 
-  return group({ 'data-layer': 'figure' }, [
-    group({ 'data-layer': 'limbs-far' }, draw(bonesOf(skeleton, LIMB_BONES, 'far'))),
-    group({ 'data-layer': 'torso' }, [
-      ...optional(torsoShape(ctx)),
-      ...draw(bonesOf(skeleton, TORSO_BONES, 'all')),
-    ]),
-    ...optional(head(ctx)),
-    group({ 'data-layer': 'limbs-near' }, draw(bonesOf(skeleton, LIMB_BONES, 'near'))),
-    ...optional(joints(ctx)),
-  ]);
+  const boneNodes: Primitive[] = Object.values(skeleton.bones).map((bone) => {
+    const far = style.figure.farOpacity < 1 && bone.depth < centre - FAR_DEPTH;
+    return {
+      depth: bone.depth,
+      key: bone.id,
+      node: boneLine(bone, far ? style.figure.farOpacity : undefined, ctx),
+    };
+  });
+
+  const solids: Primitive[] = [
+    ...optional(torsoShape(ctx)).map((node) => ({ depth: centre, key: 'torso', node })),
+    ...optional(head(ctx)).map((node) => ({ depth: skeleton.bones.head.depth, key: 'head', node })),
+  ];
+
+  const painted = [...boneNodes, ...solids].sort(
+    (a, b) => a.depth - b.depth || a.key.localeCompare(b.key),
+  );
+
+  return group({ 'data-layer': 'figure' }, [...painted.map((p) => p.node), ...optional(joints(ctx))]);
 };

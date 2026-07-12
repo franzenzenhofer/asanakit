@@ -5,10 +5,12 @@
  * The landmark NAMES and EDGE lists below restate the public layouts of
  * MediaPipe BlazePose (33) and COCO (17), as published in the Apache-2.0
  * licensed tfjs-models / mediapipe projects. Only the layout is reused; the
- * geometry is asanakit's own.
+ * geometry is asanakit's own - and since the rig is 3D, every keypoint carries
+ * a real z (MediaPipe convention: hip-relative, negative toward the camera).
  */
+import { axisAngleDeg, rotateVec3 } from '../core/quat.js';
 import type { Skeleton } from '../core/types.js';
-import { add, fromPolar, lerp, sub, type Vec2 } from '../core/vec2.js';
+import { add3, lerp3, normalize3, scale3, sub3, type Vec3 } from '../core/vec3.js';
 
 export const MEDIAPIPE_33 = [
   'nose', 'left_eye_inner', 'left_eye', 'left_eye_outer', 'right_eye_inner', 'right_eye', 'right_eye_outer',
@@ -45,6 +47,7 @@ export interface Keypoint {
   readonly name: string;
   readonly x: number;
   readonly y: number;
+  readonly z: number;
 }
 
 export interface KeypointSet {
@@ -55,27 +58,29 @@ export interface KeypointSet {
 }
 
 export interface KeypointOptions {
-  /** Emit image coordinates: 0..1 across the pose bounds, y pointing down. */
+  /** Emit image coordinates: 0..1 across the pose bounds, y pointing down, z hip-relative. */
   readonly normalize?: boolean;
 }
 
 /**
- * The rig has no facial bones, so eyes, ears and mouth are derived from the head
- * bone's axis. They are approximations by construction - honest ones, and enough
- * for a consumer that only needs head orientation.
+ * The rig has no facial bones, so eyes, ears and mouth are derived from the
+ * head bone's frame. They are approximations by construction - honest ones,
+ * and enough for a consumer that only needs head orientation.
  */
-const facePoints = (skeleton: Skeleton): Record<string, Vec2> => {
+const facePoints = (skeleton: Skeleton): Record<string, Vec3> => {
   const head = skeleton.bones.head;
-  const axis = sub(head.end, head.start);
-  const forward = fromPolar(head.worldAngle - 90, 1);
-  const centre = lerp(head.start, head.end, 0.55);
-  const size = Math.hypot(axis[0], axis[1]);
+  const q = head.orientation;
+  const up = rotateVec3(q, [0, 1, 0]);
+  const forward = rotateVec3(q, [0, 0, 1]);
+  const left = rotateVec3(q, [1, 0, 0]);
+  const centre = lerp3(head.start, head.end, 0.55);
+  const size = head.length;
 
-  const at = (fwd: number, up: number, side: number): Vec2 =>
-    add(add(centre, fromPolar(head.worldAngle, up * size)), fromPolar(head.worldAngle - 90, (fwd + side) * size));
+  const at = (fwd: number, rise: number, side: number): Vec3 =>
+    add3(add3(add3(centre, scale3(forward, fwd * size)), scale3(up, rise * size)), scale3(left, side * size));
 
   return {
-    nose: add(centre, fromPolar(head.worldAngle - 90, 0.42 * size)),
+    nose: at(0.42, 0, 0),
     left_eye: at(0.3, 0.12, 0.08),
     left_eye_inner: at(0.32, 0.12, 0.03),
     left_eye_outer: at(0.26, 0.12, 0.14),
@@ -86,23 +91,26 @@ const facePoints = (skeleton: Skeleton): Record<string, Vec2> => {
     right_ear: at(-0.1, 0.06, -0.22),
     mouth_left: at(0.3, -0.18, 0.09),
     mouth_right: at(0.3, -0.18, -0.09),
-    _forward: forward,
   };
 };
 
-const heel = (skeleton: Skeleton, side: 'L' | 'R'): Vec2 => {
+const heel = (skeleton: Skeleton, side: 'L' | 'R'): Vec3 => {
   const foot = skeleton.bones[side === 'L' ? 'footL' : 'footR'];
-  return add(foot.start, fromPolar(foot.worldAngle + 180, foot.length * 0.35));
+  const dir = normalize3(sub3(foot.end, foot.start));
+  return add3(foot.start, scale3(dir, -foot.length * 0.35));
 };
 
-const hand = (skeleton: Skeleton, side: 'L' | 'R', spread: number): Vec2 => {
+/** Pinky and thumb fan out from the wrist around the hand's own forward axis. */
+const hand = (skeleton: Skeleton, side: 'L' | 'R', spread: number): Vec3 => {
   const h = skeleton.bones[side === 'L' ? 'handL' : 'handR'];
-  return add(h.end, fromPolar(h.worldAngle + spread, h.length * 0.3));
+  const dir = normalize3(sub3(h.end, h.start));
+  const axis = rotateVec3(h.orientation, [0, 0, 1]);
+  return add3(h.end, scale3(rotateVec3(axisAngleDeg(axis, spread), dir), h.length * 0.3));
 };
 
-const pointFor = (name: string, skeleton: Skeleton, face: Record<string, Vec2>): Vec2 => {
+const pointFor = (name: string, skeleton: Skeleton, face: Record<string, Vec3>): Vec3 => {
   const l = skeleton.landmarks;
-  const table: Record<string, Vec2> = {
+  const table: Record<string, Vec3> = {
     left_shoulder: l.shoulderL,
     right_shoulder: l.shoulderR,
     left_elbow: l.elbowL,
@@ -146,19 +154,22 @@ export const toKeypoints = (
   const minX = Math.min(...xs);
   const minY = Math.min(...ys);
   const span = Math.max(Math.max(...xs) - minX, Math.max(...ys) - minY, 1e-6);
+  const hipZ = skeleton.landmarks.hipCenter[2];
 
   return {
     format,
     space: normalize ? 'normalized' : 'stature',
     edges: format === 'coco17' ? COCO_EDGES : MEDIAPIPE_EDGES,
     keypoints: names.map((name, index) => {
-      const p = raw[index] as Vec2;
+      const p = raw[index] as Vec3;
       return {
         index,
         name,
-        // Image space is y-down, so normalising also flips the axis.
+        // Image space is y-down, so normalising also flips that axis; z stays
+        // hip-relative and negative toward the camera, as MediaPipe reports it.
         x: normalize ? (p[0] - minX) / span : p[0],
         y: normalize ? 1 - (p[1] - minY) / span : p[1],
+        z: normalize ? -(p[2] - hipZ) / span : p[2],
       };
     }),
   };

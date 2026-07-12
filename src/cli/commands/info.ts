@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises';
 import type { Command } from 'commander';
 import { MUSCLES, MUSCLE_IDS } from '../../anatomy/muscles.js';
 import { validatePose } from '../../anatomy/validate.js';
+import { CAMERA_PRESET_IDS } from '../../core/camera.js';
 import { BONE_IDS, LANDMARK_IDS } from '../../core/types.js';
 import { parsePose, poseJsonSchema, sequenceJsonSchema } from '../../model/index.js';
 import { STYLES, STYLE_IDS } from '../../render/index.js';
@@ -101,10 +102,11 @@ export const registerInfoCommands = (program: Command): void => {
     .action(() => {
       json({
         joints: BONE_IDS,
+        jointAxes: ['flex', 'abduct', 'twist'],
         landmarks: LANDMARK_IDS,
         muscles: MUSCLE_IDS.map((id) => ({ id, label: MUSCLES[id].label, region: MUSCLES[id].region })),
         styles: STYLE_IDS.map((id) => ({ id, label: STYLES[id].label })),
-        views: ['front', 'back', 'side', 'three-quarter'],
+        cameras: CAMERA_PRESET_IDS,
       });
     });
 };

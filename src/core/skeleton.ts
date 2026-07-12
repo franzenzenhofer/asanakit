@@ -1,57 +1,20 @@
-import { VIEWS } from './rig.js';
+import { jointQuat, sphereDir } from './joints.js';
+import { axisAngleDeg, mulQuat, rotateVec3, rotationTo, yawPitchRollDeg, type Quat } from './quat.js';
 import type {
   BoneDef,
   BoneId,
   BoneSegment,
-  Bounds,
+  Bounds3,
   KinematicPose,
   LandmarkId,
   Rig,
   Skeleton,
-  ViewId,
 } from './types.js';
-import { add, fromPolar, midpoint, type Vec2 } from './vec2.js';
-
-const boneLength = (bone: BoneDef, pose: KinematicPose): number => {
-  const view = VIEWS[pose.view];
-  const foreshorten = (bone.lateral ? view.lateralScale : 1) * (bone.foot ? view.footScale : 1);
-  return bone.length * foreshorten * pose.root.scale;
-};
-
-/**
- * Which way a positive angle turns a right-side bone.
- *
- * Lateral bones (clavicle, hip) always mirror - that is what puts the right
- * shoulder on the other side of the spine. Limbs only mirror when the figure
- * faces us; in profile both arms swing the same way, because we are looking at
- * both of them from the same side.
- */
-export const sideSign = (bone: BoneDef, view: ViewId): number => {
-  if (bone.side !== 'right') return 1;
-  if (bone.lateral === true) return -1;
-  return VIEWS[view].mirrorLimbs ? -1 : 1;
-};
-
-/**
- * Where the left/right offset points on screen.
- *
- * Facing the viewer it lies in the picture plane, so it swings with the torso: a
- * tilted chest tilts the shoulder line. Seen from the side it points into the
- * screen, so it must project as a small sideways nudge and nothing else - if it
- * rotated with the torso, a figure in a horizontal plank would end up with one
- * shoulder above the other and one hand hovering off the floor.
- */
-const isDepthAxis = (bone: BoneDef, view: ViewId): boolean =>
-  bone.lateral === true && VIEWS[view].lateralScale < 1;
-
-const relativeAngle = (bone: BoneDef, pose: KinematicPose, parentAngle: number, joint: number): number => {
-  if (isDepthAxis(bone, pose.view)) return bone.side === 'right' ? 180 : 0;
-  return parentAngle + sideSign(bone, pose.view) * (bone.restAngle + joint);
-};
+import { add3, midpoint3, scale3, type Vec3 } from './vec3.js';
 
 const assertKnownJoints = (pose: KinematicPose, rig: Rig): void => {
   const known = new Set<string>(rig.bones.map((b) => b.id));
-  const names = [...Object.keys(pose.joints), ...Object.keys(pose.world ?? {})];
+  const names = [...Object.keys(pose.joints), ...Object.keys(pose.world)];
   for (const joint of names) {
     if (!known.has(joint)) {
       throw new Error(`Unknown bone "${joint}". Known bones: ${[...known].sort().join(', ')}`);
@@ -60,51 +23,63 @@ const assertKnownJoints = (pose: KinematicPose, rig: Rig): void => {
 };
 
 /** Where a bone begins: the start or the end of the bone it hangs off. */
-const originOf = (bone: BoneDef, parent: BoneSegment | null, pose: KinematicPose): Vec2 => {
+const originOf = (bone: BoneDef, parent: BoneSegment | null, pose: KinematicPose): Vec3 => {
   if (parent === null) return pose.root.position;
   return bone.attach === 'start' ? parent.start : parent.end;
 };
 
-/** Which direction this bone's rest angle is measured against. */
-const aimOf = (bone: BoneDef, parent: BoneSegment | null, solved: Record<BoneId, BoneSegment>, pose: KinematicPose): number => {
-  const aimedAt = bone.angleParent === undefined ? parent : solved[bone.angleParent];
-  return aimedAt === null || aimedAt === undefined ? pose.root.rotation : aimedAt.worldAngle;
+/**
+ * A `world` override aims the bone at an absolute direction, whatever its
+ * parent does - which is how a human (or a model) actually thinks about a
+ * posture: "the front thigh points down and forward", not "rotate the hip 60
+ * degrees from neutral". The orientation is the shortest arc from rest, plus
+ * any requested twist about the target direction; children hang off it.
+ */
+const worldOrientation = (bone: BoneDef, target: NonNullable<KinematicPose['world'][BoneId]>): Quat => {
+  const dir = sphereDir(target);
+  const swing = rotationTo(bone.dir, dir);
+  const twist = target.twist ?? 0;
+  return twist === 0 ? swing : mulQuat(axisAngleDeg(dir, twist), swing);
 };
 
-const solveBone = (bone: BoneDef, solved: Record<BoneId, BoneSegment>, pose: KinematicPose): BoneSegment => {
+const solveBone = (
+  bone: BoneDef,
+  solved: Record<BoneId, BoneSegment>,
+  pose: KinematicPose,
+  rootQuat: Quat,
+): BoneSegment => {
   const parent = bone.parent === null ? null : solved[bone.parent];
   if (bone.parent !== null && parent === undefined) {
     throw new Error(`Bone "${bone.id}" is listed before its parent "${bone.parent}"`);
   }
 
-  const joint = (pose.joints[bone.id] ?? 0) * (bone.flexSign ?? 1);
-  const worldAngle = pose.world?.[bone.id] ?? relativeAngle(bone, pose, aimOf(bone, parent ?? null, solved, pose), joint);
+  const override = pose.world[bone.id];
+  const parentQuat = parent === null || parent === undefined ? rootQuat : parent.orientation;
+  const orientation =
+    override === undefined
+      ? mulQuat(parentQuat, jointQuat(bone, pose.joints[bone.id] ?? 0))
+      : worldOrientation(bone, override);
+
   const start = originOf(bone, parent ?? null, pose);
-  const length = boneLength(bone, pose);
+  const length = bone.length * pose.root.scale;
 
   return {
     id: bone.id,
     start,
-    end: add(start, fromPolar(worldAngle, length)),
-    worldAngle,
+    end: add3(start, rotateVec3(orientation, scale3(bone.dir, length))),
+    orientation,
     length,
     side: bone.side,
     group: bone.group,
   };
 };
 
-const solveBones = (pose: KinematicPose, rig: Rig): Record<BoneId, BoneSegment> => {
-  const solved = {} as Record<BoneId, BoneSegment>;
-  for (const bone of rig.bones) solved[bone.id] = solveBone(bone, solved, pose);
-  return solved;
-};
-
-const landmarksOf = (b: Record<BoneId, BoneSegment>): Record<LandmarkId, Vec2> => ({
+const landmarksOf = (b: Record<BoneId, BoneSegment>): Record<LandmarkId, Vec3> => ({
   hipCenter: b.pelvis.start,
   waist: b.pelvis.end,
   chest: b.spine.end,
   neckBase: b.neck.start,
-  headCenter: midpoint(b.head.start, b.head.end),
+  headCenter: midpoint3(b.head.start, b.head.end),
   headTop: b.head.end,
   shoulderL: b.clavicleL.end,
   elbowL: b.upperArmL.end,
@@ -124,37 +99,37 @@ const landmarksOf = (b: Record<BoneId, BoneSegment>): Record<LandmarkId, Vec2> =
   toeR: b.footR.end,
 });
 
-const boundsOf = (points: readonly Vec2[]): Bounds => ({
+const boundsOf = (points: readonly Vec3[]): Bounds3 => ({
   minX: Math.min(...points.map((p) => p[0])),
   maxX: Math.max(...points.map((p) => p[0])),
   minY: Math.min(...points.map((p) => p[1])),
   maxY: Math.max(...points.map((p) => p[1])),
+  minZ: Math.min(...points.map((p) => p[2])),
+  maxZ: Math.max(...points.map((p) => p[2])),
 });
 
-const transformPoint = (p: Vec2, dy: number, flip: boolean): Vec2 => [flip ? -p[0] : p[0], p[1] + dy];
-
-const transformBone = (bone: BoneSegment, dy: number, flip: boolean): BoneSegment => ({
-  ...bone,
-  start: transformPoint(bone.start, dy, flip),
-  end: transformPoint(bone.end, dy, flip),
-  worldAngle: flip ? 180 - bone.worldAngle : bone.worldAngle,
-});
+const lift = (bone: BoneSegment, dy: number): BoneSegment =>
+  dy === 0
+    ? bone
+    : { ...bone, start: add3(bone.start, [0, dy, 0]), end: add3(bone.end, [0, dy, 0]) };
 
 /**
- * Forward kinematics: turn a pose (joint angles) into world-space bone segments,
- * named landmarks and bounds. Pure and deterministic - the same pose always
- * yields byte-identical geometry.
+ * Forward kinematics: turn a pose (joint rotations about anatomical axes) into
+ * world-space bone segments, named landmarks and bounds. Pure and
+ * deterministic - the same pose always yields byte-identical geometry.
  */
 export const solveSkeleton = (pose: KinematicPose, rig: Rig): Skeleton => {
   assertKnownJoints(pose, rig);
 
-  const raw = solveBones(pose, rig);
+  const rootQuat = yawPitchRollDeg(pose.root.yaw, pose.root.pitch, pose.root.roll);
+  const raw = {} as Record<BoneId, BoneSegment>;
+  for (const bone of rig.bones) raw[bone.id] = solveBone(bone, raw, pose, rootQuat);
+
   const rawPoints = Object.values(raw).flatMap((b) => [b.start, b.end]);
   const dy = pose.grounded ? -boundsOf(rawPoints).minY : 0;
-  const flip = pose.flip ?? false;
 
   const bones = Object.fromEntries(
-    Object.entries(raw).map(([id, bone]) => [id, transformBone(bone, dy, flip)]),
+    Object.entries(raw).map(([id, bone]) => [id, lift(bone, dy)]),
   ) as Record<BoneId, BoneSegment>;
 
   const landmarks = landmarksOf(bones);
@@ -162,7 +137,6 @@ export const solveSkeleton = (pose: KinematicPose, rig: Rig): Skeleton => {
 
   return {
     rig,
-    view: pose.view,
     scale: pose.root.scale,
     bones,
     landmarks,

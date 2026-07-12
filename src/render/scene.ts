@@ -1,9 +1,11 @@
+import { resolveCamera, type CameraInput } from '../core/camera.js';
 import { DEFAULT_RIG } from '../core/rig.js';
 import { solveSkeleton } from '../core/skeleton.js';
 import type { Bounds, Rig, Skeleton } from '../core/types.js';
 import { resolveFigure, type PoseSpec } from '../model/index.js';
 import { renderMuscles } from './anatomy.js';
 import { annotationsBounds, arrowMarker, renderAnnotations } from './annotations.js';
+import { viewSkeleton, type ViewSkeleton } from './camera.js';
 import type { RenderContext } from './context.js';
 import { renderFigure } from './figure.js';
 import { fitProjection, padBounds, unionBounds, type Projection } from './project.js';
@@ -17,6 +19,10 @@ export interface RenderOptions {
   readonly style?: StyleId;
   readonly styleOverride?: StyleOverride;
   readonly rig?: Rig;
+  /** Viewpoint: a preset name or orbit angles. Overrides the pose's own `camera`. */
+  readonly camera?: CameraInput;
+  /** A pre-solved (e.g. physics-settled) skeleton to render instead of solving the figure. */
+  readonly skeleton?: Skeleton;
   /** Draw the pose name (and Sanskrit name) above the figure. */
   readonly title?: boolean;
   /** Draw the teaching cues below the figure. */
@@ -41,7 +47,7 @@ const shiftProjection = (proj: Projection, dy: number): Projection => ({
 });
 
 /** Everything that must be visible: the figure, its props and its annotations. */
-export const contentBounds = (pose: PoseSpec, skeleton: Skeleton, style: Style): Bounds => {
+export const contentBounds = (pose: PoseSpec, skeleton: ViewSkeleton, style: Style): Bounds => {
   const headPad = Math.max(style.head.rx, style.head.ry) * skeleton.scale;
   let bounds = padBounds(skeleton.bounds, headPad);
 
@@ -171,7 +177,9 @@ export const renderSvgNode = (pose: PoseSpec, options: RenderOptions = {}): SvgN
   const layout = layoutFor(pose, options, style);
   const { width, height } = layout;
 
-  const skeleton = solveSkeleton(resolveFigure(pose.figure), options.rig ?? DEFAULT_RIG);
+  const solved = options.skeleton ?? solveSkeleton(resolveFigure(pose.figure), options.rig ?? DEFAULT_RIG);
+  const camera = resolveCamera(options.camera ?? pose.camera);
+  const skeleton = viewSkeleton(solved, camera);
   const content = contentBounds(pose, skeleton, style);
   const stage = Math.max(height - layout.titleBand - layout.captionBand, 1);
 

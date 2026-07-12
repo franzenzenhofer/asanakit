@@ -1,7 +1,9 @@
-import { normalizeDeg } from '../core/angles.js';
+import { radToDeg } from '../core/angles.js';
 import { DEFAULT_RIG } from '../core/rig.js';
-import { sideSign, solveSkeleton } from '../core/skeleton.js';
+import { rotateVec3 } from '../core/quat.js';
+import { solveSkeleton } from '../core/skeleton.js';
 import type { BoneId, LandmarkId, Rig, Skeleton } from '../core/types.js';
+import { cross3, dot3, normalize3, sub3 } from '../core/vec3.js';
 import { resolveFigure, type PoseSpec } from '../model/index.js';
 
 export type IssueCode =
@@ -49,18 +51,24 @@ const GROUND_TOLERANCE = 0.02;
 const CONTACT_TOLERANCE = 0.035;
 
 /**
- * Flexion of a bone away from its parent, in the joint's own frame. Right-side
- * bones mirror, so their world delta runs the other way - undo that, and both
- * elbows report flexion as a positive number.
+ * Signed flexion of a bone away from its parent: the angle between the two
+ * bone directions, signed by the child's own flexion axis (carried into world
+ * space by the parent's orientation). Positive is the way the joint actually
+ * bends - the axis in the rig says which way that is.
  */
 const flexion = (skeleton: Skeleton, hinge: Hinge, rig: Rig): number => {
   const child = skeleton.bones[hinge.child];
   const parent = skeleton.bones[hinge.parent];
   const def = rig.bones.find((b) => b.id === hinge.child);
   if (def === undefined) throw new Error(`Rig "${rig.name}" has no bone "${hinge.child}"`);
-  // Read the joint the same way the solver writes it, or a mirrored limb reports
-  // a perfectly good elbow as bending backwards.
-  return normalizeDeg(child.worldAngle - parent.worldAngle) * sideSign(def, skeleton.view) * (def.flexSign ?? 1);
+
+  const parentDir = normalize3(sub3(parent.end, parent.start));
+  const childDir = normalize3(sub3(child.end, child.start));
+  const cos = Math.min(1, Math.max(-1, dot3(parentDir, childDir)));
+  const angle = radToDeg(Math.acos(cos));
+
+  const axis = rotateVec3(parent.orientation, def.flexAxis);
+  return dot3(cross3(parentDir, childDir), axis) >= 0 ? angle : -angle;
 };
 
 const jointIssues = (skeleton: Skeleton, rig: Rig): Issue[] => {
@@ -95,13 +103,13 @@ const groundIssues = (skeleton: Skeleton): Issue[] => {
     issues.push({
       code: 'below-ground',
       severity: 'error',
-      message: `The figure sinks ${Math.abs(lowest).toFixed(2)} below the ground line. Raise it, or set "grounded: true".`,
+      message: `The figure sinks ${Math.abs(lowest).toFixed(2)} below the ground plane. Raise it, or set "grounded: true".`,
     });
   } else if (lowest > GROUND_TOLERANCE) {
     issues.push({
       code: 'no-ground-contact',
       severity: 'error',
-      message: `The figure floats ${lowest.toFixed(2)} above the ground line and touches nothing.`,
+      message: `The figure floats ${lowest.toFixed(2)} above the ground plane and touches nothing.`,
     });
   }
 

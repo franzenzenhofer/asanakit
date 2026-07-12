@@ -1,5 +1,5 @@
-import { VIEWS } from '../core/rig.js';
-import type { BoneId, ViewId } from '../core/types.js';
+import { degToRad } from '../core/angles.js';
+import type { BoneId } from '../core/types.js';
 
 /**
  * Muscles are modelled as capsules laid over the bone they act on: a span
@@ -113,31 +113,37 @@ export interface MuscleInstance {
 
 const isTorsoMuscle = (muscle: MuscleDef): boolean => TORSO_BONES.includes(muscle.bone);
 
+/** A pair of bellies this close together reads as one; draw it once. */
+const PAIR_MERGE = 0.01;
+
 /**
- * Resolve a muscle to the concrete bellies drawn for a given view.
+ * Resolve a muscle to the concrete bellies drawn for a camera azimuth.
  *
- * Face-on, a paired torso muscle is two bellies either side of the spine and its
- * front/back displacement is invisible. In profile it is one belly, placed in
- * front of or behind the spine. Limb muscles are always drawn on both limbs -
- * in profile the two simply overlap, which is exactly what you see.
+ * The two displacement planes fade continuously with the viewpoint: the
+ * left/right split is fully visible face-on (azimuth 0) and collapses in
+ * profile; the front/back displacement does the opposite, signed by which
+ * profile the camera stands on. Face-on, a paired torso muscle is two bellies
+ * either side of the spine; in profile it is one belly, in front of or behind
+ * it. Limb muscles are always drawn on both limbs - in profile the two simply
+ * overlap, which is exactly what you see.
  */
-export const muscleInstances = (muscle: MuscleDef, view: ViewId): MuscleInstance[] => {
-  const profile = VIEWS[view].lateralScale < 1;
-  const sagittal = muscle.sagittal * anteriorSign(muscle.bone);
+export const muscleInstances = (muscle: MuscleDef, azimuthDeg: number): MuscleInstance[] => {
+  const az = degToRad(azimuthDeg);
+  const lateralVis = Math.cos(az);
+  const sagittalVis = -Math.sin(az);
+  const sagittal = muscle.sagittal * anteriorSign(muscle.bone) * sagittalVis;
 
   if (isTorsoMuscle(muscle)) {
     const bone = muscle.bone as BoneId;
-    if (profile) return [{ bone, offset: sagittal }];
-    if (muscle.lateral === 0) return [{ bone, offset: 0 }];
+    const split = muscle.lateral * lateralVis;
+    if (Math.abs(split) < PAIR_MERGE) return [{ bone, offset: sagittal }];
     return [
-      { bone, offset: muscle.lateral },
-      { bone, offset: -muscle.lateral },
+      { bone, offset: sagittal + split },
+      { bone, offset: sagittal - split },
     ];
   }
 
-  // A limb muscle rides its own bone; only its front/back displacement is ever
-  // visible, and face-on that displacement points at the viewer and collapses.
-  const offset = profile ? sagittal : muscle.lateral;
+  const offset = muscle.lateral * lateralVis + sagittal;
   return [
     { bone: `${muscle.bone}L` as BoneId, offset },
     { bone: `${muscle.bone}R` as BoneId, offset },

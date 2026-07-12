@@ -1,4 +1,5 @@
-import type { Vec2 } from './vec2.js';
+import type { Quat } from './quat.js';
+import type { Vec3 } from './vec3.js';
 
 export type Side = 'left' | 'right' | 'center';
 
@@ -59,34 +60,35 @@ export const LANDMARK_IDS = [
 
 export type LandmarkId = (typeof LANDMARK_IDS)[number];
 
+/**
+ * A bone in anatomical neutral (standing, arms down, facing +z). The three
+ * axes carry the whole sign convention of the format, as data:
+ *
+ *  - `dir` - the direction the bone points at rest (unit vector)
+ *  - `flexAxis` - positive `flex` rotates about this: anatomical flexion
+ *    (a knee bends backward, a hip swings forward - each bone's axis says so)
+ *  - `abductAxis` - positive `abduct` moves the bone away from the midline
+ *    (for center bones: toward the figure's left)
+ *  - `twistAxis` - positive `twist` turns about this, along the bone: external
+ *    rotation for limbs, turning toward the figure's left for center bones
+ *
+ * Because the signs live in the axes - and axes mirror as the pseudovectors
+ * they are - the right side is an exact mirror of the left and swapping L/R
+ * joint values mirrors a pose. No code branches on side anywhere.
+ */
 export interface BoneDef {
   readonly id: BoneId;
   readonly parent: BoneId | null;
   /** Which end of the parent bone this bone hangs off. */
   readonly attach: 'start' | 'end';
-  /**
-   * The bone whose direction this bone's rest angle is measured against, when
-   * that differs from the bone it hangs off. An upper arm *attaches* to the
-   * clavicle (which points sideways) but *aims* relative to the spine - keeping
-   * the two apart is what stops a profile figure's right arm pointing skyward.
-   */
-  readonly angleParent?: BoneId;
   /** Bone length as a fraction of the figure's stature (1.0 = full height). */
   readonly length: number;
-  /** Angle in degrees relative to the parent bone's direction, in the neutral standing pose. */
-  readonly restAngle: number;
+  readonly dir: Vec3;
+  readonly flexAxis: Vec3;
+  readonly abductAxis: Vec3;
+  readonly twistAxis: Vec3;
   readonly side: Side;
   readonly group: BoneGroup;
-  /** Lateral bones (clavicle, hip) foreshorten as the figure turns away from the viewer. */
-  readonly lateral?: boolean;
-  /** Foot bones foreshorten in front/back views. */
-  readonly foot?: boolean;
-  /**
-   * Which way a positive joint value bends this bone. -1 for the shin, so that
-   * "shinL: 90" means the knee is flexed 90 degrees - the way a knee actually
-   * bends - rather than hyperextended by 90.
-   */
-  readonly flexSign?: number;
 }
 
 export interface Rig {
@@ -94,56 +96,54 @@ export interface Rig {
   readonly bones: readonly BoneDef[];
 }
 
-export type ViewId = 'front' | 'back' | 'side' | 'three-quarter';
+/** A joint rotation in degrees about the bone's anatomical axes, applied twist, then abduct, then flex. */
+export interface JointRotation {
+  readonly flex: number;
+  readonly abduct: number;
+  readonly twist: number;
+}
 
-export interface ViewConfig {
-  /** Foreshortening applied to lateral bones: 1 = full width, 0 = perfectly edge-on. */
-  readonly lateralScale: number;
-  /** Foreshortening applied to feet. */
-  readonly footScale: number;
-  /**
-   * Whether the right limbs mirror the left ones.
-   *
-   * Facing the viewer, they do: a raised right arm goes one way and a raised
-   * left arm goes the other. Seen from the side, they do not - both arms swing
-   * the same way, because you are looking at both of them from the same side.
-   */
-  readonly mirrorLimbs: boolean;
+/** A scalar is pure flexion - the common case reads like anatomy: "forearmL: 90" bends the elbow. */
+export type JointValue = number | Partial<JointRotation>;
+
+/**
+ * An absolute bone direction: where the bone points in world space, whatever
+ * its parent does. `azimuth` turns from +z (the figure's facing direction)
+ * toward +x (the figure's left); `elevation` rises from horizontal (90 = up).
+ */
+export interface WorldDirection {
+  readonly azimuth: number;
+  readonly elevation: number;
+  readonly twist?: number | undefined;
 }
 
 export interface KinematicPose {
-  readonly view: ViewId;
   readonly root: {
-    readonly position: Vec2;
-    /** World angle of the pelvis in degrees; 90 = upright. */
-    readonly rotation: number;
+    readonly position: Vec3;
+    /** Degrees. Yaw turns the figure (+ = toward its left), pitch tips it forward, roll cartwheels it. */
+    readonly yaw: number;
+    readonly pitch: number;
+    readonly roll: number;
     readonly scale: number;
   };
-  readonly joints: Partial<Record<JointId, number>>;
-  /**
-   * Absolute bone directions in degrees. A bone listed here points exactly this
-   * way in world space, whatever its parent does - which is how a human (or a
-   * model) actually thinks about a posture: "the front thigh points down-left at
-   * -150 degrees", not "rotate the hip 60 degrees from neutral".
-   */
-  readonly world?: Partial<Record<JointId, number>>;
+  readonly joints: Partial<Record<JointId, JointValue>>;
+  readonly world: Partial<Record<JointId, WorldDirection>>;
   /** Translate the solved figure so its lowest point sits on y = 0. */
   readonly grounded: boolean;
-  /** Mirror the solved figure across the vertical axis (a figure facing the other way). */
-  readonly flip?: boolean;
 }
 
 export interface BoneSegment {
   readonly id: BoneId;
-  readonly start: Vec2;
-  readonly end: Vec2;
-  /** Absolute direction of the bone in degrees. */
-  readonly worldAngle: number;
+  readonly start: Vec3;
+  readonly end: Vec3;
+  /** World orientation of the bone's rest frame. */
+  readonly orientation: Quat;
   readonly length: number;
   readonly side: Side;
   readonly group: BoneGroup;
 }
 
+/** 2D extent in a projected picture plane. */
 export interface Bounds {
   readonly minX: number;
   readonly minY: number;
@@ -151,13 +151,22 @@ export interface Bounds {
   readonly maxY: number;
 }
 
+/** 3D extent of a solved skeleton. */
+export interface Bounds3 {
+  readonly minX: number;
+  readonly minY: number;
+  readonly minZ: number;
+  readonly maxX: number;
+  readonly maxY: number;
+  readonly maxZ: number;
+}
+
 export interface Skeleton {
   readonly rig: Rig;
-  readonly view: ViewId;
   readonly scale: number;
   readonly bones: Record<BoneId, BoneSegment>;
-  readonly landmarks: Record<LandmarkId, Vec2>;
-  readonly bounds: Bounds;
+  readonly landmarks: Record<LandmarkId, Vec3>;
+  readonly bounds: Bounds3;
   /** Sole-to-crown extent of the solved figure. */
   readonly height: number;
 }

@@ -1,6 +1,7 @@
 import { path } from 'd3-path';
 import { interiorAngle } from '../core/angles.js';
-import type { Bounds, Skeleton } from '../core/types.js';
+import type { Bounds } from '../core/types.js';
+import type { ViewSkeleton } from './camera.js';
 import { add, angleOf, dist, fromPolar, lerp, normalLeft, scale as scaleVec, sub, type Vec2 } from '../core/vec2.js';
 import type { Annotation } from '../model/schema.js';
 import type { RenderContext } from './context.js';
@@ -178,7 +179,7 @@ const dot = (a: Annotation & { type: 'point' }, ctx: RenderContext): SvgNode => 
   ]);
 };
 
-const annotationPoints = (a: Annotation, skeleton: Skeleton): Vec2[] => {
+const annotationPoints = (a: Annotation, skeleton: ViewSkeleton): Vec2[] => {
   switch (a.type) {
     case 'angle':
       return [skeleton.landmarks[a.at]];
@@ -193,7 +194,7 @@ const annotationPoints = (a: Annotation, skeleton: Skeleton): Vec2[] => {
   }
 };
 
-export const annotationsBounds = (annotations: readonly Annotation[], skeleton: Skeleton): Bounds | null => {
+export const annotationsBounds = (annotations: readonly Annotation[], skeleton: ViewSkeleton): Bounds | null => {
   const pts = annotations.flatMap((a) => annotationPoints(a, skeleton));
   return pts.length === 0 ? null : boundsOfPoints(pts);
 };

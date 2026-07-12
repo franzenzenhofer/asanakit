@@ -4,12 +4,13 @@ import type { Command } from 'commander';
 import { expandSequence } from '../../library/index.js';
 import type { PoseSpec } from '../../model/index.js';
 import { optimizeSvg, renderPng, renderSheet, renderSvg, type RenderOptions, type SheetOptions } from '../../render/index.js';
-import { library, parseIntOption, parseStyle, resolvePose } from '../resolve.js';
+import { library, parseCamera, parseIntOption, parseStyle, resolvePose } from '../resolve.js';
 
 interface CommonOptions {
   style: string;
   width: string;
   height: string;
+  camera?: string;
   title?: boolean;
   caption?: boolean;
   muscles?: boolean;
@@ -25,6 +26,7 @@ const renderOptionsFrom = (o: CommonOptions): RenderOptions => ({
   height: parseIntOption(o.height, 'height'),
   title: o.title === true,
   caption: o.caption === true,
+  ...(o.camera === undefined ? {} : { camera: parseCamera(o.camera) }),
   ...(o.muscles === undefined ? {} : { muscles: o.muscles }),
   ...(o.background === undefined ? {} : { background: o.background }),
 });
@@ -47,6 +49,7 @@ const withCommonOptions = (cmd: Command): Command =>
     .option('-s, --style <style>', 'stick | anatomy | silhouette | blueprint | ink | poster | minimal', 'stick')
     .option('-w, --width <px>', 'canvas width', '600')
     .option('-h, --height <px>', 'canvas height', '800')
+    .option('-c, --camera <view>', 'front | back | left | right | side | three-quarter | top, or "azimuth=30,elevation=15"')
     .option('--title', 'draw the pose name above the figure')
     .option('--caption', 'draw the teaching cues below the figure')
     .option('--muscles', 'force the muscle layer on')

@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 import { validatePose } from '../../src/anatomy/validate.js';
 import { parsePose } from '../../src/model/index.js';
 
-const pose = (body: string) => parsePose(`asanakit: 1\nid: t\nname: T\ndiscipline: yoga\n${body}`, 't.pose.yaml');
+const pose = (body: string) => parsePose(`asanakit: 2\nid: t\nname: T\ndiscipline: yoga\n${body}`, 't.pose.yaml');
 
 const codes = (body: string): string[] => validatePose(pose(body)).map((i) => i.code);
 
@@ -32,19 +32,23 @@ describe('validatePose - joint limits', () => {
     expect(issues[0]?.message).toContain('shinL');
   });
 
-  test('checks limits on world-angled bones too, not just relative joints', () => {
-    // Shin pinned forward of a vertical thigh: a knee bending the wrong way.
-    expect(codes('figure:\n  world:\n    thighL: -90\n    shinL: -50\n')).toContain('knee-hyperextension');
+  test('checks limits on world-aimed bones too, not just relative joints', () => {
+    // Thigh straight down, shin aimed forward: a knee bending the wrong way.
+    expect(
+      codes(
+        'figure:\n  world:\n    thighL: { azimuth: 0, elevation: -90 }\n    shinL: { azimuth: 0, elevation: -40 }\n',
+      ),
+    ).toContain('knee-hyperextension');
   });
 });
 
 describe('validatePose - ground contact', () => {
   test('a figure floating above the ground is caught', () => {
-    expect(codes('figure:\n  grounded: false\n  root:\n    position: [0, 0.9]\n')).toContain('no-ground-contact');
+    expect(codes('figure:\n  grounded: false\n  root:\n    position: [0, 0.9, 0]\n')).toContain('no-ground-contact');
   });
 
   test('a figure sunk through the ground is caught', () => {
-    expect(codes('figure:\n  grounded: false\n  root:\n    position: [0, -0.2]\n')).toContain('below-ground');
+    expect(codes('figure:\n  grounded: false\n  root:\n    position: [0, -0.2, 0]\n')).toContain('below-ground');
   });
 
   test('a grounded standing figure passes both checks', () => {
@@ -60,9 +64,9 @@ describe('validatePose - declared contact points', () => {
   });
 
   test('catches a limb that was meant to reach the floor but does not', () => {
-    // The classic authoring mistake: tilt the pelvis, forget to pin the legs.
-    // The hands were supposed to be on the mat; they are nowhere near it.
-    const issues = validatePose(pose('contact: [handTipL, handTipR]\nfigure:\n  root:\n    rotation: -20\n'));
+    // The classic authoring mistake: the hands were supposed to be on the mat;
+    // they are nowhere near it.
+    const issues = validatePose(pose('contact: [handTipL, handTipR]\nfigure:\n  root:\n    pitch: 20\n'));
     expect(issues.map((i) => i.code)).toContain('contact-off-ground');
     expect(issues.find((i) => i.code === 'contact-off-ground')?.message).toContain('handTipL');
   });

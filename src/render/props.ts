@@ -1,18 +1,19 @@
 import { curveBasis, line } from 'd3-shape';
 import { path } from 'd3-path';
-import type { Bounds, LandmarkId, Skeleton } from '../core/types.js';
+import type { Bounds, LandmarkId } from '../core/types.js';
+import type { ViewSkeleton } from './camera.js';
 import { add, fromPolar, rotate, scale as scaleVec, type Vec2 } from '../core/vec2.js';
 import type { Anchor, Prop } from '../model/schema.js';
 import { boundsOfPoints, type Projection } from './project.js';
 import type { RenderContext } from './context.js';
 import { el, group, num, type SvgNode } from './svg.js';
 
-export const resolveAnchor = (anchor: Anchor, skeleton: Skeleton): Vec2 =>
+export const resolveAnchor = (anchor: Anchor, skeleton: ViewSkeleton): Vec2 =>
   typeof anchor === 'string' ? skeleton.landmarks[anchor] : [anchor[0], anchor[1]];
 
-const centreX = (skeleton: Skeleton): number => (skeleton.bounds.minX + skeleton.bounds.maxX) / 2;
+const centreX = (skeleton: ViewSkeleton): number => (skeleton.bounds.minX + skeleton.bounds.maxX) / 2;
 
-const centroid = (ids: readonly LandmarkId[], skeleton: Skeleton): Vec2 => {
+const centroid = (ids: readonly LandmarkId[], skeleton: ViewSkeleton): Vec2 => {
   if (ids.length === 0) return [centreX(skeleton), skeleton.bounds.minY];
   const pts = ids.map((id) => skeleton.landmarks[id]);
   return [
@@ -67,7 +68,7 @@ const polygon = (points: readonly Vec2[], proj: Projection): string => {
   return p.toString();
 };
 
-const propPoints = (prop: Prop, skeleton: Skeleton): Vec2[] => {
+const propPoints = (prop: Prop, skeleton: ViewSkeleton): Vec2[] => {
   const cx = centreX(skeleton);
   switch (prop.type) {
     case 'ground':
@@ -103,7 +104,7 @@ const propPoints = (prop: Prop, skeleton: Skeleton): Vec2[] => {
   }
 };
 
-export const propsBounds = (props: readonly Prop[], skeleton: Skeleton): Bounds | null => {
+export const propsBounds = (props: readonly Prop[], skeleton: ViewSkeleton): Bounds | null => {
   const pts = props.flatMap((prop) => propPoints(prop, skeleton));
   return pts.length === 0 ? null : boundsOfPoints(pts);
 };

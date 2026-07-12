@@ -4,8 +4,7 @@ import { solveSkeleton } from '../../src/core/skeleton.js';
 import type { KinematicPose } from '../../src/core/types.js';
 
 const pose = (over: Partial<KinematicPose> = {}): KinematicPose => ({
-  view: 'front',
-  root: { position: [0, 0], rotation: 90, scale: 1 },
+  root: { position: [0, 0, 0], yaw: 0, pitch: 0, roll: 0, scale: 1 },
   joints: {},
   world: {},
   grounded: false,
@@ -16,12 +15,13 @@ const solve = (over: Partial<KinematicPose> = {}) => solveSkeleton(pose(over), D
 
 describe('solveSkeleton - rest pose', () => {
   test('places the pelvis at the root position', () => {
-    expect(solve().hipCenter).toEqual([0, 0]);
+    expect(solve().hipCenter).toEqual([0, 0, 0]);
   });
 
   test('stacks the torso straight up from the hips', () => {
     const l = solve();
     expect(l.headTop[0]).toBeCloseTo(0, 8);
+    expect(l.headTop[2]).toBeCloseTo(0, 8);
     expect(l.headTop[1]).toBeGreaterThan(l.chest[1]);
     expect(l.chest[1]).toBeGreaterThan(l.waist[1]);
     expect(l.waist[1]).toBeGreaterThan(0);
@@ -34,11 +34,12 @@ describe('solveSkeleton - rest pose', () => {
     expect(l.wristL[1]).toBeLessThan(l.elbowL[1]);
   });
 
-  test('puts the figure left side on positive x in front view', () => {
+  test('puts the figure left side on positive x', () => {
     const l = solve();
     expect(l.shoulderL[0]).toBeGreaterThan(0);
     expect(l.shoulderR[0]).toBeLessThan(0);
     expect(l.shoulderL[0]).toBeCloseTo(-l.shoulderR[0], 8);
+    expect(l.shoulderL[1]).toBeCloseTo(l.shoulderR[1], 8);
   });
 
   test('extends both legs straight down to the ankles', () => {
@@ -48,6 +49,13 @@ describe('solveSkeleton - rest pose', () => {
     expect(l.ankleL[0]).toBeCloseTo(l.kneeL[0], 8);
   });
 
+  test('points both feet forward, toward +z', () => {
+    const l = solve();
+    expect(l.toeL[2]).toBeGreaterThan(l.ankleL[2]);
+    expect(l.toeR[2]).toBeGreaterThan(l.ankleR[2]);
+    expect(l.toeL[0]).toBeCloseTo(l.ankleL[0], 8);
+  });
+
   test('is roughly one unit tall from sole to crown', () => {
     const s = solveSkeleton(pose(), DEFAULT_RIG);
     expect(s.height).toBeGreaterThan(0.95);
@@ -55,36 +63,59 @@ describe('solveSkeleton - rest pose', () => {
   });
 });
 
-describe('solveSkeleton - joint rotations', () => {
-  test('a positive shoulder angle abducts the arm out to the side', () => {
+describe('solveSkeleton - flexion', () => {
+  test('a scalar joint value flexes the bone forward, into +z', () => {
     const l = solve({ joints: { upperArmL: 90 } });
+    expect(l.elbowL[2]).toBeGreaterThan(l.shoulderL[2] + 0.1);
     expect(l.elbowL[1]).toBeCloseTo(l.shoulderL[1], 8);
-    expect(l.elbowL[0]).toBeGreaterThan(l.shoulderL[0]);
   });
 
-  test('mirrors symmetric joint angles across the body midline', () => {
-    const l = solve({ joints: { upperArmL: 120, upperArmR: 120 } });
-    expect(l.wristL[0]).toBeCloseTo(-l.wristR[0], 8);
-    expect(l.wristL[1]).toBeCloseTo(l.wristR[1], 8);
+  test('hip flexion swings the thigh forward', () => {
+    const l = solve({ joints: { thighL: 90 } });
+    expect(l.kneeL[2]).toBeGreaterThan(l.hipJointL[2] + 0.2);
+    expect(l.kneeL[1]).toBeCloseTo(l.hipJointL[1], 8);
   });
 
-  test('a positive shin angle flexes the knee: the heel swings up and back', () => {
+  test('knee flexion folds the heel up and BACKWARD - the way a knee bends', () => {
     const straight = solve();
     const bent = solve({ joints: { shinL: 90 } });
     expect(bent.ankleL[1]).toBeGreaterThan(straight.ankleL[1]);
-    // Flexion takes the heel behind the knee, never in front of it.
-    expect(bent.ankleL[0]).toBeLessThan(straight.ankleL[0]);
+    expect(bent.ankleL[2]).toBeLessThan(straight.ankleL[2]);
   });
 
-  test('root rotation turns the whole figure', () => {
-    const l = solve({ root: { position: [0, 0], rotation: 0, scale: 1 } });
-    expect(l.headTop[0]).toBeGreaterThan(0.4);
-    expect(l.headTop[1]).toBeCloseTo(0, 8);
+  test('spine flexion bends the torso forward', () => {
+    const l = solve({ joints: { spine: 60 } });
+    expect(l.chest[2]).toBeGreaterThan(0.1);
+  });
+});
+
+describe('solveSkeleton - abduction and twist', () => {
+  test('abduction lifts the arm away from the midline, on both sides', () => {
+    const l = solve({ joints: { upperArmL: { abduct: 90 }, upperArmR: { abduct: 90 } } });
+    expect(l.elbowL[0]).toBeGreaterThan(l.shoulderL[0] + 0.1);
+    expect(l.elbowR[0]).toBeLessThan(l.shoulderR[0] - 0.1);
+    expect(l.elbowL[1]).toBeCloseTo(l.shoulderL[1], 6);
   });
 
-  test('root scale scales the whole figure', () => {
-    const s = solveSkeleton(pose({ root: { position: [0, 0], rotation: 90, scale: 2 } }), DEFAULT_RIG);
-    expect(s.height).toBeGreaterThan(1.9);
+  test('mirrored joint values yield a perfectly mirrored figure', () => {
+    const l = solve({
+      joints: {
+        upperArmL: { flex: 40, abduct: 70, twist: 25 },
+        upperArmR: { flex: 40, abduct: 70, twist: 25 },
+        forearmL: 30,
+        forearmR: 30,
+      },
+    });
+    expect(l.wristL[0]).toBeCloseTo(-l.wristR[0], 8);
+    expect(l.wristL[1]).toBeCloseTo(l.wristR[1], 8);
+    expect(l.wristL[2]).toBeCloseTo(l.wristR[2], 8);
+  });
+
+  test('external hip twist turns the toes outward, symmetrically', () => {
+    const l = solve({ joints: { thighL: { twist: 45 }, thighR: { twist: 45 } } });
+    expect(l.toeL[0]).toBeGreaterThan(l.ankleL[0] + 0.02);
+    expect(l.toeR[0]).toBeLessThan(l.ankleR[0] - 0.02);
+    expect(l.toeL[0]).toBeCloseTo(-l.toeR[0], 8);
   });
 
   test('rejects an unknown joint name instead of silently ignoring it', () => {
@@ -93,105 +124,85 @@ describe('solveSkeleton - joint rotations', () => {
   });
 });
 
-describe('solveSkeleton - grounding, flipping and bounds', () => {
+describe('solveSkeleton - root orientation', () => {
+  test('yaw turns the whole figure toward its left', () => {
+    const l = solve({ root: { position: [0, 0, 0], yaw: 90, pitch: 0, roll: 0, scale: 1 } });
+    // Facing +x now, so the toes point that way.
+    expect(l.toeL[0]).toBeGreaterThan(l.ankleL[0] + 0.05);
+    expect(l.toeL[2]).toBeCloseTo(l.ankleL[2], 6);
+  });
+
+  test('pitch tips the whole figure toward horizontal', () => {
+    const l = solve({ root: { position: [0, 0, 0], yaw: 0, pitch: 90, roll: 0, scale: 1 } });
+    expect(l.headTop[2]).toBeGreaterThan(0.4);
+    expect(l.headTop[1]).toBeCloseTo(0, 6);
+  });
+
+  test('root scale scales the whole figure', () => {
+    const s = solveSkeleton(pose({ root: { position: [0, 0, 0], yaw: 0, pitch: 0, roll: 0, scale: 2 } }), DEFAULT_RIG);
+    expect(s.height).toBeGreaterThan(1.9);
+  });
+});
+
+describe('solveSkeleton - grounding and bounds', () => {
   test('grounded poses rest their lowest point on y = 0', () => {
     const s = solveSkeleton(pose({ grounded: true }), DEFAULT_RIG);
     expect(s.bounds.minY).toBeCloseTo(0, 8);
     expect(s.landmarks.hipCenter[1]).toBeGreaterThan(0.4);
   });
 
-  test('flip mirrors the whole figure across the vertical axis', () => {
-    const normal = solve({ view: 'side' });
-    const flipped = solve({ view: 'side', flip: true });
-    expect(flipped.toeL[0]).toBeCloseTo(-normal.toeL[0], 8);
-    expect(flipped.toeL[1]).toBeCloseTo(normal.toeL[1], 8);
-  });
-
   test('bounds enclose every landmark', () => {
-    const s = solveSkeleton(pose({ joints: { upperArmL: 170, upperArmR: 170 } }), DEFAULT_RIG);
-    for (const [px, py] of Object.values(s.landmarks)) {
+    const s = solveSkeleton(pose({ joints: { upperArmL: 170, upperArmR: { abduct: 170 } } }), DEFAULT_RIG);
+    for (const [px, py, pz] of Object.values(s.landmarks)) {
       expect(px).toBeGreaterThanOrEqual(s.bounds.minX - 1e-9);
       expect(px).toBeLessThanOrEqual(s.bounds.maxX + 1e-9);
       expect(py).toBeGreaterThanOrEqual(s.bounds.minY - 1e-9);
       expect(py).toBeLessThanOrEqual(s.bounds.maxY + 1e-9);
+      expect(pz).toBeGreaterThanOrEqual(s.bounds.minZ - 1e-9);
+      expect(pz).toBeLessThanOrEqual(s.bounds.maxZ + 1e-9);
     }
   });
 });
 
-describe('solveSkeleton - views', () => {
-  test('side view collapses the lateral offset between the shoulders', () => {
-    const front = solve({ view: 'front' });
-    const side = solve({ view: 'side' });
-    const frontSpan = Math.abs(front.shoulderL[0] - front.shoulderR[0]);
-    const sideSpan = Math.abs(side.shoulderL[0] - side.shoulderR[0]);
-    expect(sideSpan).toBeLessThan(frontSpan * 0.3);
+describe('solveSkeleton - absolute world directions', () => {
+  test('aims a bone at an absolute direction, ignoring its parent chain', () => {
+    // Straight up, whatever the pelvis does.
+    const s = solveSkeleton(
+      pose({
+        root: { position: [0, 0, 0], yaw: 0, pitch: 40, roll: 0, scale: 1 },
+        world: { spine: { azimuth: 0, elevation: 90 } },
+      }),
+      DEFAULT_RIG,
+    );
+    const spine = s.bones.spine;
+    expect(spine.end[1] - spine.start[1]).toBeCloseTo(spine.length, 6);
   });
 
-  test('side view points both feet the same way', () => {
-    const l = solve({ view: 'side' });
-    const toeDirL = l.toeL[0] - l.ankleL[0];
-    const toeDirR = l.toeR[0] - l.ankleR[0];
-    expect(toeDirL).toBeGreaterThan(0);
-    expect(toeDirR).toBeGreaterThan(0);
+  test('children of a world-aimed bone stay relative to it', () => {
+    // Thigh pinned horizontal-forward; 90 degrees of knee flexion hangs the shin straight down.
+    const s = solveSkeleton(
+      pose({ world: { thighL: { azimuth: 0, elevation: 0 } }, joints: { shinL: 90 } }),
+      DEFAULT_RIG,
+    );
+    const shin = s.bones.shinL;
+    expect(shin.end[1] - shin.start[1]).toBeCloseTo(-shin.length, 6);
   });
 
-  test('front view splays the feet outward from the midline', () => {
-    const l = solve({ view: 'front' });
-    expect(l.toeL[0]).toBeGreaterThan(l.ankleL[0]);
-    expect(l.toeR[0]).toBeLessThan(l.ankleR[0]);
-  });
-});
-
-describe('solveSkeleton - absolute world angles', () => {
-  test('points a bone in an absolute direction, ignoring its rest angle', () => {
-    const s = solveSkeleton(pose({ world: { thighL: -150 } }), DEFAULT_RIG);
-    expect(s.bones.thighL.worldAngle).toBeCloseTo(-150, 8);
-  });
-
-  test('children of a world-angled bone stay relative to it', () => {
-    // Thigh pinned down-and-back; 30 degrees of knee flexion folds the shin further back.
-    const s = solveSkeleton(pose({ world: { thighL: -150 }, joints: { shinL: 30 } }), DEFAULT_RIG);
-    expect(s.bones.shinL.worldAngle).toBeCloseTo(-180, 8);
-  });
-
-  test('a world angle on a right-side bone is not mirrored: it means what it says', () => {
-    const s = solveSkeleton(pose({ world: { thighR: -150 } }), DEFAULT_RIG);
-    expect(s.bones.thighR.worldAngle).toBeCloseTo(-150, 8);
-  });
-
-  test('world angles compose with root rotation rather than fighting it', () => {
-    const s = solveSkeleton(pose({ root: { position: [0, 0], rotation: -30, scale: 1 }, world: { spine: 0 } }), DEFAULT_RIG);
-    expect(s.bones.spine.worldAngle).toBeCloseTo(0, 8);
-    expect(s.bones.pelvis.worldAngle).toBeCloseTo(-30, 8);
+  test('a world direction on a right-side bone means what it says', () => {
+    const s = solveSkeleton(pose({ world: { thighR: { azimuth: 90, elevation: 0 } } }), DEFAULT_RIG);
+    const thigh = s.bones.thighR;
+    expect(thigh.end[0] - thigh.start[0]).toBeCloseTo(thigh.length, 6);
   });
 
   test('rejects an unknown bone in the world block', () => {
-    const bad = { elbowL: 10 } as NonNullable<KinematicPose['world']>;
-    expect(() => solveSkeleton(pose({ world: bad }), DEFAULT_RIG)).toThrow(/elbowL/);
+    const bad = { notABone: { azimuth: 0, elevation: 0 } } as unknown as KinematicPose['world'];
+    expect(() => solveSkeleton(pose({ world: bad }), DEFAULT_RIG)).toThrow(/notABone/);
   });
 });
 
-describe('solveSkeleton - lateral offset in profile views', () => {
-  test('keeps the two shoulders at the same height however the torso is rotated', () => {
-    // In profile, left/right separation points into the screen. It must project as a
-    // sideways nudge, never as a vertical one - otherwise a horizontal spine (plank,
-    // chaturanga) lifts one shoulder above the other and one hand misses the floor.
-    const l = solve({ view: 'side', root: { position: [0, 0], rotation: 0, scale: 1 } });
-    expect(l.shoulderL[1]).toBeCloseTo(l.shoulderR[1], 8);
-    expect(l.hipJointL[1]).toBeCloseTo(l.hipJointR[1], 8);
-  });
-
-  test('lands both hands at the same height in a horizontal profile pose', () => {
-    const l = solve({
-      view: 'side',
-      root: { position: [0, 0], rotation: 0, scale: 1 },
-      world: { upperArmL: -90, upperArmR: -90, forearmL: -90, forearmR: -90 },
-    });
-    expect(l.wristL[1]).toBeCloseTo(l.wristR[1], 8);
-  });
-
-  test('front view still tilts the shoulder line with the torso', () => {
-    const l = solve({ view: 'front', root: { position: [0, 0], rotation: 70, scale: 1 } });
-    expect(Math.abs(l.shoulderL[1] - l.shoulderR[1])).toBeGreaterThan(0.02);
+describe('solveSkeleton - determinism', () => {
+  test('the same pose always solves to identical geometry', () => {
+    const p = pose({ joints: { upperArmL: { flex: 33, abduct: 21, twist: 8 }, shinR: 47 }, grounded: true });
+    expect(solveSkeleton(p, DEFAULT_RIG)).toEqual(solveSkeleton(p, DEFAULT_RIG));
   });
 });
