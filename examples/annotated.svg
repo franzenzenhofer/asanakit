@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 520" width="700" height="520" data-pose="utthita-trikonasana" data-style="blueprint" role="img" aria-label="Extended Triangle (Utthita Trikoṇāsana)">
+  <defs>
+    <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
+    </marker>
+  </defs>
+  <rect data-layer="background" x="0" y="0" width="700" height="520" fill="#f3f7fb"/>
+  <g data-layer="title">
+    <text x="350" y="44.85" text-anchor="middle" fill="#1b3a5c" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="39" font-weight="600">Extended Triangle</text>
+    <text x="350" y="78" text-anchor="middle" fill="#5c7998" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="21.45" font-style="italic">Utthita Trikoṇāsana</text>
+  </g>
+  <g data-layer="props">
+    <rect data-prop="mat" x="122.389" y="455.257" width="455.222" height="14.837" rx="7.418" fill="#e2ecf5" stroke="#1b3a5c" stroke-width="2.023"/>
+  </g>
+  <g data-layer="figure">
+    <g data-layer="limbs-far"/>
+    <g data-layer="torso">
+      <line data-bone="pelvis" x1="350" y1="341.171" x2="380.561" y2="326.92" stroke="#1b3a5c" stroke-width="4.046" stroke-linecap="round"/>
+      <line data-bone="spine" x1="380.561" y1="326.92" x2="432.514" y2="302.694" stroke="#1b3a5c" stroke-width="4.046" stroke-linecap="round"/>
+      <line data-bone="neck" x1="432.514" y1="302.694" x2="450.036" y2="292.578" stroke="#1b3a5c" stroke-width="4.046" stroke-linecap="round"/>
+      <line data-bone="clavicleL" x1="432.514" y1="302.694" x2="446.765" y2="333.254" stroke="#1b3a5c" stroke-width="4.046" stroke-linecap="round"/>
+      <line data-bone="clavicleR" x1="432.514" y1="302.694" x2="418.263" y2="272.133" stroke="#1b3a5c" stroke-width="4.046" stroke-linecap="round"/>
+      <line data-bone="hipL" x1="350" y1="341.171" x2="378.662" y2="341.171" stroke="#1b3a5c" stroke-width="4.046" stroke-linecap="round"/>
+      <line data-bone="hipR" x1="350" y1="341.171" x2="321.338" y2="341.171" stroke="#1b3a5c" stroke-width="4.046" stroke-linecap="round"/>
+    </g>
+    <ellipse data-part="head" cx="462.607" cy="274.623" rx="16.86" ry="16.86" transform="rotate(35.000 462.607 274.623)" fill="none" stroke="#1b3a5c" stroke-width="4.046"/>
+    <g data-layer="limbs-near">
+      <line data-bone="upperArmL" x1="446.765" y1="333.254" x2="456.426" y2="388.047" stroke="#1b3a5c" stroke-width="4.046" stroke-linecap="round"/>
+      <line data-bone="forearmL" x1="456.426" y1="388.047" x2="464.917" y2="436.199" stroke="#1b3a5c" stroke-width="4.046" stroke-linecap="round"/>
+      <line data-bone="handL" x1="464.917" y1="436.199" x2="468.137" y2="454.463" stroke="#1b3a5c" stroke-width="4.046" stroke-linecap="round"/>
+      <line data-bone="thighL" x1="378.662" y1="341.171" x2="437.079" y2="399.588" stroke="#1b3a5c" stroke-width="4.046" stroke-linecap="round"/>
+      <line data-bone="shinL" x1="437.079" y1="399.588" x2="495.496" y2="458.005" stroke="#1b3a5c" stroke-width="4.046" stroke-linecap="round"/>
+      <line data-bone="footL" x1="495.496" y1="458.005" x2="508.329" y2="462.676" stroke="#1b3a5c" stroke-width="4.046" stroke-linecap="round"/>
+      <line data-bone="upperArmR" x1="418.263" y1="272.133" x2="408.602" y2="217.34" stroke="#1b3a5c" stroke-width="4.046" stroke-linecap="round"/>
+      <line data-bone="forearmR" x1="408.602" y1="217.34" x2="400.112" y2="169.189" stroke="#1b3a5c" stroke-width="4.046" stroke-linecap="round"/>
+      <line data-bone="handR" x1="400.112" y1="169.189" x2="396.891" y2="150.924" stroke="#1b3a5c" stroke-width="4.046" stroke-linecap="round"/>
+      <line data-bone="thighR" x1="321.338" y1="341.171" x2="262.921" y2="399.588" stroke="#1b3a5c" stroke-width="4.046" stroke-linecap="round"/>
+      <line data-bone="shinR" x1="262.921" y1="399.588" x2="204.504" y2="458.005" stroke="#1b3a5c" stroke-width="4.046" stroke-linecap="round"/>
+      <line data-bone="footR" x1="204.504" y1="458.005" x2="191.671" y2="462.676" stroke="#1b3a5c" stroke-width="4.046" stroke-linecap="round"/>
+    </g>
+    <g data-part="joints">
+      <circle data-joint="shoulderL" cx="446.765" cy="333.254" r="3.372" fill="#1b3a5c"/>
+      <circle data-joint="elbowL" cx="456.426" cy="388.047" r="3.372" fill="#1b3a5c"/>
+      <circle data-joint="wristL" cx="464.917" cy="436.199" r="3.372" fill="#1b3a5c"/>
+      <circle data-joint="shoulderR" cx="418.263" cy="272.133" r="3.372" fill="#1b3a5c"/>
+      <circle data-joint="elbowR" cx="408.602" cy="217.34" r="3.372" fill="#1b3a5c"/>
+      <circle data-joint="wristR" cx="400.112" cy="169.189" r="3.372" fill="#1b3a5c"/>
+      <circle data-joint="hipJointL" cx="378.662" cy="341.171" r="3.372" fill="#1b3a5c"/>
+      <circle data-joint="kneeL" cx="437.079" cy="399.588" r="3.372" fill="#1b3a5c"/>
+      <circle data-joint="ankleL" cx="495.496" cy="458.005" r="3.372" fill="#1b3a5c"/>
+      <circle data-joint="hipJointR" cx="321.338" cy="341.171" r="3.372" fill="#1b3a5c"/>
+      <circle data-joint="kneeR" cx="262.921" cy="399.588" r="3.372" fill="#1b3a5c"/>
+      <circle data-joint="ankleR" cx="204.504" cy="458.005" r="3.372" fill="#1b3a5c"/>
+      <circle data-joint="chest" cx="432.514" cy="302.694" r="3.372" fill="#1b3a5c"/>
+      <circle data-joint="hipCenter" cx="350" cy="341.171" r="3.372" fill="#1b3a5c"/>
+    </g>
+  </g>
+  <g data-layer="annotations">
+    <g data-annotation="plumb">
+      <line x1="446.765" y1="520" x2="446.765" y2="93.6" stroke="#c1121f" stroke-width="1.349" stroke-dasharray="10.116 6.744" fill="none"/>
+      <text x="456.881" y="93.6" fill="#1b3a5c" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15.174" dominant-baseline="middle">stack the shoulders</text>
+    </g>
+    <g data-annotation="line">
+      <line x1="471.99" y1="470.877" x2="393.038" y2="134.51" stroke="#c1121f" stroke-width="1.349" stroke-dasharray="10.116 6.744" fill="none"/>
+      <text x="416.1" y="306.546" fill="#1b3a5c" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="15.174" dominant-baseline="middle">one straight line</text>
+    </g>
+  </g>
+</svg>

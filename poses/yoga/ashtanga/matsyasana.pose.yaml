@@ -1,0 +1,43 @@
+posekit: 1
+id: matsyasana
+name: Fish Pose
+sanskrit: Matsyāsana
+english: Fish Pose
+discipline: yoga
+family: backbend
+difficulty: 3
+description: Lying on the back, the chest arches high and the crown of the head rests on the floor. The forearms press down, the hands tuck under the hips and the legs stay long along the floor.
+tags: [ashtanga, finishing, backbend, supine]
+breath: inhale
+drishti: broomadhya
+cues:
+  - Lift the chest first, then let the head tip back
+  - Press the elbows down, keep weight off the neck
+contact: [hipCenter, elbowL, elbowR, handTipL, handTipR, ankleL, ankleR, headTop]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: 165
+  world:
+    pelvis: 165
+    spine: 125
+    neck: 210
+    head: -90
+    upperArmL: -90
+    upperArmR: -90
+    forearmL: 0
+    forearmR: 0
+    handL: 0
+    handR: 0
+    thighL: 0
+    thighR: 0
+    shinL: 0
+    shinR: 0
+    footL: 25
+    footR: 25
+props:
+  - type: mat
+muscles:
+  engaged: [erectorSpinae, trapezius, triceps, quadriceps]
+  stretched: [pectoralis, rectusAbdominis, hipFlexors]

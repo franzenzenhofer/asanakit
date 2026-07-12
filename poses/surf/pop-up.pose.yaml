@@ -1,0 +1,47 @@
+posekit: 1
+id: pop-up
+name: Pop-Up
+english: Pop-Up
+discipline: surf
+family: transition
+difficulty: 3
+description: The one explosive move that turns a paddler into a surfer. The hands press down on the deck under the chest, the hips lift, the back foot loads the tail and the front foot swings through under the body to land in the stance. It happens in one beat, without a knee ever touching the deck.
+tags: [surf, transition, dynamic, fundamental]
+cues:
+  - Press the deck away and lift the hips first
+  - Swing the front foot under your chest - never through a knee
+contact: [handTipL, handTipR, toeR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: 30
+  world:
+    spine: 26
+    neck: 18
+    head: 10
+    upperArmL: -80
+    forearmL: -85
+    handL: -88
+    upperArmR: -94
+    forearmR: -91
+    handR: -88
+    thighL: -2
+    shinL: -114
+    footL: 5
+    thighR: -145
+    shinR: -152
+    footR: -178
+props:
+  - type: wave
+    amplitude: 0.35
+    length: 3.4
+    y: -0.3
+  - type: surfboard
+    under: [handTipL, toeR]
+    rotation: 0
+    length: 1.3
+    offset: [0, -0.09]
+muscles:
+  engaged: [triceps, pectoralis, deltoid, rectusAbdominis, hipFlexors, serratus]
+  stretched: [hamstrings, gluteus]

@@ -1,0 +1,47 @@
+posekit: 1
+id: cutback
+name: Cutback
+english: Cutback
+discipline: surf
+family: turning
+difficulty: 4
+description: The turn that takes the surfer back to the power source. Out on the shoulder the board is swung around by the torso - the chest and both arms lead the rotation back toward the breaking part of the wave, the weight settles over the tail and the front leg extends.
+tags: [surf, turning, rotation, flow]
+cues:
+  - Turn your chest and arms first, the board follows
+  - Weight back over the tail to pivot, not the nose
+contact: [toeL, toeR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: 82
+  world:
+    spine: 100
+    neck: 118
+    head: 145
+    thighL: -45
+    shinL: -105
+    footL: -20
+    thighR: -85
+    shinR: -135
+    footR: -15
+    upperArmL: -178
+    forearmL: -172
+    handL: -170
+    upperArmR: 132
+    forearmR: 158
+    handR: 162
+props:
+  - type: wave
+    amplitude: 0.42
+    length: 3.4
+    y: -0.22
+  - type: surfboard
+    under: [ankleL, ankleR]
+    rotation: 4
+    length: 1.15
+    offset: [0, -0.1]
+muscles:
+  engaged: [obliques, erectorSpinae, gluteus, quadriceps, deltoid]
+  stretched: [pectoralis, hamstrings]

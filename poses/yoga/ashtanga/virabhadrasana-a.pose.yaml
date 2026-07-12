@@ -27,12 +27,12 @@ figure:
     shinR: -142
     footR: -15
     spine: 92
-    neck: 95
-    head: 95
-    upperArmL: 95
-    upperArmR: 95
-    forearmL: 95
-    forearmR: 95
+    neck: 97
+    head: 100
+    upperArmL: 99
+    upperArmR: 99
+    forearmL: 97
+    forearmR: 97
     handL: 95
     handR: 95
 props:

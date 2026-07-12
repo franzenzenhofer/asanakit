@@ -18,7 +18,7 @@ figure:
   view: side
   grounded: true
   root:
-    rotation: 60
+    rotation: 70
   world:
     thighL: -30
     thighR: -30
@@ -26,15 +26,15 @@ figure:
     shinR: -100
     footL: -18
     footR: -18
-    spine: 55
-    neck: 60
-    head: 62
-    upperArmL: 58
-    upperArmR: 58
-    forearmL: 60
-    forearmR: 60
-    handL: 62
-    handR: 62
+    spine: 65
+    neck: 70
+    head: 72
+    upperArmL: 78
+    upperArmR: 78
+    forearmL: 80
+    forearmR: 80
+    handL: 82
+    handR: 82
 props:
   - type: mat
 muscles:

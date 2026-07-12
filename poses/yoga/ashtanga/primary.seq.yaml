@@ -1,0 +1,74 @@
+posekit: 1
+id: ashtanga-primary
+name: Ashtanga Primary Series
+tradition: Ashtanga Vinyasa Yoga
+description: >-
+  Yoga Chikitsa, the first series of Ashtanga Vinyasa Yoga: the opening sun salutations,
+  the standing sequence, the seated sequence and the finishing sequence. Asymmetric
+  postures are marked "both" and render twice, once per side.
+
+sections:
+  - name: Surya Namaskara A
+    steps:
+      - { pose: samasthiti, breath: free, count: 1 }
+      - { pose: urdhva-hastasana, breath: inhale, count: 1 }
+      - { pose: uttanasana, breath: exhale, count: 1 }
+      - { pose: ardha-uttanasana, breath: inhale, count: 1 }
+      - { pose: chaturanga-dandasana, breath: exhale, count: 1 }
+      - { pose: urdhva-mukha-svanasana, breath: inhale, count: 1 }
+      - { pose: adho-mukha-svanasana, breath: exhale, count: 5 }
+      - { pose: ardha-uttanasana, breath: inhale, count: 1 }
+      - { pose: uttanasana, breath: exhale, count: 1 }
+      - { pose: urdhva-hastasana, breath: inhale, count: 1 }
+      - { pose: samasthiti, breath: exhale, count: 1 }
+
+  - name: Surya Namaskara B
+    steps:
+      - { pose: utkatasana, breath: inhale, count: 1 }
+      - { pose: chaturanga-dandasana, breath: exhale, count: 1 }
+      - { pose: urdhva-mukha-svanasana, breath: inhale, count: 1 }
+      - { pose: adho-mukha-svanasana, breath: exhale, count: 1 }
+      - { pose: virabhadrasana-a, breath: inhale, count: 1, side: both }
+      - { pose: chaturanga-dandasana, breath: exhale, count: 1 }
+      - { pose: adho-mukha-svanasana, breath: exhale, count: 5 }
+      - { pose: samasthiti, breath: exhale, count: 1 }
+
+  - name: Standing sequence
+    steps:
+      - { pose: padangusthasana, breath: exhale, count: 5 }
+      - { pose: padahastasana, breath: exhale, count: 5 }
+      - { pose: utthita-trikonasana, breath: exhale, count: 5, side: both }
+      - { pose: utthita-parsvakonasana, breath: exhale, count: 5, side: both }
+      - { pose: prasarita-padottanasana-a, breath: exhale, count: 5 }
+      - { pose: prasarita-padottanasana-c, breath: exhale, count: 5 }
+      - { pose: parsvottanasana, breath: exhale, count: 5, side: both }
+      - { pose: utkatasana, breath: inhale, count: 5 }
+      - { pose: virabhadrasana-a, breath: inhale, count: 5, side: both }
+      - { pose: virabhadrasana-b, breath: exhale, count: 5, side: both }
+
+  - name: Seated sequence
+    steps:
+      - { pose: dandasana, breath: hold, count: 5 }
+      - { pose: paschimottanasana, breath: exhale, count: 5 }
+      - { pose: purvottanasana, breath: inhale, count: 5 }
+      - { pose: janu-sirsasana-a, breath: exhale, count: 5, side: both }
+      - { pose: marichyasana-a, breath: exhale, count: 5, side: both }
+      - { pose: marichyasana-c, breath: exhale, count: 5, side: both }
+      - { pose: navasana, breath: free, count: 5 }
+      - { pose: baddha-konasana, breath: exhale, count: 5 }
+      - { pose: upavistha-konasana, breath: exhale, count: 5 }
+      - { pose: supta-padangusthasana, breath: exhale, count: 5, side: both }
+      - { pose: setu-bandhasana, breath: inhale, count: 5 }
+
+  - name: Finishing sequence
+    steps:
+      - { pose: urdhva-dhanurasana, breath: free, count: 5 }
+      - { pose: paschimottanasana, breath: exhale, count: 10 }
+      - { pose: salamba-sarvangasana, breath: free, count: 10 }
+      - { pose: halasana, breath: free, count: 8 }
+      - { pose: karnapidasana, breath: free, count: 8 }
+      - { pose: matsyasana, breath: free, count: 8 }
+      - { pose: sirsasana, breath: free, count: 15 }
+      - { pose: balasana, breath: free, count: 5 }
+      - { pose: padmasana, breath: free, count: 10 }
+      - { pose: savasana, breath: free, count: 10, note: Rest. }

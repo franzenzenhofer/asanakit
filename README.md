@@ -10,7 +10,10 @@ npx posekit sheet --sequence ashtanga-primary -o primary-series.png --columns 6 
 ```
 
 posekit is CLI-first, has no browser and no DOM, and renders the same bytes on every
-machine. It ships with the **full Ashtanga Primary Series** authored in its own pose format.
+machine. It ships with the **full Ashtanga Primary Series** - 37 asanas, 60 steps - authored
+in its own pose format, plus 8 surf postures.
+
+![The Ashtanga Primary Series rendered by posekit](examples/ashtanga-primary-series.png)
 
 ---
 
@@ -37,6 +40,22 @@ The posture is the data. The picture is a pure function of it.
   `data-muscle`, `data-annotation` hooks so the output stays machine-readable.
 - **Keypoint export** to MediaPipe-33 and COCO-17 for interop with pose-estimation tooling.
 - **Contact sheets and sequences** - render a whole practice in one command.
+
+## The same posture, seven ways
+
+![Every style](examples/styles.png)
+
+## Anatomy, not decoration
+
+Muscles are displaced in two anatomical planes - lateral (left/right) and sagittal
+(front/back) - so the chest is never drawn behind the back. Engaged muscles shade one way,
+stretched muscles the other.
+
+![Downward dog with muscle activation](examples/anatomy.png)
+
+## Surf
+
+![Surf postures](examples/surf.png)
 
 ## Install
 

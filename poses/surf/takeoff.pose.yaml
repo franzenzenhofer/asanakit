@@ -1,0 +1,47 @@
+posekit: 1
+id: takeoff
+name: Takeoff
+english: Takeoff
+discipline: surf
+family: riding
+difficulty: 3
+description: The first instant on the feet at the top of the wave. The stance lands wide and low, the knees soak up the drop, the arms swing out for balance and the board angles down the face.
+tags: [surf, riding, dynamic, beginner-milestone]
+cues:
+  - Land low, both feet under the shoulders
+  - Look down the line, not at your feet
+contact: [toeL, toeR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: 72
+  world:
+    spine: 62
+    neck: 55
+    head: 50
+    thighL: -35
+    shinL: -115
+    footL: -15
+    thighR: -70
+    shinR: -155
+    footR: -15
+    upperArmL: -25
+    forearmL: -5
+    handL: 0
+    upperArmR: 150
+    forearmR: 175
+    handR: 175
+props:
+  - type: wave
+    amplitude: 0.4
+    length: 3.2
+    y: -0.18
+  - type: surfboard
+    under: [ankleL, ankleR]
+    rotation: -8
+    length: 1.15
+    offset: [0, -0.1]
+muscles:
+  engaged: [quadriceps, gluteus, deltoid, erectorSpinae, tibialisAnterior]
+  stretched: [hipFlexors, gastrocnemius]

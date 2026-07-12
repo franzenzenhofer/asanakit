@@ -1,0 +1,48 @@
+posekit: 1
+id: paddling
+name: Paddling
+english: Paddling
+discipline: surf
+family: prone
+difficulty: 1
+description: Where ninety percent of surfing actually happens. The surfer lies prone and centred on the deck, chest lifted off the board, legs together over the tail, and pulls through the water one long arm at a time while the other arm recovers.
+tags: [surf, prone, paddling, fundamental, endurance]
+cues:
+  - Chest up, back long - do not lie flat
+  - Reach past your head and pull the water all the way to the hip
+contact: [hipCenter, kneeL, ankleL, ankleR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: 0
+  world:
+    spine: 34
+    neck: 44
+    head: 28
+    upperArmL: 4
+    forearmL: -2
+    handL: -8
+    upperArmR: 145
+    forearmR: 196
+    handR: 200
+    thighL: 180
+    shinL: 180
+    footL: 180
+    thighR: 177
+    shinR: 176
+    footR: 176
+props:
+  - type: wave
+    amplitude: 0.22
+    length: 3.6
+    y: -0.35
+    breaking: false
+  - type: surfboard
+    under: [hipCenter, chest]
+    rotation: 0
+    length: 1.5
+    offset: [-0.12, -0.13]
+muscles:
+  engaged: [latissimus, deltoid, trapezius, erectorSpinae, triceps]
+  stretched: [pectoralis, rectusAbdominis]

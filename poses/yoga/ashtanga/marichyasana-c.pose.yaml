@@ -1,0 +1,42 @@
+posekit: 1
+id: marichyasana-c
+name: Pose Dedicated to the Sage Marichi C
+sanskrit: Marīcyāsana C
+english: Sage Marichi's Pose C
+discipline: yoga
+family: seated
+difficulty: 3
+description: A seated spinal twist. One leg stays straight on the floor, the other knee is drawn up with the sole flat. The opposite elbow levers against the outside of the bent knee, the back hand presses the floor and the spine turns tall.
+tags: [ashtanga, primary-series, seated, twist]
+breath: exhale
+drishti: parsva
+cues:
+  - Lengthen up on the inhale, turn on the exhale
+  - Press the elbow against the knee and the knee back into the elbow
+contact: [hipCenter, hipJointL, hipJointR, kneeL, ankleL, ankleR, toeR, handTipR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: 90
+  world:
+    thighL: 0
+    shinL: 0
+    footL: 75
+    thighR: 78
+    shinR: -78
+    footR: 0
+    spine: 92
+    neck: 96
+    head: 105
+    upperArmL: -60
+    forearmL: 75
+    handL: 85
+    upperArmR: -132
+    forearmR: -132
+    handR: -132
+props:
+  - type: mat
+muscles:
+  engaged: [obliques, erectorSpinae, deltoid]
+  stretched: [obliques, gluteus, trapezius]

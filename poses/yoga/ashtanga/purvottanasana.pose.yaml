@@ -1,0 +1,42 @@
+posekit: 1
+id: purvottanasana
+name: Upward Plank
+sanskrit: Pūrvottānāsana
+english: Intense East Stretch
+discipline: yoga
+family: backbend
+difficulty: 3
+description: The counterpose to the seated forward fold. Hands press the floor behind the hips, the body lifts into one straight line from shoulders to feet, the soles press down and the head drops back.
+tags: [ashtanga, backbend, counterpose, primary-series]
+breath: inhale
+drishti: broomadhya
+cues:
+  - Press the hands down and lift the hips until the body is one line
+  - Push the soles into the floor and open the chest
+contact: [toeL, toeR, handTipL, handTipR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: 158
+  world:
+    thighL: -22
+    thighR: -22
+    shinL: -22
+    shinR: -22
+    footL: -18
+    footR: -18
+    spine: 158
+    neck: 158
+    head: 205
+    upperArmL: -90
+    upperArmR: -90
+    forearmL: -90
+    forearmR: -90
+    handL: 0
+    handR: 0
+props:
+  - type: mat
+muscles:
+  engaged: [gluteus, hamstrings, erectorSpinae, triceps, deltoid]
+  stretched: [pectoralis, rectusAbdominis, hipFlexors]

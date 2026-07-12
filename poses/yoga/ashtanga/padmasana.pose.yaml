@@ -1,0 +1,43 @@
+posekit: 1
+id: padmasana
+name: Lotus Pose
+sanskrit: Padmāsana
+english: Lotus Pose
+discipline: yoga
+family: seated
+difficulty: 3
+description: Seated with the legs folded and crossed, each foot drawn up onto the opposite thigh. The spine lifts tall and the hands rest quietly on the knees.
+tags: [ashtanga, finishing, seated, meditation]
+breath: free
+drishti: nasagrai
+cues:
+  - Root the sit bones, grow tall through the crown
+  - Let the knees settle, never force them down
+contact: [kneeL, kneeR, ankleL, ankleR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: 90
+  world:
+    pelvis: 90
+    spine: 90
+    neck: 90
+    head: 90
+    upperArmL: -65
+    upperArmR: -65
+    forearmL: -50
+    forearmR: -50
+    handL: -45
+    handR: -45
+    thighL: -20
+    thighR: -20
+    shinL: 181.5
+    shinR: 181.5
+    footL: 20
+    footR: 20
+props:
+  - type: mat
+muscles:
+  engaged: [erectorSpinae, rectusAbdominis]
+  stretched: [adductors, gluteus, quadriceps]

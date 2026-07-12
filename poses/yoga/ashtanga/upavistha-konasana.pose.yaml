@@ -1,0 +1,42 @@
+posekit: 1
+id: upavistha-konasana
+name: Wide-Angle Seated Forward Fold
+sanskrit: Upaviṣṭha Koṇāsana
+english: Seated Wide-Angle Pose
+discipline: yoga
+family: seated
+difficulty: 3
+description: Seated with the legs straight and spread wide on the floor. The torso hinges forward from the hips, the hands take hold of the outer edges of the feet and the chest travels toward the mat.
+tags: [ashtanga, primary-series, seated, forward-fold, hip-opener]
+breath: exhale
+drishti: nasagrai
+cues:
+  - Roll the thighs open so the kneecaps point at the ceiling
+  - Walk the hands out and lead with the chest, not the chin
+contact: [hipCenter, hipJointL, hipJointR, kneeR, ankleR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: 32
+  world:
+    thighL: 8
+    shinL: 8
+    footL: 82
+    thighR: 0
+    shinR: 0
+    footR: 75
+    spine: 40
+    neck: 20
+    head: 5
+    upperArmL: -30
+    forearmL: -20
+    handL: -25
+    upperArmR: -30
+    forearmR: -20
+    handR: -25
+props:
+  - type: mat
+muscles:
+  engaged: [quadriceps, rectusAbdominis]
+  stretched: [hamstrings, adductors, erectorSpinae]

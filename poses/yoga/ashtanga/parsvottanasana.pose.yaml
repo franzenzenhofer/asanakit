@@ -1,0 +1,42 @@
+posekit: 1
+id: parsvottanasana
+name: Intense Side Stretch
+sanskrit: Pārśvottānāsana
+english: Intense Side Stretch Pose
+discipline: yoga
+family: standing
+difficulty: 3
+description: Feet staggered front and back, both legs straight, the hips square. The torso folds flat over the front leg while the hands stay in reverse prayer behind the back. Held five breaths.
+tags: [ashtanga, standing, forward-fold, primary-series]
+breath: exhale
+drishti: padhayoragrai
+cues:
+  - Square the hips to the front foot before you fold
+  - Lengthen the chest along the front thigh, chin toward the shin
+contact: [toeL, toeR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: -55
+  world:
+    thighL: -65
+    shinL: -65
+    footL: 0
+    thighR: -115
+    shinR: -115
+    footR: 0
+    spine: -55
+    neck: -70
+    head: -68
+    upperArmL: 140
+    forearmL: -160
+    handL: -160
+    upperArmR: 140
+    forearmR: -160
+    handR: -160
+props:
+  - type: mat
+muscles:
+  engaged: [quadriceps, rectusAbdominis, rotatorCuff]
+  stretched: [hamstrings, gastrocnemius, erectorSpinae, pectoralis]

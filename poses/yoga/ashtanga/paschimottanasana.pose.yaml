@@ -1,0 +1,42 @@
+posekit: 1
+id: paschimottanasana
+name: Seated Forward Fold
+sanskrit: Paścimottānāsana
+english: Intense West Stretch
+discipline: yoga
+family: seated
+difficulty: 2
+description: From Staff Pose the torso hinges forward over straight legs, the hands catch the feet and the spine lengthens along the thighs. The whole back line of the body opens.
+tags: [ashtanga, seated, forward-fold, primary-series]
+breath: exhale
+drishti: padhayoragrai
+cues:
+  - Hinge from the hip joints, lead with the chest not the chin
+  - Draw the belly in and lengthen the spine on every inhale
+contact: [hipCenter, ankleL, ankleR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: 40
+  world:
+    thighL: 0
+    thighR: 0
+    shinL: 0
+    shinR: 0
+    footL: 90
+    footR: 90
+    spine: 28
+    neck: 10
+    head: -5
+    upperArmL: -45
+    upperArmR: -45
+    forearmL: 23
+    forearmR: 23
+    handL: -45
+    handR: -45
+props:
+  - type: mat
+muscles:
+  engaged: [quadriceps, rectusAbdominis, biceps]
+  stretched: [hamstrings, erectorSpinae, gastrocnemius, latissimus]

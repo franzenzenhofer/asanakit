@@ -1,0 +1,43 @@
+posekit: 1
+id: karnapidasana
+name: Ear Pressure Pose
+sanskrit: Karṇapīḍāsana
+english: Ear Pressure Pose
+discipline: yoga
+family: inversion
+difficulty: 3
+description: From plough the knees bend all the way down to the floor beside the ears, the shins rest along the floor and the arms stay flat.
+tags: [ashtanga, finishing, inversion, forward-fold]
+breath: exhale
+drishti: nasagrai
+cues:
+  - Let the knees squeeze gently in beside the ears
+  - Keep lifting the hips, breathe into the back body
+contact: [shoulderL, shoulderR, elbowL, elbowR, handTipL, handTipR, headTop, kneeL, kneeR, ankleL, ankleR, toeL, toeR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: -60
+  world:
+    pelvis: -60
+    spine: -60
+    neck: 180
+    head: 180
+    upperArmL: 0
+    upperArmR: 0
+    forearmL: 0
+    forearmR: 0
+    handL: 0
+    handR: 0
+    thighL: -119
+    thighR: -119
+    shinL: 180
+    shinR: 180
+    footL: 185
+    footR: 185
+props:
+  - type: mat
+muscles:
+  engaged: [rectusAbdominis, deltoid]
+  stretched: [erectorSpinae, trapezius, gluteus, hamstrings]

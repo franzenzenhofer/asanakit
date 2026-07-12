@@ -1,0 +1,43 @@
+posekit: 1
+id: salamba-sarvangasana
+name: Shoulderstand
+sanskrit: Sālamba Sarvāṅgāsana
+english: Supported Shoulderstand
+discipline: yoga
+family: inversion
+difficulty: 3
+description: An inversion. The shoulders and upper arms rest on the floor, the body stacks vertically upside down, the legs point straight up and the hands support the mid back.
+tags: [ashtanga, finishing, inversion]
+breath: free
+drishti: nasagrai
+cues:
+  - Stack hips over shoulders, lift through the balls of the feet
+  - Keep the weight in the shoulders, never on the neck
+contact: [shoulderL, shoulderR, elbowL, elbowR, headTop]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: -90
+  world:
+    pelvis: -90
+    spine: -90
+    neck: 180
+    head: 180
+    upperArmL: 0
+    upperArmR: 0
+    forearmL: 134
+    forearmR: 134
+    handL: 134
+    handR: 134
+    thighL: 90
+    thighR: 90
+    shinL: 90
+    shinR: 90
+    footL: 95
+    footR: 95
+props:
+  - type: mat
+muscles:
+  engaged: [rectusAbdominis, erectorSpinae, gluteus, quadriceps, triceps]
+  stretched: [trapezius, hamstrings]

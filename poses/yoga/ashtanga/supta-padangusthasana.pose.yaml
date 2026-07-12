@@ -1,0 +1,42 @@
+posekit: 1
+id: supta-padangusthasana
+name: Reclining Big Toe Pose
+sanskrit: Supta Pādāṅguṣṭhāsana
+english: Reclining Hand-to-Big-Toe Pose
+discipline: yoga
+family: supine
+difficulty: 2
+description: Lying flat on the back, one leg stays long on the floor while the other lifts straight up. The hand catches the big toe and draws the leg in toward the torso; the free arm rests on the mat.
+tags: [ashtanga, primary-series, supine, forward-fold]
+breath: exhale
+drishti: padhayoragrai
+cues:
+  - Press the floor leg down as the lifted leg comes in
+  - Keep both hips level, do not let the bottom hip roll up
+contact: [hipCenter, hipJointL, hipJointR, kneeL, ankleL, handTipL]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: 0
+  world:
+    thighL: 180
+    shinL: 180
+    footL: 95
+    thighR: 60
+    shinR: 60
+    footR: -5
+    spine: 20
+    neck: 0
+    head: -5
+    upperArmL: 186
+    forearmL: 190
+    handL: 185
+    upperArmR: 78
+    forearmR: 78
+    handR: 78
+props:
+  - type: mat
+muscles:
+  engaged: [quadriceps, hipFlexors, biceps]
+  stretched: [hamstrings, gastrocnemius, gluteus]

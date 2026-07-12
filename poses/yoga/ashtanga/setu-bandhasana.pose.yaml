@@ -1,0 +1,42 @@
+posekit: 1
+id: setu-bandhasana
+name: Bridge Pose
+sanskrit: Setu Bandhāsana
+english: Bridge Pose
+discipline: yoga
+family: backbend
+difficulty: 3
+description: Lying on the back with the knees bent and the feet planted, the hips and chest lift while the crown of the head stays on the floor. The final posture of the primary series.
+tags: [ashtanga, backbend, primary-series, neck]
+breath: inhale
+drishti: broomadhya
+cues:
+  - Press the feet down and lift the hips before the chest
+  - Keep weight in the feet, never crank the neck
+contact: [headTop, toeL, toeR, handTipL, handTipR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: 180
+  world:
+    thighL: -10
+    thighR: -10
+    shinL: -114
+    shinR: -114
+    footL: -18
+    footR: -18
+    spine: 225
+    neck: 240
+    head: 250
+    upperArmL: -83
+    upperArmR: -83
+    forearmL: -4
+    forearmR: -4
+    handL: 0
+    handR: 0
+props:
+  - type: mat
+muscles:
+  engaged: [gluteus, hamstrings, erectorSpinae, quadriceps]
+  stretched: [rectusAbdominis, hipFlexors, pectoralis]

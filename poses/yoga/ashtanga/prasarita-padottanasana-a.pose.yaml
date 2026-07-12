@@ -1,0 +1,46 @@
+posekit: 1
+id: prasarita-padottanasana-a
+name: Wide-Legged Forward Fold A
+sanskrit: Prasārita Pādottānāsana A
+english: Wide-Legged Intense Stretch A
+discipline: yoga
+family: standing
+difficulty: 2
+description: Feet wide and parallel, legs straight, the torso folds down between them. Hands press the floor in line with the feet, elbows bend back and the crown of the head reaches the mat. Held five breaths.
+tags: [ashtanga, standing, forward-fold, primary-series]
+breath: exhale
+drishti: nasagrai
+cues:
+  - Straighten the legs and lift the kneecaps
+  - Bend the elbows straight back, crown to the floor
+contact: [toeL, toeR, handTipL, handTipR, headTop]
+figure:
+  view: front
+  grounded: true
+  root:
+    rotation: -90
+  world:
+    hipL: 0
+    hipR: 180
+    thighL: -62
+    shinL: -62
+    footL: -30
+    thighR: -118
+    shinR: -118
+    footR: -150
+    spine: -90
+    neck: -90
+    head: -90
+    clavicleL: 0
+    clavicleR: 180
+    upperArmL: -95
+    forearmL: -10
+    handL: -8
+    upperArmR: -85
+    forearmR: -170
+    handR: -172
+props:
+  - type: mat
+muscles:
+  engaged: [quadriceps, rectusAbdominis, deltoid]
+  stretched: [hamstrings, adductors, erectorSpinae, gastrocnemius]

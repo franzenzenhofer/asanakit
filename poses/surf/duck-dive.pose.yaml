@@ -1,0 +1,47 @@
+posekit: 1
+id: duck-dive
+name: Duck Dive
+english: Duck Dive
+discipline: surf
+family: prone
+difficulty: 3
+description: How a shortboarder gets under a broken wave. Both arms straighten and drive the nose deep under the water, the head follows it down, and one knee then punches into the tail to sink the whole board while the wave passes overhead.
+tags: [surf, prone, paddling, defensive, shortboard]
+cues:
+  - Straight arms - push the nose down, do not pull it toward you
+  - Knee into the tail only once the nose is already under
+contact: [handTipL, handTipR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: -30
+  world:
+    spine: -38
+    neck: -34
+    head: -30
+    upperArmL: -56
+    forearmL: -56
+    handL: -56
+    upperArmR: -50
+    forearmR: -50
+    handR: -50
+    thighL: 168
+    shinL: 142
+    footL: 150
+    thighR: -175
+    shinR: 95
+    footR: 70
+props:
+  - type: wave
+    amplitude: 0.5
+    length: 3.2
+    y: 0.55
+    facing: left
+  - type: surfboard
+    at: [0.023, 0.108]
+    rotation: -32
+    length: 1.35
+muscles:
+  engaged: [triceps, deltoid, latissimus, rectusAbdominis, hipFlexors]
+  stretched: [pectoralis, quadriceps]

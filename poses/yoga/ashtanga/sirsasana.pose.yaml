@@ -1,0 +1,43 @@
+posekit: 1
+id: sirsasana
+name: Headstand
+sanskrit: Śīrṣāsana
+english: Supported Headstand
+discipline: yoga
+family: inversion
+difficulty: 4
+description: An inversion. The crown of the head and the forearms rest on the floor, the body stacks upside down in one vertical line and the legs reach straight up.
+tags: [ashtanga, finishing, inversion, balance]
+breath: free
+drishti: nasagrai
+cues:
+  - Press the forearms down and lift the shoulders away from the ears
+  - Stack ankles over hips over shoulders, ribs in
+contact: [headTop, elbowL, elbowR, handTipL, handTipR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: -90
+  world:
+    pelvis: -90
+    spine: -90
+    neck: -90
+    head: -90
+    upperArmL: -100
+    upperArmR: -100
+    forearmL: 0
+    forearmR: 0
+    handL: 0
+    handR: 0
+    thighL: 90
+    thighR: 90
+    shinL: 90
+    shinR: 90
+    footL: 95
+    footR: 95
+props:
+  - type: mat
+muscles:
+  engaged: [deltoid, trapezius, rectusAbdominis, erectorSpinae, quadriceps, adductors]
+  stretched: [hamstrings]

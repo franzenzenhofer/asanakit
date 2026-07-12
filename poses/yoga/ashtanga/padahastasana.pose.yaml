@@ -18,7 +18,7 @@ figure:
   view: side
   grounded: true
   root:
-    rotation: -88
+    rotation: -78
   world:
     thighL: -90
     thighR: -90
@@ -26,13 +26,13 @@ figure:
     shinR: -90
     footL: -18
     footR: -18
-    spine: -92
-    neck: -95
-    head: -85
-    upperArmL: -101
-    upperArmR: -101
-    forearmL: -38
-    forearmR: -38
+    spine: -86
+    neck: -85
+    head: -75
+    upperArmL: -110
+    upperArmR: -110
+    forearmL: -43
+    forearmR: -43
     handL: 180
     handR: 180
 props:

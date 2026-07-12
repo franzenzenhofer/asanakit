@@ -1,0 +1,47 @@
+posekit: 1
+id: tube-stance
+name: Tube Stance
+english: Tube Stance
+discipline: surf
+family: riding
+difficulty: 5
+description: Inside the barrel. Everything shrinks - the surfer folds into the smallest possible shape under the falling lip, head tucked, weight quiet over the middle of the board, while the trailing hand drags on the wave face to hold the line.
+tags: [surf, riding, barrel, advanced]
+cues:
+  - Make yourself small and stay quiet on the board
+  - Trail the back hand on the face to hold your line
+contact: [toeL, toeR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: 75
+  world:
+    spine: 78
+    neck: 52
+    head: 32
+    thighL: -20
+    shinL: -105
+    footL: -15
+    thighR: -65
+    shinR: -155
+    footR: -10
+    upperArmL: -30
+    forearmL: 20
+    handL: 25
+    upperArmR: -145
+    forearmR: -135
+    handR: -130
+props:
+  - type: wave
+    amplitude: 0.5
+    length: 3.2
+    y: -0.25
+  - type: surfboard
+    under: [ankleL, ankleR]
+    rotation: -4
+    length: 1.1
+    offset: [0, -0.1]
+muscles:
+  engaged: [quadriceps, gluteus, rectusAbdominis, obliques, tibialisAnterior]
+  stretched: [erectorSpinae, latissimus]

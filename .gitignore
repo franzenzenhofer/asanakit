@@ -2,6 +2,6 @@ node_modules/
 dist/
 coverage/
 out/
-gallery/
+
 *.log
 .DS_Store

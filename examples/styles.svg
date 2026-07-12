@@ -1,0 +1,423 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2100 260" width="2100" height="260" data-sheet="7">
+  <rect x="0" y="0" width="2100" height="260" fill="#ffffff"/>
+  <g transform="translate(0 0)" data-cell="1">
+    <svg viewBox="0 0 300 260" width="300" height="260" data-pose="stick" data-style="stick" role="img" aria-label="stick (Adho Mukha Śvānāsana)">
+      <defs>
+        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
+        </marker>
+      </defs>
+      <g data-layer="title">
+        <text x="150" y="22.425" text-anchor="middle" fill="#111111" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19.5" font-weight="600">stick</text>
+        <text x="150" y="39" text-anchor="middle" fill="#666666" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10.725" font-style="italic">Adho Mukha Śvānāsana</text>
+      </g>
+      <g data-layer="props">
+        <rect data-prop="mat" x="22.642" y="191.304" width="254.717" height="8.302" rx="4.151" fill="#f0f0f0" stroke="#111111" stroke-width="1.509"/>
+      </g>
+      <g data-layer="figure">
+        <g data-layer="limbs-far">
+          <line data-bone="upperArmR" x1="165.971" y1="149.204" x2="185.982" y2="173.052" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="forearmR" x1="185.982" y1="173.052" x2="203.568" y2="194.01" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="handR" x1="203.568" y1="194.01" x2="213.844" y2="195.454" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="thighR" x1="132.392" y1="111.346" x2="105.878" y2="149.212" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="shinR" x1="105.878" y1="149.212" x2="79.364" y2="187.078" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="footR" x1="79.364" y1="187.078" x2="95.321" y2="192.886" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+        </g>
+        <g data-layer="torso">
+          <line data-bone="pelvis" x1="135.279" y1="111.346" x2="147.904" y2="125.367" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="spine" x1="147.904" y1="125.367" x2="169.367" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="neck" x1="169.367" y1="149.204" x2="176.942" y2="157.617" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="clavicleL" x1="169.367" y1="149.204" x2="172.763" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="clavicleR" x1="169.367" y1="149.204" x2="165.971" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="hipL" x1="135.279" y1="111.346" x2="138.166" y2="111.346" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="hipR" x1="135.279" y1="111.346" x2="132.392" y2="111.346" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+        </g>
+        <ellipse data-part="head" cx="185.148" cy="166.731" rx="8.679" ry="11.698" transform="rotate(138.000 185.148 166.731)" fill="#ffffff" stroke="#111111" stroke-width="3.774"/>
+        <g data-layer="limbs-near">
+          <line data-bone="upperArmL" x1="172.763" y1="149.204" x2="192.774" y2="173.052" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="forearmL" x1="192.774" y1="173.052" x2="210.36" y2="194.01" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="handL" x1="210.36" y1="194.01" x2="220.636" y2="195.454" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="thighL" x1="138.166" y1="111.346" x2="111.651" y2="149.212" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="shinL" x1="111.651" y1="149.212" x2="85.137" y2="187.078" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="footL" x1="85.137" y1="187.078" x2="101.094" y2="192.886" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+        </g>
+        <g data-part="joints">
+          <circle data-joint="shoulderL" cx="172.763" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="elbowL" cx="192.774" cy="173.052" r="2.642" fill="#111111"/>
+          <circle data-joint="wristL" cx="210.36" cy="194.01" r="2.642" fill="#111111"/>
+          <circle data-joint="shoulderR" cx="165.971" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="elbowR" cx="185.982" cy="173.052" r="2.642" fill="#111111"/>
+          <circle data-joint="wristR" cx="203.568" cy="194.01" r="2.642" fill="#111111"/>
+          <circle data-joint="hipJointL" cx="138.166" cy="111.346" r="2.642" fill="#111111"/>
+          <circle data-joint="kneeL" cx="111.651" cy="149.212" r="2.642" fill="#111111"/>
+          <circle data-joint="ankleL" cx="85.137" cy="187.078" r="2.642" fill="#111111"/>
+          <circle data-joint="hipJointR" cx="132.392" cy="111.346" r="2.642" fill="#111111"/>
+          <circle data-joint="kneeR" cx="105.878" cy="149.212" r="2.642" fill="#111111"/>
+          <circle data-joint="ankleR" cx="79.364" cy="187.078" r="2.642" fill="#111111"/>
+          <circle data-joint="chest" cx="169.367" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="hipCenter" cx="135.279" cy="111.346" r="2.642" fill="#111111"/>
+        </g>
+      </g>
+    </svg>
+  </g>
+  <g transform="translate(300 0)" data-cell="2">
+    <svg viewBox="0 0 300 260" width="300" height="260" data-pose="anatomy" data-style="stick" role="img" aria-label="anatomy (Adho Mukha Śvānāsana)">
+      <defs>
+        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
+        </marker>
+      </defs>
+      <g data-layer="title">
+        <text x="150" y="22.425" text-anchor="middle" fill="#111111" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19.5" font-weight="600">anatomy</text>
+        <text x="150" y="39" text-anchor="middle" fill="#666666" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10.725" font-style="italic">Adho Mukha Śvānāsana</text>
+      </g>
+      <g data-layer="props">
+        <rect data-prop="mat" x="22.642" y="191.304" width="254.717" height="8.302" rx="4.151" fill="#f0f0f0" stroke="#111111" stroke-width="1.509"/>
+      </g>
+      <g data-layer="figure">
+        <g data-layer="limbs-far">
+          <line data-bone="upperArmR" x1="165.971" y1="149.204" x2="185.982" y2="173.052" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="forearmR" x1="185.982" y1="173.052" x2="203.568" y2="194.01" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="handR" x1="203.568" y1="194.01" x2="213.844" y2="195.454" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="thighR" x1="132.392" y1="111.346" x2="105.878" y2="149.212" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="shinR" x1="105.878" y1="149.212" x2="79.364" y2="187.078" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="footR" x1="79.364" y1="187.078" x2="95.321" y2="192.886" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+        </g>
+        <g data-layer="torso">
+          <line data-bone="pelvis" x1="135.279" y1="111.346" x2="147.904" y2="125.367" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="spine" x1="147.904" y1="125.367" x2="169.367" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="neck" x1="169.367" y1="149.204" x2="176.942" y2="157.617" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="clavicleL" x1="169.367" y1="149.204" x2="172.763" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="clavicleR" x1="169.367" y1="149.204" x2="165.971" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="hipL" x1="135.279" y1="111.346" x2="138.166" y2="111.346" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="hipR" x1="135.279" y1="111.346" x2="132.392" y2="111.346" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+        </g>
+        <ellipse data-part="head" cx="185.148" cy="166.731" rx="8.679" ry="11.698" transform="rotate(138.000 185.148 166.731)" fill="#ffffff" stroke="#111111" stroke-width="3.774"/>
+        <g data-layer="limbs-near">
+          <line data-bone="upperArmL" x1="172.763" y1="149.204" x2="192.774" y2="173.052" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="forearmL" x1="192.774" y1="173.052" x2="210.36" y2="194.01" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="handL" x1="210.36" y1="194.01" x2="220.636" y2="195.454" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="thighL" x1="138.166" y1="111.346" x2="111.651" y2="149.212" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="shinL" x1="111.651" y1="149.212" x2="85.137" y2="187.078" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="footL" x1="85.137" y1="187.078" x2="101.094" y2="192.886" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+        </g>
+        <g data-part="joints">
+          <circle data-joint="shoulderL" cx="172.763" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="elbowL" cx="192.774" cy="173.052" r="2.642" fill="#111111"/>
+          <circle data-joint="wristL" cx="210.36" cy="194.01" r="2.642" fill="#111111"/>
+          <circle data-joint="shoulderR" cx="165.971" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="elbowR" cx="185.982" cy="173.052" r="2.642" fill="#111111"/>
+          <circle data-joint="wristR" cx="203.568" cy="194.01" r="2.642" fill="#111111"/>
+          <circle data-joint="hipJointL" cx="138.166" cy="111.346" r="2.642" fill="#111111"/>
+          <circle data-joint="kneeL" cx="111.651" cy="149.212" r="2.642" fill="#111111"/>
+          <circle data-joint="ankleL" cx="85.137" cy="187.078" r="2.642" fill="#111111"/>
+          <circle data-joint="hipJointR" cx="132.392" cy="111.346" r="2.642" fill="#111111"/>
+          <circle data-joint="kneeR" cx="105.878" cy="149.212" r="2.642" fill="#111111"/>
+          <circle data-joint="ankleR" cx="79.364" cy="187.078" r="2.642" fill="#111111"/>
+          <circle data-joint="chest" cx="169.367" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="hipCenter" cx="135.279" cy="111.346" r="2.642" fill="#111111"/>
+        </g>
+      </g>
+    </svg>
+  </g>
+  <g transform="translate(600 0)" data-cell="3">
+    <svg viewBox="0 0 300 260" width="300" height="260" data-pose="silhouette" data-style="stick" role="img" aria-label="silhouette (Adho Mukha Śvānāsana)">
+      <defs>
+        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
+        </marker>
+      </defs>
+      <g data-layer="title">
+        <text x="150" y="22.425" text-anchor="middle" fill="#111111" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19.5" font-weight="600">silhouette</text>
+        <text x="150" y="39" text-anchor="middle" fill="#666666" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10.725" font-style="italic">Adho Mukha Śvānāsana</text>
+      </g>
+      <g data-layer="props">
+        <rect data-prop="mat" x="22.642" y="191.304" width="254.717" height="8.302" rx="4.151" fill="#f0f0f0" stroke="#111111" stroke-width="1.509"/>
+      </g>
+      <g data-layer="figure">
+        <g data-layer="limbs-far">
+          <line data-bone="upperArmR" x1="165.971" y1="149.204" x2="185.982" y2="173.052" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="forearmR" x1="185.982" y1="173.052" x2="203.568" y2="194.01" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="handR" x1="203.568" y1="194.01" x2="213.844" y2="195.454" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="thighR" x1="132.392" y1="111.346" x2="105.878" y2="149.212" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="shinR" x1="105.878" y1="149.212" x2="79.364" y2="187.078" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="footR" x1="79.364" y1="187.078" x2="95.321" y2="192.886" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+        </g>
+        <g data-layer="torso">
+          <line data-bone="pelvis" x1="135.279" y1="111.346" x2="147.904" y2="125.367" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="spine" x1="147.904" y1="125.367" x2="169.367" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="neck" x1="169.367" y1="149.204" x2="176.942" y2="157.617" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="clavicleL" x1="169.367" y1="149.204" x2="172.763" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="clavicleR" x1="169.367" y1="149.204" x2="165.971" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="hipL" x1="135.279" y1="111.346" x2="138.166" y2="111.346" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="hipR" x1="135.279" y1="111.346" x2="132.392" y2="111.346" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+        </g>
+        <ellipse data-part="head" cx="185.148" cy="166.731" rx="8.679" ry="11.698" transform="rotate(138.000 185.148 166.731)" fill="#ffffff" stroke="#111111" stroke-width="3.774"/>
+        <g data-layer="limbs-near">
+          <line data-bone="upperArmL" x1="172.763" y1="149.204" x2="192.774" y2="173.052" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="forearmL" x1="192.774" y1="173.052" x2="210.36" y2="194.01" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="handL" x1="210.36" y1="194.01" x2="220.636" y2="195.454" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="thighL" x1="138.166" y1="111.346" x2="111.651" y2="149.212" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="shinL" x1="111.651" y1="149.212" x2="85.137" y2="187.078" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="footL" x1="85.137" y1="187.078" x2="101.094" y2="192.886" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+        </g>
+        <g data-part="joints">
+          <circle data-joint="shoulderL" cx="172.763" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="elbowL" cx="192.774" cy="173.052" r="2.642" fill="#111111"/>
+          <circle data-joint="wristL" cx="210.36" cy="194.01" r="2.642" fill="#111111"/>
+          <circle data-joint="shoulderR" cx="165.971" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="elbowR" cx="185.982" cy="173.052" r="2.642" fill="#111111"/>
+          <circle data-joint="wristR" cx="203.568" cy="194.01" r="2.642" fill="#111111"/>
+          <circle data-joint="hipJointL" cx="138.166" cy="111.346" r="2.642" fill="#111111"/>
+          <circle data-joint="kneeL" cx="111.651" cy="149.212" r="2.642" fill="#111111"/>
+          <circle data-joint="ankleL" cx="85.137" cy="187.078" r="2.642" fill="#111111"/>
+          <circle data-joint="hipJointR" cx="132.392" cy="111.346" r="2.642" fill="#111111"/>
+          <circle data-joint="kneeR" cx="105.878" cy="149.212" r="2.642" fill="#111111"/>
+          <circle data-joint="ankleR" cx="79.364" cy="187.078" r="2.642" fill="#111111"/>
+          <circle data-joint="chest" cx="169.367" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="hipCenter" cx="135.279" cy="111.346" r="2.642" fill="#111111"/>
+        </g>
+      </g>
+    </svg>
+  </g>
+  <g transform="translate(900 0)" data-cell="4">
+    <svg viewBox="0 0 300 260" width="300" height="260" data-pose="blueprint" data-style="stick" role="img" aria-label="blueprint (Adho Mukha Śvānāsana)">
+      <defs>
+        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
+        </marker>
+      </defs>
+      <g data-layer="title">
+        <text x="150" y="22.425" text-anchor="middle" fill="#111111" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19.5" font-weight="600">blueprint</text>
+        <text x="150" y="39" text-anchor="middle" fill="#666666" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10.725" font-style="italic">Adho Mukha Śvānāsana</text>
+      </g>
+      <g data-layer="props">
+        <rect data-prop="mat" x="22.642" y="191.304" width="254.717" height="8.302" rx="4.151" fill="#f0f0f0" stroke="#111111" stroke-width="1.509"/>
+      </g>
+      <g data-layer="figure">
+        <g data-layer="limbs-far">
+          <line data-bone="upperArmR" x1="165.971" y1="149.204" x2="185.982" y2="173.052" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="forearmR" x1="185.982" y1="173.052" x2="203.568" y2="194.01" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="handR" x1="203.568" y1="194.01" x2="213.844" y2="195.454" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="thighR" x1="132.392" y1="111.346" x2="105.878" y2="149.212" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="shinR" x1="105.878" y1="149.212" x2="79.364" y2="187.078" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="footR" x1="79.364" y1="187.078" x2="95.321" y2="192.886" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+        </g>
+        <g data-layer="torso">
+          <line data-bone="pelvis" x1="135.279" y1="111.346" x2="147.904" y2="125.367" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="spine" x1="147.904" y1="125.367" x2="169.367" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="neck" x1="169.367" y1="149.204" x2="176.942" y2="157.617" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="clavicleL" x1="169.367" y1="149.204" x2="172.763" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="clavicleR" x1="169.367" y1="149.204" x2="165.971" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="hipL" x1="135.279" y1="111.346" x2="138.166" y2="111.346" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="hipR" x1="135.279" y1="111.346" x2="132.392" y2="111.346" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+        </g>
+        <ellipse data-part="head" cx="185.148" cy="166.731" rx="8.679" ry="11.698" transform="rotate(138.000 185.148 166.731)" fill="#ffffff" stroke="#111111" stroke-width="3.774"/>
+        <g data-layer="limbs-near">
+          <line data-bone="upperArmL" x1="172.763" y1="149.204" x2="192.774" y2="173.052" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="forearmL" x1="192.774" y1="173.052" x2="210.36" y2="194.01" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="handL" x1="210.36" y1="194.01" x2="220.636" y2="195.454" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="thighL" x1="138.166" y1="111.346" x2="111.651" y2="149.212" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="shinL" x1="111.651" y1="149.212" x2="85.137" y2="187.078" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="footL" x1="85.137" y1="187.078" x2="101.094" y2="192.886" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+        </g>
+        <g data-part="joints">
+          <circle data-joint="shoulderL" cx="172.763" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="elbowL" cx="192.774" cy="173.052" r="2.642" fill="#111111"/>
+          <circle data-joint="wristL" cx="210.36" cy="194.01" r="2.642" fill="#111111"/>
+          <circle data-joint="shoulderR" cx="165.971" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="elbowR" cx="185.982" cy="173.052" r="2.642" fill="#111111"/>
+          <circle data-joint="wristR" cx="203.568" cy="194.01" r="2.642" fill="#111111"/>
+          <circle data-joint="hipJointL" cx="138.166" cy="111.346" r="2.642" fill="#111111"/>
+          <circle data-joint="kneeL" cx="111.651" cy="149.212" r="2.642" fill="#111111"/>
+          <circle data-joint="ankleL" cx="85.137" cy="187.078" r="2.642" fill="#111111"/>
+          <circle data-joint="hipJointR" cx="132.392" cy="111.346" r="2.642" fill="#111111"/>
+          <circle data-joint="kneeR" cx="105.878" cy="149.212" r="2.642" fill="#111111"/>
+          <circle data-joint="ankleR" cx="79.364" cy="187.078" r="2.642" fill="#111111"/>
+          <circle data-joint="chest" cx="169.367" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="hipCenter" cx="135.279" cy="111.346" r="2.642" fill="#111111"/>
+        </g>
+      </g>
+    </svg>
+  </g>
+  <g transform="translate(1200 0)" data-cell="5">
+    <svg viewBox="0 0 300 260" width="300" height="260" data-pose="ink" data-style="stick" role="img" aria-label="ink (Adho Mukha Śvānāsana)">
+      <defs>
+        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
+        </marker>
+      </defs>
+      <g data-layer="title">
+        <text x="150" y="22.425" text-anchor="middle" fill="#111111" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19.5" font-weight="600">ink</text>
+        <text x="150" y="39" text-anchor="middle" fill="#666666" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10.725" font-style="italic">Adho Mukha Śvānāsana</text>
+      </g>
+      <g data-layer="props">
+        <rect data-prop="mat" x="22.642" y="191.304" width="254.717" height="8.302" rx="4.151" fill="#f0f0f0" stroke="#111111" stroke-width="1.509"/>
+      </g>
+      <g data-layer="figure">
+        <g data-layer="limbs-far">
+          <line data-bone="upperArmR" x1="165.971" y1="149.204" x2="185.982" y2="173.052" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="forearmR" x1="185.982" y1="173.052" x2="203.568" y2="194.01" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="handR" x1="203.568" y1="194.01" x2="213.844" y2="195.454" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="thighR" x1="132.392" y1="111.346" x2="105.878" y2="149.212" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="shinR" x1="105.878" y1="149.212" x2="79.364" y2="187.078" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="footR" x1="79.364" y1="187.078" x2="95.321" y2="192.886" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+        </g>
+        <g data-layer="torso">
+          <line data-bone="pelvis" x1="135.279" y1="111.346" x2="147.904" y2="125.367" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="spine" x1="147.904" y1="125.367" x2="169.367" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="neck" x1="169.367" y1="149.204" x2="176.942" y2="157.617" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="clavicleL" x1="169.367" y1="149.204" x2="172.763" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="clavicleR" x1="169.367" y1="149.204" x2="165.971" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="hipL" x1="135.279" y1="111.346" x2="138.166" y2="111.346" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="hipR" x1="135.279" y1="111.346" x2="132.392" y2="111.346" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+        </g>
+        <ellipse data-part="head" cx="185.148" cy="166.731" rx="8.679" ry="11.698" transform="rotate(138.000 185.148 166.731)" fill="#ffffff" stroke="#111111" stroke-width="3.774"/>
+        <g data-layer="limbs-near">
+          <line data-bone="upperArmL" x1="172.763" y1="149.204" x2="192.774" y2="173.052" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="forearmL" x1="192.774" y1="173.052" x2="210.36" y2="194.01" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="handL" x1="210.36" y1="194.01" x2="220.636" y2="195.454" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="thighL" x1="138.166" y1="111.346" x2="111.651" y2="149.212" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="shinL" x1="111.651" y1="149.212" x2="85.137" y2="187.078" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="footL" x1="85.137" y1="187.078" x2="101.094" y2="192.886" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+        </g>
+        <g data-part="joints">
+          <circle data-joint="shoulderL" cx="172.763" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="elbowL" cx="192.774" cy="173.052" r="2.642" fill="#111111"/>
+          <circle data-joint="wristL" cx="210.36" cy="194.01" r="2.642" fill="#111111"/>
+          <circle data-joint="shoulderR" cx="165.971" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="elbowR" cx="185.982" cy="173.052" r="2.642" fill="#111111"/>
+          <circle data-joint="wristR" cx="203.568" cy="194.01" r="2.642" fill="#111111"/>
+          <circle data-joint="hipJointL" cx="138.166" cy="111.346" r="2.642" fill="#111111"/>
+          <circle data-joint="kneeL" cx="111.651" cy="149.212" r="2.642" fill="#111111"/>
+          <circle data-joint="ankleL" cx="85.137" cy="187.078" r="2.642" fill="#111111"/>
+          <circle data-joint="hipJointR" cx="132.392" cy="111.346" r="2.642" fill="#111111"/>
+          <circle data-joint="kneeR" cx="105.878" cy="149.212" r="2.642" fill="#111111"/>
+          <circle data-joint="ankleR" cx="79.364" cy="187.078" r="2.642" fill="#111111"/>
+          <circle data-joint="chest" cx="169.367" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="hipCenter" cx="135.279" cy="111.346" r="2.642" fill="#111111"/>
+        </g>
+      </g>
+    </svg>
+  </g>
+  <g transform="translate(1500 0)" data-cell="6">
+    <svg viewBox="0 0 300 260" width="300" height="260" data-pose="poster" data-style="stick" role="img" aria-label="poster (Adho Mukha Śvānāsana)">
+      <defs>
+        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
+        </marker>
+      </defs>
+      <g data-layer="title">
+        <text x="150" y="22.425" text-anchor="middle" fill="#111111" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19.5" font-weight="600">poster</text>
+        <text x="150" y="39" text-anchor="middle" fill="#666666" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10.725" font-style="italic">Adho Mukha Śvānāsana</text>
+      </g>
+      <g data-layer="props">
+        <rect data-prop="mat" x="22.642" y="191.304" width="254.717" height="8.302" rx="4.151" fill="#f0f0f0" stroke="#111111" stroke-width="1.509"/>
+      </g>
+      <g data-layer="figure">
+        <g data-layer="limbs-far">
+          <line data-bone="upperArmR" x1="165.971" y1="149.204" x2="185.982" y2="173.052" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="forearmR" x1="185.982" y1="173.052" x2="203.568" y2="194.01" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="handR" x1="203.568" y1="194.01" x2="213.844" y2="195.454" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="thighR" x1="132.392" y1="111.346" x2="105.878" y2="149.212" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="shinR" x1="105.878" y1="149.212" x2="79.364" y2="187.078" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="footR" x1="79.364" y1="187.078" x2="95.321" y2="192.886" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+        </g>
+        <g data-layer="torso">
+          <line data-bone="pelvis" x1="135.279" y1="111.346" x2="147.904" y2="125.367" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="spine" x1="147.904" y1="125.367" x2="169.367" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="neck" x1="169.367" y1="149.204" x2="176.942" y2="157.617" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="clavicleL" x1="169.367" y1="149.204" x2="172.763" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="clavicleR" x1="169.367" y1="149.204" x2="165.971" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="hipL" x1="135.279" y1="111.346" x2="138.166" y2="111.346" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="hipR" x1="135.279" y1="111.346" x2="132.392" y2="111.346" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+        </g>
+        <ellipse data-part="head" cx="185.148" cy="166.731" rx="8.679" ry="11.698" transform="rotate(138.000 185.148 166.731)" fill="#ffffff" stroke="#111111" stroke-width="3.774"/>
+        <g data-layer="limbs-near">
+          <line data-bone="upperArmL" x1="172.763" y1="149.204" x2="192.774" y2="173.052" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="forearmL" x1="192.774" y1="173.052" x2="210.36" y2="194.01" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="handL" x1="210.36" y1="194.01" x2="220.636" y2="195.454" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="thighL" x1="138.166" y1="111.346" x2="111.651" y2="149.212" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="shinL" x1="111.651" y1="149.212" x2="85.137" y2="187.078" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="footL" x1="85.137" y1="187.078" x2="101.094" y2="192.886" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+        </g>
+        <g data-part="joints">
+          <circle data-joint="shoulderL" cx="172.763" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="elbowL" cx="192.774" cy="173.052" r="2.642" fill="#111111"/>
+          <circle data-joint="wristL" cx="210.36" cy="194.01" r="2.642" fill="#111111"/>
+          <circle data-joint="shoulderR" cx="165.971" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="elbowR" cx="185.982" cy="173.052" r="2.642" fill="#111111"/>
+          <circle data-joint="wristR" cx="203.568" cy="194.01" r="2.642" fill="#111111"/>
+          <circle data-joint="hipJointL" cx="138.166" cy="111.346" r="2.642" fill="#111111"/>
+          <circle data-joint="kneeL" cx="111.651" cy="149.212" r="2.642" fill="#111111"/>
+          <circle data-joint="ankleL" cx="85.137" cy="187.078" r="2.642" fill="#111111"/>
+          <circle data-joint="hipJointR" cx="132.392" cy="111.346" r="2.642" fill="#111111"/>
+          <circle data-joint="kneeR" cx="105.878" cy="149.212" r="2.642" fill="#111111"/>
+          <circle data-joint="ankleR" cx="79.364" cy="187.078" r="2.642" fill="#111111"/>
+          <circle data-joint="chest" cx="169.367" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="hipCenter" cx="135.279" cy="111.346" r="2.642" fill="#111111"/>
+        </g>
+      </g>
+    </svg>
+  </g>
+  <g transform="translate(1800 0)" data-cell="7">
+    <svg viewBox="0 0 300 260" width="300" height="260" data-pose="minimal" data-style="stick" role="img" aria-label="minimal (Adho Mukha Śvānāsana)">
+      <defs>
+        <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
+        </marker>
+      </defs>
+      <g data-layer="title">
+        <text x="150" y="22.425" text-anchor="middle" fill="#111111" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19.5" font-weight="600">minimal</text>
+        <text x="150" y="39" text-anchor="middle" fill="#666666" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="10.725" font-style="italic">Adho Mukha Śvānāsana</text>
+      </g>
+      <g data-layer="props">
+        <rect data-prop="mat" x="22.642" y="191.304" width="254.717" height="8.302" rx="4.151" fill="#f0f0f0" stroke="#111111" stroke-width="1.509"/>
+      </g>
+      <g data-layer="figure">
+        <g data-layer="limbs-far">
+          <line data-bone="upperArmR" x1="165.971" y1="149.204" x2="185.982" y2="173.052" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="forearmR" x1="185.982" y1="173.052" x2="203.568" y2="194.01" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="handR" x1="203.568" y1="194.01" x2="213.844" y2="195.454" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="thighR" x1="132.392" y1="111.346" x2="105.878" y2="149.212" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="shinR" x1="105.878" y1="149.212" x2="79.364" y2="187.078" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="footR" x1="79.364" y1="187.078" x2="95.321" y2="192.886" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+        </g>
+        <g data-layer="torso">
+          <line data-bone="pelvis" x1="135.279" y1="111.346" x2="147.904" y2="125.367" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="spine" x1="147.904" y1="125.367" x2="169.367" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="neck" x1="169.367" y1="149.204" x2="176.942" y2="157.617" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="clavicleL" x1="169.367" y1="149.204" x2="172.763" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="clavicleR" x1="169.367" y1="149.204" x2="165.971" y2="149.204" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+          <line data-bone="hipL" x1="135.279" y1="111.346" x2="138.166" y2="111.346" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="hipR" x1="135.279" y1="111.346" x2="132.392" y2="111.346" stroke="#111111" stroke-width="4.151" stroke-linecap="round" opacity="0.45"/>
+        </g>
+        <ellipse data-part="head" cx="185.148" cy="166.731" rx="8.679" ry="11.698" transform="rotate(138.000 185.148 166.731)" fill="#ffffff" stroke="#111111" stroke-width="3.774"/>
+        <g data-layer="limbs-near">
+          <line data-bone="upperArmL" x1="172.763" y1="149.204" x2="192.774" y2="173.052" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="forearmL" x1="192.774" y1="173.052" x2="210.36" y2="194.01" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="handL" x1="210.36" y1="194.01" x2="220.636" y2="195.454" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="thighL" x1="138.166" y1="111.346" x2="111.651" y2="149.212" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="shinL" x1="111.651" y1="149.212" x2="85.137" y2="187.078" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+          <line data-bone="footL" x1="85.137" y1="187.078" x2="101.094" y2="192.886" stroke="#111111" stroke-width="4.151" stroke-linecap="round"/>
+        </g>
+        <g data-part="joints">
+          <circle data-joint="shoulderL" cx="172.763" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="elbowL" cx="192.774" cy="173.052" r="2.642" fill="#111111"/>
+          <circle data-joint="wristL" cx="210.36" cy="194.01" r="2.642" fill="#111111"/>
+          <circle data-joint="shoulderR" cx="165.971" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="elbowR" cx="185.982" cy="173.052" r="2.642" fill="#111111"/>
+          <circle data-joint="wristR" cx="203.568" cy="194.01" r="2.642" fill="#111111"/>
+          <circle data-joint="hipJointL" cx="138.166" cy="111.346" r="2.642" fill="#111111"/>
+          <circle data-joint="kneeL" cx="111.651" cy="149.212" r="2.642" fill="#111111"/>
+          <circle data-joint="ankleL" cx="85.137" cy="187.078" r="2.642" fill="#111111"/>
+          <circle data-joint="hipJointR" cx="132.392" cy="111.346" r="2.642" fill="#111111"/>
+          <circle data-joint="kneeR" cx="105.878" cy="149.212" r="2.642" fill="#111111"/>
+          <circle data-joint="ankleR" cx="79.364" cy="187.078" r="2.642" fill="#111111"/>
+          <circle data-joint="chest" cx="169.367" cy="149.204" r="2.642" fill="#111111"/>
+          <circle data-joint="hipCenter" cx="135.279" cy="111.346" r="2.642" fill="#111111"/>
+        </g>
+      </g>
+    </svg>
+  </g>
+</svg>

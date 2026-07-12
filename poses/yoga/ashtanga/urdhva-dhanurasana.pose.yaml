@@ -1,0 +1,43 @@
+posekit: 1
+id: urdhva-dhanurasana
+name: Upward Bow
+sanskrit: Ūrdhva Dhanurāsana
+english: Upward Bow / Wheel
+discipline: yoga
+family: backbend
+difficulty: 4
+description: A deep backbend. Hands and feet press the floor, the hips and chest lift into a high arc, the head hangs back between the arms.
+tags: [ashtanga, finishing, backbend]
+breath: inhale
+drishti: nasagrai
+cues:
+  - Press evenly through hands and feet to lift the chest
+  - Keep the knees tracking over the feet, do not splay
+contact: [toeL, toeR, handTipL, handTipR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: 195
+  world:
+    pelvis: 195
+    spine: 210
+    neck: 235
+    head: 250
+    upperArmL: -88
+    upperArmR: -88
+    forearmL: -88
+    forearmR: -88
+    handL: 0
+    handR: 0
+    thighL: -50
+    thighR: -50
+    shinL: -110
+    shinR: -110
+    footL: -15
+    footR: -15
+props:
+  - type: mat
+muscles:
+  engaged: [gluteus, erectorSpinae, deltoid, triceps, quadriceps]
+  stretched: [pectoralis, rectusAbdominis, hipFlexors]

@@ -1,0 +1,44 @@
+posekit: 1
+id: utthita-trikonasana
+name: Extended Triangle
+sanskrit: Utthita Trikoṇāsana
+english: Extended Triangle Pose
+discipline: yoga
+family: standing
+difficulty: 2
+description: Legs wide and straight, the torso tilts sideways over the front leg, the bottom hand catches the big toe and the top arm reaches straight up. Held five breaths.
+tags: [ashtanga, standing, side-bend, primary-series]
+breath: exhale
+drishti: hastagrai
+cues:
+  - Reach sideways out of the waist before you tilt down
+  - Stack both shoulders in one line, chest open to the side
+contact: [toeL, toeR, handTipL]
+figure:
+  view: front
+  grounded: true
+  root:
+    rotation: 25
+  world:
+    hipL: 0
+    hipR: 180
+    thighL: -45
+    shinL: -45
+    footL: -20
+    thighR: -135
+    shinR: -135
+    footR: -160
+    spine: 25
+    neck: 30
+    head: 55
+    upperArmL: -80
+    forearmL: -80
+    handL: -80
+    upperArmR: 100
+    forearmR: 100
+    handR: 100
+props:
+  - type: mat
+muscles:
+  engaged: [quadriceps, obliques, deltoid, erectorSpinae]
+  stretched: [hamstrings, adductors, obliques, latissimus]

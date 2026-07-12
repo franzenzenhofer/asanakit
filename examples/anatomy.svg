@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 460" width="620" height="460" data-pose="adho-mukha-svanasana" data-style="anatomy" role="img" aria-label="Downward-Facing Dog (Adho Mukha Śvānāsana)">
+  <defs>
+    <marker id="posekit-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#c1121f"/>
+    </marker>
+  </defs>
+  <rect data-layer="background" x="0" y="0" width="620" height="460" fill="#ffffff"/>
+  <g data-layer="title">
+    <text x="310" y="39.675" text-anchor="middle" fill="#111111" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="34.5" font-weight="600">Downward-Facing Dog</text>
+    <text x="310" y="69" text-anchor="middle" fill="#666666" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="18.975" font-style="italic">Adho Mukha Śvānāsana</text>
+  </g>
+  <g data-layer="props">
+    <rect data-prop="mat" x="61.608" y="305.719" width="496.783" height="16.191" rx="8.096" fill="#f0f0f0" stroke="#111111" stroke-width="2.944"/>
+  </g>
+  <g data-layer="muscles">
+    <path data-muscle="deltoid" data-muscle-state="engaged" d="M351.273,219.889Q359.079,229.192,366.885,238.494" fill="none" stroke="#d1495b" stroke-width="21.343" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="deltoid" data-muscle-state="engaged" d="M338.026,219.889Q345.832,229.192,353.637,238.494" fill="none" stroke="#d1495b" stroke-width="21.343" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="rotatorCuff" data-muscle-state="resting" d="M349.061,224.123Q348.432,231.388,355.696,232.03" fill="none" stroke="#e0cfc2" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="rotatorCuff" data-muscle-state="resting" d="M335.814,224.123Q335.185,231.388,342.449,232.03" fill="none" stroke="#e0cfc2" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="biceps" data-muscle-state="resting" d="M367.059,227.252Q385.446,241.15,395.94,261.671" fill="none" stroke="#e0cfc2" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="biceps" data-muscle-state="resting" d="M353.811,227.252Q372.198,241.15,382.692,261.671" fill="none" stroke="#e0cfc2" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="triceps" data-muscle-state="engaged" d="M354.612,235.318Q366.277,257.234,385.835,272.528" fill="none" stroke="#d1495b" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="triceps" data-muscle-state="engaged" d="M341.365,235.318Q353.029,257.234,372.587,272.528" fill="none" stroke="#d1495b" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="forearmFlexors" data-muscle-state="resting" d="M398.522,269.328Q414.738,281.841,424.246,299.984" fill="none" stroke="#e0cfc2" stroke-width="12.512" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="forearmFlexors" data-muscle-state="resting" d="M385.274,269.328Q401.491,281.841,410.998,299.984" fill="none" stroke="#e0cfc2" stroke-width="12.512" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="pectoralis" data-muscle-state="resting" d="M320.184,210.569Q321.994,224.513,335.672,227.77" fill="none" stroke="#e0cfc2" stroke-width="22.815" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="latissimus" data-muscle-state="stretched" d="M330.246,182.148Q344.66,188.531,349.502,203.533" fill="none" stroke="#3d7ea6" stroke-width="18.399" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="trapezius" data-muscle-state="resting" d="M347.604,206.925Q357.413,208.195,357.65,218.083" fill="none" stroke="#e0cfc2" stroke-width="18.399" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="serratus" data-muscle-state="engaged" d="M322.015,200.503Q324.376,208.9,332.479,212.126" fill="none" stroke="#d1495b" stroke-width="11.04" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="erectorSpinae" data-muscle-state="resting" d="M313.86,171.648Q334.922,188.881,349.859,211.629" fill="none" stroke="#e0cfc2" stroke-width="11.776" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="rectusAbdominis" data-muscle-state="resting" d="M297.708,184.507Q304.165,202.265,321.15,210.542" fill="none" stroke="#e0cfc2" stroke-width="20.239" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="obliques" data-muscle-state="resting" d="M304.724,182.4Q310.314,196.307,323.561,203.32" fill="none" stroke="#e0cfc2" stroke-width="14.72" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="gluteus" data-muscle-state="resting" d="M280.979,139.011Q266.259,145.213,265.466,161.166" fill="none" stroke="#e0cfc2" stroke-width="24.287" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="gluteus" data-muscle-state="resting" d="M269.719,139.011Q254.999,145.213,254.205,161.166" fill="none" stroke="#e0cfc2" stroke-width="24.287" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="hipFlexors" data-muscle-state="resting" d="M298.031,153.152Q292.004,169.843,278.381,181.216" fill="none" stroke="#e0cfc2" stroke-width="13.248" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="hipFlexors" data-muscle-state="resting" d="M286.771,153.152Q280.744,169.843,267.12,181.216" fill="none" stroke="#e0cfc2" stroke-width="13.248" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="quadriceps" data-muscle-state="engaged" d="M286.914,165.179Q271.199,199.3,244.511,225.738" fill="none" stroke="#d1495b" stroke-width="19.135" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="quadriceps" data-muscle-state="engaged" d="M275.654,165.179Q259.938,199.3,233.25,225.738" fill="none" stroke="#d1495b" stroke-width="19.135" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="hamstrings" data-muscle-state="stretched" d="M272.877,153.148Q246.611,179.882,230.473,213.707" fill="none" stroke="#3d7ea6" stroke-width="17.663" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="hamstrings" data-muscle-state="stretched" d="M261.616,153.148Q235.35,179.882,219.213,213.707" fill="none" stroke="#3d7ea6" stroke-width="17.663" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="adductors" data-muscle-state="resting" d="M282.783,155.682Q264.683,181.53,246.584,207.378" fill="none" stroke="#e0cfc2" stroke-width="11.04" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="adductors" data-muscle-state="resting" d="M271.522,155.682Q253.423,181.53,235.324,207.378" fill="none" stroke="#e0cfc2" stroke-width="11.04" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="gastrocnemius" data-muscle-state="stretched" d="M225.905,221.514Q206.055,239.533,195.912,264.349" fill="none" stroke="#3d7ea6" stroke-width="16.927" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="gastrocnemius" data-muscle-state="stretched" d="M214.644,221.514Q194.795,239.533,184.651,264.349" fill="none" stroke="#3d7ea6" stroke-width="16.927" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="tibialisAnterior" data-muscle-state="resting" d="M236.928,231.434Q223.028,258.022,202.798,280.177" fill="none" stroke="#e0cfc2" stroke-width="11.04" stroke-linecap="round" opacity="0.95"/>
+    <path data-muscle="tibialisAnterior" data-muscle-state="resting" d="M225.667,231.434Q211.768,258.022,191.538,280.177" fill="none" stroke="#e0cfc2" stroke-width="11.04" stroke-linecap="round" opacity="0.95"/>
+  </g>
+  <g data-layer="figure">
+    <g data-layer="limbs-far">
+      <line data-bone="upperArmR" x1="341.148" y1="223.61" x2="380.177" y2="270.123" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
+      <line data-bone="forearmR" x1="380.177" y1="270.123" x2="414.475" y2="310.997" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
+      <line data-bone="handR" x1="414.475" y1="310.997" x2="434.517" y2="313.814" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
+      <line data-bone="thighR" x1="275.659" y1="149.774" x2="223.947" y2="223.626" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
+      <line data-bone="shinR" x1="223.947" y1="223.626" x2="172.235" y2="297.478" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
+      <line data-bone="footR" x1="172.235" y1="297.478" x2="203.357" y2="308.806" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
+    </g>
+    <g data-layer="torso">
+      <line data-bone="pelvis" x1="281.289" y1="149.774" x2="305.912" y2="177.121" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+      <line data-bone="spine" x1="305.912" y1="177.121" x2="347.772" y2="223.61" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+      <line data-bone="neck" x1="347.772" y1="223.61" x2="362.546" y2="240.018" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+      <line data-bone="clavicleL" x1="347.772" y1="223.61" x2="354.396" y2="223.61" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+      <line data-bone="clavicleR" x1="347.772" y1="223.61" x2="341.148" y2="223.61" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
+      <line data-bone="hipL" x1="281.289" y1="149.774" x2="286.92" y2="149.774" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+      <line data-bone="hipR" x1="281.289" y1="149.774" x2="275.659" y2="149.774" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round" opacity="0.45"/>
+    </g>
+    <ellipse data-part="head" cx="378.551" cy="257.794" rx="16.927" ry="22.815" transform="rotate(138.000 378.551 257.794)" fill="#f5efe8" stroke="#3d3d3d" stroke-width="4.416"/>
+    <g data-layer="limbs-near">
+      <line data-bone="upperArmL" x1="354.396" y1="223.61" x2="393.424" y2="270.123" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+      <line data-bone="forearmL" x1="393.424" y1="270.123" x2="427.722" y2="310.997" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+      <line data-bone="handL" x1="427.722" y1="310.997" x2="447.765" y2="313.814" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+      <line data-bone="thighL" x1="286.92" y1="149.774" x2="235.208" y2="223.626" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+      <line data-bone="shinL" x1="235.208" y1="223.626" x2="183.496" y2="297.478" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+      <line data-bone="footL" x1="183.496" y1="297.478" x2="214.617" y2="308.806" stroke="#3d3d3d" stroke-width="4.416" stroke-linecap="round"/>
+    </g>
+    <g data-part="joints">
+      <circle data-joint="shoulderL" cx="354.396" cy="223.61" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="elbowL" cx="393.424" cy="270.123" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="wristL" cx="427.722" cy="310.997" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="shoulderR" cx="341.148" cy="223.61" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="elbowR" cx="380.177" cy="270.123" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="wristR" cx="414.475" cy="310.997" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="hipJointL" cx="286.92" cy="149.774" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="kneeL" cx="235.208" cy="223.626" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="ankleL" cx="183.496" cy="297.478" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="hipJointR" cx="275.659" cy="149.774" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="kneeR" cx="223.947" cy="223.626" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="ankleR" cx="172.235" cy="297.478" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="chest" cx="347.772" cy="223.61" r="3.312" fill="#3d3d3d"/>
+      <circle data-joint="hipCenter" cx="281.289" cy="149.774" r="3.312" fill="#3d3d3d"/>
+    </g>
+  </g>
+  <g data-layer="caption">
+    <text x="310" y="400.108" text-anchor="middle" fill="#666666" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19.32">Lift the sit bones, lengthen the spine</text>
+    <text x="310" y="430.054" text-anchor="middle" fill="#666666" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="19.32">Press the floor away through the whole hand</text>
+  </g>
+</svg>

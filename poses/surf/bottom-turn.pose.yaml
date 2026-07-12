@@ -1,0 +1,47 @@
+posekit: 1
+id: bottom-turn
+name: Bottom Turn
+english: Bottom Turn
+discipline: surf
+family: turning
+difficulty: 4
+description: The turn at the base of the wave that sets up everything after it. The surfer compresses deep, drives the weight through the heels and the rail, and reaches the inside arm toward the wave face while the eyes go back up to the lip.
+tags: [surf, turning, rail, power]
+cues:
+  - Compress low and drive from the heels
+  - Look where you want to go - back up at the lip
+contact: [toeL, toeR]
+figure:
+  view: side
+  grounded: true
+  root:
+    rotation: 55
+  world:
+    spine: 45
+    neck: 68
+    head: 82
+    thighL: -25
+    shinL: -100
+    footL: -15
+    thighR: -60
+    shinR: -145
+    footR: -10
+    upperArmL: -5
+    forearmL: 15
+    handL: 20
+    upperArmR: -150
+    forearmR: -140
+    handR: -135
+props:
+  - type: wave
+    amplitude: 0.45
+    length: 3.4
+    y: -0.2
+  - type: surfboard
+    under: [ankleL, ankleR]
+    rotation: 10
+    length: 1.15
+    offset: [0, -0.1]
+muscles:
+  engaged: [quadriceps, gluteus, obliques, erectorSpinae, adductors]
+  stretched: [hipFlexors, latissimus]
