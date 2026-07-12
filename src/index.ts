@@ -14,5 +14,6 @@ export * from './render/index.js';
 export * from './three/index.js';
 export * from './export3d/index.js';
 export * from './viewer/index.js';
+export * from './solve.js';
 export * from './library/index.js';
 export * from './standards/keypoints.js';

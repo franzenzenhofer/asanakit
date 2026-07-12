@@ -177,6 +177,11 @@ export const renderSvgNode = (pose: PoseSpec, options: RenderOptions = {}): SvgN
   const layout = layoutFor(pose, options, style);
   const { width, height } = layout;
 
+  if (pose.physics === 'settle' && options.skeleton === undefined) {
+    throw new Error(
+      `Pose "${pose.id}" asks for physics settling. Solve it first - await solvePose(pose) - and pass the result as options.skeleton.`,
+    );
+  }
   const solved = options.skeleton ?? solveSkeleton(resolveFigure(pose.figure), options.rig ?? DEFAULT_RIG);
   const camera = resolveCamera(options.camera ?? pose.camera);
   const skeleton = viewSkeleton(solved, camera);

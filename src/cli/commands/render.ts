@@ -4,6 +4,7 @@ import type { Command } from 'commander';
 import { expandSequence } from '../../library/index.js';
 import type { PoseSpec } from '../../model/index.js';
 import { optimizeSvg, renderPng, renderSheet, renderSvg, type RenderOptions, type SheetOptions } from '../../render/index.js';
+import { solvePose } from '../../solve.js';
 import { library, parseCamera, parseIntOption, parseStyle, resolvePose } from '../resolve.js';
 
 interface CommonOptions {
@@ -11,6 +12,7 @@ interface CommonOptions {
   width: string;
   height: string;
   camera?: string;
+  settle?: boolean;
   title?: boolean;
   caption?: boolean;
   muscles?: boolean;
@@ -50,6 +52,7 @@ const withCommonOptions = (cmd: Command): Command =>
     .option('-w, --width <px>', 'canvas width', '600')
     .option('-h, --height <px>', 'canvas height', '800')
     .option('--camera <view>', 'front | back | left | right | side | three-quarter | top, or "azimuth=30,elevation=15"')
+    .option('--settle', 'drop the figure onto the ground with the physics engine before rendering')
     .option('--title', 'draw the pose name above the figure')
     .option('--caption', 'draw the teaching cues below the figure')
     .option('--muscles', 'force the muscle layer on')
@@ -67,7 +70,8 @@ export const registerRenderCommands = (program: Command): void => {
       .requiredOption('-o, --out <file>', 'output path; the extension picks the format (.svg or .png)'),
   ).action(async (ref: string, options: CommonOptions & { out: string }) => {
     const pose = await resolvePose(ref, options.lib);
-    await write(options.out, renderSvg(pose, renderOptionsFrom(options)), options);
+    const skeleton = await solvePose(pose, options.settle === undefined ? {} : { settle: options.settle });
+    await write(options.out, renderSvg(pose, { ...renderOptionsFrom(options), skeleton }), options);
   });
 
   withCommonOptions(
@@ -109,8 +113,12 @@ export const registerRenderCommands = (program: Command): void => {
 
       if (poses.length === 0) throw new Error('Nothing to render: pass pose ids, --all, or --sequence <id>');
 
+      const settle = options.settle === undefined ? {} : { settle: options.settle };
+      const skeletons = await Promise.all(poses.map((p) => solvePose(p, settle)));
+
       const sheetOptions: SheetOptions = {
         ...renderOptionsFrom(options),
+        skeletons,
         columns: parseIntOption(options.columns, 'columns'),
         cellWidth: parseIntOption(options.width, 'width'),
         cellHeight: parseIntOption(options.height, 'height'),
@@ -142,7 +150,8 @@ export const registerRenderCommands = (program: Command): void => {
     for (const [i, step] of steps.entries()) {
       const n = String(i + 1).padStart(pad, '0');
       const path = `${options.out}/${n}-${step.pose.id}${step.side === 'right' ? '-right' : ''}.${options.format}`;
-      await write(path, renderSvg({ ...step.pose, name: step.label }, renderOptionsFrom(options)), options);
+      const skeleton = await solvePose(step.pose, options.settle === undefined ? {} : { settle: options.settle });
+      await write(path, renderSvg({ ...step.pose, name: step.label }, { ...renderOptionsFrom(options), skeleton }), options);
     }
   });
 };

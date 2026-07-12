@@ -40,6 +40,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./physics": {
+      "types": "./dist/physics/index.d.ts",
+      "default": "./dist/physics/index.js"
     }
   },
   "files": [
@@ -63,6 +67,7 @@
     "prepublishOnly": "npm run verify"
   },
   "dependencies": {
+    "@dimforge/rapier3d-compat": "^0.19.3",
     "@resvg/resvg-js": "^2.6.2",
     "commander": "^14.0.1",
     "culori": "^4.0.2",

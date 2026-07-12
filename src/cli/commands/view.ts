@@ -3,9 +3,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import type { Command } from 'commander';
 import { resolveCamera } from '../../core/camera.js';
-import { DEFAULT_RIG } from '../../core/rig.js';
-import { solveSkeleton } from '../../core/skeleton.js';
-import { resolveFigure } from '../../model/index.js';
+import { solvePose } from '../../solve.js';
 import { buildViewerHtml } from '../../viewer/index.js';
 import { parseCamera, resolvePose } from '../resolve.js';
 
@@ -20,11 +18,12 @@ export const registerViewCommands = (program: Command): void => {
     .description('Write a self-contained interactive 3D viewer (orbit, zoom, pan) as one offline HTML file')
     .option('-o, --out <file>', 'output path (defaults to <pose-id>.viewer.html)')
     .option('--camera <view>', 'starting viewpoint: a preset or "azimuth=30,elevation=15"')
+    .option('--settle', 'drop the figure onto the ground with the physics engine first')
     .option('--open', 'open the viewer in the default browser')
     .option('--lib <dir>', 'load poses from this directory')
-    .action(async (ref: string, options: { out?: string; camera?: string; open?: boolean; lib?: string }) => {
+    .action(async (ref: string, options: { out?: string; camera?: string; settle?: boolean; open?: boolean; lib?: string }) => {
       const pose = await resolvePose(ref, options.lib);
-      const skeleton = solveSkeleton(resolveFigure(pose.figure), DEFAULT_RIG);
+      const skeleton = await solvePose(pose, options.settle === undefined ? {} : { settle: options.settle });
       const camera = resolveCamera(options.camera === undefined ? pose.camera : parseCamera(options.camera));
 
       const html = await buildViewerHtml(skeleton, {

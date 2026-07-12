@@ -1,3 +1,4 @@
+import type { Skeleton } from '../core/types.js';
 import type { PoseSpec } from '../model/index.js';
 import { renderSvgNode, type RenderOptions } from './scene.js';
 import { resolveStyle } from './styles.js';
@@ -11,6 +12,8 @@ export interface SheetOptions extends RenderOptions {
   /** Print the sequence position on each cell - what a practice sheet needs. */
   readonly numbered?: boolean;
   readonly gutter?: number;
+  /** Pre-solved (e.g. physics-settled) skeletons, aligned by index with the poses. */
+  readonly skeletons?: readonly (Skeleton | undefined)[];
 }
 
 const DEFAULTS = { columns: 6, cellWidth: 260, cellHeight: 340, gutter: 0 };
@@ -40,8 +43,10 @@ export const renderSheetNode = (poses: readonly PoseSpec[], options: SheetOption
     const x = col * (cw + gutter);
     const y = titleBand + row * (ch + gutter);
 
+    const skeleton = options.skeletons?.[i];
     const inner = renderSvgNode(pose, {
       ...options,
+      ...(skeleton === undefined ? {} : { skeleton }),
       width: cw,
       height: ch,
       background: options.background ?? 'none',

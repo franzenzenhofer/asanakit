@@ -5,6 +5,7 @@ import { DEFAULT_RIG } from '../../core/rig.js';
 import { solveSkeleton } from '../../core/skeleton.js';
 import { exportGlb, exportGltf } from '../../export3d/index.js';
 import { resolveFigure } from '../../model/index.js';
+import { solvePose } from '../../solve.js';
 import { toKeypoints, type KeypointFormat } from '../../standards/keypoints.js';
 import { resolvePose } from '../resolve.js';
 
@@ -15,10 +16,11 @@ export const registerExportCommands = (program: Command): void => {
     .command('gltf <pose>')
     .description('Export a pose as a 3D model any glTF viewer can orbit and zoom (.glb or .gltf)')
     .requiredOption('-o, --out <file>', 'output path; the extension picks binary .glb or JSON .gltf')
+    .option('--settle', 'drop the figure onto the ground with the physics engine first')
     .option('--lib <dir>', 'load poses from this directory')
-    .action(async (ref: string, options: { out: string; lib?: string }) => {
+    .action(async (ref: string, options: { out: string; settle?: boolean; lib?: string }) => {
       const pose = await resolvePose(ref, options.lib);
-      const skeleton = solveSkeleton(resolveFigure(pose.figure), DEFAULT_RIG);
+      const skeleton = await solvePose(pose, options.settle === undefined ? {} : { settle: options.settle });
       const sceneOptions = { engaged: pose.muscles.engaged, stretched: pose.muscles.stretched };
 
       await mkdir(dirname(options.out), { recursive: true });
