@@ -44,6 +44,8 @@
   },
   "files": [
     "dist",
+    "poses",
+    "docs/AUTHORING.md",
     "README.md",
     "LICENSE"
   ],
