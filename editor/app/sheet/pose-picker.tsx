@@ -25,6 +25,7 @@ export const PosePicker = ({ onPick, onClose }: PosePickerProps): JSX.Element =>
             class="search"
             style="flex:1;margin:0"
             type="search"
+            name="pose-search"
             placeholder="Search poses…"
             value={query}
             onInput={(e) => setQuery((e.target as HTMLInputElement).value)}

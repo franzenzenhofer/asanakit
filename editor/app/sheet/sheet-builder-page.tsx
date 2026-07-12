@@ -111,6 +111,7 @@ export const SheetBuilderPage = (): JSX.Element => {
         <input
           style="flex:1;border:none;background:none;font-family:var(--serif);font-size:17px;font-weight:650;padding:4px 0;min-width:0"
           value={doc.name ?? ''}
+          name="sheet-name"
           aria-label="Sheet name"
           onChange={(e) => loadSheet({ ...doc, name: (e.target as HTMLInputElement).value || 'My Practice Sheet' })}
         />

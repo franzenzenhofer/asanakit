@@ -31,6 +31,7 @@ export const LibraryPage = (): JSX.Element => {
       <input
         class="search"
         type="search"
+        name="library-search"
         placeholder={`Search ${library().entries.length} poses - name, sanskrit, tag…`}
         value={filter.query}
         onInput={(e) => patch({ query: (e.target as HTMLInputElement).value })}
