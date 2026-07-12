@@ -56,24 +56,46 @@ const muscleBones = (ids: readonly MuscleId[]): Set<BoneId> => {
 const material = (color: string): MeshStandardMaterial =>
   new MeshStandardMaterial({ color, roughness: 0.65, metalness: 0 });
 
-const boneMesh = (
-  start: Vec3,
-  end: Vec3,
-  radius: number,
-  mat: MeshStandardMaterial,
-  name: string,
-): Mesh => {
-  const axis = sub3(end, start);
-  const length = len3(axis);
-  const geometry = new CapsuleGeometry(radius, Math.max(length, 1e-6), CAPSULE_SEGMENTS.cap, CAPSULE_SEGMENTS.radial);
-  const mesh = new Mesh(geometry, mat);
-  mesh.name = name;
-  const mid = midpoint3(start, end);
-  mesh.position.set(mid[0], mid[1], mid[2]);
+interface BoneMeshSpec {
+  readonly radius: number;
+  readonly mat: MeshStandardMaterial;
+  readonly name: string;
+}
+
+const alignToAxis = (mesh: Mesh, axis: Vec3): void => {
   mesh.quaternion.copy(
     new Quaternion().setFromUnitVectors(REST_AXIS, new Vector3(axis[0], axis[1], axis[2]).normalize()),
   );
+};
+
+const boneMesh = (start: Vec3, end: Vec3, spec: BoneMeshSpec): Mesh => {
+  const axis = sub3(end, start);
+  const length = len3(axis);
+  const geometry = new CapsuleGeometry(
+    spec.radius,
+    Math.max(length, 1e-6),
+    CAPSULE_SEGMENTS.cap,
+    CAPSULE_SEGMENTS.radial,
+  );
+  const mesh = new Mesh(geometry, spec.mat);
+  mesh.name = spec.name;
+  const mid = midpoint3(start, end);
+  mesh.position.set(mid[0], mid[1], mid[2]);
+  alignToAxis(mesh, axis);
   return mesh;
+};
+
+const headMesh = (skeleton: Skeleton, mat: MeshStandardMaterial): Mesh => {
+  const head = new Mesh(
+    new SphereGeometry(HEAD_RADIUS * skeleton.scale, SPHERE_SEGMENTS.width, SPHERE_SEGMENTS.height),
+    mat,
+  );
+  head.name = 'bone:head';
+  const centre = skeleton.landmarks.headCenter;
+  head.position.set(centre[0], centre[1], centre[2]);
+  alignToAxis(head, sub3(skeleton.bones.head.end, skeleton.bones.head.start));
+  head.scale.set(0.82, 1.18, 0.9); // An ellipsoid skull, not a ball.
+  return head;
 };
 
 /**
@@ -92,31 +114,19 @@ export const buildFigureScene = (skeleton: Skeleton, options: FigureSceneOptions
   const stretched = muscleBones(options.stretched ?? []);
   const scale = skeleton.scale;
 
+  const materialFor = (id: BoneId): MeshStandardMaterial =>
+    engaged.has(id) ? engagedMat : stretched.has(id) ? stretchedMat : base;
+
   for (const bone of Object.values(skeleton.bones)) {
     if (bone.id === 'head') continue; // The head is a sphere, not a stick.
-    const mat = engaged.has(bone.id) ? engagedMat : stretched.has(bone.id) ? stretchedMat : base;
-    group.add(boneMesh(bone.start, bone.end, BONE_RADIUS * scale, mat, `bone:${bone.id}`));
+    group.add(boneMesh(bone.start, bone.end, { radius: BONE_RADIUS * scale, mat: materialFor(bone.id), name: `bone:${bone.id}` }));
   }
 
-  const head = new Mesh(
-    new SphereGeometry(HEAD_RADIUS * scale, SPHERE_SEGMENTS.width, SPHERE_SEGMENTS.height),
-    engaged.has('head') ? engagedMat : base,
-  );
-  head.name = 'bone:head';
-  const centre = skeleton.landmarks.headCenter;
-  head.position.set(centre[0], centre[1], centre[2]);
-  const headBone = skeleton.bones.head;
-  const axis = sub3(headBone.end, headBone.start);
-  head.quaternion.copy(
-    new Quaternion().setFromUnitVectors(REST_AXIS, new Vector3(axis[0], axis[1], axis[2]).normalize()),
-  );
-  head.scale.set(0.82, 1.18, 0.9); // An ellipsoid skull, not a ball.
-  group.add(head);
+  group.add(headMesh(skeleton, materialFor('head')));
 
-  const jointMat = base;
   for (const [id, p] of Object.entries(skeleton.landmarks)) {
     if (id === 'headCenter' || id === 'headTop') continue;
-    const joint = new Mesh(new SphereGeometry(JOINT_RADIUS * scale, 12, 8), jointMat);
+    const joint = new Mesh(new SphereGeometry(JOINT_RADIUS * scale, 12, 8), base);
     joint.name = `joint:${id}`;
     joint.position.set(p[0], p[1], p[2]);
     group.add(joint);

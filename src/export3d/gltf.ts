@@ -16,7 +16,7 @@ const exportScene = (skeleton: Skeleton, options: GltfExportOptions): Promise<Ar
     exporter.parse(
       scene,
       (result) => {
-        resolve(result as ArrayBuffer | object);
+        resolve(result);
       },
       reject,
       { binary: options.binary ?? true },
