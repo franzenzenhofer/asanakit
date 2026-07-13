@@ -39,7 +39,10 @@ body {
   color: var(--ink);
   background: var(--paper);
   -webkit-font-smoothing: antialiased;
-  font-size: 15px;
+  /* Relative to the reader's own setting: someone who has chosen larger text has
+     chosen it. Everything else is sized in rem so it grows with them - and the
+     chrome is laid out so that it still fits when it does. */
+  font-size: 1rem;
   line-height: 1.45;
 }
 

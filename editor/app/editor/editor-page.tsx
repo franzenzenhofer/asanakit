@@ -2,6 +2,7 @@ import { useEffect, useState } from 'preact/hooks';
 import type { JSX } from 'preact';
 import { CAMERA_PRESETS, CAMERA_PRESET_IDS, resolveCamera } from '@asanakit/core/camera.js';
 import { history, pose, redoEdit, selectedBone, undoEdit, view } from '../state/doc.js';
+import { snap, stageBottom, trackViewport } from '../state/layout.js';
 import { Canvas2d } from './canvas2d.js';
 import { Canvas3d } from './canvas3d.js';
 import { ExportMenu } from './export-menu.js';
@@ -11,6 +12,7 @@ import { MetaPanel } from './meta-panel.js';
 import { MusclesPanel } from './muscles-panel.js';
 import { PosePanel } from './pose-panel.js';
 import { PropsPanel } from './props-panel.js';
+import { Sheet } from '../ui/sheet.js';
 import { CubeIcon, FlatIcon, MoreIcon, RedoIcon, UndoIcon } from '../ui/icons.js';
 
 type Tab = 'joints' | 'pose' | 'props' | 'body' | 'info';
@@ -55,8 +57,8 @@ const ViewToggle = (): JSX.Element => {
 };
 
 /**
- * Where the camera is - the same camera in both views, so it is worth saying
- * out loud. Tap it to open the camera controls.
+ * Where the camera is. It is the same camera in both views, so it is worth
+ * saying out loud. Tap it to open the camera controls.
  */
 const CameraReadout = ({ onOpen }: { onOpen: () => void }): JSX.Element => {
   const camera = resolveCamera(pose.value.camera ?? 'front');
@@ -72,69 +74,64 @@ const CameraReadout = ({ onOpen }: { onOpen: () => void }): JSX.Element => {
 };
 
 /**
- * The editing surface. Space is the scarcest resource on a phone: the canvas
- * takes everything the collapsible tool panel does not currently claim, and
- * selecting a bone opens the Joints tab so the controls are always one tap away.
+ * The editing surface, built around one rule: you can always see the figure you
+ * are editing. The canvas owns the screen; the tool sheet floats over it,
+ * see-through, and the figure is drawn into the space the sheet is not using.
  */
 export const EditorPage = (): JSX.Element => {
   const [tab, setTab] = useState<Tab>('joints');
   const [menuOpen, setMenuOpen] = useState(false);
-  const [panelOpen, setPanelOpen] = useState(true);
   const bone = selectedBone.value;
+
+  useEffect(trackViewport, []);
 
   useEffect(() => {
     if (bone === null) return;
     setTab('joints');
-    setPanelOpen(true);
+    if (snap.value === 'peek') snap.value = 'half';
   }, [bone]);
 
   const pick = (next: Tab): void => {
-    setPanelOpen(tab === next ? !panelOpen : true);
+    if (tab === next && snap.value !== 'peek') snap.value = 'peek';
+    else if (snap.value === 'peek') snap.value = 'half';
     setTab(next);
   };
 
   return (
     <div class="editor">
-      <div style="display:flex;flex-direction:column;flex:1;min-width:0;">
-        <EditorTopbar onMenu={() => setMenuOpen(true)} />
-        <div class="canvas-wrap">
+      <EditorTopbar onMenu={() => setMenuOpen(true)} />
+
+      <div class="canvas-wrap" style={`--stage-bottom:${stageBottom.value}px`}>
+        {/* The chrome lives on the STAGE, not the wrapper, so it follows the figure
+            into whatever room the sheet has left it - and never hides beneath it. */}
+        <div class="canvas-stage">
           {view.value === '2d' ? <Canvas2d /> : <Canvas3d />}
           <LintChips />
           <ViewToggle />
           <CameraReadout
             onOpen={() => {
               setTab('pose');
-              setPanelOpen(true);
+              if (snap.value === 'peek') snap.value = 'half';
             }}
           />
         </div>
-      </div>
 
-      <section class={`panel ${panelOpen ? '' : 'collapsed'}`} aria-label="Editing tools">
-        <div class="panel-tabs">
-          <button
-            class="panel-grabber"
-            onClick={() => setPanelOpen(!panelOpen)}
-            aria-expanded={panelOpen}
-            aria-label={panelOpen ? 'Collapse tool panel' : 'Expand tool panel'}
-          >
-            <span class="grabber" />
-          </button>
-          <div class="chips tabs" role="tablist">
-            {TABS.map((t) => (
-              <button
-                key={t.id}
-                class={`chip ${tab === t.id && panelOpen ? 'active' : ''}`}
-                role="tab"
-                aria-selected={tab === t.id}
-                onClick={() => pick(t.id)}
-              >
-                {t.label}
-              </button>
-            ))}
+        <Sheet label="Editing tools">
+          <div class="panel-tabs">
+            <div class="chips tabs" role="tablist">
+              {TABS.map((t) => (
+                <button
+                  key={t.id}
+                  class={`chip ${tab === t.id && snap.value !== 'peek' ? 'active' : ''}`}
+                  role="tab"
+                  aria-selected={tab === t.id}
+                  onClick={() => pick(t.id)}
+                >
+                  {t.label}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-        {panelOpen && (
           <div class="panel-body">
             {tab === 'joints' && <JointPanel />}
             {tab === 'pose' && <PosePanel />}
@@ -142,8 +139,8 @@ export const EditorPage = (): JSX.Element => {
             {tab === 'body' && <MusclesPanel />}
             {tab === 'info' && <MetaPanel />}
           </div>
-        )}
-      </section>
+        </Sheet>
+      </div>
 
       {menuOpen && <ExportMenu onClose={() => setMenuOpen(false)} />}
     </div>

@@ -25,12 +25,12 @@
   align-items: center;
   gap: 2px;
   padding: 7px 0 5px;
-  font-size: 11px;
+  font-size: 0.7rem;
   color: var(--ink-faint);
   min-height: 48px;
 }
 .tabbar button.active { color: var(--accent); }
-.tabbar svg { width: 22px; height: 22px; }
+.tabbar svg { width: 22px; height: 22px; flex-shrink: 0; }
 
 .topbar {
   display: flex;
@@ -43,7 +43,16 @@
   flex-shrink: 0;
   min-height: 48px;
 }
-.topbar h1 { font-size: 16px; font-family: var(--serif); flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* The title yields before the buttons do: a name can be cut, a control cannot. */
+.topbar h1 {
+  font-size: 1rem;
+  font-family: var(--serif);
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .topbar .spacer { flex: 1; }
 
 .iconbtn {
@@ -99,16 +108,33 @@
 .chip:active { background: var(--paper-sunken); }
 .chip.active:active { background: var(--ink); }
 
-/* ---- editor ---- */
+/* ---- editor ----
+   One rule: you can always see the figure you are editing. The canvas owns the
+   screen, the tool sheet floats over it, and the figure is drawn into the
+   "stage" - the part of the canvas the sheet is not currently sitting on. */
 .editor { display: flex; flex-direction: column; flex: 1; min-height: 0; }
-.canvas-wrap { flex: 1; min-height: 0; position: relative; display: flex; align-items: stretch; justify-content: center; background: var(--paper); }
+.canvas-wrap {
+  flex: 1;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+  --stage-bottom: 0px;
+}
+.canvas-stage {
+  position: absolute;
+  inset: 0;
+  bottom: var(--stage-bottom);
+  display: flex;
+  transition: bottom 0.22s ease, right 0.22s ease;
+}
 .canvas2d {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  touch-action: manipulation;
+  touch-action: none;
   -webkit-tap-highlight-color: transparent;
 }
 .canvas2d svg { width: 100%; height: 100%; -webkit-user-select: none; user-select: none; }
@@ -119,7 +145,7 @@
   stroke: var(--accent) !important;
   filter: drop-shadow(0 0 3px rgb(59 73 180 / 0.55));
 }
-.canvas3d { flex: 1; position: relative; -webkit-tap-highlight-color: transparent; }
+.canvas3d { flex: 1; position: relative; -webkit-tap-highlight-color: transparent; overflow: hidden; }
 .canvas3d canvas { display: block; touch-action: none; }
 
 .canvas-fab {
@@ -175,41 +201,61 @@
 .lint-chip.ok { color: var(--ok); }
 .lint-list { background: var(--paper-raised); border-radius: var(--radius); box-shadow: var(--shadow); padding: 8px 10px; font-size: 12.5px; display: flex; flex-direction: column; gap: 6px; max-width: 100%; }
 
-/* ---- panel / bottom sheet ---- */
+/* ---- the tool sheet ----
+   It floats OVER the canvas and it is see-through, so the figure never leaves
+   the screen while you work on it. Three heights, dragged by the handle. */
 .panel {
-  background: var(--paper-raised);
-  border-top: 1px solid var(--line);
-  flex-shrink: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
   display: flex;
   flex-direction: column;
-  max-height: 46vh;
-  max-height: 44dvh;
+  height: var(--sheet-h, 50dvh);
+  max-height: 88dvh;
+  border-top: 1px solid var(--line);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background: color-mix(in srgb, var(--paper-raised) 90%, transparent);
+  box-shadow: 0 -6px 24px rgb(26 24 23 / 0.1);
+  transition: height 0.22s ease, background-color 0.18s ease;
 }
-.panel.collapsed { max-height: none; }
+@supports (backdrop-filter: blur(1px)) {
+  .panel { backdrop-filter: blur(14px) saturate(1.1); }
+}
+.panel.snap-peek { height: auto; }
+.panel.snap-half { --sheet-h: 50dvh; }
+.panel.snap-full { --sheet-h: 88dvh; }
+.panel.snap-peek .panel-body { display: none; }
+.panel.snap-peek .panel-tabs { border-bottom: none; }
+
+/* While a control is being dragged the sheet gets out of the way of your own eyes. */
+.panel.adjusting { background: color-mix(in srgb, var(--paper-raised) 55%, transparent); }
+.panel.adjusting .panel-body { opacity: 0.75; }
+
 .panel-tabs { padding: 0 8px 6px; border-bottom: 1px solid var(--line); position: relative; }
-.panel.collapsed .panel-tabs { border-bottom: none; }
-.panel-tabs::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 24px;
-  bottom: 0;
-  width: 26px;
-  background: linear-gradient(to left, var(--paper-raised), transparent);
-  pointer-events: none;
-}
 .panel-grabber {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 24px;
+  height: 28px;
+  flex-shrink: 0;
+  touch-action: none;
+  cursor: grab;
 }
-.panel-grabber .grabber { width: 40px; height: 4px; border-radius: 2px; background: var(--line); }
+.panel-grabber .grabber { width: 44px; height: 5px; border-radius: 3px; background: var(--line); }
+.panel-grabber:active { cursor: grabbing; }
 .panel-grabber:active .grabber { background: var(--ink-faint); }
 .chips.tabs { padding-bottom: 2px; }
 .chips.tabs .chip { flex: 1; justify-content: center; min-width: fit-content; }
-.panel-body { overflow-y: auto; overscroll-behavior: contain; padding: 12px 14px 14px; }
+.panel-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 12px 14px calc(14px + var(--safe-bottom));
+}
 
 .panel-hint { margin: 2px 0 10px; font-size: 13.5px; color: var(--ink-soft); }
 
@@ -373,7 +419,22 @@
 }
 .empty .serif { font-size: 18px; color: var(--ink-soft); display: block; margin-bottom: 6px; }
 
-/* ---- desktop ---- */
+/* ---- small phone ----
+   320-360px, or a reader who has turned the text up. Chrome gives way first. */
+@media (max-width: 360px) {
+  .chips.tabs .chip { padding: 8px 10px; font-size: 0.78rem; }
+  .iconbtn.labeled span { display: none; }
+  .prop-card { padding: 8px 9px; }
+  .panel-body { padding: 10px 10px calc(12px + var(--safe-bottom)); }
+}
+
+/* ---- tablet: the sheet has room to be a proper panel, but still floats ---- */
+@media (min-width: 640px) and (max-width: 899px) {
+  .panel { left: auto; right: 0; width: min(420px, 55vw); border-radius: var(--radius-lg) 0 0 0; }
+  .panel.snap-half, .panel.snap-full { --sheet-h: 92dvh; }
+}
+
+/* ---- desktop: the sheet stops floating and becomes a sidebar ---- */
 @media (min-width: 900px) {
   .shell { flex-direction: row; }
   .tabbar {
@@ -383,12 +444,25 @@
   }
   .tabbar button { flex: 0 0 auto; padding: 10px 0; }
   .shell-main { flex: 1; }
-  .editor { flex-direction: row; }
-  .canvas-wrap { flex: 1; }
+  .editor { flex-direction: column; }
+  /* There is space for both, so nothing needs to overlap and nothing needs to be see-through. */
+  .canvas-stage { bottom: 0; right: 380px; }
   .panel {
-    width: 380px; max-height: none; border-top: none; border-left: 1px solid var(--line);
+    top: 0;
+    left: auto;
+    width: 380px;
+    height: auto;
+    max-height: none;
+    border-top: none;
+    border-radius: 0;
+    border-left: 1px solid var(--line);
+    background: var(--paper-raised);
+    box-shadow: none;
   }
-  .panel.collapsed { width: 380px; }
+  .panel.snap-peek, .panel.snap-half, .panel.snap-full { height: auto; }
+  .panel.snap-peek .panel-body { display: block; }
+  .panel.adjusting { background: var(--paper-raised); }
+  .panel.adjusting .panel-body { opacity: 1; }
   .panel-grabber { display: none; }
   .pose-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
   .modal-veil { align-items: center; }

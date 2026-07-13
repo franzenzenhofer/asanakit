@@ -1,4 +1,5 @@
 import type { JSX } from 'preact';
+import { adjusting } from '../state/layout.js';
 
 /** Nothing sane lives outside this, whatever a typed value claims. */
 const ABSOLUTE = 360;
@@ -29,8 +30,14 @@ const round = (value: number, unit: string): number =>
  */
 export const SliderRow = ({ label, value, min, max, unit = '°', onChange, onCommit }: SliderRowProps): JSX.Element => {
   const step = unit === '°' ? 1 : 0.005;
-  const commit = (): void => onCommit?.();
   const clamp = (v: number): number => Math.max(-ABSOLUTE, Math.min(ABSOLUTE, v));
+
+  // While the finger is on the slider the sheet fades, so you watch the body
+  // move under your own thumb instead of guessing behind a wall of controls.
+  const commit = (): void => {
+    adjusting.value = false;
+    onCommit?.();
+  };
 
   const nudge = (delta: number): void => {
     onChange(clamp(round(value + delta * step, unit)), false);
@@ -72,6 +79,7 @@ export const SliderRow = ({ label, value, min, max, unit = '°', onChange, onCom
           step={step}
           value={Math.max(min, Math.min(max, value))}
           aria-label={label}
+          onPointerDown={() => (adjusting.value = true)}
           onInput={(e) => onChange(Number((e.target as HTMLInputElement).value), true)}
           onPointerUp={commit}
           onPointerCancel={commit}
