@@ -8,7 +8,7 @@ import { SliderRow } from '../ui/slider-row.js';
 import { LinkIcon } from '../ui/icons.js';
 
 const GROUPS: readonly { name: string; bones: readonly BoneId[] }[] = [
-  { name: 'Torso', bones: ['pelvis', 'spine', 'neck', 'head'] },
+  { name: 'Torso', bones: ['pelvis', 'spine', 'thorax', 'neck', 'head'] },
   { name: 'Arm L', bones: ['clavicleL', 'upperArmL', 'forearmL', 'handL'] },
   { name: 'Arm R', bones: ['clavicleR', 'upperArmR', 'forearmR', 'handR'] },
   { name: 'Leg L', bones: ['hipL', 'thighL', 'shinL', 'footL'] },

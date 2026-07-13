@@ -48,8 +48,20 @@ describe('viewSkeleton - projections', () => {
     expect(side.landmarks.toeL[0]).toBeGreaterThan(side.landmarks.ankleL[0]);
   });
 
-  test('an exact profile is still one flag away', () => {
-    const exact = viewSkeleton(SKELETON, CAMERA_PRESETS.right);
+  test('the side views are cheated off square, so the far side is not hidden behind the near one', () => {
+    // A dead-on profile hides the far arm and the far leg EXACTLY behind the near
+    // ones and loses half the body - so the presets sit a few degrees off, the way
+    // an aircraft three-view is drawn.
+    for (const camera of [CAMERA_PRESETS.right, CAMERA_PRESETS.left, CAMERA_PRESETS.side]) {
+      const view = viewSkeleton(SKELETON, camera);
+      const span = Math.abs(view.landmarks.shoulderL[0] - view.landmarks.shoulderR[0]);
+      expect(span).toBeGreaterThan(0.01); // the shoulders do not collapse onto each other
+      expect(span).toBeLessThan(0.1); // but it still reads as a profile
+    }
+  });
+
+  test('an exact profile is still one number away', () => {
+    const exact = viewSkeleton(SKELETON, { azimuth: -90, elevation: 0, roll: 0 });
     const span = Math.abs(exact.landmarks.shoulderL[0] - exact.landmarks.shoulderR[0]);
     expect(span).toBeLessThan(1e-6);
   });

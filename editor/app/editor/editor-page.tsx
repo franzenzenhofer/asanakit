@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'preact/hooks';
 import type { JSX } from 'preact';
-import { CAMERA_PRESETS, CAMERA_PRESET_IDS, resolveCamera } from '@asanakit/core/camera.js';
-import { history, pose, redoEdit, selectedBone, undoEdit, view } from '../state/doc.js';
+import { CAMERA_PRESETS, resolveCamera, type CameraPresetId } from '@asanakit/core/camera.js';
+import { dispatch, history, pose, redoEdit, selectedBone, undoEdit, view } from '../state/doc.js';
 import { snap, stageBottom, trackViewport } from '../state/layout.js';
 import { Canvas2d } from './canvas2d.js';
 import { Canvas3d } from './canvas3d.js';
@@ -70,20 +70,49 @@ const ViewToggle = (): JSX.Element => (
   </div>
 );
 
-/**
- * Where the camera is. It is the same camera in both views, so it is worth
- * saying out loud. Tap it to open the camera controls.
- */
-const CameraReadout = ({ onOpen }: { onOpen: () => void }): JSX.Element => {
-  const camera = resolveCamera(pose.value.camera ?? 'front');
-  const preset = CAMERA_PRESET_IDS.find((id) => {
+/** The standard views, the way a drawing is set up: front, both sides, top, bottom. */
+const VIEWS: readonly { id: CameraPresetId; label: string }[] = [
+  { id: 'front', label: 'Front' },
+  { id: 'back', label: 'Back' },
+  { id: 'left', label: 'Left' },
+  { id: 'right', label: 'Right' },
+  { id: 'three-quarter', label: '3/4' },
+  { id: 'top', label: 'Top' },
+  { id: 'bottom', label: 'Under' },
+];
+
+const presetOf = (camera: { azimuth: number; elevation: number; roll: number }): CameraPresetId | undefined =>
+  VIEWS.map((v) => v.id).find((id) => {
     const p = CAMERA_PRESETS[id];
     return p.azimuth === camera.azimuth && p.elevation === camera.elevation && p.roll === camera.roll;
   });
+
+/**
+ * The standard views, one tap each, over BOTH canvases - because there is one
+ * camera and both views are looking through it. The readout beside them says
+ * where it is when it is somewhere of your own choosing.
+ */
+const CameraBar = ({ onOpen }: { onOpen: () => void }): JSX.Element => {
+  const camera = resolveCamera(pose.value.camera ?? 'front');
+  const active = presetOf(camera);
+
   return (
-    <button class="angle-readout" onClick={onOpen} aria-label="Camera angle - tap to change">
-      {preset ?? `${camera.azimuth}° / ${camera.elevation}°`}
-    </button>
+    <div class="camera-bar">
+      <div class="chips">
+        {VIEWS.map((v) => (
+          <button
+            key={v.id}
+            class={`chip ${active === v.id ? 'active' : ''}`}
+            onClick={() => dispatch({ type: 'set-camera', camera: v.id })}
+          >
+            {v.label}
+          </button>
+        ))}
+        <button class="chip angle-readout" onClick={onOpen} aria-label="Camera angle - tap for the sliders">
+          {active === undefined ? `${camera.azimuth}° / ${camera.elevation}°` : 'Free…'}
+        </button>
+      </div>
+    </div>
   );
 };
 
@@ -122,7 +151,7 @@ export const EditorPage = (): JSX.Element => {
           {view.value === '2d' ? <Canvas2d /> : <Canvas3d />}
           <LintChips />
           <ViewToggle />
-          <CameraReadout
+          <CameraBar
             onOpen={() => {
               setTab('pose');
               if (snap.value === 'peek') snap.value = 'half';

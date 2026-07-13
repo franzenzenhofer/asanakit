@@ -53,7 +53,7 @@ const muscleBones = (ids: readonly MuscleId[]): Set<BoneId> => {
   const bones = new Set<BoneId>();
   for (const id of ids) {
     const base = MUSCLES[id].bone;
-    if (base === 'pelvis' || base === 'spine' || base === 'neck' || base === 'head') {
+    if (base === 'pelvis' || base === 'spine' || base === 'thorax' || base === 'neck' || base === 'head') {
       bones.add(base);
     } else {
       bones.add(`${base}L` as BoneId);

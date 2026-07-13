@@ -148,7 +148,8 @@ const swingTwist = (relative: Quat): { swing: number; twist: number } => {
  */
 const cervicalIssues = (skeleton: Skeleton): Issue[] => {
   const issues: Issue[] = [];
-  const chest = skeleton.bones.spine.orientation;
+  // The CHEST is the thorax, not the lumbar spine below it.
+  const chest = skeleton.bones.thorax.orientation;
   const head = skeleton.bones.head.orientation;
 
   const relative = mulQuat(conjugateQuat(chest), head);
@@ -169,15 +170,13 @@ const cervicalIssues = (skeleton: Skeleton): Issue[] => {
   }
 
   if (swing > CERVICAL_BEND_MAX + ANGLE_EPSILON) {
-    // A warning, not an error, and the reason is the RIG: there is one bone from
-    // pelvis to chest, so a thoracic arch has nowhere to go. A deep backbend has
-    // to spend its curve somewhere, and it spends it here, in the neck. Until the
-    // spine is segmented, this number is measuring the rig as much as the pose -
-    // so it is said out loud, and it does not fail the gate.
+    // A warning, not an error: the pose is still drawable, and some of these are
+    // old poses that spent their whole arch in the neck back when the trunk was
+    // one bone. The trunk is two bones now, so there IS somewhere else to put it.
     issues.push({
       code: 'cervical-bend',
       severity: 'warning',
-      message: `The head is bent ${Math.round(swing)}° on the chest, past the ${CERVICAL_BEND_MAX}° a cervical spine bends. The rig has one spine bone, so a deep arch lands in the neck - segment the spine, or lift the chest.`,
+      message: `The head is bent ${Math.round(swing)}° on the chest, past the ${CERVICAL_BEND_MAX}° a cervical spine bends. Arch the thorax and let the ribcage carry the curve, instead of the neck.`,
     });
   } else if (swing > CERVICAL_BEND_WARN + ANGLE_EPSILON) {
     issues.push({

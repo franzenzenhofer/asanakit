@@ -144,13 +144,17 @@ describe('props in every output', () => {
   });
 
   test('the 2D mat is camera-aware: a profile sees the length, a front camera the width', () => {
-    const span = (cameraId: 'right' | 'front'): number => {
-      const q = viewQuat(CAMERA_PRESETS[cameraId]);
+    const span = (camera: { azimuth: number; elevation: number; roll: number }): number => {
+      const q = viewQuat(camera);
       const xs = matModel(mat(), SKELETON).top.map((corner) => rotateVec3(q, corner)[0]);
       return Math.max(...xs) - Math.min(...xs);
     };
-    expect(span('right')).toBeCloseTo(1.35, 6);
-    expect(span('front')).toBeCloseTo(0.38, 6);
+    expect(span({ azimuth: -90, elevation: 0, roll: 0 })).toBeCloseTo(1.35, 6);
+    expect(span(CAMERA_PRESETS.front)).toBeCloseTo(0.38, 6);
+    // The `right` preset is cheated a few degrees off square, so it sees nearly all
+    // the length PLUS a sliver of the width - which is the whole point of the cheat.
+    expect(span(CAMERA_PRESETS.right)).toBeGreaterThan(1.35);
+    expect(span(CAMERA_PRESETS.right)).toBeLessThan(1.42);
   });
 });
 

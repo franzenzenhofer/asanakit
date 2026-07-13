@@ -21,17 +21,37 @@ const FORWARD: Vec3 = [0, 0, 1];
 const FOOT_DROP_DEG = 20;
 const FOOT_DIR: Vec3 = [0, -Math.sin((FOOT_DROP_DEG * Math.PI) / 180), Math.cos((FOOT_DROP_DEG * Math.PI) / 180)];
 
+/**
+ * The trunk is TWO bones, not one, and that is load-bearing.
+ *
+ * With a single bone from pelvis to chest, a deep backbend has no thoracic arch
+ * to spend its curve on, so the curve goes into the neck instead - matsyasana
+ * solved to 145 degrees of cervical bend, which is not a neck, it is an injury.
+ * So `spine` is the lumbar segment and `thorax` is the ribcage above it, and a
+ * backbend can arch where a spine actually arches.
+ *
+ * The two lengths still sum to the old 0.17, and a child bone at rest points
+ * exactly where its parent points - so a pose that says nothing about the thorax
+ * draws precisely the figure it always drew. Nothing had to be migrated.
+ */
+const LUMBAR = 0.09;
+const THORAX = 0.08;
+
 const CENTER_BONES: readonly BoneDef[] = [
   // Positive flex bends forward, positive abduct leans toward the figure's left.
   { id: 'pelvis', parent: null, attach: 'end', length: 0.1, dir: UP, flexAxis: LEFT, abductAxis: [0, 0, -1], twistAxis: UP, side: 'center', group: 'torso' },
-  { id: 'spine', parent: 'pelvis', attach: 'end', length: 0.17, dir: UP, flexAxis: LEFT, abductAxis: [0, 0, -1], twistAxis: UP, side: 'center', group: 'torso' },
-  { id: 'neck', parent: 'spine', attach: 'end', length: 0.06, dir: UP, flexAxis: LEFT, abductAxis: [0, 0, -1], twistAxis: UP, side: 'center', group: 'torso' },
+  { id: 'spine', parent: 'pelvis', attach: 'end', length: LUMBAR, dir: UP, flexAxis: LEFT, abductAxis: [0, 0, -1], twistAxis: UP, side: 'center', group: 'torso' },
+  { id: 'thorax', parent: 'spine', attach: 'end', length: THORAX, dir: UP, flexAxis: LEFT, abductAxis: [0, 0, -1], twistAxis: UP, side: 'center', group: 'torso' },
+  { id: 'neck', parent: 'thorax', attach: 'end', length: 0.06, dir: UP, flexAxis: LEFT, abductAxis: [0, 0, -1], twistAxis: UP, side: 'center', group: 'torso' },
   { id: 'head', parent: 'neck', attach: 'end', length: 0.13, dir: UP, flexAxis: LEFT, abductAxis: [0, 0, -1], twistAxis: UP, side: 'center', group: 'head' },
 ];
 
+/** Where the old single spine bone's parameter `u` falls once it is cut in two. */
+export const LUMBAR_FRACTION = LUMBAR / (LUMBAR + THORAX);
+
 const LEFT_BONES: readonly BoneDef[] = [
   // Shoulder girdle: flex swings the shoulder forward, abduct shrugs it up.
-  { id: 'clavicleL', parent: 'spine', attach: 'end', length: 0.1, dir: LEFT, flexAxis: [0, -1, 0], abductAxis: FORWARD, twistAxis: LEFT, side: 'left', group: 'torso' },
+  { id: 'clavicleL', parent: 'thorax', attach: 'end', length: 0.1, dir: LEFT, flexAxis: [0, -1, 0], abductAxis: FORWARD, twistAxis: LEFT, side: 'left', group: 'torso' },
   // Arm: flex raises it forward, abduct lifts it sideways away from the body,
   // positive twist rotates it externally.
   { id: 'upperArmL', parent: 'clavicleL', attach: 'end', length: 0.165, dir: DOWN, flexAxis: [-1, 0, 0], abductAxis: FORWARD, twistAxis: UP, side: 'left', group: 'arm' },

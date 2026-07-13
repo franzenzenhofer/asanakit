@@ -124,7 +124,7 @@ describe('every surf technique, in every format', () => {
   test('glTF JSON with a node per bone', async () => {
     const { pose, skeleton } = surf[0] as ShowcaseEntry;
     const gltf = JSON.parse(await exportGltf(skeleton)) as { nodes?: { name?: string }[] };
-    expect((gltf.nodes ?? []).filter((n) => n.name?.startsWith('bone:'))).toHaveLength(20);
+    expect((gltf.nodes ?? []).filter((n) => n.name?.startsWith('bone:'))).toHaveLength(21);
     await writeFile(`${OUT}/surf/${pose.id}.gltf`, JSON.stringify(gltf));
   });
 

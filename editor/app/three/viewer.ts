@@ -43,6 +43,8 @@ const DEG = 180 / Math.PI;
 const RAD = Math.PI / 180;
 const TARGET = new Vector3(0, 0.5, 0);
 const ORBIT_RADIUS = 2.4;
+/** How close the orbit may get to a pole before its azimuth stops meaning anything. */
+const POLE_EPSILON = 0.01;
 
 interface DragState {
   readonly bone: BoneId;
@@ -213,8 +215,13 @@ export const createViewer = (mount: HTMLElement, callbacks: ViewerCallbacks = {}
     getAngles: currentAngles,
     setAngles({ azimuth, elevation }): void {
       applying = true;
+      // Straight up and straight down are gimbal poles for an orbit: the camera's
+      // own up-vector becomes its view direction and the azimuth stops meaning
+      // anything. The 2D drawing wants an honest 90 (it is a plan view, and it
+      // prints), so the pose keeps 90 - and only the orbit is nudged off it.
+      const polar = Math.max(POLE_EPSILON, Math.min(Math.PI - POLE_EPSILON, (90 - elevation) * RAD));
       camera.position
-        .setFromSphericalCoords(camera.position.distanceTo(controls.target), (90 - elevation) * RAD, azimuth * RAD)
+        .setFromSphericalCoords(camera.position.distanceTo(controls.target), polar, azimuth * RAD)
         .add(controls.target);
       controls.update();
       applying = false;

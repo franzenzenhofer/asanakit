@@ -39,6 +39,7 @@ export interface MuscleDef {
 export type BoneBase =
   | 'pelvis'
   | 'spine'
+  | 'thorax'
   | 'neck'
   | 'head'
   | 'clavicle'
@@ -51,7 +52,7 @@ export type BoneBase =
   | 'foot';
 
 /** Torso bones run upwards, limb bones hang downwards, so their left-normals point opposite ways. */
-const TORSO_BONES: readonly BoneBase[] = ['pelvis', 'spine', 'neck', 'head', 'clavicle', 'hip'];
+const TORSO_BONES: readonly BoneBase[] = ['pelvis', 'spine', 'thorax', 'neck', 'head', 'clavicle', 'hip'];
 
 const anteriorSign = (bone: BoneBase): number => (TORSO_BONES.includes(bone) ? -1 : 1);
 
@@ -86,13 +87,13 @@ export const MUSCLES: Record<MuscleId, MuscleDef> = {
   triceps: { id: 'triceps', label: 'Triceps', latin: 'musculus triceps brachii', region: 'upper', bone: 'upperArm', t0: 0.15, t1: 0.95, lateral: 0, sagittal: -0.02, width: 0.04 },
   forearmFlexors: { id: 'forearmFlexors', label: 'Forearm flexors', latin: 'flexores antebrachii', region: 'upper', bone: 'forearm', t0: 0.05, t1: 0.8, lateral: 0, sagittal: 0.012, width: 0.034 },
 
-  pectoralis: { id: 'pectoralis', label: 'Chest', latin: 'musculus pectoralis major', region: 'upper', bone: 'spine', t0: 0.55, t1: 0.92, lateral: 0.05, sagittal: 0.032, width: 0.062 },
-  latissimus: { id: 'latissimus', label: 'Lats', latin: 'musculus latissimus dorsi', region: 'upper', bone: 'spine', t0: 0.32, t1: 0.78, lateral: 0.062, sagittal: -0.04, width: 0.05 },
-  trapezius: { id: 'trapezius', label: 'Trapezius', latin: 'musculus trapezius', region: 'upper', bone: 'spine', t0: 0.8, t1: 1.04, lateral: 0.032, sagittal: -0.03, width: 0.05 },
-  serratus: { id: 'serratus', label: 'Serratus', latin: 'musculus serratus anterior', region: 'upper', bone: 'spine', t0: 0.45, t1: 0.7, lateral: 0.056, sagittal: 0.01, width: 0.03 },
-  erectorSpinae: { id: 'erectorSpinae', label: 'Spinal erectors', latin: 'musculi erectores spinae', region: 'core', bone: 'spine', t0: 0.02, t1: 0.88, lateral: 0, sagittal: -0.026, width: 0.032 },
-  rectusAbdominis: { id: 'rectusAbdominis', label: 'Abdominals', latin: 'musculus rectus abdominis', region: 'core', bone: 'spine', t0: 0.0, t1: 0.56, lateral: 0, sagittal: 0.03, width: 0.055 },
-  obliques: { id: 'obliques', label: 'Obliques', latin: 'musculi obliqui abdominis', region: 'core', bone: 'spine', t0: 0.05, t1: 0.5, lateral: 0.05, sagittal: 0.012, width: 0.04 },
+  pectoralis: { id: 'pectoralis', label: 'Chest', latin: 'musculus pectoralis major', region: 'upper', bone: 'thorax', t0: 0.0438, t1: 0.83, lateral: 0.05, sagittal: 0.032, width: 0.062 },
+  latissimus: { id: 'latissimus', label: 'Lats', latin: 'musculus latissimus dorsi', region: 'upper', bone: 'thorax', t0: -0.445, t1: 0.5325, lateral: 0.062, sagittal: -0.04, width: 0.05 },
+  trapezius: { id: 'trapezius', label: 'Trapezius', latin: 'musculus trapezius', region: 'upper', bone: 'thorax', t0: 0.575, t1: 1.085, lateral: 0.032, sagittal: -0.03, width: 0.05 },
+  serratus: { id: 'serratus', label: 'Serratus', latin: 'musculus serratus anterior', region: 'upper', bone: 'thorax', t0: -0.1687, t1: 0.3625, lateral: 0.056, sagittal: 0.01, width: 0.03 },
+  erectorSpinae: { id: 'erectorSpinae', label: 'Spinal erectors', latin: 'musculi erectores spinae', region: 'core', bone: 'spine', t0: 0.0378, t1: 1.6622, lateral: 0, sagittal: -0.026, width: 0.032 },
+  rectusAbdominis: { id: 'rectusAbdominis', label: 'Abdominals', latin: 'musculus rectus abdominis', region: 'core', bone: 'spine', t0: 0.0, t1: 1.0578, lateral: 0, sagittal: 0.03, width: 0.055 },
+  obliques: { id: 'obliques', label: 'Obliques', latin: 'musculi obliqui abdominis', region: 'core', bone: 'spine', t0: 0.0944, t1: 0.9444, lateral: 0.05, sagittal: 0.012, width: 0.04 },
 
   gluteus: { id: 'gluteus', label: 'Glutes', latin: 'musculus gluteus maximus', region: 'lower', bone: 'thigh', t0: -0.06, t1: 0.24, lateral: 0, sagittal: -0.03, width: 0.066 },
   hipFlexors: { id: 'hipFlexors', label: 'Hip flexors', latin: 'musculus iliopsoas', region: 'lower', bone: 'thigh', t0: -0.04, t1: 0.34, lateral: 0, sagittal: 0.03, width: 0.036 },

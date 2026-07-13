@@ -8,6 +8,7 @@ export type BoneGroup = 'torso' | 'head' | 'arm' | 'leg';
 export const BONE_IDS = [
   'pelvis',
   'spine',
+  'thorax',
   'neck',
   'head',
   'clavicleL',

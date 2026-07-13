@@ -121,15 +121,28 @@ const HEAD: BoneRom = {
   abduct: { min: -10, max: 10, ...LATERAL },
   twist: { min: -20, max: 20, ...AXIAL },
 };
-const SPINE: BoneRom = {
-  flex: { min: -60, max: 90, ...FLEXION },
-  abduct: { min: -45, max: 45, ...LATERAL },
-  twist: { min: -45, max: 45, ...AXIAL },
+/**
+ * The trunk, in its two halves. The lumbar spine flexes and extends freely and
+ * barely rotates at all - its facets are built to resist it. The thorax is the
+ * opposite: the ribs hold it, so it bends little and rotates well. Together they
+ * come to the range the old single bone claimed, and separately they are the
+ * reason a backbend has somewhere to arch that is not the neck.
+ */
+const LUMBAR: BoneRom = {
+  flex: { min: -30, max: 60, ...FLEXION },
+  abduct: { min: -25, max: 25, ...LATERAL },
+  twist: { min: -10, max: 10, ...AXIAL },
+};
+const THORAX: BoneRom = {
+  flex: { min: -35, max: 35, ...FLEXION },
+  abduct: { min: -25, max: 25, ...LATERAL },
+  twist: { min: -35, max: 35, ...AXIAL },
 };
 
 export const ROM: Record<BoneId, BoneRom> = {
   pelvis: { flex: { min: -30, max: 30, positive: 'Anterior tilt', negative: 'Posterior tilt' }, abduct: { min: -20, max: 20, ...LATERAL }, twist: { min: -30, max: 30, ...AXIAL } },
-  spine: SPINE,
+  spine: LUMBAR,
+  thorax: THORAX,
   neck: NECK,
   head: HEAD,
   clavicleL: SHOULDER_GIRDLE,

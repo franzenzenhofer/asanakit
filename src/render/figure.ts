@@ -23,7 +23,7 @@ const JOINT_LANDMARKS = [
   'hipCenter',
 ] as const;
 
-const TORSO_BONES: readonly BoneId[] = ['pelvis', 'spine', 'neck', 'clavicleL', 'clavicleR', 'hipL', 'hipR'];
+const TORSO_BONES: readonly BoneId[] = ['pelvis', 'spine', 'thorax', 'neck', 'clavicleL', 'clavicleR', 'hipL', 'hipR'];
 
 /** A limb this far behind the torso reads as "the far side" and gets the lighter stroke. */
 const FAR_DEPTH = 0.02;

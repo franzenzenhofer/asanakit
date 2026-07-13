@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'vitest';
+import { DEFAULT_RIG } from '../../src/core/rig.js';
 import { MUSCLES, MUSCLE_IDS, muscleInstances } from '../../src/anatomy/muscles.js';
 import { CAMERA_PRESETS } from '../../src/core/camera.js';
 
@@ -7,8 +8,9 @@ const SIDE = CAMERA_PRESETS.side.azimuth;
 
 describe('muscle definitions', () => {
   test('every muscle sits on a bone the rig actually has', () => {
-    const bases = ['pelvis', 'spine', 'neck', 'head', 'clavicle', 'upperArm', 'forearm', 'hand', 'hip', 'thigh', 'shin', 'foot'];
-    for (const id of MUSCLE_IDS) expect(bases).toContain(MUSCLES[id].bone);
+    // Derived from the rig itself, so a new bone cannot be forgotten here.
+    const bases = new Set(DEFAULT_RIG.bones.map((b) => b.id.replace(/[LR]$/, '')));
+    for (const id of MUSCLE_IDS) expect([...bases]).toContain(MUSCLES[id].bone);
   });
 
   test('every muscle spans a positive length of its bone', () => {
@@ -17,10 +19,11 @@ describe('muscle definitions', () => {
 });
 
 describe('muscleInstances - facing the camera', () => {
-  test('draws a paired torso muscle on both sides of the spine', () => {
+  test('draws a paired torso muscle on both sides of the trunk', () => {
     const pecs = muscleInstances(MUSCLES.pectoralis, FRONT);
     expect(pecs).toHaveLength(2);
-    expect(pecs.map((i) => i.bone)).toEqual(['spine', 'spine']);
+    // The chest rides the ribcage, which is the thorax - not the lumbar spine under it.
+    expect(pecs.map((i) => i.bone)).toEqual(['thorax', 'thorax']);
     expect(pecs[0]?.offset).toBeCloseTo(-(pecs[1]?.offset as number), 8);
   });
 

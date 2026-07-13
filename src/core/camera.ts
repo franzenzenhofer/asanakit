@@ -10,19 +10,26 @@ export interface CameraAngles {
   readonly roll: number;
 }
 
+/**
+ * A dead-on profile is a trap: the far arm and the far leg hide EXACTLY behind
+ * the near ones, and the drawing loses half the body. So the side views are
+ * cheated a few degrees off square - the way an aircraft three-view is drawn -
+ * and the far side peeks out beside the near side instead of vanishing into it.
+ */
+const CHEAT = 6;
+
 export const CAMERA_PRESETS = {
   front: { azimuth: 0, elevation: 0, roll: 0 },
   back: { azimuth: 180, elevation: 0, roll: 0 },
-  left: { azimuth: 90, elevation: 0, roll: 0 },
-  right: { azimuth: -90, elevation: 0, roll: 0 },
-  /**
-   * The classic profile of a yoga diagram: the figure faces picture-right -
-   * turned a whisker off dead-on, so the far (left, gray) side peeks out
-   * beside the near side instead of hiding exactly behind it.
-   */
-  side: { azimuth: -78, elevation: 0, roll: 0 },
+  /** The figure's LEFT side toward you - its gray limbs near, its dark ones peeking past. */
+  left: { azimuth: 90 - CHEAT, elevation: 0, roll: 0 },
+  /** The figure's RIGHT side toward you: the classic profile of a yoga diagram. */
+  right: { azimuth: -90 + CHEAT, elevation: 0, roll: 0 },
+  /** What most poses ask for, and it is the right-side profile. */
+  side: { azimuth: -90 + CHEAT, elevation: 0, roll: 0 },
   'three-quarter': { azimuth: -45, elevation: 10, roll: 0 },
   top: { azimuth: 0, elevation: 90, roll: 0 },
+  bottom: { azimuth: 0, elevation: -90, roll: 0 },
 } as const satisfies Record<string, CameraAngles>;
 
 export type CameraPresetId = keyof typeof CAMERA_PRESETS;

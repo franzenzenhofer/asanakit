@@ -21,8 +21,8 @@ describe('buildFigureScene', () => {
     expect(names).toContain('bone:thighL');
     expect(names).toContain('bone:head');
     expect(names).toContain('joint:kneeL');
-    // 19 capsules + head + 20 joint spheres.
-    expect(names.filter((n) => n.startsWith('bone:'))).toHaveLength(20);
+    // 20 capsules + head + 20 joint spheres.
+    expect(names.filter((n) => n.startsWith("bone:"))).toHaveLength(21);
   });
 
   test('keeps the figure in solver space: y-up, feet on the floor, ~1 tall', () => {
@@ -59,7 +59,7 @@ describe('exportGlb', () => {
     const names = (gltf.nodes ?? []).map((n) => n.name);
     expect(names).toContain('bone:thighL');
     expect(names).toContain('bone:head');
-    expect(names.filter((n) => n?.startsWith('bone:'))).toHaveLength(20);
+    expect(names.filter((n) => n?.startsWith("bone:"))).toHaveLength(21);
   });
 
   test('is deterministic: the same skeleton exports identical bytes', async () => {

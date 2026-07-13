@@ -77,7 +77,7 @@ const solveBone = (
 const landmarksOf = (b: Record<BoneId, BoneSegment>): Record<LandmarkId, Vec3> => ({
   hipCenter: b.pelvis.start,
   waist: b.pelvis.end,
-  chest: b.spine.end,
+  chest: b.thorax.end,
   neckBase: b.neck.start,
   headCenter: midpoint3(b.head.start, b.head.end),
   headTop: b.head.end,

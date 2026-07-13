@@ -178,28 +178,31 @@
 .view-toggle button.active { background: var(--ink); color: var(--paper); box-shadow: none; }
 .view-toggle svg { width: 17px; height: 17px; flex-shrink: 0; }
 
-/* One camera, both views - so it is worth saying where it is. */
-.angle-readout {
+/* One camera, both views - so the standard views sit over both of them. */
+.camera-bar {
   position: absolute;
-  top: 10px;
-  right: 50%;
-  transform: translateX(50%);
-  display: inline-flex;
-  align-items: center;
-  min-height: 36px;
-  padding: 6px 14px;
-  border-radius: 999px;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  z-index: 2;
+  padding: 0 10px;
+  pointer-events: none;
+}
+.camera-bar .chips {
+  justify-content: center;
+  pointer-events: auto;
+  padding: 2px 4px;
+}
+.camera-bar .chip {
   background: var(--paper-raised);
-  color: var(--ink-soft);
+  box-shadow: var(--shadow);
+  min-height: 36px;
+  padding: 6px 13px;
   font-size: 13px;
   font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  text-transform: capitalize;
-  box-shadow: var(--shadow);
-  z-index: 2;
-  white-space: nowrap;
 }
-.angle-readout:active { background: var(--paper-sunken); }
+.camera-bar .chip.active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.angle-readout { font-variant-numeric: tabular-nums; }
 
 .lint-chips { position: absolute; left: 10px; top: 10px; display: flex; flex-direction: column; gap: 6px; z-index: 2; max-width: 75%; }
 .lint-chip {
