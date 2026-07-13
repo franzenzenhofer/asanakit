@@ -35,9 +35,20 @@ export const landmarkOfMesh = (mesh: Mesh): LandmarkId | null => {
   return isLandmarkId(id) ? id : null;
 };
 
-/** Everything a pick or an aim needs to know about the view. */
+/**
+ * Everything a pick or an aim needs to know about the view. The rect is spelled
+ * out rather than taken as a DOMRect, so this module says what it needs and can
+ * be reasoned about - and tested - without a browser in the room.
+ */
+export interface ViewRect {
+  readonly left: number;
+  readonly top: number;
+  readonly width: number;
+  readonly height: number;
+}
+
 export interface PickContext {
-  readonly rect: DOMRect;
+  readonly rect: ViewRect;
   readonly camera: Camera;
   readonly figure: Group;
 }
