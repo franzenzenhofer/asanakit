@@ -30,7 +30,20 @@ export default defineConfig({
     posesPlugin(),
     VitePWA({
       registerType: 'autoUpdate',
-      workbox: { globPatterns: ['**/*.{js,css,html,png,svg}'], maximumFileSizeToCacheInBytes: 4_000_000 },
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,png,svg}'],
+        maximumFileSizeToCacheInBytes: 4_000_000,
+        // Without this, a stale worker can go on serving an index.html whose
+        // hashed assets we have already deleted from the server - and the app
+        // boots to a white screen. Take the old caches with the old worker.
+        cleanupOutdatedCaches: true,
+        clientsClaim: true,
+        skipWaiting: true,
+        // Never answer a request for a hashed chunk with the app shell. Pages
+        // serves index.html for anything it does not have, and a worker that
+        // caches THAT as if it were the JS will hand it back forever.
+        navigateFallbackDenylist: [/^\/assets\//],
+      },
       manifest: {
         name: 'asanakit Studio',
         short_name: 'asanakit',

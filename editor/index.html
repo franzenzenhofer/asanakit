@@ -17,6 +17,54 @@
 </head>
 <body>
   <div id="app"></div>
+  <!--
+    The white-screen guard, and it has to live HERE, in the page, not in the
+    bundle: the failure it exists to catch is the bundle not loading at all.
+
+    Studio is a PWA, so a returning visitor can be holding a service worker from
+    an older deploy. If that worker's cache and the page's script tags disagree
+    about which hashed chunk to load, the module never arrives and the app boots
+    to nothing - a white screen that nobody reports, they just decide it is
+    broken. So: if a script or stylesheet fails, or the app is still empty after
+    load, throw away every worker and every cache and reload ONCE. The flag makes
+    it once; a reload loop would be worse than the bug it fixes.
+  -->
+  <script>
+    (function () {
+      var FLAG = 'asanakit.recovered';
+      var recovering = false;
+
+      function recover() {
+        if (recovering || sessionStorage.getItem(FLAG)) return;
+        recovering = true;
+        sessionStorage.setItem(FLAG, '1');
+        var reload = function () { location.reload(); };
+        Promise.resolve()
+          .then(function () {
+            return navigator.serviceWorker ? navigator.serviceWorker.getRegistrations() : [];
+          })
+          .then(function (regs) {
+            return Promise.all((regs || []).map(function (r) { return r.unregister(); }));
+          })
+          .then(function () { return window.caches ? caches.keys() : []; })
+          .then(function (keys) {
+            return Promise.all((keys || []).map(function (k) { return caches.delete(k); }));
+          })
+          .then(reload, reload);
+      }
+
+      window.addEventListener('error', function (event) {
+        var el = event.target;
+        if (el && (el.tagName === 'SCRIPT' || el.tagName === 'LINK')) recover();
+      }, true);
+
+      window.addEventListener('load', function () {
+        var app = document.getElementById('app');
+        if (app && app.children.length === 0) recover();
+        else sessionStorage.removeItem(FLAG);
+      });
+    })();
+  </script>
   <script type="module" src="/app/main.tsx"></script>
 </body>
 </html>
