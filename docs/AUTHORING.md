@@ -90,9 +90,10 @@ numbers with L and R swapped - which is what `mirror: true` does.
 | forearm pronation / supination | `forearmL: { internalRotation: … }` / `{ externalRotation: … }` |
 | scapular elevation (shrug) | `clavicleL: { abduct: … }` |
 | scapular protraction / retraction | `clavicleL: { flex: … }` / `{ extend: … }` |
-| spinal flexion (forward fold) / extension (backbend) | `spine: { flex: … }` / `{ extend: … }` |
+| lumbar flexion (forward fold) / extension (backbend) | `spine: { flex: … }` / `{ extend: … }` |
+| thoracic extension (the arch of a backbend) | `thorax: { extend: … }` |
 | spinal lateral flexion (side bend) | `spine: { abduct: … }` (positive = toward the figure's left) |
-| spinal / cervical rotation (twist) | `spine: { twist: … }`, `neck: { twist: … }` |
+| spinal / cervical rotation (twist) | `thorax: { twist: … }`, `neck: { twist: … }` |
 | hip abduction / adduction | `thighL: { abduct: … }` / `{ adduct: … }` |
 
 ### The root
@@ -109,10 +110,21 @@ root:
 ## Bones you can angle
 
 ```
-pelvis  spine  neck  head
+pelvis  spine  thorax  neck  head
 clavicleL/R  upperArmL/R  forearmL/R  handL/R
 hipL/R  thighL/R  shinL/R  footL/R
 ```
+
+**The trunk is two bones.** `spine` is the lumbar segment and `thorax` is the ribcage
+above it, and the difference is not decoration: with one bone from pelvis to chest, a
+deep backbend has no thoracic arch to spend its curve on and spends it in the NECK
+instead. Arch the thorax and the ribcage carries it, which is what a ribcage is for.
+The lumbar spine flexes and extends freely and barely rotates; the thorax is the
+opposite, because ribs. `lint` checks the neck against the thorax, not against the
+lumbar spine below it.
+
+A pose that says nothing about the thorax gets a thorax in line with the spine, which
+is exactly the figure it would have drawn before - so nothing needs re-authoring.
 
 Rotating a bone rotates everything below it. Feet rest pointing forward, dropped 20°
 toward the floor; a **flat standing foot wants `world: { azimuth: …, elevation: 0 }`**
@@ -133,9 +145,14 @@ hipJointL/R kneeL/R ankleL/R toeL/R
 The pose is 3D; a picture of it needs a viewpoint:
 
 ```yaml
-camera: side                              # or front | back | left | right | three-quarter | top
+camera: side                              # front | back | left | right | side | three-quarter | top | bottom
 camera: { azimuth: 30, elevation: 15 }    # or any orbit angle
 ```
+
+The side views (`left`, `right`, `side`) are cheated **6° off square**, the way an
+aircraft three-view is drawn: a dead-on profile hides the far arm and the far leg
+exactly behind the near ones and loses half the body. An exact profile is one number
+away - `camera: { azimuth: -90 }`.
 
 This is only the pose's **default**. `--camera` on the CLI overrides it, and every camera
 shows the same body: `asanakit render pose --camera back` needs nothing re-authored.

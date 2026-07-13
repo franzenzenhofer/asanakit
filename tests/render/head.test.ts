@@ -50,7 +50,8 @@ const noseLength = (svg: string): number => {
   return Math.hypot(Number(m[3]) - Number(m[1]), Number(m[4]) - Number(m[2]));
 };
 
-const headCx = (svg: string): number => Number(/data-part="head" cx="([-\d.]+)"/.exec(svg)?.[1]);
+/** The head is a DRAWN path now, so its centre is read off the nose stroke, which starts there. */
+const headCx = (svg: string): number => Number(/data-part="nose" x1="([-\d.]+)"/.exec(svg)?.[1]);
 
 describe('the head looks somewhere, and the drawing says where', () => {
   test('facing the camera: the nose foreshortens to a mark, and there is no shade', () => {

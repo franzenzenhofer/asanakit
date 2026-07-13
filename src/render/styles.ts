@@ -8,6 +8,12 @@ export interface Style {
   readonly label: string;
   readonly background: string;
   readonly padding: number;
+  /**
+   * How much of a HAND is in the line. 0 is a ruler - a technical projection.
+   * 1 is a pen held loosely. The 2D view is a drawing, not a screenshot of the
+   * model, so the default is not 0.
+   */
+  readonly hand: number;
   readonly figure: {
     readonly stroke: string;
     /** Left-side bones take this stroke, so a profile tells left from right. */
@@ -83,6 +89,7 @@ const stick: Style = {
   label: 'Stick figure',
   background: '#ffffff',
   padding: 0.12,
+  hand: 0.8,
   figure: {
     stroke: '#111111',
     strokeLeft: '#6b6b6b',

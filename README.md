@@ -15,7 +15,7 @@ npx @franzenzenhofer/asanakit gltf navasana -o boat.glb            # a model any
 npx @franzenzenhofer/asanakit sheet --sequence ashtanga-primary -o primary-series.png --columns 6 --numbered
 ```
 
-Every pose solves to a real **3D skeleton** (quaternion forward kinematics over a 20-bone
+Every pose solves to a real **3D skeleton** (quaternion forward kinematics over a 21-bone
 rig). The 2D pictures are camera projections of that solve - front, back, side, any azimuth
 and elevation - rendered without a browser or a GPU, byte-identical on every machine. It
 ships with a **121-pose library** - the full Ashtanga Primary Series plus standing, seated,
@@ -47,7 +47,7 @@ datasets give you keypoints scraped from photos, with no joint angles, no licenc
 use, and no way to say "now bend that knee ten degrees more". 3D mannequin tools are GPL,
 or need a GPU, or both.
 
-asanakit takes the third path: a **20-bone 3D kinematic rig** plus a **declarative pose
+asanakit takes the third path: a **21-bone 3D kinematic rig** plus a **declarative pose
 format**. The posture is the data. Every picture - flat or interactive - is a pure
 function of it.
 
@@ -57,7 +57,7 @@ function of it.
   anatomical vocabulary (`flex`/`extend`, `abduct`/`adduct`, `twist` or
   `internalRotation`/`externalRotation`), absolute bone directions (`azimuth` /
   `elevation`), a default camera, 3D props, annotations, muscle activation, teaching cues.
-- **3D forward kinematics** over a 20-bone humanoid rig with anatomical proportions. The
+- **3D forward kinematics** over a 21-bone humanoid rig with anatomical proportions. The
   rotation axes live in the rig as data, so left and right are exact mirrors by construction.
 - **Any-angle 2D rendering.** Orthographic camera, depth-sorted painter's algorithm,
   deterministic SVG/PNG with `data-bone` / `data-muscle` / `data-annotation` hooks. No GPU.

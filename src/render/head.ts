@@ -20,6 +20,7 @@ import type { Vec2 } from '../core/vec2.js';
 import type { Vec3 } from '../core/vec3.js';
 import { viewQuat } from './camera.js';
 import type { RenderContext } from './context.js';
+import { drawnEllipse } from './hand.js';
 import { el, group, num, type SvgNode } from './svg.js';
 
 /** Below this the head is edge-on to the shade's own axis, and the terminator is drawn as a straight edge. */
@@ -92,12 +93,11 @@ export const renderHead = (ctx: RenderContext): SvgNode | null => {
   const rotation = 90 - bone.worldAngle;
   const spin = rotation === 0 ? '' : ` rotate(${num(rotation)})`;
 
-  const skull = el('ellipse', {
+  // Drawn, not struck with a compass: a skull on paper is round the way a drawn
+  // skull is round, which is nearly.
+  const skull = el('path', {
     'data-part': 'head',
-    cx,
-    cy,
-    rx,
-    ry,
+    d: drawnEllipse({ centre: [cx, cy], radii: [rx, ry], rotation }, style.hand),
     transform: rotation === 0 ? undefined : `rotate(${num(rotation)} ${num(cx)} ${num(cy)})`,
     fill: style.head.fill,
     stroke: style.head.stroke,

@@ -8,6 +8,7 @@ import type { Anchor, Prop } from '../model/schema.js';
 import { BOARD_WIDTH_RATIO, matModel, type MatProp } from '../props/geometry.js';
 import { viewQuat, type ViewSkeleton } from './camera.js';
 import type { RenderContext } from './context.js';
+import { drawnPolygon } from './hand.js';
 import { boundsOfPoints, type Projection } from './project.js';
 import { el, group, num, type SvgNode } from './svg.js';
 
@@ -89,16 +90,9 @@ const boardOutline = (centre: Vec2, length: number, rotationDeg: number, width?:
   return local.map((p) => add(centre, rotate(p, rotationDeg)));
 };
 
-const polygon = (points: readonly Vec2[], proj: Projection): string => {
-  const p = path();
-  points.forEach((pt, i) => {
-    const [px, py] = proj.p(pt);
-    if (i === 0) p.moveTo(num(px), num(py));
-    else p.lineTo(num(px), num(py));
-  });
-  p.closePath();
-  return p.toString();
-};
+/** Props are drawn too - a mat on paper was drawn on paper. */
+const polygon = (points: readonly Vec2[], proj: Projection, hand = 0): string =>
+  drawnPolygon(points.map((pt) => proj.p(pt)), hand);
 
 const propPoints = (prop: Prop, skeleton: ViewSkeleton): Vec2[] => {
   const cx = WORLD_X;
@@ -155,7 +149,7 @@ const renderProp = (prop: Prop, ctx: RenderContext): SvgNode => {
       // a camera, and the camera already told you which way you are looking.
       return el('path', {
         'data-prop': 'mat',
-        d: polygon(matFace(prop, skeleton).corners, proj),
+        d: polygon(matFace(prop, skeleton).corners, proj, style.hand),
         fill: style.props.fill,
         ...attrs,
         'stroke-linejoin': 'round',

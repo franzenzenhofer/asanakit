@@ -17,7 +17,7 @@ If the renderer is wrong, there is a test missing.
 ## Doctrine: one 3D core, no legacy paths
 
 - The **3D skeleton is the single source of truth**. Every pose solves to a real 3D skeleton
-  (quaternion forward kinematics over the 20-bone rig).
+  (quaternion forward kinematics over the 21-bone rig).
 - **2D output is always a camera projection of the 3D solve** — front, back, side, or any
   azimuth/elevation. Never add view-specific hacks (foreshortening factors, per-view sign flips,
   fake depth) to make a single angle look right; fix the rig, the pose, or the projection.
@@ -39,7 +39,7 @@ npx tsx src/cli/index.ts lint    # every bundled pose must be anatomically sound
 
 | Path | Responsibility |
 |---|---|
-| `src/core` | vec3/quat math, the 20-bone 3D rig, joint rotations (flex/abduct/twist), the quaternion FK solver. Pure. |
+| `src/core` | vec3/quat math, the 21-bone 3D rig, joint rotations (flex/abduct/twist), the quaternion FK solver. Pure. |
 | `src/model` | the pose/sequence schema v2 (zod), parsing, mirroring |
 | `src/anatomy` | muscle definitions, and the validator that rejects impossible bodies |
 | `src/render` | camera + orthographic projection, depth-sorted SVG layers (figure, muscles, props, annotations), styles, rasterising |

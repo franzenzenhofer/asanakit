@@ -3,6 +3,7 @@ import type { BoneId } from '../core/types.js';
 import type { Vec2 } from '../core/vec2.js';
 import type { ViewBone, ViewSkeleton } from './camera.js';
 import type { RenderContext } from './context.js';
+import { drawnLine } from './hand.js';
 import { renderHead } from './head.js';
 import { el, group, type SvgNode } from './svg.js';
 
@@ -41,17 +42,14 @@ const torsoDepth = (skeleton: ViewSkeleton): number => {
   return depths.reduce((sum, d) => sum + d, 0) / depths.length;
 };
 
+/** A bone, struck as a drawn stroke rather than ruled between two points. */
 const boneLine = (bone: ViewBone, farOpacity: number | undefined, ctx: RenderContext): SvgNode => {
   const { proj, style } = ctx;
-  const [x1, y1] = proj.p(bone.start);
-  const [x2, y2] = proj.p(bone.end);
-  return el('line', {
+  return el('path', {
     'data-bone': bone.id,
     'data-side': bone.side,
-    x1,
-    y1,
-    x2,
-    y2,
+    d: drawnLine(proj.p(bone.start), proj.p(bone.end), style.hand),
+    fill: 'none',
     stroke: bone.side === 'left' ? style.figure.strokeLeft : style.figure.stroke,
     'stroke-width': style.figure.strokeWidth * proj.s,
     'stroke-linecap': style.figure.lineCap,
