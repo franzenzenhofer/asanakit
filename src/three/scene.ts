@@ -43,8 +43,11 @@ const DEFAULT_COLOR = '#1a1a1a';
 const LEFT_COLOR = '#6b6b6b';
 const ENGAGED_COLOR = '#c0392b';
 const STRETCHED_COLOR = '#2471a3';
-/** The back of the skull, so you can tell at a glance which way the figure looks. */
-const OCCIPUT_COLOR = '#5c5c5c';
+/**
+ * The back of the skull, in a light grey against the dark head - so in 3D, as on
+ * paper, you can see at a glance which way the figure is looking.
+ */
+const OCCIPUT_COLOR = '#c8c8c8';
 
 const REST_AXIS = new Vector3(0, 1, 0);
 
@@ -112,10 +115,14 @@ const headMesh = (skeleton: Skeleton, mat: MeshStandardMaterial, shadeMat: MeshS
   skull.name = 'head:skull';
   skull.scale.set(0.82, 1.18, 0.9); // An ellipsoid skull, not a ball.
 
-  // The back of the skull, a hemisphere facing away from the nose, a hair proud
-  // of the surface so it reads as hair rather than z-fighting with it.
+  // The back of the skull, a hemisphere facing away from the nose, a hair proud of
+  // the surface so it reads as hair rather than z-fighting with it.
+  //
+  // three's sphere puts z = sin(phi), and the face looks along +z - so the BACK of
+  // the head is the half where sin(phi) is negative, which is phi from PI to 2*PI.
+  // Starting at PI/2 (as this did) greys the figure's left ear instead.
   const occiput = new Mesh(
-    new SphereGeometry(r * 1.01, SPHERE_SEGMENTS.width, SPHERE_SEGMENTS.height, Math.PI / 2, Math.PI),
+    new SphereGeometry(r * 1.01, SPHERE_SEGMENTS.width, SPHERE_SEGMENTS.height, Math.PI, Math.PI),
     shadeMat,
   );
   occiput.name = 'head:occiput';

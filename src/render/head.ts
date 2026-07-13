@@ -75,6 +75,28 @@ const occiputPath = (dir: Vec2, toward: number): string => {
 };
 
 /**
+ * Carry a picture-space direction back into the circle the shade is authored on.
+ *
+ * The shade is drawn on a unit circle and carried onto the skull by the same
+ * transform that draws the skull, so its outer edge follows the head outline
+ * exactly, whatever the style's proportions. Which means the FACING has to travel
+ * the other way first: undo the spin, then undo the stretch. Hand that transform
+ * a picture-space direction instead, and it spins it a SECOND time - which is how
+ * the back of the head ends up on top of the head.
+ */
+const intoSkullFrame = (dir: Vec2, rotation: number, { radii }: { radii: Vec2 }): Vec2 => {
+  const rad = (rotation * Math.PI) / 180;
+  const [dx, dy] = dir;
+  const [rx, ry] = radii;
+  const local: Vec2 = [
+    (dx * Math.cos(rad) + dy * Math.sin(rad)) / rx,
+    (-dx * Math.sin(rad) + dy * Math.cos(rad)) / ry,
+  ];
+  const length = Math.hypot(local[0], local[1]);
+  return length < FLAT ? [1, 0] : [local[0] / length, local[1] / length];
+};
+
+/**
  * The head: the skull and the shade over the back of it. One group, one depth -
  * they are the same object, and nothing ever sorts between them.
  */
@@ -124,14 +146,11 @@ export const renderHead = (ctx: RenderContext): SvgNode | null => {
 
   const nodes: SvgNode[] = [skull];
 
-  // The shade is drawn on a unit circle and carried onto the skull by the same
-  // transform that would draw the skull itself, so its outer edge always follows
-  // the head outline exactly, whatever the style's proportions.
   if (face.toward < 1 - FLAT) {
     nodes.push(
       el('path', {
         'data-part': 'occiput',
-        d: occiputPath(face.dir, face.toward),
+        d: occiputPath(intoSkullFrame(face.dir, rotation, ellipse), face.toward),
         transform: `translate(${num(cx)} ${num(cy)})${spin} scale(${num(rx)} ${num(ry)})`,
         fill: style.head.shade,
         opacity: style.head.shadeOpacity,

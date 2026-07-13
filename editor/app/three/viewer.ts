@@ -6,7 +6,7 @@ import type { CameraAngles } from '@asanakit/core/camera.js';
 import type { BoneId, Skeleton } from '@asanakit/core/types.js';
 import type { Prop } from '@asanakit/model/schema.js';
 import { buildFigureScene } from '@asanakit/three/scene.js';
-import { aimFromPointer, boneOfMesh, pickBone, type AimAngles } from './pick.js';
+import { aimFromPointer, boneOfMesh, jointOfMesh, pickBone, type AimAngles } from './pick.js';
 
 export interface ViewerCallbacks {
   /** A bone was tapped (null: empty space, clears the selection). */
@@ -125,7 +125,9 @@ export const createViewer = (mount: HTMLElement, callbacks: ViewerCallbacks = {}
     if (figure === null || selected === null) return;
     for (const child of figure.children) {
       const mesh = child as Mesh;
-      if (boneOfMesh(mesh) !== selected) continue;
+      // The bone AND the joint at the end of it: the handle you are holding lights
+      // up along with the thing it moves.
+      if (boneOfMesh(mesh) !== selected && jointOfMesh(mesh) !== selected) continue;
       const material = mesh.material as MeshStandardMaterial;
       originals.set(mesh, material);
       const lit = material.clone();

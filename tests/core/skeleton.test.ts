@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 import { DEFAULT_RIG } from '../../src/core/rig.js';
-import { solveSkeleton } from '../../src/core/skeleton.js';
-import type { KinematicPose } from '../../src/core/types.js';
+import { boneEndingAt, solveSkeleton } from '../../src/core/skeleton.js';
+import { LANDMARK_IDS, type KinematicPose } from '../../src/core/types.js';
 
 const pose = (over: Partial<KinematicPose> = {}): KinematicPose => ({
   root: { position: [0, 0, 0], yaw: 0, pitch: 0, roll: 0, scale: 1 },
@@ -204,5 +204,50 @@ describe('solveSkeleton - determinism', () => {
   test('the same pose always solves to identical geometry', () => {
     const p = pose({ joints: { upperArmL: { flex: 33, abduct: 21, twist: 8 }, shinR: 47 }, grounded: true });
     expect(solveSkeleton(p, DEFAULT_RIG)).toEqual(solveSkeleton(p, DEFAULT_RIG));
+  });
+});
+
+describe('joints are handles: grab one, and what hangs off it comes along', () => {
+  test('a joint moves the bone that ENDS there', () => {
+    // Pull the knee and you are aiming the thigh - which is what a knee is.
+    expect(boneEndingAt('kneeL')).toBe('thighL');
+    expect(boneEndingAt('ankleR')).toBe('shinR');
+    expect(boneEndingAt('elbowL')).toBe('upperArmL');
+    expect(boneEndingAt('wristR')).toBe('forearmR');
+    expect(boneEndingAt('shoulderL')).toBe('clavicleL');
+    expect(boneEndingAt('chest')).toBe('thorax');
+  });
+
+  test('a landmark that ends nothing is not a handle', () => {
+    expect(boneEndingAt('hipCenter')).toBeNull();
+    expect(boneEndingAt('neckBase')).toBeNull();
+    expect(boneEndingAt('headCenter')).toBeNull();
+  });
+
+  test('every handle really is at the end of the bone it claims', () => {
+    const skeleton = solveSkeleton(
+      { root: { position: [0, 0, 0], yaw: 0, pitch: 0, roll: 0, scale: 1 }, joints: { thighL: { flex: 40 }, upperArmR: { abduct: 60 } }, world: {}, grounded: false },
+      DEFAULT_RIG,
+    );
+    for (const id of LANDMARK_IDS) {
+      const bone = boneEndingAt(id);
+      if (bone === null) continue;
+      expect(skeleton.landmarks[id]).toEqual(skeleton.bones[bone].end);
+    }
+  });
+
+  test('aiming the bone a joint holds carries the whole limb below it', () => {
+    const at = (flex: number) =>
+      solveSkeleton(
+        { root: { position: [0, 0, 0], yaw: 0, pitch: 0, roll: 0, scale: 1 }, joints: { thighL: { flex } }, world: {}, grounded: false },
+        DEFAULT_RIG,
+      );
+    const straight = at(0);
+    const raised = at(60);
+
+    // The knee is the handle; the ankle and the toes hang off it and must follow.
+    expect(raised.landmarks.kneeL).not.toEqual(straight.landmarks.kneeL);
+    expect(raised.landmarks.ankleL).not.toEqual(straight.landmarks.ankleL);
+    expect(raised.landmarks.toeL).not.toEqual(straight.landmarks.toeL);
   });
 });

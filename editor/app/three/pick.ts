@@ -1,8 +1,10 @@
 import { Plane, Raycaster, Vector2, Vector3, type Camera, type Group, type Mesh } from 'three';
-import type { BoneId } from '@asanakit/core/types.js';
-import { BONE_IDS } from '@asanakit/core/types.js';
+import { boneEndingAt } from '@asanakit/core/skeleton.js';
+import type { BoneId, LandmarkId } from '@asanakit/core/types.js';
+import { BONE_IDS, LANDMARK_IDS } from '@asanakit/core/types.js';
 
 const isBoneId = (value: string): value is BoneId => (BONE_IDS as readonly string[]).includes(value);
+const isLandmarkId = (value: string): value is LandmarkId => (LANDMARK_IDS as readonly string[]).includes(value);
 
 /** `bone:<id>` mesh names come from buildFigureScene; everything else is not pickable. */
 export const boneOfMesh = (mesh: Mesh): BoneId | null => {
@@ -10,6 +12,27 @@ export const boneOfMesh = (mesh: Mesh): BoneId | null => {
   if (!name.startsWith('bone:')) return null;
   const id = name.slice(5);
   return isBoneId(id) ? id : null;
+};
+
+/**
+ * A JOINT is a handle. Taking hold of the knee and pulling it is exactly aiming
+ * the thigh - and the shin, the foot and the toes come with it, because they hang
+ * off the thigh and that is what forward kinematics does. So a joint sphere picks
+ * the bone that ENDS there, and the rest of the limb follows for free.
+ */
+export const jointOfMesh = (mesh: Mesh): BoneId | null => {
+  const name = mesh.name;
+  if (!name.startsWith('joint:')) return null;
+  const id = name.slice(6);
+  return isLandmarkId(id) ? boneEndingAt(id) : null;
+};
+
+/** The joint the mesh IS, for highlighting the handle you are holding. */
+export const landmarkOfMesh = (mesh: Mesh): LandmarkId | null => {
+  const name = mesh.name;
+  if (!name.startsWith('joint:')) return null;
+  const id = name.slice(6);
+  return isLandmarkId(id) ? id : null;
 };
 
 /** Everything a pick or an aim needs to know about the view. */
@@ -32,7 +55,15 @@ const setRay = (x: number, y: number, context: PickContext): void => {
 
 const castAt = (x: number, y: number, context: PickContext): BoneId | null => {
   setRay(x, y, context);
-  for (const hit of raycaster.intersectObjects(context.figure.children, false)) {
+  const hits = raycaster.intersectObjects(context.figure.children, false);
+
+  // A joint sits ON its bones, so it wins: if your finger is over a knee you meant
+  // the knee, not whichever of the thigh and the shin happens to be nearer the eye.
+  for (const hit of hits) {
+    const joint = jointOfMesh(hit.object as Mesh);
+    if (joint !== null) return joint;
+  }
+  for (const hit of hits) {
     const bone = boneOfMesh(hit.object as Mesh);
     if (bone !== null) return bone;
   }

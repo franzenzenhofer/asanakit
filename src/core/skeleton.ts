@@ -74,30 +74,59 @@ const solveBone = (
   };
 };
 
-const landmarksOf = (b: Record<BoneId, BoneSegment>): Record<LandmarkId, Vec3> => ({
-  hipCenter: b.pelvis.start,
-  waist: b.pelvis.end,
-  chest: b.thorax.end,
-  neckBase: b.neck.start,
-  headCenter: midpoint3(b.head.start, b.head.end),
-  headTop: b.head.end,
-  shoulderL: b.clavicleL.end,
-  elbowL: b.upperArmL.end,
-  wristL: b.forearmL.end,
-  handTipL: b.handL.end,
-  shoulderR: b.clavicleR.end,
-  elbowR: b.upperArmR.end,
-  wristR: b.forearmR.end,
-  handTipR: b.handR.end,
-  hipJointL: b.hipL.end,
-  kneeL: b.thighL.end,
-  ankleL: b.shinL.end,
-  toeL: b.footL.end,
-  hipJointR: b.hipR.end,
-  kneeR: b.thighR.end,
-  ankleR: b.shinR.end,
-  toeR: b.footR.end,
-});
+/**
+ * Where each landmark lives on the skeleton: which bone, and which end of it.
+ *
+ * This is a table and not twenty-two expressions because something else needs to
+ * read it backwards. A landmark that is a bone's END is a JOINT you can take hold
+ * of and drag: pulling the knee is exactly aiming the thigh, and everything below
+ * the knee comes along on its own, because that is what forward kinematics is.
+ * `boneEndingAt` is that question, answered from this same table - so the thing
+ * you grab and the thing that moves can never disagree.
+ */
+const LANDMARK_AT: Record<LandmarkId, { readonly bone: BoneId; readonly at: 'start' | 'end' | 'middle' }> = {
+  hipCenter: { bone: 'pelvis', at: 'start' },
+  waist: { bone: 'pelvis', at: 'end' },
+  chest: { bone: 'thorax', at: 'end' },
+  neckBase: { bone: 'neck', at: 'start' },
+  headCenter: { bone: 'head', at: 'middle' },
+  headTop: { bone: 'head', at: 'end' },
+  shoulderL: { bone: 'clavicleL', at: 'end' },
+  elbowL: { bone: 'upperArmL', at: 'end' },
+  wristL: { bone: 'forearmL', at: 'end' },
+  handTipL: { bone: 'handL', at: 'end' },
+  shoulderR: { bone: 'clavicleR', at: 'end' },
+  elbowR: { bone: 'upperArmR', at: 'end' },
+  wristR: { bone: 'forearmR', at: 'end' },
+  handTipR: { bone: 'handR', at: 'end' },
+  hipJointL: { bone: 'hipL', at: 'end' },
+  kneeL: { bone: 'thighL', at: 'end' },
+  ankleL: { bone: 'shinL', at: 'end' },
+  toeL: { bone: 'footL', at: 'end' },
+  hipJointR: { bone: 'hipR', at: 'end' },
+  kneeR: { bone: 'thighR', at: 'end' },
+  ankleR: { bone: 'shinR', at: 'end' },
+  toeR: { bone: 'footR', at: 'end' },
+};
+
+/**
+ * The bone a joint moves when you take hold of it. Null for the few landmarks
+ * that are not the end of anything - you cannot drag the top of a head anywhere
+ * the head is not already going.
+ */
+export const boneEndingAt = (landmark: LandmarkId): BoneId | null => {
+  const source = LANDMARK_AT[landmark];
+  return source.at === 'end' ? source.bone : null;
+};
+
+const landmarksOf = (b: Record<BoneId, BoneSegment>): Record<LandmarkId, Vec3> =>
+  Object.fromEntries(
+    Object.entries(LANDMARK_AT).map(([id, { bone, at }]) => {
+      const segment = b[bone];
+      const point = at === 'start' ? segment.start : at === 'end' ? segment.end : midpoint3(segment.start, segment.end);
+      return [id, point];
+    }),
+  ) as Record<LandmarkId, Vec3>;
 
 const boundsOf = (points: readonly Vec3[]): Bounds3 => ({
   minX: Math.min(...points.map((p) => p[0])),
