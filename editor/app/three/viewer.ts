@@ -15,6 +15,10 @@ export interface ViewerCallbacks {
   readonly onAim?: (bone: BoneId, angles: AimAngles) => void;
   /** The aim gesture ended - close the undo step. */
   readonly onAimEnd?: () => void;
+  /** The orbit moved. There is one camera in this app, and this is how it gets written. */
+  readonly onOrbit?: (angles: { azimuth: number; elevation: number }) => void;
+  /** The orbit gesture ended - close the undo step. */
+  readonly onOrbitEnd?: () => void;
 }
 
 export interface ViewerHandle {
@@ -22,6 +26,14 @@ export interface ViewerHandle {
   setSelected(bone: BoneId | null): void;
   /** The orbit camera's current angles, in the render camera's orbit convention. */
   getAngles(): { azimuth: number; elevation: number };
+  /** Drive the orbit FROM the document - the other half of "one camera". */
+  setAngles(angles: { azimuth: number; elevation: number }): void;
+  /**
+   * Roll the picture. OrbitControls owns `camera.up`, so rolling the camera
+   * there would break its own azimuth/polar maths; rotating the image plane
+   * about the view axis is the same thing and costs nothing.
+   */
+  setRoll(degrees: number): void;
   dispose(): void;
 }
 
@@ -71,7 +83,10 @@ export const createViewer = (mount: HTMLElement, callbacks: ViewerCallbacks = {}
 
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.target.copy(TARGET);
-  controls.enableDamping = true;
+  // No damping: the orbit IS the document's camera, and a camera that keeps
+  // drifting after the finger lifts would keep rewriting the pose after the
+  // undo step has closed.
+  controls.enableDamping = false;
   controls.maxDistance = 8;
   controls.minDistance = 0.4;
 
@@ -80,7 +95,23 @@ export const createViewer = (mount: HTMLElement, callbacks: ViewerCallbacks = {}
   let selected: BoneId | null = null;
   let drag: DragState | null = null;
   let disposed = false;
+  /** True while the document is driving the orbit, so we do not echo it straight back. */
+  let applying = false;
   const originals = new Map<Mesh, MeshStandardMaterial>();
+
+  const currentAngles = (): { azimuth: number; elevation: number } => ({
+    azimuth: Math.round(controls.getAzimuthalAngle() * DEG),
+    elevation: Math.round(90 - controls.getPolarAngle() * DEG),
+  });
+
+  controls.addEventListener('change', () => {
+    if (applying) return;
+    callbacks.onOrbit?.(currentAngles());
+  });
+  controls.addEventListener('end', () => {
+    if (applying) return;
+    callbacks.onOrbitEnd?.();
+  });
 
   const clearHighlight = (): void => {
     for (const [mesh, material] of originals) mesh.material = material;
@@ -179,11 +210,20 @@ export const createViewer = (mount: HTMLElement, callbacks: ViewerCallbacks = {}
       selected = bone;
       applyHighlight();
     },
-    getAngles(): { azimuth: number; elevation: number } {
-      return {
-        azimuth: Math.round(controls.getAzimuthalAngle() * DEG),
-        elevation: Math.round(90 - controls.getPolarAngle() * DEG),
-      };
+    getAngles: currentAngles,
+    setAngles({ azimuth, elevation }): void {
+      applying = true;
+      camera.position
+        .setFromSphericalCoords(camera.position.distanceTo(controls.target), (90 - elevation) * RAD, azimuth * RAD)
+        .add(controls.target);
+      controls.update();
+      applying = false;
+    },
+    setRoll(degrees): void {
+      const r = Math.abs(degrees % 180) * RAD;
+      // Grow the canvas enough that its corners never swing into view.
+      const cover = Math.abs(Math.cos(r)) + Math.abs(Math.sin(r));
+      renderer.domElement.style.transform = `rotate(${-degrees}deg) scale(${cover.toFixed(4)})`;
     },
     dispose(): void {
       disposed = true;

@@ -4,20 +4,24 @@ import { resolveCamera } from '@asanakit/core/camera.js';
 import { DEFAULT_RIG } from '@asanakit/core/rig.js';
 import { solveSkeleton } from '@asanakit/core/skeleton.js';
 import { resolveFigure } from '@asanakit/model/index.js';
-import { commitGesture, dispatch, pose, selectedBone, view } from '../state/doc.js';
+import { commitGesture, dispatch, pose, selectedBone } from '../state/doc.js';
 import { parsed } from '../state/preview.js';
 import type { ViewerHandle } from '../three/viewer.js';
-import { AngleIcon } from '../ui/icons.js';
 
 /**
- * The 3D posing surface: three.js loads lazily, the orbit starts at the pose's
- * own camera, touching a bone selects it, dragging a bone aims the limb.
+ * The 3D posing surface. There is ONE camera in this app: orbiting here writes
+ * the pose's own camera, which is the camera every 2D drawing and every export
+ * is projected through. Turn the figure in 3D, flip to 2D, and you are looking
+ * at it from exactly where you left off - the viewpoint is never lost in the
+ * switch, and a pose can be presented from three-quarters, or slightly from
+ * above, simply by putting the camera there.
  */
 export const Canvas3d = (): JSX.Element => {
   const host = useRef<HTMLDivElement>(null);
   const handle = useRef<ViewerHandle | null>(null);
   const [ready, setReady] = useState(false);
   const spec = parsed.value.spec;
+  const camera = resolveCamera(pose.value.camera ?? 'front');
 
   useEffect(() => {
     let cancelled = false;
@@ -29,10 +33,17 @@ export const Canvas3d = (): JSX.Element => {
           onSelect: (bone) => (selectedBone.value = bone),
           onAim: (bone, angles) => dispatch({ type: 'aim-bone', bone, ...angles }, { transient: true }),
           onAimEnd: commitGesture,
+          onOrbit: (angles) =>
+            dispatch(
+              { type: 'set-camera', camera: { ...angles, roll: resolveCamera(pose.peek().camera ?? 'front').roll } },
+              { transient: true },
+            ),
+          onOrbitEnd: commitGesture,
         },
-        resolveCamera(pose.value.camera ?? 'front'),
+        resolveCamera(pose.peek().camera ?? 'front'),
       );
       handle.current.setSelected(selectedBone.value);
+      handle.current.setRoll(resolveCamera(pose.peek().camera ?? 'front').roll);
       setReady(true);
     });
     return (): void => {
@@ -52,22 +63,22 @@ export const Canvas3d = (): JSX.Element => {
     }
   }, [ready, spec]);
 
+  // The other direction: a camera edited in 2D (a slider, a preset) moves the
+  // orbit. Only when it actually differs, so the orbit never fights the finger.
+  useEffect(() => {
+    const viewer = handle.current;
+    if (!ready || viewer === null) return;
+    const now = viewer.getAngles();
+    if (now.azimuth !== camera.azimuth || now.elevation !== camera.elevation) {
+      viewer.setAngles(camera);
+    }
+    viewer.setRoll(camera.roll);
+  }, [ready, camera.azimuth, camera.elevation, camera.roll]);
+
   const bone = selectedBone.value;
   useEffect(() => {
     handle.current?.setSelected(bone);
   }, [bone, ready]);
 
-  const captureAngle = (): void => {
-    if (handle.current === null) return;
-    dispatch({ type: 'set-camera', camera: { ...handle.current.getAngles(), roll: 0 } });
-    view.value = '2d'; // show the flat render this exact angle produces
-  };
-
-  return (
-    <div class="canvas3d" ref={host} aria-label="3D view - drag a limb to pose it, drag empty space to orbit">
-      <button class="angle-pill" onClick={captureAngle}>
-        <AngleIcon /> Use this angle
-      </button>
-    </div>
-  );
+  return <div class="canvas3d" ref={host} aria-label="3D view - drag a limb to pose it, drag empty space to turn the camera" />;
 };

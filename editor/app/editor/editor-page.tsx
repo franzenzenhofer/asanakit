@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'preact/hooks';
 import type { JSX } from 'preact';
+import { CAMERA_PRESETS, CAMERA_PRESET_IDS, resolveCamera } from '@asanakit/core/camera.js';
 import { history, pose, redoEdit, selectedBone, undoEdit, view } from '../state/doc.js';
 import { Canvas2d } from './canvas2d.js';
 import { Canvas3d } from './canvas3d.js';
@@ -54,6 +55,23 @@ const ViewToggle = (): JSX.Element => {
 };
 
 /**
+ * Where the camera is - the same camera in both views, so it is worth saying
+ * out loud. Tap it to open the camera controls.
+ */
+const CameraReadout = ({ onOpen }: { onOpen: () => void }): JSX.Element => {
+  const camera = resolveCamera(pose.value.camera ?? 'front');
+  const preset = CAMERA_PRESET_IDS.find((id) => {
+    const p = CAMERA_PRESETS[id];
+    return p.azimuth === camera.azimuth && p.elevation === camera.elevation && p.roll === camera.roll;
+  });
+  return (
+    <button class="angle-readout" onClick={onOpen} aria-label="Camera angle - tap to change">
+      {preset ?? `${camera.azimuth}° / ${camera.elevation}°`}
+    </button>
+  );
+};
+
+/**
  * The editing surface. Space is the scarcest resource on a phone: the canvas
  * takes everything the collapsible tool panel does not currently claim, and
  * selecting a bone opens the Joints tab so the controls are always one tap away.
@@ -83,6 +101,12 @@ export const EditorPage = (): JSX.Element => {
           {view.value === '2d' ? <Canvas2d /> : <Canvas3d />}
           <LintChips />
           <ViewToggle />
+          <CameraReadout
+            onOpen={() => {
+              setTab('pose');
+              setPanelOpen(true);
+            }}
+          />
         </div>
       </div>
 

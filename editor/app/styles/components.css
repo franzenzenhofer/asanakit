@@ -133,27 +133,28 @@
 }
 .canvas-fab .iconbtn { background: var(--paper-raised); box-shadow: var(--shadow); color: var(--ink); }
 
-.angle-pill {
+/* One camera, both views - so it is worth saying where it is. */
+.angle-readout {
   position: absolute;
-  bottom: 12px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 10px;
+  right: 50%;
+  transform: translateX(50%);
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  min-height: 44px;
-  padding: 10px 16px;
+  min-height: 36px;
+  padding: 6px 14px;
   border-radius: 999px;
-  background: var(--accent);
-  color: #fff;
-  font-size: 14px;
-  font-weight: 650;
+  background: var(--paper-raised);
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  text-transform: capitalize;
   box-shadow: var(--shadow);
   z-index: 2;
   white-space: nowrap;
 }
-.angle-pill svg { width: 18px; height: 18px; }
-.angle-pill:active { filter: brightness(1.1); }
+.angle-readout:active { background: var(--paper-sunken); }
 
 .lint-chips { position: absolute; left: 10px; top: 10px; display: flex; flex-direction: column; gap: 6px; z-index: 2; max-width: 75%; }
 .lint-chip {
