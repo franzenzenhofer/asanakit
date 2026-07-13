@@ -102,6 +102,17 @@ const JointToggles = ({ bone, joint }: { bone: BoneId; joint: LandmarkId | null 
   );
 };
 
+/**
+ * Pick a bone straight, rather than through a joint - and DROP the joint when you
+ * do. A stale joint left hanging off a new bone reads as nonsense: "hand tip r,
+ * moves thigh l" is not a thing, and it is what you get if you only change one
+ * half of the pair.
+ */
+const takeBone = (bone: BoneId): void => {
+  selectedBone.value = bone;
+  selectedJoint.value = null;
+};
+
 const BonePicker = ({ onPick }: { onPick: (bone: BoneId) => void }): JSX.Element => (
   <div class="field">
     {GROUPS.map((group) => (
@@ -181,7 +192,7 @@ export const JointPanel = (): JSX.Element => {
           Tap a limb to pose it - or, in 3D, take hold of one of the knobs at the joints and pull. Everything
           hanging off it comes with you.
         </p>
-        <BonePicker onPick={(b) => (selectedBone.value = b)} />
+        <BonePicker onPick={takeBone} />
       </div>
     );
   }
@@ -192,7 +203,14 @@ export const JointPanel = (): JSX.Element => {
   return (
     <div>
       <Header bone={bone} joint={joint} picking={picking} onPick={() => setPicking(!picking)} />
-      {picking && <BonePicker onPick={(b) => { selectedBone.value = b; setPicking(false); }} />}
+      {picking && (
+        <BonePicker
+          onPick={(b) => {
+            takeBone(b);
+            setPicking(false);
+          }}
+        />
+      )}
 
       <div class="field-row" style="align-items:center; margin-bottom: 10px;">
         <div class="segmented" role="tablist" aria-label="Control mode">
