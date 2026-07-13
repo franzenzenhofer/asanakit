@@ -3,6 +3,7 @@ import type { BoneId } from '../core/types.js';
 import type { Vec2 } from '../core/vec2.js';
 import type { ViewBone, ViewSkeleton } from './camera.js';
 import type { RenderContext } from './context.js';
+import { renderHead } from './head.js';
 import { el, group, type SvgNode } from './svg.js';
 
 const JOINT_LANDMARKS = [
@@ -82,28 +83,6 @@ const torsoShape = ({ skeleton, proj, style }: RenderContext): SvgNode | null =>
   });
 };
 
-const head = ({ skeleton, proj, style }: RenderContext): SvgNode | null => {
-  if (style.head.shape === 'none') return null;
-  const bone = skeleton.bones.head;
-  const [cx, cy] = proj.p(skeleton.landmarks.headCenter);
-  const rx = style.head.rx * proj.s * skeleton.scale;
-  const ry = (style.head.shape === 'circle' ? style.head.rx : style.head.ry) * proj.s * skeleton.scale;
-  // SVG rotates clockwise because y points down, so the sign flips against the world angle.
-  const rotation = 90 - bone.worldAngle;
-
-  return el('ellipse', {
-    'data-part': 'head',
-    cx,
-    cy,
-    rx,
-    ry,
-    transform: rotation === 0 ? undefined : `rotate(${rotation.toFixed(3)} ${cx.toFixed(3)} ${cy.toFixed(3)})`,
-    fill: style.head.fill,
-    stroke: style.head.stroke,
-    'stroke-width': style.head.strokeWidth * proj.s,
-  });
-};
-
 const joints = ({ skeleton, proj, style }: RenderContext): SvgNode | null => {
   if (style.figure.joints !== 'dots') return null;
   return group(
@@ -143,7 +122,7 @@ export const renderFigure = (ctx: RenderContext): SvgNode => {
 
   const solids: Primitive[] = [
     ...optional(torsoShape(ctx)).map((node) => ({ depth: centre, key: 'torso', node })),
-    ...optional(head(ctx)).map((node) => ({ depth: skeleton.bones.head.depth, key: 'head', node })),
+    ...optional(renderHead(ctx)).map((node) => ({ depth: skeleton.bones.head.depth, key: 'head', node })),
   ];
 
   const painted = [...boneNodes, ...solids].sort(

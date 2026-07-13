@@ -8,9 +8,10 @@
  * geometry is asanakit's own - and since the rig is 3D, every keypoint carries
  * a real z (MediaPipe convention: hip-relative, negative toward the camera).
  */
+import { facePoint, headFrame } from '../core/head.js';
 import { axisAngleDeg, rotateVec3 } from '../core/quat.js';
 import type { Skeleton } from '../core/types.js';
-import { add3, lerp3, normalize3, scale3, sub3, type Vec3 } from '../core/vec3.js';
+import { add3, normalize3, scale3, sub3, type Vec3 } from '../core/vec3.js';
 
 export const MEDIAPIPE_33 = [
   'nose', 'left_eye_inner', 'left_eye', 'left_eye_outer', 'right_eye_inner', 'right_eye', 'right_eye_outer',
@@ -68,19 +69,11 @@ export interface KeypointOptions {
  * and enough for a consumer that only needs head orientation.
  */
 const facePoints = (skeleton: Skeleton): Record<string, Vec3> => {
-  const head = skeleton.bones.head;
-  const q = head.orientation;
-  const up = rotateVec3(q, [0, 1, 0]);
-  const forward = rotateVec3(q, [0, 0, 1]);
-  const left = rotateVec3(q, [1, 0, 0]);
-  const centre = lerp3(head.start, head.end, 0.55);
-  const size = head.length;
-
-  const at = (fwd: number, rise: number, side: number): Vec3 =>
-    add3(add3(add3(centre, scale3(forward, fwd * size)), scale3(up, rise * size)), scale3(left, side * size));
+  const frame = headFrame(skeleton);
+  const at = (fwd: number, rise: number, side: number): Vec3 => facePoint(frame, fwd, rise, side);
 
   return {
-    nose: at(0.42, 0, 0),
+    nose: frame.nose,
     left_eye: at(0.3, 0.12, 0.08),
     left_eye_inner: at(0.32, 0.12, 0.03),
     left_eye_outer: at(0.26, 0.12, 0.14),

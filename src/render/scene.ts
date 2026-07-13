@@ -1,4 +1,5 @@
 import { resolveCamera, type CameraInput } from '../core/camera.js';
+import { NOSE_FORWARD } from '../core/head.js';
 import { DEFAULT_RIG } from '../core/rig.js';
 import { solveSkeleton } from '../core/skeleton.js';
 import type { Bounds, Rig, Skeleton } from '../core/types.js';
@@ -48,7 +49,9 @@ const shiftProjection = (proj: Projection, dy: number): Projection => ({
 
 /** Everything that must be visible: the figure, its props and its annotations. */
 export const contentBounds = (pose: PoseSpec, skeleton: ViewSkeleton, style: Style): Bounds => {
-  const headPad = Math.max(style.head.rx, style.head.ry) * skeleton.scale;
+  // In profile the nose reaches past the skull, so it - not the skull - sets the pad.
+  const nosePad = NOSE_FORWARD * skeleton.source.bones.head.length + style.head.noseRadius;
+  const headPad = Math.max(style.head.rx, style.head.ry, nosePad) * skeleton.scale;
   let bounds = padBounds(skeleton.bounds, headPad);
 
   const props = propsBounds(pose.props, skeleton);
