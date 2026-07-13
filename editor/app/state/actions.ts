@@ -17,6 +17,7 @@ export type MetaPatch = Partial<
 export type EditorAction =
   | { type: 'set-joint'; bone: BoneId; channel: JointChannel; value: number }
   | { type: 'set-world'; bone: BoneId; channel: WorldChannel; value: number }
+  | { type: 'aim-bone'; bone: BoneId; azimuth: number; elevation: number }
   | { type: 'set-bone-mode'; bone: BoneId; mode: 'joint' | 'world' }
   | { type: 'reset-bone'; bone: BoneId }
   | { type: 'set-root'; field: RootField; value: number }
@@ -111,6 +112,15 @@ const HANDLERS: { [K in EditorAction['type']]: Handler<K> } = {
   'set-world': (pose, a, linked) =>
     onBothSides(pose, a.bone, linked, (p, bone, mirrored) =>
       setWorld(p, bone, a.channel, mirrored ? mirroredValue(a.channel, a.value) : a.value),
+    ),
+  'aim-bone': (pose, a, linked) =>
+    onBothSides(pose, a.bone, linked, (p, bone, mirrored) =>
+      setWorld(
+        setWorld(p, bone, 'azimuth', mirrored ? -a.azimuth : a.azimuth),
+        bone,
+        'elevation',
+        a.elevation,
+      ),
     ),
   'set-bone-mode': (pose, a, linked) => onBothSides(pose, a.bone, linked, (p, bone) => setBoneMode(p, bone, a.mode)),
   'reset-bone': (pose, a, linked) => onBothSides(pose, a.bone, linked, (p, bone) => resetBone(p, bone)),

@@ -30,7 +30,7 @@ export type CameraPresetId = keyof typeof CAMERA_PRESETS;
 export const CAMERA_PRESET_IDS = Object.keys(CAMERA_PRESETS) as readonly CameraPresetId[];
 
 /** What a pose file or a CLI flag may say about the camera. */
-export type CameraInput = CameraPresetId | Partial<CameraAngles>;
+export type CameraInput = CameraPresetId | { [K in keyof CameraAngles]?: number | undefined };
 
 export const isCameraPresetId = (value: string): value is CameraPresetId => value in CAMERA_PRESETS;
 

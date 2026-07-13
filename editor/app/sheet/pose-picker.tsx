@@ -29,7 +29,8 @@ export const PosePicker = ({ onPick, onClose }: PosePickerProps): JSX.Element =>
             placeholder="Search poses…"
             value={query}
             onInput={(e) => setQuery((e.target as HTMLInputElement).value)}
-            autofocus
+            // Touch devices: autofocus would pop the keyboard over the sheet the instant it opens.
+            autofocus={matchMedia('(pointer: fine)').matches}
           />
           <button class="iconbtn" onClick={onClose} aria-label="Close"><CloseIcon /></button>
         </div>

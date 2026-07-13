@@ -47,6 +47,12 @@ export const AppShell = (): JSX.Element => {
 
   return (
     <div class="shell">
+      <main class="shell-main">
+        {(current.page === 'library' || current.page === 'pose') && <LibraryPage />}
+        {current.page === 'editor' && <EditorPage />}
+        {current.page === 'sheet' && <SheetBuilderPage />}
+        {current.page === 'pose' && <PoseDetail id={current.id} />}
+      </main>
       <nav class="tabbar" aria-label="Main">
         {TABS.map((tab) => (
           <button
@@ -60,12 +66,6 @@ export const AppShell = (): JSX.Element => {
           </button>
         ))}
       </nav>
-      <main class="shell-main">
-        {(current.page === 'library' || current.page === 'pose') && <LibraryPage />}
-        {current.page === 'editor' && <EditorPage />}
-        {current.page === 'sheet' && <SheetBuilderPage />}
-        {current.page === 'pose' && <PoseDetail id={current.id} />}
-      </main>
     </div>
   );
 };

@@ -25,4 +25,6 @@ export const PlusIcon = (): JSX.Element => icon(<path d="M12 5v14M5 12h14" />);
 export const MoreIcon = (): JSX.Element => icon(<><circle cx="5" cy="12" r="1.2" fill="currentColor" /><circle cx="12" cy="12" r="1.2" fill="currentColor" /><circle cx="19" cy="12" r="1.2" fill="currentColor" /></>);
 export const PrintIcon = (): JSX.Element => icon(<><path d="M7 8V4h10v4M7 16H4v-6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v6h-3" /><rect x="7" y="14" width="10" height="7" rx="1" /></>);
 export const DownloadIcon = (): JSX.Element => icon(<><path d="M12 4v11M7 11l5 5 5-5" /><path d="M5 20h14" /></>);
+export const AngleIcon = (): JSX.Element =>
+  icon(<><path d="M4 19h16" /><path d="M4 19L16 6" /><path d="M11 19a8 8 0 0 0-2.5-5.5" /></>);
 export const LinkIcon = (): JSX.Element => icon(<><path d="M9 15l6-6" /><path d="M10.5 6.5L12 5a4 4 0 0 1 6 6l-1.5 1.5M13.5 17.5L12 19a4 4 0 0 1-6-6l1.5-1.5" /></>);

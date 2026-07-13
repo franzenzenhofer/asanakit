@@ -1,23 +1,60 @@
-import type { Group} from 'three';
-import { AmbientLight, Color, DirectionalLight, GridHelper, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
+import type { Group, Mesh, MeshStandardMaterial } from 'three';
+import { AmbientLight, Color, DirectionalLight, GridHelper, PerspectiveCamera, Scene, Vector3, WebGLRenderer } from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import type { MuscleId } from '@asanakit/anatomy/muscles.js';
-import type { Skeleton } from '@asanakit/core/types.js';
+import type { CameraAngles } from '@asanakit/core/camera.js';
+import type { BoneId, Skeleton } from '@asanakit/core/types.js';
 import type { Prop } from '@asanakit/model/schema.js';
 import { buildFigureScene } from '@asanakit/three/scene.js';
+import { aimFromPointer, boneOfMesh, pickBone, type AimAngles } from './pick.js';
+
+export interface ViewerCallbacks {
+  /** A bone was tapped (null: empty space, clears the selection). */
+  readonly onSelect?: (bone: BoneId | null) => void;
+  /** A bone tip is being dragged toward a new world direction; fires while the finger moves. */
+  readonly onAim?: (bone: BoneId, angles: AimAngles) => void;
+  /** The aim gesture ended - close the undo step. */
+  readonly onAimEnd?: () => void;
+}
 
 export interface ViewerHandle {
   setFigure(skeleton: Skeleton, engaged: readonly MuscleId[], stretched: readonly MuscleId[], props: readonly Prop[]): void;
+  setSelected(bone: BoneId | null): void;
+  /** The orbit camera's current angles, in the render camera's orbit convention. */
+  getAngles(): { azimuth: number; elevation: number };
   dispose(): void;
 }
 
-/** One long-lived orbitable scene; the figure group swaps on every edit. */
-export const createViewer = (mount: HTMLElement): ViewerHandle => {
+const ACCENT = new Color('#3b49b4');
+const DRAG_THRESHOLD_PX = 6;
+const DEG = 180 / Math.PI;
+const RAD = Math.PI / 180;
+const TARGET = new Vector3(0, 0.5, 0);
+const ORBIT_RADIUS = 2.4;
+
+interface DragState {
+  readonly bone: BoneId;
+  readonly pivot: Vector3;
+  readonly planePoint: Vector3;
+  readonly startX: number;
+  readonly startY: number;
+  moved: boolean;
+}
+
+/**
+ * One long-lived orbitable scene; the figure group swaps on every edit.
+ * Touch a bone to select it, drag it to aim the limb; empty space orbits.
+ */
+export const createViewer = (mount: HTMLElement, callbacks: ViewerCallbacks = {}, initial?: CameraAngles): ViewerHandle => {
   const scene = new Scene();
   scene.background = new Color('#ffffff');
 
   const camera = new PerspectiveCamera(38, 1, 0.01, 100);
-  camera.position.set(0.9, 0.9, 2.1);
+  const azimuth = (initial?.azimuth ?? 22) * RAD;
+  const polar = (90 - (initial?.elevation ?? 18)) * RAD;
+  camera.position
+    .setFromSphericalCoords(ORBIT_RADIUS, polar, azimuth)
+    .add(TARGET);
 
   scene.add(new AmbientLight(0xffffff, 1.15));
   const sun = new DirectionalLight(0xffffff, 1.6);
@@ -29,16 +66,86 @@ export const createViewer = (mount: HTMLElement): ViewerHandle => {
 
   const renderer = new WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.domElement.style.touchAction = 'none';
   mount.appendChild(renderer.domElement);
 
   const controls = new OrbitControls(camera, renderer.domElement);
-  controls.target.set(0, 0.5, 0);
+  controls.target.copy(TARGET);
   controls.enableDamping = true;
   controls.maxDistance = 8;
   controls.minDistance = 0.4;
 
   let figure: Group | null = null;
+  let skeleton: Skeleton | null = null;
+  let selected: BoneId | null = null;
+  let drag: DragState | null = null;
   let disposed = false;
+  const originals = new Map<Mesh, MeshStandardMaterial>();
+
+  const clearHighlight = (): void => {
+    for (const [mesh, material] of originals) mesh.material = material;
+    originals.clear();
+  };
+
+  const applyHighlight = (): void => {
+    clearHighlight();
+    if (figure === null || selected === null) return;
+    for (const child of figure.children) {
+      const mesh = child as Mesh;
+      if (boneOfMesh(mesh) !== selected) continue;
+      const material = mesh.material as MeshStandardMaterial;
+      originals.set(mesh, material);
+      const lit = material.clone();
+      lit.color.copy(ACCENT);
+      lit.emissive.copy(ACCENT);
+      lit.emissiveIntensity = 0.3;
+      mesh.material = lit;
+    }
+  };
+
+  const onPointerDown = (event: PointerEvent): void => {
+    if (figure === null || skeleton === null || !event.isPrimary) return;
+    const rect = renderer.domElement.getBoundingClientRect();
+    const bone = pickBone(event.clientX, event.clientY, { rect, camera, figure });
+    if (bone === null) {
+      // Empty space: OrbitControls owns the gesture; a plain tap clears the selection.
+      if (selected !== null) callbacks.onSelect?.(null);
+      return;
+    }
+    const segment = skeleton.bones[bone];
+    drag = {
+      bone,
+      pivot: new Vector3(...segment.start),
+      planePoint: new Vector3(...segment.end),
+      startX: event.clientX,
+      startY: event.clientY,
+      moved: false,
+    };
+    controls.enabled = false;
+    renderer.domElement.setPointerCapture(event.pointerId);
+    callbacks.onSelect?.(bone);
+  };
+
+  const onPointerMove = (event: PointerEvent): void => {
+    if (drag === null || figure === null || !event.isPrimary) return;
+    if (!drag.moved && Math.hypot(event.clientX - drag.startX, event.clientY - drag.startY) < DRAG_THRESHOLD_PX) return;
+    drag.moved = true;
+    const rect = renderer.domElement.getBoundingClientRect();
+    const angles = aimFromPointer(event.clientX, event.clientY, { rect, camera, figure }, drag);
+    if (angles !== null) callbacks.onAim?.(drag.bone, angles);
+  };
+
+  const onPointerUp = (event: PointerEvent): void => {
+    if (drag === null || !event.isPrimary) return;
+    if (drag.moved) callbacks.onAimEnd?.();
+    drag = null;
+    controls.enabled = true;
+  };
+
+  renderer.domElement.addEventListener('pointerdown', onPointerDown);
+  renderer.domElement.addEventListener('pointermove', onPointerMove);
+  renderer.domElement.addEventListener('pointerup', onPointerUp);
+  renderer.domElement.addEventListener('pointercancel', onPointerUp);
 
   const resize = (): void => {
     const { clientWidth, clientHeight } = mount;
@@ -60,10 +167,23 @@ export const createViewer = (mount: HTMLElement): ViewerHandle => {
   requestAnimationFrame(tick);
 
   return {
-    setFigure(skeleton, engaged, stretched, props): void {
+    setFigure(nextSkeleton, engaged, stretched, props): void {
       if (figure !== null) scene.remove(figure);
-      figure = buildFigureScene(skeleton, { engaged: [...engaged], stretched: [...stretched], props: [...props] });
+      originals.clear();
+      skeleton = nextSkeleton;
+      figure = buildFigureScene(nextSkeleton, { engaged: [...engaged], stretched: [...stretched], props: [...props] });
       scene.add(figure);
+      applyHighlight();
+    },
+    setSelected(bone): void {
+      selected = bone;
+      applyHighlight();
+    },
+    getAngles(): { azimuth: number; elevation: number } {
+      return {
+        azimuth: Math.round(controls.getAzimuthalAngle() * DEG),
+        elevation: Math.round(90 - controls.getPolarAngle() * DEG),
+      };
     },
     dispose(): void {
       disposed = true;

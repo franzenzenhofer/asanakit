@@ -55,6 +55,7 @@ button {
   padding: 0;
   cursor: pointer;
   touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, a:focus-visible {
@@ -65,6 +66,8 @@ button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-
 
 input, select, textarea {
   font: inherit;
+  /* 16px minimum: anything smaller makes iOS Safari zoom-and-pan the whole app on focus. */
+  font-size: 16px;
   color: var(--ink);
   background: var(--paper-raised);
   border: 1px solid var(--line);

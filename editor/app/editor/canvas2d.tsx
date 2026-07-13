@@ -31,8 +31,8 @@ export const Canvas2d = (): JSX.Element => {
   const onPointerDown = (event: JSX.TargetedPointerEvent<HTMLDivElement>): void => {
     const root = host.current?.querySelector('svg');
     if (!(root instanceof SVGSVGElement)) return;
-    const hit = boneAtPoint(selectedBone.value, event.clientX, event.clientY, root);
-    if (hit !== null) selectedBone.value = hit;
+    // A miss clears the selection; a hit selects (repeat taps cycle stacked bones).
+    selectedBone.value = boneAtPoint(selectedBone.value, event.clientX, event.clientY, root);
   };
 
   return <div class="canvas2d" ref={host} onPointerDown={onPointerDown} />;

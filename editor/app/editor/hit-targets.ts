@@ -14,6 +14,8 @@ export const attachHitTargets = (svg: SVGSVGElement): void => {
     const hit = line.cloneNode(false) as SVGElement;
     hit.classList.add('bone-hit');
     hit.removeAttribute('style');
+    // Screen-space stroke width: a fingertip-sized target no matter how the viewBox scales down.
+    hit.setAttribute('vector-effect', 'non-scaling-stroke');
     line.parentNode?.insertBefore(hit, line.nextSibling);
   }
 };

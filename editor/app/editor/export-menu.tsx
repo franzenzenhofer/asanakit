@@ -139,11 +139,16 @@ export const ExportMenu = ({ onClose }: { onClose: () => void }): JSX.Element =>
         <div class="field" style="margin-top:16px">
           <label>Import - paste .pose.yaml</label>
           <textarea
+            id="import-yaml"
             rows={4}
             placeholder="asanakit: 2&#10;id: my-asana&#10;..."
-            onChange={(e) =>
+          />
+          <button
+            class="btn"
+            onClick={() =>
               act(() => {
-                const text = (e.target as HTMLTextAreaElement).value;
+                const el = document.getElementById('import-yaml') as HTMLTextAreaElement;
+                const text = el.value;
                 if (text.trim() === '') return;
                 parsePose(text, 'pasted');
                 loadPose(parseYamlRaw(text) as PoseSpecInput);
@@ -151,7 +156,9 @@ export const ExportMenu = ({ onClose }: { onClose: () => void }): JSX.Element =>
                 onClose();
               })
             }
-          />
+          >
+            Import pasted YAML
+          </button>
         </div>
 
         {message !== '' && <p role="status" style="font-size:13px;color:var(--ink-soft)">{message}</p>}

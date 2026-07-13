@@ -33,6 +33,8 @@ export const SliderRow = ({ label, value, min, max, onChange, onCommit }: Slider
           aria-label={label}
           onInput={(e) => onChange(Number((e.target as HTMLInputElement).value), true)}
           onPointerUp={commit}
+          onPointerCancel={commit}
+          onBlur={commit}
           onKeyUp={commit}
         />
       </div>
