@@ -500,3 +500,11 @@
   color: var(--ink-faint);
   text-transform: none;
 }
+
+/* A joint chip carries the bone it moves, quietly, underneath its own name. */
+.chip .chip-sub {
+  margin-left: 6px;
+  font-size: 0.72em;
+  font-weight: 500;
+  opacity: 0.62;
+}

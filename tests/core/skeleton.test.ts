@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import { DEFAULT_RIG } from '../../src/core/rig.js';
-import { boneEndingAt, solveSkeleton } from '../../src/core/skeleton.js';
+import { boneEndingAt, jointsOfBone, solveSkeleton } from '../../src/core/skeleton.js';
 import { LANDMARK_IDS, type KinematicPose } from '../../src/core/types.js';
 
 const pose = (over: Partial<KinematicPose> = {}): KinematicPose => ({
@@ -249,5 +249,28 @@ describe('joints are handles: grab one, and what hangs off it comes along', () =
     expect(raised.landmarks.kneeL).not.toEqual(straight.landmarks.kneeL);
     expect(raised.landmarks.ankleL).not.toEqual(straight.landmarks.ankleL);
     expect(raised.landmarks.toeL).not.toEqual(straight.landmarks.toeL);
+  });
+});
+
+describe('a bone knows the joints at both of its ends', () => {
+  test('a thigh swings around the hip joint and carries the knee', () => {
+    expect(jointsOfBone('thighL')).toEqual({ base: 'hipJointL', tip: 'kneeL' });
+    expect(jointsOfBone('shinR')).toEqual({ base: 'kneeR', tip: 'ankleR' });
+    expect(jointsOfBone('forearmL')).toEqual({ base: 'elbowL', tip: 'wristL' });
+  });
+
+  test('the far joint belongs to the bone ABOVE, so stepping to it walks up the body', () => {
+    const { base } = jointsOfBone('shinL');
+    expect(base).toBe('kneeL');
+    expect(boneEndingAt(base as 'kneeL')).toBe('thighL'); // the knee moves the thigh, not the shin
+  });
+
+  test('every joint reported really is where the bone begins and ends', () => {
+    const skeleton = solveSkeleton(pose({ joints: { thighL: { flex: 35 }, shinL: { flex: 50 } } }), DEFAULT_RIG);
+    for (const bone of ['thighL', 'shinL', 'forearmR', 'handR'] as const) {
+      const { base, tip } = jointsOfBone(bone);
+      if (base !== null) expect(skeleton.landmarks[base]).toEqual(skeleton.bones[bone].start);
+      if (tip !== null) expect(skeleton.landmarks[tip]).toEqual(skeleton.bones[bone].end);
+    }
   });
 });

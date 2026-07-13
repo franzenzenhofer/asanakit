@@ -1,6 +1,7 @@
 import { useState } from 'preact/hooks';
 import type { JSX } from 'preact';
 import { channelsOf, isHinge, ROM, termFor, type Channel, type Range } from '@asanakit/anatomy/rom.js';
+import { boneEndingAt, jointsOfBone } from '@asanakit/core/skeleton.js';
 import type { BoneId, LandmarkId } from '@asanakit/core/types.js';
 import { commitGesture, dispatch, linkSides, pose, selectedBone, selectedJoint } from '../state/doc.js';
 import { counterpart, readJoint, solvedWorldDirection } from '../state/joints.js';
@@ -66,6 +67,40 @@ const Header = ({
     </button>
   </div>
 );
+
+/**
+ * The joints on this bone, and the bones on those joints.
+ *
+ * A thigh swings around the hip joint and carries the knee, so from a thigh you
+ * can step either way along the body - which is how anyone actually thinks about
+ * a skeleton, and how you find the bone you want without hunting for it in a grid
+ * of twenty-one names. Taking the far joint selects the bone that joint moves,
+ * which is the bone above; taking the near one keeps you here.
+ */
+const JointToggles = ({ bone, joint }: { bone: BoneId; joint: LandmarkId | null }): JSX.Element | null => {
+  const { base, tip } = jointsOfBone(bone);
+  const options = [base, tip].filter((id): id is LandmarkId => id !== null && boneEndingAt(id) !== null);
+  if (options.length === 0) return null;
+
+  const take = (id: LandmarkId): void => {
+    selectedBone.value = boneEndingAt(id);
+    selectedJoint.value = id;
+  };
+
+  return (
+    <div class="field">
+      <label>Joints on this bone</label>
+      <div class="chips">
+        {options.map((id) => (
+          <button key={id} class={`chip ${joint === id ? 'active' : ''}`} onClick={() => take(id)}>
+            {label(id)}
+            <span class="chip-sub">moves {label(boneEndingAt(id) as BoneId)}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const BonePicker = ({ onPick }: { onPick: (bone: BoneId) => void }): JSX.Element => (
   <div class="field">
@@ -181,6 +216,7 @@ export const JointPanel = (): JSX.Element => {
       </div>
 
       <ChannelSliders bone={bone} />
+      <JointToggles bone={bone} joint={joint} />
     </div>
   );
 };

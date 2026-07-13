@@ -1,4 +1,5 @@
 import { jointQuat, sphereDir } from './joints.js';
+import { DEFAULT_RIG } from './rig.js';
 import { axisAngleDeg, mulQuat, rotateVec3, rotationTo, yawPitchRollDeg, type Quat } from './quat.js';
 import type {
   BoneDef,
@@ -117,6 +118,30 @@ const LANDMARK_AT: Record<LandmarkId, { readonly bone: BoneId; readonly at: 'sta
 export const boneEndingAt = (landmark: LandmarkId): BoneId | null => {
   const source = LANDMARK_AT[landmark];
   return source.at === 'end' ? source.bone : null;
+};
+
+const landmarkFor = (bone: BoneId, at: 'start' | 'end'): LandmarkId | null =>
+  (Object.entries(LANDMARK_AT).find(([, source]) => source.bone === bone && source.at === at)?.[0] as
+    | LandmarkId
+    | undefined) ?? null;
+
+/**
+ * The two joints a bone hangs between: the one it swings AROUND and the one it
+ * carries. A thigh swings around the hip joint and carries the knee - so from a
+ * thigh you can step either way along the body, which is how anyone actually
+ * thinks about a skeleton.
+ *
+ * The far joint is not the bone's own landmark: a thigh starts where the hip bone
+ * ENDS. So it is looked up through the rig, from the parent it attaches to.
+ */
+export const jointsOfBone = (
+  bone: BoneId,
+  rig: Rig = DEFAULT_RIG,
+): { readonly base: LandmarkId | null; readonly tip: LandmarkId | null } => {
+  const def = rig.bones.find((b) => b.id === bone);
+  const parent = def?.parent ?? null;
+  const base = parent === null ? null : landmarkFor(parent, def?.attach ?? 'end');
+  return { base, tip: landmarkFor(bone, 'end') };
 };
 
 const landmarksOf = (b: Record<BoneId, BoneSegment>): Record<LandmarkId, Vec3> =>
