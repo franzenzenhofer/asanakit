@@ -6,17 +6,12 @@
  * a width, a thickness and a pitch.
  */
 import { degToRad } from '../core/angles.js';
-import type { Bounds3, LandmarkId, Skeleton } from '../core/types.js';
+import type { LandmarkId, Skeleton } from '../core/types.js';
 import type { Vec3 } from '../core/vec3.js';
 import type { Prop } from '../model/schema.js';
 
 export type MatProp = Extract<Prop, { type: 'mat' }>;
 export type SurfboardProp = Extract<Prop, { type: 'surfboard' }>;
-
-const centreOf = (bounds: Bounds3): [number, number] => [
-  (bounds.minX + bounds.maxX) / 2,
-  (bounds.minZ + bounds.maxZ) / 2,
-];
 
 const rotateY = (p: Vec3, deg: number, cx: number, cz: number): Vec3 => {
   const r = degToRad(deg);
@@ -27,8 +22,10 @@ const rotateY = (p: Vec3, deg: number, cx: number, cz: number): Vec3 => {
 
 export interface MatModel {
   readonly centre: Vec3;
-  /** Corners of the top face, in world space. */
+  /** Corners of the top face, in world space, starting at the BACK-left and running to the FRONT-left. */
   readonly top: readonly [Vec3, Vec3, Vec3, Vec3];
+  /** The front short edge - the end the figure faces (+z at yaw 0). */
+  readonly frontEdge: readonly [Vec3, Vec3];
   readonly width: number;
   readonly length: number;
   readonly thickness: number;
@@ -36,26 +33,31 @@ export interface MatModel {
 }
 
 /**
- * The mat lies on the floor under the figure's footprint centre: `length`
- * runs along the figure's sagittal axis (+z), `width` across it, `yaw` turns
- * the whole mat (90 = length along x, for wide standing poses). `y` is the
- * TOP surface - the figure stands and lies ON it - so the box extends
- * downward by `thickness`.
+ * The mat lies on the floor at its own world position `at` = [x, z]. It is
+ * furniture: it does NOT follow the body, because a mat does not slide across
+ * the room when you raise an arm. `length` runs along the figure's sagittal
+ * axis (+z), `width` across it, `yaw` turns the whole mat (90 = length along
+ * x, for wide standing poses). `y` is the TOP surface - the figure stands and
+ * lies ON it - so the box extends downward by `thickness`.
  */
-export const matModel = (prop: MatProp, skeleton: Skeleton): MatModel => {
-  const [cx, cz] = centreOf(skeleton.bounds);
+export const matModel = (prop: MatProp, _skeleton: Skeleton): MatModel => {
+  const [cx, cz] = prop.at;
   const topY = prop.y;
   const hw = prop.width / 2;
   const hl = prop.length / 2;
+  // Back edge first (-z), front edge last (+z): the figure faces +z, so corners
+  // 2 and 3 are the front of the mat, and every renderer can rely on that.
   const corners: [Vec3, Vec3, Vec3, Vec3] = [
     [cx - hw, topY, cz - hl],
     [cx + hw, topY, cz - hl],
     [cx + hw, topY, cz + hl],
     [cx - hw, topY, cz + hl],
   ];
+  const top = corners.map((p) => rotateY(p, prop.yaw, cx, cz)) as [Vec3, Vec3, Vec3, Vec3];
   return {
     centre: [cx, prop.y - prop.thickness / 2, cz],
-    top: corners.map((p) => rotateY(p, prop.yaw, cx, cz)) as [Vec3, Vec3, Vec3, Vec3],
+    top,
+    frontEdge: [top[2], top[3]],
     width: prop.width,
     length: prop.length,
     thickness: prop.thickness,
@@ -106,7 +108,7 @@ export const surfboardModel = (prop: SurfboardProp, skeleton: Skeleton): Surfboa
             under.reduce((s, p) => s + p[1], 0) / under.length,
             under.reduce((s, p) => s + p[2], 0) / under.length,
           ]
-        : [0, 0, (skeleton.bounds.minZ + skeleton.bounds.maxZ) / 2];
+        : [0, 0, 0]; // no anchor at all: the board sits at the world origin, not wherever the body happens to reach
 
   const cx = centre[0];
   const cy = centre[1] + prop.offset[1];

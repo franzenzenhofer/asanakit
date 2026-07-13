@@ -21,10 +21,11 @@ const SKELETON = solveSkeleton(POSE, DEFAULT_RIG);
 
 const mat = (over: Partial<MatProp> = {}): MatProp => ({
   type: 'mat',
+  at: [0, 0],
   y: 0,
   width: 0.38,
   length: 1.35,
-  thickness: 0.022,
+  thickness: 0.006,
   yaw: 0,
   ...over,
 });
@@ -37,6 +38,40 @@ const board = (over: Partial<SurfboardProp> = {}): SurfboardProp => ({
   thickness: 0.024,
   offset: [0, 0],
   ...over,
+});
+
+describe('the mat is floor furniture, not a function of the body', () => {
+  const armOut = (abduct: number): ReturnType<typeof solveSkeleton> =>
+    solveSkeleton({ ...POSE, joints: { upperArmL: { abduct } } }, DEFAULT_RIG);
+
+  test('moving an arm does not move the mat', () => {
+    const down = matModel(mat(), armOut(0));
+    const out = matModel(mat(), armOut(90));
+
+    // Reaching the left arm out sideways stretches the figure's bounding box...
+    expect(out.centre).not.toBe(down.centre); // (distinct objects, so the compare below is real)
+    expect(armOut(90).bounds.maxX).toBeGreaterThan(armOut(0).bounds.maxX + 0.1);
+    // ...and the mat, which lies on the floor, does not care in the slightest.
+    expect(out.centre).toEqual(down.centre);
+    expect(out.top).toEqual(down.top);
+  });
+
+  test('the mat sits where it is put, in world coordinates', () => {
+    const m = matModel(mat({ at: [0.4, -0.25] }), SKELETON);
+    expect(m.centre[0]).toBeCloseTo(0.4, 8);
+    expect(m.centre[2]).toBeCloseTo(-0.25, 8);
+  });
+
+  test('the default mat is centred on the world origin, where the figure stands', () => {
+    const m = matModel(mat(), SKELETON);
+    expect(m.centre[0]).toBeCloseTo(0, 8);
+    expect(m.centre[2]).toBeCloseTo(0, 8);
+  });
+
+  test('a real mat is about a centimetre thick, not four', () => {
+    // 0.006 stature = ~1.1 cm on a 1.8 m figure.
+    expect(mat().thickness).toBeLessThanOrEqual(0.006);
+  });
 });
 
 describe('matModel - a configurable 3D yoga mat', () => {

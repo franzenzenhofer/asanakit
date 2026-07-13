@@ -27,6 +27,16 @@ export interface Style {
     readonly fill: string;
     readonly stroke: string;
     readonly strokeWidth: number;
+    /**
+     * Which way is the figure looking? The convention of hand-drawn asana
+     * notation: a nose mark - a dot when the face is toward you, sliding to
+     * the rim as the head turns - and a shade over the back of the skull that
+     * grows as the face turns away. Never a face.
+     */
+    readonly nose: 'dot' | 'none';
+    readonly noseRadius: number;
+    readonly shade: string;
+    readonly shadeOpacity: number;
   };
   readonly muscles: {
     readonly show: boolean;
@@ -41,6 +51,8 @@ export interface Style {
     readonly stroke: string;
     readonly fill: string;
     readonly strokeWidth: number;
+    /** The front edge of the mat, so a printout says which way the practice faces. */
+    readonly accent: string;
   };
   readonly annotation: {
     readonly stroke: string;
@@ -82,7 +94,18 @@ const stick: Style = {
     fill: 'none',
     farOpacity: 0.45,
   },
-  head: { shape: 'ellipse', rx: 0.046, ry: 0.062, fill: '#ffffff', stroke: '#111111', strokeWidth: 0.02 },
+  head: {
+    shape: 'ellipse',
+    rx: 0.046,
+    ry: 0.062,
+    fill: '#ffffff',
+    stroke: '#111111',
+    strokeWidth: 0.02,
+    nose: 'dot',
+    noseRadius: 0.011,
+    shade: '#111111',
+    shadeOpacity: 0.16,
+  },
   muscles: {
     show: false,
     base: '#e6ded6',
@@ -92,7 +115,7 @@ const stick: Style = {
     outline: '#00000000',
     outlineWidth: 0,
   },
-  props: { stroke: '#111111', fill: '#f0f0f0', strokeWidth: 0.008 },
+  props: { stroke: '#111111', fill: '#f0f0f0', strokeWidth: 0.008, accent: '#c1121f' },
   annotation: {
     stroke: '#c1121f',
     strokeWidth: 0.005,
@@ -136,7 +159,19 @@ const silhouette: Style = {
     torsoWidth: 0.075,
     fill: '#111111',
   },
-  head: { shape: 'ellipse', rx: 0.05, ry: 0.066, fill: '#111111', stroke: '#111111', strokeWidth: 0.01 },
+  // A filled silhouette cannot shade its own skull: the nose mark carries the facing alone,
+  // in the ink of the background, the way a cut-paper figure would.
+  head: {
+    ...stick.head,
+    rx: 0.05,
+    ry: 0.066,
+    fill: '#111111',
+    stroke: '#111111',
+    strokeWidth: 0.01,
+    shade: '#ffffff',
+    shadeOpacity: 0.22,
+    noseRadius: 0.012,
+  },
 };
 
 const blueprint: Style = {
@@ -145,8 +180,18 @@ const blueprint: Style = {
   label: 'Blueprint',
   background: '#f3f7fb',
   figure: { ...stick.figure, stroke: '#1b3a5c', strokeLeft: '#7591b3', strokeWidth: 0.012, jointRadius: 0.01 },
-  head: { shape: 'circle', rx: 0.05, ry: 0.05, fill: 'none', stroke: '#1b3a5c', strokeWidth: 0.012 },
-  props: { stroke: '#1b3a5c', fill: '#e2ecf5', strokeWidth: 0.006 },
+  head: {
+    ...stick.head,
+    shape: 'circle',
+    rx: 0.05,
+    ry: 0.05,
+    fill: 'none',
+    stroke: '#1b3a5c',
+    strokeWidth: 0.012,
+    shade: '#1b3a5c',
+    shadeOpacity: 0.12,
+  },
+  props: { stroke: '#1b3a5c', fill: '#e2ecf5', strokeWidth: 0.006, accent: '#c1121f' },
   annotation: { ...stick.annotation, stroke: '#c1121f', accent: '#c1121f', color: '#1b3a5c', strokeWidth: 0.004 },
   text: { ...stick.text, color: '#1b3a5c', muted: '#5c7998' },
 };
@@ -165,8 +210,8 @@ const poster: Style = {
   label: 'Poster',
   background: '#fdf6ec',
   figure: { ...stick.figure, stroke: '#1d1d1b', strokeLeft: '#6e6e6a', strokeWidth: 0.03, torsoWidth: 0.05, jointRadius: 0.016 },
-  head: { ...stick.head, fill: '#f4a259', stroke: '#1d1d1b', strokeWidth: 0.026, rx: 0.05, ry: 0.066 },
-  props: { stroke: '#1d1d1b', fill: '#8cb369', strokeWidth: 0.012 },
+  head: { ...stick.head, fill: '#f4a259', stroke: '#1d1d1b', strokeWidth: 0.026, rx: 0.05, ry: 0.066, shadeOpacity: 0.22 },
+  props: { stroke: '#1d1d1b', fill: '#8cb369', strokeWidth: 0.012, accent: '#bc4b51' },
   annotation: { ...stick.annotation, stroke: '#bc4b51', accent: '#bc4b51', color: '#1d1d1b' },
 };
 
@@ -175,7 +220,8 @@ const minimal: Style = {
   id: 'minimal',
   label: 'Minimal',
   figure: { ...stick.figure, stroke: '#9aa0a6', strokeLeft: '#c6cbd0', strokeWidth: 0.01, joints: 'none', jointRadius: 0 },
-  head: { ...stick.head, stroke: '#9aa0a6', strokeWidth: 0.01 },
+  head: { ...stick.head, stroke: '#9aa0a6', strokeWidth: 0.01, shade: '#9aa0a6', shadeOpacity: 0.18, noseRadius: 0.009 },
+  props: { ...stick.props, stroke: '#9aa0a6', accent: '#9aa0a6' },
   annotation: { ...stick.annotation, stroke: '#9aa0a6', color: '#9aa0a6', accent: '#9aa0a6' },
 };
 

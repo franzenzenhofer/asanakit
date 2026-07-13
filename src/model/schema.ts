@@ -150,10 +150,13 @@ export const propSchema = z.discriminatedUnion('type', [
   z.object({ type: z.literal('ground'), y: z.number().default(0), width: z.number().positive().default(1.6) }),
   z.object({
     type: z.literal('mat'),
+    at: point
+      .default([0, 0])
+      .describe('[x, z] world position of the mat centre. Floor furniture: it never follows the body.'),
     y: z.number().default(0),
     width: z.number().positive().default(0.38).describe('Across the practice direction, in stature units.'),
     length: z.number().positive().default(1.35).describe('Along the practice direction.'),
-    thickness: z.number().positive().default(0.022),
+    thickness: z.number().positive().default(0.006).describe('A real mat is about a centimetre thick.'),
     yaw: z.number().default(0).describe('Turn the mat; 90 lays its length along the figure\'s left-right axis.'),
   }),
   z.object({
