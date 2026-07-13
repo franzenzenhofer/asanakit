@@ -73,18 +73,27 @@ export const registerInfoCommands = (program: Command): void => {
       const lib = await library(options.lib);
       const targets = refs.length === 0 ? [...lib.poses.values()] : await Promise.all(refs.map((r) => resolvePose(r, options.lib)));
 
+      // A warning is a warning: it is said out loud, and it does not fail the gate.
+      // Only an impossible body does that.
       let failed = 0;
+      let warned = 0;
       for (const pose of targets) {
         const issues = validatePose(pose);
         if (issues.length === 0) {
           process.stdout.write(`ok    ${pose.id}\n`);
           continue;
         }
-        failed += 1;
-        for (const issue of issues) process.stdout.write(`FAIL  ${pose.id}: ${issue.message}\n`);
+        const errors = issues.filter((i) => i.severity === 'error');
+        if (errors.length > 0) failed += 1;
+        else warned += 1;
+
+        for (const issue of issues) {
+          process.stdout.write(`${issue.severity === 'error' ? 'FAIL' : 'warn'}  ${pose.id}: ${issue.message}\n`);
+        }
       }
 
-      process.stdout.write(`\n${targets.length - failed}/${targets.length} poses sound\n`);
+      process.stdout.write(`\n${targets.length - failed}/${targets.length} poses sound`);
+      process.stdout.write(warned > 0 ? ` (${warned} with warnings)\n` : '\n');
       if (failed > 0) process.exitCode = 1;
     });
 

@@ -1,17 +1,28 @@
 import { radToDeg } from '../core/angles.js';
 import { DEFAULT_RIG } from '../core/rig.js';
-import { rotateVec3 } from '../core/quat.js';
+import { conjugateQuat, mulQuat, rotateVec3, type Quat } from '../core/quat.js';
 import { solveSkeleton } from '../core/skeleton.js';
 import type { BoneId, LandmarkId, Rig, Skeleton } from '../core/types.js';
 import { cross3, dot3, normalize3, sub3 } from '../core/vec3.js';
 import { resolveFigure, type PoseSpec } from '../model/index.js';
-import { ELBOW_MAX_FLEXION, HINGE_SLACK, KNEE_MAX_FLEXION } from './rom.js';
+import {
+  CERVICAL_BEND_MAX,
+  CERVICAL_BEND_WARN,
+  CERVICAL_ROTATION_MAX,
+  CERVICAL_ROTATION_WARN,
+  ELBOW_MAX_FLEXION,
+  HINGE_SLACK,
+  KNEE_MAX_FLEXION,
+} from './rom.js';
+
 
 export type IssueCode =
   | 'knee-hyperextension'
   | 'knee-overflexion'
   | 'elbow-hyperextension'
   | 'elbow-overflexion'
+  | 'cervical-rotation'
+  | 'cervical-bend'
   | 'below-ground'
   | 'no-ground-contact'
   | 'contact-off-ground';
@@ -104,6 +115,81 @@ const jointIssues = (skeleton: Skeleton, rig: Rig): Issue[] => {
   return issues;
 };
 
+/**
+ * Split a rotation into the part that spins about the bone's own long axis
+ * (+y in every bone's rest frame) and the part that swings the axis itself -
+ * the classic swing-twist decomposition. The twist quaternion is what is left
+ * of the rotation once every component off that axis is dropped.
+ */
+const swingTwist = (relative: Quat): { swing: number; twist: number } => {
+  const [, y, , w] = relative;
+  const along = Math.hypot(y, w); // the twist quaternion's magnitude, before normalising
+  if (along < 1e-9) return { swing: 180, twist: 0 };
+
+  const twist = Math.abs(2 * radToDeg(Math.atan2(y, w)));
+  const swing = 2 * radToDeg(Math.acos(Math.min(1, along)));
+  return {
+    swing: Math.min(swing, 360 - swing),
+    twist: Math.min(twist, 360 - twist),
+  };
+};
+
+/**
+ * The neck, measured the only way that means anything: the whole cervical spine
+ * at once, head against CHEST. Either bone alone can look innocent while the
+ * pair of them turns the skull further than a skull turns.
+ *
+ * A neck does two separable things and they have separate limits, so they are
+ * separated here: the TWIST about the head's own long axis, which is axial
+ * rotation - looking over your shoulder - and the SWING left over, which is
+ * every nod and side-bend together. Taking the plain angle between the two
+ * facing directions instead would call a head tipped back over a lifted chest
+ * "180 degrees of rotation", and a fish pose is not a broken neck.
+ */
+const cervicalIssues = (skeleton: Skeleton): Issue[] => {
+  const issues: Issue[] = [];
+  const chest = skeleton.bones.spine.orientation;
+  const head = skeleton.bones.head.orientation;
+
+  const relative = mulQuat(conjugateQuat(chest), head);
+  const { swing, twist } = swingTwist(relative);
+
+  if (twist > CERVICAL_ROTATION_MAX + ANGLE_EPSILON) {
+    issues.push({
+      code: 'cervical-rotation',
+      severity: 'error',
+      message: `The head is turned ${Math.round(twist)}° from the chest. A neck rotates about ${CERVICAL_ROTATION_MAX}°, and no further.`,
+    });
+  } else if (twist > CERVICAL_ROTATION_WARN + ANGLE_EPSILON) {
+    issues.push({
+      code: 'cervical-rotation',
+      severity: 'warning',
+      message: `The head is turned ${Math.round(twist)}° from the chest - at the very end of a real neck's range.`,
+    });
+  }
+
+  if (swing > CERVICAL_BEND_MAX + ANGLE_EPSILON) {
+    // A warning, not an error, and the reason is the RIG: there is one bone from
+    // pelvis to chest, so a thoracic arch has nowhere to go. A deep backbend has
+    // to spend its curve somewhere, and it spends it here, in the neck. Until the
+    // spine is segmented, this number is measuring the rig as much as the pose -
+    // so it is said out loud, and it does not fail the gate.
+    issues.push({
+      code: 'cervical-bend',
+      severity: 'warning',
+      message: `The head is bent ${Math.round(swing)}° on the chest, past the ${CERVICAL_BEND_MAX}° a cervical spine bends. The rig has one spine bone, so a deep arch lands in the neck - segment the spine, or lift the chest.`,
+    });
+  } else if (swing > CERVICAL_BEND_WARN + ANGLE_EPSILON) {
+    issues.push({
+      code: 'cervical-bend',
+      severity: 'warning',
+      message: `The head is bent ${Math.round(swing)}° on the chest - deep cervical flexion, and hard on a neck.`,
+    });
+  }
+
+  return issues;
+};
+
 const groundIssues = (skeleton: Skeleton): Issue[] => {
   const issues: Issue[] = [];
   const lowest = skeleton.bounds.minY;
@@ -146,5 +232,10 @@ const contactIssues = (skeleton: Skeleton, contact: readonly LandmarkId[]): Issu
 /** Check a pose against the limits of an actual body. Empty result means it is sound. */
 export const validatePose = (pose: PoseSpec, rig: Rig = DEFAULT_RIG): Issue[] => {
   const skeleton = solveSkeleton(resolveFigure(pose.figure), rig);
-  return [...jointIssues(skeleton, rig), ...groundIssues(skeleton), ...contactIssues(skeleton, pose.contact)];
+  return [
+    ...jointIssues(skeleton, rig),
+    ...cervicalIssues(skeleton),
+    ...groundIssues(skeleton),
+    ...contactIssues(skeleton, pose.contact),
+  ];
 };

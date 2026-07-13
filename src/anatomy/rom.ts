@@ -54,6 +54,24 @@ export const HINGE_SLACK = 8;
 export const KNEE_MAX_FLEXION = 160;
 export const ELBOW_MAX_FLEXION = 155;
 
+/**
+ * The neck, which the rig splits between the `neck` bone and the `head` bone.
+ * These are the limits of the WHOLE cervical spine, head measured against
+ * chest - the only measurement that means anything, since either bone alone can
+ * be innocent while the pair is impossible.
+ */
+export const CERVICAL_ROTATION_WARN = 70;
+export const CERVICAL_ROTATION_MAX = 80;
+/**
+ * Nod and side-bend together, head against chest. The ceiling is high on
+ * purpose: a shoulderstand really does flex the cervical spine to about a right
+ * angle - it is exactly why the pose is contraindicated for a bad neck - and a
+ * lint that called sarvangasana impossible would be a lint nobody believed.
+ * Past 90 you are not bending a neck, you are breaking one.
+ */
+export const CERVICAL_BEND_WARN = 70;
+export const CERVICAL_BEND_MAX = 90;
+
 const KNEE: BoneRom = { flex: { min: -HINGE_SLACK, max: KNEE_MAX_FLEXION, ...FLEXION } };
 const ELBOW: BoneRom = {
   flex: { min: -HINGE_SLACK, max: ELBOW_MAX_FLEXION, ...FLEXION },

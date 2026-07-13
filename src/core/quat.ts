@@ -20,6 +20,9 @@ export const axisAngleDeg = (axis: Vec3, deg: number): Quat =>
 /** `a` after `b`: the combined rotation applies `b` first, then `a`. */
 export const mulQuat = (a: Quat, b: Quat): Quat => gl.multiply(out(), a, b) as [number, number, number, number];
 
+/** The inverse rotation. (Unit quaternions only - which is all of them here.) */
+export const conjugateQuat = (q: Quat): Quat => gl.conjugate(out(), q) as [number, number, number, number];
+
 export const rotateVec3 = (q: Quat, v: Vec3): Vec3 =>
   glv.transformQuat([0, 0, 0], v, q) as [number, number, number];
 

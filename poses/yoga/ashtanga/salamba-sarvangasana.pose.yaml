@@ -20,7 +20,7 @@ figure:
     pitch: 180
   world:
     pelvis: { azimuth: 0, elevation: -90 }
-    spine: { azimuth: 0, elevation: -90 }
+    spine: { azimuth: 0, elevation: -90, twist: 180 }
     neck: { azimuth: 180, elevation: 0 }
     head: { azimuth: 180, elevation: 0 }
     upperArmL: { azimuth: 0, elevation: 0 }

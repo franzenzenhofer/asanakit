@@ -87,3 +87,40 @@ describe('a new prop arrives fully specified', () => {
     expect(mat.at).toEqual([0, 0]);
   });
 });
+
+describe('the neck is checked, not just the knees', () => {
+  const withNeck = (world: string): ReturnType<typeof parsePose> =>
+    parsePose(`asanakit: 2\nid: t\nname: T\ndiscipline: yoga\nfigure:\n  grounded: false\n  world:\n${world}\n`, 't.pose.yaml');
+
+  test('a neck turned past its range is an error, and says so', () => {
+    const issues = validatePose(withNeck('    head: { azimuth: 0, elevation: 90, twist: 140 }'));
+    const rotation = issues.find((i) => i.code === 'cervical-rotation');
+    expect(rotation?.severity).toBe('error');
+    expect(rotation?.message).toContain('turned');
+  });
+
+  test('a head turned within range passes', () => {
+    const issues = validatePose(withNeck('    head: { azimuth: 0, elevation: 90, twist: 50 }'));
+    expect(issues.filter((i) => i.code === 'cervical-rotation')).toEqual([]);
+  });
+
+  test('a head tipped back over a lifted chest is EXTENSION, not rotation', () => {
+    // The trap the naive check falls into: comparing facing directions calls this
+    // 180 degrees of rotation. A fish pose is not a broken neck.
+    const issues = validatePose(
+      withNeck('    spine: { azimuth: 180, elevation: 55 }\n    head: { azimuth: 180, elevation: -20 }'),
+    );
+    expect(issues.filter((i) => i.code === 'cervical-rotation')).toEqual([]);
+  });
+
+  test('every bundled pose has a possible neck - no head is on backwards', async () => {
+    const { loadLibrary } = await import('../../src/library/index.js');
+    const lib = await loadLibrary();
+    const broken = [...lib.poses.values()].flatMap((pose) =>
+      validatePose(pose)
+        .filter((i) => i.severity === 'error')
+        .map((i) => `${pose.id}: ${i.message}`),
+    );
+    expect(broken).toEqual([]);
+  });
+});
