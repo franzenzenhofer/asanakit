@@ -14,26 +14,31 @@ export const boneOfMesh = (mesh: Mesh): BoneId | null => {
   return isBoneId(id) ? id : null;
 };
 
+/** The landmark a `joint:` dot or a `grab:` sphere stands for. */
+const landmarkOf = (mesh: Mesh, prefix: string): LandmarkId | null => {
+  const name = mesh.name;
+  if (!name.startsWith(prefix)) return null;
+  const id = name.slice(prefix.length);
+  return isLandmarkId(id) ? id : null;
+};
+
 /**
  * A JOINT is a handle. Taking hold of the knee and pulling it is exactly aiming
  * the thigh - and the shin, the foot and the toes come with it, because they hang
- * off the thigh and that is what forward kinematics does. So a joint sphere picks
- * the bone that ENDS there, and the rest of the limb follows for free.
+ * off the thigh and that is what forward kinematics does.
+ *
+ * What you actually hit is `grab:` - an invisible sphere much wider than the dot
+ * you can see. The dot stays small because a small dot looks right; the target
+ * stays big because a small target is unhittable. They are different problems.
  */
 export const jointOfMesh = (mesh: Mesh): BoneId | null => {
-  const name = mesh.name;
-  if (!name.startsWith('joint:')) return null;
-  const id = name.slice(6);
-  return isLandmarkId(id) ? boneEndingAt(id) : null;
+  const id = landmarkOf(mesh, 'grab:') ?? landmarkOf(mesh, 'joint:');
+  return id === null ? null : boneEndingAt(id);
 };
 
-/** The joint the mesh IS, for highlighting the handle you are holding. */
-export const landmarkOfMesh = (mesh: Mesh): LandmarkId | null => {
-  const name = mesh.name;
-  if (!name.startsWith('joint:')) return null;
-  const id = name.slice(6);
-  return isLandmarkId(id) ? id : null;
-};
+/** The joint the mesh stands for, so the panel can say what you are holding. */
+export const landmarkOfMesh = (mesh: Mesh): LandmarkId | null =>
+  landmarkOf(mesh, 'grab:') ?? landmarkOf(mesh, 'joint:');
 
 /**
  * Everything a pick or an aim needs to know about the view. The rect is spelled

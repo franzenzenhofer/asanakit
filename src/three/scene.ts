@@ -8,6 +8,7 @@ import {
   CapsuleGeometry,
   Group,
   Mesh,
+  MeshBasicMaterial,
   MeshStandardMaterial,
   Quaternion,
   SphereGeometry,
@@ -38,13 +39,15 @@ const BONE_RADIUS = 0.016;
 const HEAD_RADIUS = 0.055;
 const JOINT_RADIUS = 0.02;
 /**
- * A HANDLE is a joint you can take hold of. It is bigger than the bone it sits on
- * and a different colour, because a control you cannot see is not a control - and
- * the old joints were the bone's own colour and barely wider than it, which is
- * exactly as grabbable as no joint at all.
+ * The GRAB radius. A joint is drawn small because a small joint looks right - and
+ * it is caught over a much wider area than it is drawn, because a thing that
+ * looks right and a thing you can hit are two different problems, and making the
+ * dot fat to solve the second one wrecks the first.
+ *
+ * So the sphere you SEE stays the size it always was, and an invisible one three
+ * times as wide sits over it and takes the hits.
  */
-const HANDLE_RADIUS = 0.032;
-const HANDLE_COLOR = '#9aa4d4';
+const GRAB_RADIUS = 0.055;
 
 /** Fixed tessellation, so the same skeleton always exports identical bytes. */
 const CAPSULE_SEGMENTS = { cap: 6, radial: 12 } as const;
@@ -79,6 +82,12 @@ const muscleBones = (ids: readonly MuscleId[]): Set<BoneId> => {
 
 const material = (color: string): MeshStandardMaterial =>
   new MeshStandardMaterial({ color, roughness: 0.65, metalness: 0 });
+
+/**
+ * The grab sphere is invisible but not `visible: false` - three does not raycast
+ * what it will not draw, and this one exists precisely to be hit.
+ */
+const GRAB_MATERIAL = new MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false });
 
 interface BoneMeshSpec {
   readonly radius: number;
@@ -154,22 +163,29 @@ const headMesh = (skeleton: Skeleton, mat: MeshStandardMaterial, shadeMat: MeshS
 const addJointSpheres = (
   group: Group,
   skeleton: Skeleton,
-  mats: { left: MeshStandardMaterial; base: MeshStandardMaterial; handle: MeshStandardMaterial },
+  mats: { left: MeshStandardMaterial; base: MeshStandardMaterial },
   handles: boolean,
 ): void => {
   for (const [id, p] of Object.entries(skeleton.landmarks)) {
     if (id === 'headCenter' || id === 'headTop') continue;
 
-    // Only a landmark that ENDS a bone is a handle - the others move nothing, and
-    // offering to grab them would be a lie.
-    const grabbable = handles && boneEndingAt(id as LandmarkId) !== null;
-    const radius = (grabbable ? HANDLE_RADIUS : JOINT_RADIUS) * skeleton.scale;
-    const material = grabbable ? mats.handle : id.endsWith('L') ? mats.left : mats.base;
-
-    const joint = new Mesh(new SphereGeometry(radius, 16, 12), material);
+    const joint = new Mesh(
+      new SphereGeometry(JOINT_RADIUS * skeleton.scale, 12, 8),
+      id.endsWith('L') ? mats.left : mats.base,
+    );
     joint.name = `joint:${id}`;
     joint.position.set(p[0], p[1], p[2]);
     group.add(joint);
+
+    // ...and, in the editor, an invisible sphere over it that is easy to hit.
+    // Only a landmark that ENDS a bone gets one: the others move nothing, and
+    // offering to grab a thing that cannot move is a lie.
+    if (!handles || boneEndingAt(id as LandmarkId) === null) continue;
+
+    const grab = new Mesh(new SphereGeometry(GRAB_RADIUS * skeleton.scale, 10, 8), GRAB_MATERIAL);
+    grab.name = `grab:${id}`;
+    grab.position.set(p[0], p[1], p[2]);
+    group.add(grab);
   }
 };
 
@@ -205,7 +221,7 @@ export const buildFigureScene = (skeleton: Skeleton, options: FigureSceneOptions
   }
 
   group.add(headMesh(skeleton, materialFor('head', 'center'), material(OCCIPUT_COLOR)));
-  addJointSpheres(group, skeleton, { left, base, handle: material(HANDLE_COLOR) }, options.handles === true);
+  addJointSpheres(group, skeleton, { left, base }, options.handles === true);
   for (const mesh of buildPropMeshes(options.props ?? [], skeleton)) group.add(mesh);
 
   return group;

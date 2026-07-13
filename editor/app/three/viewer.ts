@@ -125,8 +125,11 @@ export const createViewer = (mount: HTMLElement, callbacks: ViewerCallbacks = {}
     if (figure === null || selected === null) return;
     for (const child of figure.children) {
       const mesh = child as Mesh;
-      // The bone AND the joint at the end of it: the handle you are holding lights
-      // up along with the thing it moves.
+      // The invisible grab spheres are targets, not paint: they carry a basic
+      // material with no emissive to light, and lighting them would throw.
+      if (mesh.name.startsWith('grab:')) continue;
+      // The bone AND the joint at the end of it: the dot you are holding lights up
+      // along with the limb it moves.
       if (boneOfMesh(mesh) !== selected && jointOfMesh(mesh) !== selected) continue;
       const material = mesh.material as MeshStandardMaterial;
       originals.set(mesh, material);
