@@ -21,6 +21,8 @@ figure:
   world:
     pelvis: { azimuth: 180, elevation: 15 }
     spine: { azimuth: 180, elevation: 55 }
+    # The ribcage carries the arch, which is what a ribcage is for.
+    thorax: { azimuth: 180, elevation: 30 }
     neck: { azimuth: 180, elevation: -30 }
     head: { azimuth: 0, elevation: -90, twist: 180 }
     upperArmL: { azimuth: 0, elevation: -90 }

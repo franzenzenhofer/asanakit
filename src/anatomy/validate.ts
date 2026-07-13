@@ -3,7 +3,7 @@ import { DEFAULT_RIG } from '../core/rig.js';
 import { conjugateQuat, mulQuat, rotateVec3, type Quat } from '../core/quat.js';
 import { solveSkeleton } from '../core/skeleton.js';
 import type { BoneId, LandmarkId, Rig, Skeleton } from '../core/types.js';
-import { cross3, dot3, normalize3, sub3 } from '../core/vec3.js';
+import { cross3, dot3, normalize3, sub3, type Vec3 } from '../core/vec3.js';
 import { resolveFigure, type PoseSpec } from '../model/index.js';
 import {
   CERVICAL_BEND_MAX,
@@ -67,6 +67,10 @@ const HYPEREXTENSION_SLACK = HINGE_SLACK;
  * is not being past it, and no body cares about a millionth of a degree.
  */
 const ANGLE_EPSILON = 1e-6;
+
+/** Every bone's rest frame: +y along the bone, +z out through the front of the body. */
+const UP: Vec3 = [0, 1, 0];
+const FORWARD: Vec3 = [0, 0, 1];
 const GROUND_TOLERANCE = 0.02;
 const CONTACT_TOLERANCE = 0.035;
 
@@ -170,13 +174,20 @@ const cervicalIssues = (skeleton: Skeleton): Issue[] => {
   }
 
   if (swing > CERVICAL_BEND_MAX + ANGLE_EPSILON) {
-    // A warning, not an error: the pose is still drawable, and some of these are
-    // old poses that spent their whole arch in the neck back when the trunk was
-    // one bone. The trunk is two bones now, so there IS somewhere else to put it.
+    // A warning, not an error: the pose still draws, and the advice depends on
+    // WHICH WAY the neck has been over-bent. A fish pose is extending and wants
+    // its ribcage to take the arch; a plough is flexing and wants the opposite.
+    // Telling a plough to arch its thorax would be worse than saying nothing.
+    const skull = rotateVec3(skeleton.bones.head.orientation, UP);
+    const anterior = rotateVec3(chest, FORWARD);
+    const flexing = dot3(skull, anterior) > 0;
+
     issues.push({
       code: 'cervical-bend',
       severity: 'warning',
-      message: `The head is bent ${Math.round(swing)}° on the chest, past the ${CERVICAL_BEND_MAX}° a cervical spine bends. Arch the thorax and let the ribcage carry the curve, instead of the neck.`,
+      message: flexing
+        ? `The head is bent ${Math.round(swing)}° forward on the chest, past the ${CERVICAL_BEND_MAX}° a cervical spine bends. Round the thorax with it, or lift the chest away.`
+        : `The head is bent ${Math.round(swing)}° back on the chest, past the ${CERVICAL_BEND_MAX}° a cervical spine bends. Arch the thorax and let the ribcage carry the curve, not the neck.`,
     });
   } else if (swing > CERVICAL_BEND_WARN + ANGLE_EPSILON) {
     issues.push({
