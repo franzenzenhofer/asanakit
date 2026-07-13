@@ -26,8 +26,8 @@ figure:
     footL: { azimuth: 0, elevation: -18 }
     footR: { azimuth: 0, elevation: -18 }
     spine: { azimuth: 0, elevation: 65 }
-    neck: { azimuth: 0, elevation: 70 }
-    head: { azimuth: 0, elevation: 72 }
+    neck: { azimuth: 180, elevation: 70 }
+    head: { azimuth: 180, elevation: 55 }
     upperArmL: { azimuth: 0, elevation: 78 }
     upperArmR: { azimuth: 0, elevation: 78 }
     forearmL: { azimuth: 0, elevation: 80 }

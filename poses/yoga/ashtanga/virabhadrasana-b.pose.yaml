@@ -25,7 +25,7 @@ figure:
     footR: { azimuth: -90, elevation: -15 }
     spine: { elevation: 90 }
     neck: { elevation: 90 }
-    head: { elevation: 90 }
+    head: { elevation: 90, twist: 80 }
     upperArmL: { azimuth: 90, elevation: 0 }
     forearmL: { azimuth: 90, elevation: 0 }
     handL: { azimuth: 90, elevation: 0 }
