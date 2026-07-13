@@ -1,11 +1,15 @@
 import { signal } from '@preact/signals';
 import type { BoneId } from '@asanakit/core/types.js';
-import type { PoseSpecInput } from '@asanakit/model/index.js';
+import { propSchema, type PoseSpecInput } from '@asanakit/model/index.js';
 import type { StyleId } from '@asanakit/render/styles.js';
 import { reduce, type EditorAction } from './actions.js';
 import { emptyHistory, record, redo, undo, type History } from './history.js';
 
-/** A fresh figure standing in anatomical neutral - the blank canvas. */
+/**
+ * A fresh figure standing in anatomical neutral - the blank canvas. Its mat is
+ * a real mat, every dimension filled in from the schema's own defaults, because
+ * nobody should have to invent the width of a yoga mat before they can draw.
+ */
 export const blankPose = (): PoseSpecInput => ({
   asanakit: 2,
   id: 'my-asana',
@@ -14,7 +18,7 @@ export const blankPose = (): PoseSpecInput => ({
   contact: ['toeL', 'toeR'],
   camera: 'front',
   figure: {},
-  props: [{ type: 'mat' }],
+  props: [propSchema.parse({ type: 'mat' })],
 });
 
 export const pose = signal<PoseSpecInput>(blankPose());

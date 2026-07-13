@@ -1,5 +1,6 @@
 import { useState } from 'preact/hooks';
 import type { JSX } from 'preact';
+import { channelsOf, isHinge, ROM, termFor, type Channel, type Range } from '@asanakit/anatomy/rom.js';
 import type { BoneId } from '@asanakit/core/types.js';
 import { commitGesture, dispatch, linkSides, pose, selectedBone } from '../state/doc.js';
 import { counterpart, readJoint, solvedWorldDirection } from '../state/joints.js';
@@ -16,17 +17,25 @@ const GROUPS: readonly { name: string; bones: readonly BoneId[] }[] = [
 
 const label = (bone: BoneId): string => bone.replace(/([A-Z])$/, ' $1').replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase();
 
-const JOINT_CHANNELS = [
-  { channel: 'flex', label: 'Flex', min: -180, max: 180 },
-  { channel: 'abduct', label: 'Abduct', min: -180, max: 180 },
-  { channel: 'twist', label: 'Twist', min: -180, max: 180 },
-] as const;
-
 const WORLD_CHANNELS = [
   { channel: 'azimuth', label: 'Azimuth', min: -180, max: 180 },
   { channel: 'elevation', label: 'Elevation', min: -90, max: 90 },
   { channel: 'twist', label: 'Twist', min: -180, max: 180 },
 ] as const;
+
+/**
+ * The control says what the movement is called, and which way it is going: a
+ * knee reads "Flexion", a shoulder turned inward reads "Internal rotation".
+ * Both the words and the range come from `src/anatomy/rom.ts`, the same table
+ * lint checks against - so a slider cannot reach a body lint would reject, and
+ * an elbow is never offered an abduction control it does not have.
+ */
+const channelLabel = (bone: BoneId, channel: Channel, value: number): string => {
+  const range = ROM[bone][channel];
+  if (range === undefined) return channel;
+  // At rest the control names both directions; once it moves, it names the one it is doing.
+  return value === 0 ? `${range.positive} / ${range.negative}` : (termFor(bone, channel, value) ?? channel);
+};
 
 const BonePicker = ({ onPick }: { onPick: (bone: BoneId) => void }): JSX.Element => (
   <div class="field">
@@ -51,17 +60,23 @@ const ChannelSliders = ({ bone }: { bone: BoneId }): JSX.Element => {
   if (world === undefined) {
     return (
       <div>
-        {JOINT_CHANNELS.map((c) => (
-          <SliderRow
-            key={c.channel}
-            label={c.label}
-            value={joint[c.channel]}
-            min={c.min}
-            max={c.max}
-            onChange={(value, transient) => dispatch({ type: 'set-joint', bone, channel: c.channel, value }, { transient })}
-            onCommit={commitGesture}
-          />
-        ))}
+        {channelsOf(bone).map((channel) => {
+          const range = ROM[bone][channel] as Range;
+          return (
+            <SliderRow
+              key={channel}
+              label={channelLabel(bone, channel, joint[channel])}
+              value={joint[channel]}
+              min={range.min}
+              max={range.max}
+              onChange={(value, transient) => dispatch({ type: 'set-joint', bone, channel, value }, { transient })}
+              onCommit={commitGesture}
+            />
+          );
+        })}
+        {isHinge(bone) && (
+          <p class="panel-hint">This joint is a hinge: it flexes, and that is all it does.</p>
+        )}
       </div>
     );
   }

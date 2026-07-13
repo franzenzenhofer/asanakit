@@ -5,6 +5,7 @@ import { solveSkeleton } from '../core/skeleton.js';
 import type { BoneId, LandmarkId, Rig, Skeleton } from '../core/types.js';
 import { cross3, dot3, normalize3, sub3 } from '../core/vec3.js';
 import { resolveFigure, type PoseSpec } from '../model/index.js';
+import { ELBOW_MAX_FLEXION, HINGE_SLACK, KNEE_MAX_FLEXION } from './rom.js';
 
 export type IssueCode =
   | 'knee-hyperextension'
@@ -35,8 +36,10 @@ interface Hinge {
   readonly over: IssueCode;
 }
 
-const KNEE = { maxFlexion: 160, hyper: 'knee-hyperextension', over: 'knee-overflexion' } as const;
-const ELBOW = { maxFlexion: 155, hyper: 'elbow-hyperextension', over: 'elbow-overflexion' } as const;
+// The limits themselves live in one place - `rom.ts` - so the editor's sliders
+// and this validator can never drift apart about what a knee can do.
+const KNEE = { maxFlexion: KNEE_MAX_FLEXION, hyper: 'knee-hyperextension', over: 'knee-overflexion' } as const;
+const ELBOW = { maxFlexion: ELBOW_MAX_FLEXION, hyper: 'elbow-hyperextension', over: 'elbow-overflexion' } as const;
 
 const HINGES: readonly Hinge[] = [
   { child: 'shinL', parent: 'thighL', name: 'left knee', ...KNEE },
@@ -46,7 +49,13 @@ const HINGES: readonly Hinge[] = [
 ];
 
 /** A little slack: a locked-out knee measures a degree or two either side of straight. */
-const HYPEREXTENSION_SLACK = 8;
+const HYPEREXTENSION_SLACK = HINGE_SLACK;
+/**
+ * The measured angle is a float derived from two normalised vectors, so a joint
+ * authored at exactly its limit can land an ulp beyond it. Sitting ON the limit
+ * is not being past it, and no body cares about a millionth of a degree.
+ */
+const ANGLE_EPSILON = 1e-6;
 const GROUND_TOLERANCE = 0.02;
 const CONTACT_TOLERANCE = 0.035;
 
@@ -77,13 +86,13 @@ const jointIssues = (skeleton: Skeleton, rig: Rig): Issue[] => {
   for (const hinge of HINGES) {
     const angle = flexion(skeleton, hinge, rig);
 
-    if (angle < -HYPEREXTENSION_SLACK) {
+    if (angle < -HYPEREXTENSION_SLACK - ANGLE_EPSILON) {
       issues.push({
         code: hinge.hyper,
         severity: 'error',
         message: `${hinge.name} ("${hinge.child}") bends backwards by ${Math.abs(Math.round(angle))}°. A ${hinge.name} only flexes forwards.`,
       });
-    } else if (angle > hinge.maxFlexion) {
+    } else if (angle > hinge.maxFlexion + ANGLE_EPSILON) {
       issues.push({
         code: hinge.over,
         severity: 'error',
