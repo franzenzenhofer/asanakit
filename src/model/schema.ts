@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { MUSCLE_IDS } from '../anatomy/muscles.js';
 import { CAMERA_PRESET_IDS, type CameraPresetId } from '../core/camera.js';
-import { BONE_IDS, LANDMARK_IDS } from '../core/types.js';
+import { BONE_IDS, LANDMARK_IDS, type BoneId } from '../core/types.js';
 
 /** Current version of the .pose file format. Bumped only on breaking changes. */
 export const POSE_FORMAT_VERSION = 2;
@@ -79,6 +79,18 @@ export const cameraSchema = z
   ])
   .describe('Default viewpoint: a preset name, or orbit angles in degrees. The CLI --camera flag overrides it.');
 
+/**
+ * A bone aimed EXACTLY straight up or straight down has no azimuth: `rotationTo`
+ * takes the shortest arc from the bone's rest direction, and when the target is
+ * (anti)parallel to it there is no arc to take - the azimuth is silently
+ * discarded, and the facing that results is whatever the maths falls back to,
+ * not what the author wrote. (One degree off, at elevation 89, the azimuth is
+ * real again and does exactly what it says; only the pole is degenerate.)
+ * Authors must say what they mean with `twist`, not with an azimuth that does
+ * nothing.
+ */
+const DEGENERATE_ELEVATION = 90;
+
 export const figureSchema = z.object({
   /** Swap all left and right joint values: the "other side" of an asymmetric asana. */
   mirror: z.boolean().default(false),
@@ -98,7 +110,31 @@ export const figureSchema = z.object({
     .partialRecord(z.enum(BONE_IDS), worldDirection)
     .default({})
     .describe('Absolute bone directions, overriding `joints` for that bone. Children still hang off it.'),
-});
+})
+  .superRefine((figure, ctx) => {
+    const joints: Partial<Record<BoneId, unknown>> = figure.joints ?? {};
+    for (const [bone, direction] of Object.entries(figure.world ?? {})) {
+      // The solver takes `world` and throws `joints` away. Throwing an author's
+      // words away in silence is how a pose ends up meaning something nobody wrote.
+      if (joints[bone as BoneId] !== undefined) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['joints', bone],
+          message: `"${bone}" is given in both "joints" and "world". A world direction overrides the joint entirely, so the joint value would be silently ignored - give one or the other.`,
+        });
+      }
+
+      if (direction === undefined) continue;
+      const { azimuth = 0, elevation = 0 } = direction;
+      if (Math.abs(elevation) >= DEGENERATE_ELEVATION && azimuth !== 0) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['world', bone, 'azimuth'],
+          message: `"${bone}" points straight ${elevation > 0 ? 'up' : 'down'} (elevation ${elevation}), so its azimuth of ${azimuth} does nothing and is discarded. Set azimuth to 0 and use "twist" to say which way it faces.`,
+        });
+      }
+    }
+  });
 
 const annotationBase = { label: z.string().optional(), color: z.string().optional() };
 

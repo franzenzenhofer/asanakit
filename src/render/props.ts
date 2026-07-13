@@ -38,8 +38,6 @@ const smooth = line<Vec2>()
 
 const WAVE_STEPS = 48;
 
-/** How much of the mat's front edge the facing tick claims. */
-const FRONT_TICK = 0.3;
 
 /**
  * The mat is a real 3D box, and the picture shows its top face projected
@@ -51,8 +49,8 @@ const FRONT_TICK = 0.3;
 interface MatFace {
   /** The top face, in the picture plane. */
   readonly corners: readonly [Vec2, Vec2, Vec2, Vec2];
-  /** The short edge the figure faces. */
-  readonly front: readonly [Vec2, Vec2];
+  /** The forward arrow, lying flat on the mat. */
+  readonly arrow: readonly [Vec2, Vec2, Vec2];
 }
 
 const matFace = (prop: MatProp, skeleton: ViewSkeleton): MatFace => {
@@ -64,7 +62,7 @@ const matFace = (prop: MatProp, skeleton: ViewSkeleton): MatFace => {
   const model = matModel(prop, skeleton.source);
   return {
     corners: model.top.map(flat) as unknown as readonly [Vec2, Vec2, Vec2, Vec2],
-    front: [flat(model.frontEdge[0]), flat(model.frontEdge[1])],
+    arrow: model.frontArrow.map(flat) as unknown as readonly [Vec2, Vec2, Vec2],
   };
 };
 
@@ -157,13 +155,9 @@ const renderProp = (prop: Prop, ctx: RenderContext): SvgNode => {
     }
     case 'mat': {
       const face = matFace(prop, skeleton);
-      // A quiet tick across the middle of the front edge - enough to say which
-      // way the practice faces, never enough to compete with the body. It
-      // survives the collapse to a single line when the camera is at eye level.
-      const [a, b] = face.front;
-      const tick = (t: number): Vec2 => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
-      const [tx1, ty1] = proj.p(tick(0.5 - FRONT_TICK / 2));
-      const [tx2, ty2] = proj.p(tick(0.5 + FRONT_TICK / 2));
+      // A flat arrow lying on the mat, pointing the way the practice faces.
+      // It is drawn in the mat's own ink, not a colour - the body is the
+      // subject, and the mat is only telling you which end is the front.
       return group({ 'data-prop': 'mat' }, [
         el('path', {
           'data-part': 'surface',
@@ -173,15 +167,11 @@ const renderProp = (prop: Prop, ctx: RenderContext): SvgNode => {
           'stroke-linejoin': 'round',
           'stroke-linecap': 'round',
         }),
-        el('line', {
+        el('path', {
           'data-part': 'front',
-          x1: tx1,
-          y1: ty1,
-          x2: tx2,
-          y2: ty2,
-          stroke: style.props.accent,
-          'stroke-width': style.props.strokeWidth * 1.5 * proj.s,
-          'stroke-linecap': 'round',
+          d: polygon(face.arrow, proj),
+          fill: style.props.accent,
+          stroke: 'none',
         }),
       ]);
     }

@@ -27,9 +27,9 @@ figure:
     thighR: { azimuth: -90, elevation: -62 }
     shinR: { azimuth: -90, elevation: -62 }
     footR: { azimuth: -90, elevation: -30 }
-    spine: { azimuth: 90, elevation: -90 }
-    neck: { azimuth: 90, elevation: -90 }
-    head: { azimuth: 90, elevation: -90 }
+    spine: { elevation: -90 }
+    neck: { elevation: -90 }
+    head: { elevation: -90 }
     clavicleL: { azimuth: 90, elevation: 0 }
     clavicleR: { azimuth: -90, elevation: 0 }
     upperArmL: { azimuth: 90, elevation: -30 }

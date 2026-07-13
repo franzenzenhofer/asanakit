@@ -20,12 +20,17 @@ const rotateY = (p: Vec3, deg: number, cx: number, cz: number): Vec3 => {
   return [cx + x * Math.cos(r) + z * Math.sin(r), p[1], cz - x * Math.sin(r) + z * Math.cos(r)];
 };
 
+/** The forward arrow's footprint on the mat, as fractions of its width and length. */
+const ARROW = { halfWidth: 0.15, tip: 0.94, base: 0.79 } as const;
+
 export interface MatModel {
   readonly centre: Vec3;
   /** Corners of the top face, in world space, starting at the BACK-left and running to the FRONT-left. */
   readonly top: readonly [Vec3, Vec3, Vec3, Vec3];
   /** The front short edge - the end the figure faces (+z at yaw 0). */
   readonly frontEdge: readonly [Vec3, Vec3];
+  /** A flat arrow lying on the mat, pointing the way the practice faces. */
+  readonly frontArrow: readonly [Vec3, Vec3, Vec3];
   readonly width: number;
   readonly length: number;
   readonly thickness: number;
@@ -54,10 +59,21 @@ export const matModel = (prop: MatProp, _skeleton: Skeleton): MatModel => {
     [cx - hw, topY, cz + hl],
   ];
   const top = corners.map((p) => rotateY(p, prop.yaw, cx, cz)) as [Vec3, Vec3, Vec3, Vec3];
+
+  // An arrow lying flat on the mat, pointing at its front edge. It says which
+  // way the practice faces without decorating the mat.
+  const aw = prop.width * ARROW.halfWidth;
+  const arrow: [Vec3, Vec3, Vec3] = [
+    [cx - aw, topY, cz + hl * ARROW.base],
+    [cx + aw, topY, cz + hl * ARROW.base],
+    [cx, topY, cz + hl * ARROW.tip],
+  ];
+
   return {
     centre: [cx, prop.y - prop.thickness / 2, cz],
     top,
     frontEdge: [top[2], top[3]],
+    frontArrow: arrow.map((p) => rotateY(p, prop.yaw, cx, cz)) as [Vec3, Vec3, Vec3],
     width: prop.width,
     length: prop.length,
     thickness: prop.thickness,

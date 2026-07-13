@@ -115,7 +115,7 @@ const stick: Style = {
     outline: '#00000000',
     outlineWidth: 0,
   },
-  props: { stroke: '#111111', fill: '#f0f0f0', strokeWidth: 0.008, accent: '#c1121f' },
+  props: { stroke: '#111111', fill: '#f0f0f0', strokeWidth: 0.008, accent: '#8a8a8a' },
   annotation: {
     stroke: '#c1121f',
     strokeWidth: 0.005,
@@ -191,7 +191,7 @@ const blueprint: Style = {
     shade: '#1b3a5c',
     shadeOpacity: 0.12,
   },
-  props: { stroke: '#1b3a5c', fill: '#e2ecf5', strokeWidth: 0.006, accent: '#c1121f' },
+  props: { stroke: '#1b3a5c', fill: '#e2ecf5', strokeWidth: 0.006, accent: '#7591b3' },
   annotation: { ...stick.annotation, stroke: '#c1121f', accent: '#c1121f', color: '#1b3a5c', strokeWidth: 0.004 },
   text: { ...stick.text, color: '#1b3a5c', muted: '#5c7998' },
 };
@@ -211,7 +211,7 @@ const poster: Style = {
   background: '#fdf6ec',
   figure: { ...stick.figure, stroke: '#1d1d1b', strokeLeft: '#6e6e6a', strokeWidth: 0.03, torsoWidth: 0.05, jointRadius: 0.016 },
   head: { ...stick.head, fill: '#f4a259', stroke: '#1d1d1b', strokeWidth: 0.026, rx: 0.05, ry: 0.066, shadeOpacity: 0.22 },
-  props: { stroke: '#1d1d1b', fill: '#8cb369', strokeWidth: 0.012, accent: '#bc4b51' },
+  props: { stroke: '#1d1d1b', fill: '#8cb369', strokeWidth: 0.012, accent: '#4f6b3f' },
   annotation: { ...stick.annotation, stroke: '#bc4b51', accent: '#bc4b51', color: '#1d1d1b' },
 };
 

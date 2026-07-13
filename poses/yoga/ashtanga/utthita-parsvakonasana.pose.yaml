@@ -22,7 +22,7 @@ figure:
     hipL: { azimuth: 90, elevation: 0 }
     hipR: { azimuth: -90, elevation: 0 }
     thighL: { azimuth: 90, elevation: 0 }
-    shinL: { azimuth: 90, elevation: -90 }
+    shinL: { elevation: -90 }
     footL: { azimuth: 90, elevation: -10 }
     thighR: { azimuth: -90, elevation: -30 }
     shinR: { azimuth: -90, elevation: -30 }

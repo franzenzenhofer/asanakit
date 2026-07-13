@@ -18,14 +18,14 @@ figure:
   grounded: true
   world:
     thighL: { azimuth: 90, elevation: -10 }
-    shinL: { azimuth: 90, elevation: -90 }
+    shinL: { elevation: -90 }
     footL: { azimuth: 90, elevation: -20 }
     thighR: { azimuth: -90, elevation: -36 }
     shinR: { azimuth: -90, elevation: -36 }
     footR: { azimuth: -90, elevation: -15 }
-    spine: { azimuth: 90, elevation: 90 }
-    neck: { azimuth: 90, elevation: 90 }
-    head: { azimuth: 90, elevation: 90 }
+    spine: { elevation: 90 }
+    neck: { elevation: 90 }
+    head: { elevation: 90 }
     upperArmL: { azimuth: 90, elevation: 0 }
     forearmL: { azimuth: 90, elevation: 0 }
     handL: { azimuth: 90, elevation: 0 }

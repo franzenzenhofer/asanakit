@@ -4,8 +4,10 @@
  * mat or a surfboard, every output agrees.
  */
 import {
+  DoubleSide,
   BoxGeometry,
   ExtrudeGeometry,
+  ShapeGeometry,
   Group,
   Mesh,
   MeshStandardMaterial,
@@ -21,12 +23,8 @@ import { BOARD_PLAN, matModel, surfboardModel, type SurfboardProp } from '../pro
 
 const MAT_TOP_COLOR = '#b8ccd8';
 const MAT_EDGE_COLOR = '#6d8494';
-const MAT_FRONT_COLOR = '#c1121f';
+const MAT_ARROW_COLOR = '#5a7080';
 const BOARD_COLOR = '#efe9da';
-
-/** How much of the mat's length and width the front tick claims. */
-const FRONT_BAND = 0.04;
-const FRONT_TICK = 0.3;
 
 const X = new Vector3(1, 0, 0);
 const Y = new Vector3(0, 1, 0);
@@ -36,9 +34,9 @@ const material = (color: string): MeshStandardMaterial =>
 
 /**
  * A mat you can read: the top face is lighter than the sides, so you can see
- * which way is up even from a low camera, and a band across the front short
- * edge (+z, the way the figure faces) tells the front of the mat from the back.
- * Six materials, in three.js's box face order: +x, -x, +y, -y, +z, -z.
+ * which way is up even from a low camera, and a flat arrow lying on it points
+ * at the front (+z, the way the figure faces). Six materials, in three.js's box
+ * face order: +x, -x, +y, -y, +z, -z.
  */
 const matMesh = (prop: Extract<Prop, { type: 'mat' }>, skeleton: Skeleton): Group => {
   const model = matModel(prop, skeleton);
@@ -53,18 +51,34 @@ const matMesh = (prop: Extract<Prop, { type: 'mat' }>, skeleton: Skeleton): Grou
   ]);
   slab.name = 'prop:mat:slab';
 
-  // The front tick sits a hair proud of the top face so it never z-fights.
-  const bandLength = model.length * FRONT_BAND;
-  const band = new Mesh(
-    new BoxGeometry(model.width * FRONT_TICK, model.thickness * 0.2, bandLength),
-    material(MAT_FRONT_COLOR),
-  );
-  band.name = 'prop:mat:front';
-  band.position.set(0, model.thickness / 2, (model.length - bandLength) / 2);
+  // The same arrow the 2D drawing uses, from the same model: laid flat on the
+  // top face, a hair proud of it so it never z-fights. The group carries the
+  // yaw, so the arrow is unrotated back into the mat's own frame.
+  const plan = new Shape();
+  const [cx, , cz] = model.centre;
+  const r = -degToRad(model.yaw);
+  model.frontArrow.forEach(([x, , z], i) => {
+    const dx = x - cx;
+    const dz = z - cz;
+    const lx = dx * Math.cos(r) + dz * Math.sin(r);
+    const lz = -dx * Math.sin(r) + dz * Math.cos(r);
+    if (i === 0) plan.moveTo(lx, lz);
+    else plan.lineTo(lx, lz);
+  });
+  plan.closePath();
+
+  // Lay the plan flat: shape-y becomes world +z, so the arrow points at the
+  // mat's front. That turns the face downward, so the material is double-sided.
+  const arrowMaterial = material(MAT_ARROW_COLOR);
+  arrowMaterial.side = DoubleSide;
+  const arrow = new Mesh(new ShapeGeometry(plan), arrowMaterial);
+  arrow.name = 'prop:mat:front';
+  arrow.rotation.x = Math.PI / 2;
+  arrow.position.y = model.thickness / 2 + model.thickness * 0.08;
 
   const group = new Group();
   group.name = 'prop:mat';
-  group.add(slab, band);
+  group.add(slab, arrow);
   group.position.set(model.centre[0], model.centre[1], model.centre[2]);
   group.rotation.y = degToRad(model.yaw);
   return group;

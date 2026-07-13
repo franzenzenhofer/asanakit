@@ -20,7 +20,7 @@ figure:
   grounded: true
   world:
     thighL: { azimuth: 90, elevation: -10 }
-    shinL: { azimuth: 90, elevation: -90 }
+    shinL: { elevation: -90 }
     footL: { azimuth: 90, elevation: -20 }
     thighR: { azimuth: -90, elevation: -36 }
     shinR: { azimuth: -90, elevation: -36 }
