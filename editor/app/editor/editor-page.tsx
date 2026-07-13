@@ -40,21 +40,35 @@ const EditorTopbar = ({ onMenu }: { onMenu: () => void }): JSX.Element => (
   </header>
 );
 
-const ViewToggle = (): JSX.Element => {
-  const flat = view.value === '2d';
-  return (
-    <div class="canvas-fab">
+/**
+ * Two views, and you can see which one you are in. 2D is the print - the drawing
+ * that comes out of the printer, held still at whatever angle you composed it.
+ * 3D is where you go to find that angle.
+ */
+const ViewToggle = (): JSX.Element => (
+  <div class="canvas-fab">
+    <div class="segmented view-toggle" role="tablist" aria-label="View">
       <button
-        class="iconbtn labeled"
-        onClick={() => (view.value = flat ? '3d' : '2d')}
-        aria-label={flat ? 'Switch to 3D posing view' : 'Switch to 2D drawing'}
+        role="tab"
+        aria-selected={view.value === '2d'}
+        class={view.value === '2d' ? 'active' : ''}
+        onClick={() => (view.value = '2d')}
       >
-        {flat ? <CubeIcon /> : <FlatIcon />}
-        <span>{flat ? '3D' : '2D'}</span>
+        <FlatIcon />
+        <span>2D</span>
+      </button>
+      <button
+        role="tab"
+        aria-selected={view.value === '3d'}
+        class={view.value === '3d' ? 'active' : ''}
+        onClick={() => (view.value = '3d')}
+      >
+        <CubeIcon />
+        <span>3D</span>
       </button>
     </div>
-  );
-};
+  </div>
+);
 
 /**
  * Where the camera is. It is the same camera in both views, so it is worth

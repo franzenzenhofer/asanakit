@@ -159,6 +159,25 @@
 }
 .canvas-fab .iconbtn { background: var(--paper-raised); box-shadow: var(--shadow); color: var(--ink); }
 
+/* Two views, and you can see which one you are in. */
+.view-toggle {
+  background: var(--paper-raised);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+  flex-wrap: nowrap;
+}
+.view-toggle button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 12px;
+  min-height: 40px;
+  font-weight: 650;
+  color: var(--ink-faint);
+}
+.view-toggle button.active { background: var(--ink); color: var(--paper); box-shadow: none; }
+.view-toggle svg { width: 17px; height: 17px; flex-shrink: 0; }
+
 /* One camera, both views - so it is worth saying where it is. */
 .angle-readout {
   position: absolute;
