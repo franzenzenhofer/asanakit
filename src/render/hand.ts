@@ -46,9 +46,17 @@ const WANDER = 0.018;
 /** Points along a stroke: enough for the pen to breathe, few enough that it stays a line. */
 const SAMPLES = 8;
 
-/** The pen. Thinning gives the mark a living weight; the easing puts the swell in its middle. */
+/**
+ * The nib. perfect-freehand's `size` is the full width of the mark at full
+ * pressure, and it draws a body around the line rather than centring a stroke on
+ * it - so a pen asked for the old stroke-width comes out FATTER than the ruled
+ * line it replaced. It is trimmed back to match.
+ */
+const NIB = 0.62;
+
+/** Thinning gives the mark a living weight; the easing puts the swell in its middle. */
 const PEN = {
-  thinning: 0.4,
+  thinning: 0.3,
   smoothing: 0.62,
   streamline: 0.45,
   simulatePressure: true,
@@ -59,7 +67,7 @@ const PEN = {
 const outline = (points: readonly Vec2[], width: number): string => {
   const stroke = getStroke(
     points.map(([x, y]) => [x, y]),
-    { size: width, ...PEN },
+    { size: width * NIB, ...PEN },
   ) as [number, number][];
   const first = stroke[0];
   if (first === undefined) return '';

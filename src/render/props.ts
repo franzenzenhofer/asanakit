@@ -1,5 +1,3 @@
-import { curveBasis, line } from 'd3-shape';
-import { path } from 'd3-path';
 import { rotateVec3 } from '../core/quat.js';
 import type { Bounds, LandmarkId } from '../core/types.js';
 import { add, fromPolar, rotate, scale as scaleVec, type Vec2 } from '../core/vec2.js';
@@ -10,7 +8,7 @@ import { viewQuat, type ViewSkeleton } from './camera.js';
 import type { RenderContext } from './context.js';
 import { drawnPolygon, type Ink } from './hand.js';
 import { boundsOfPoints, type Projection } from './project.js';
-import { el, group, num, type SvgNode } from './svg.js';
+import { el, group, type SvgNode } from './svg.js';
 
 export const resolveAnchor = (anchor: Anchor, skeleton: ViewSkeleton): Vec2 =>
   typeof anchor === 'string' ? skeleton.landmarks[anchor] : [anchor[0], anchor[1]];
@@ -31,11 +29,6 @@ const centroid = (ids: readonly LandmarkId[], skeleton: ViewSkeleton): Vec2 => {
     pts.reduce((sum, p) => sum + p[1], 0) / pts.length,
   ];
 };
-
-const smooth = line<Vec2>()
-  .x((p) => p[0])
-  .y((p) => p[1])
-  .curve(curveBasis);
 
 const WAVE_STEPS = 48;
 
@@ -90,9 +83,20 @@ const boardOutline = (centre: Vec2, length: number, rotationDeg: number, width?:
   return local.map((p) => add(centre, rotate(p, rotationDeg)));
 };
 
-/** Props are drawn too - a mat on paper was drawn on paper. */
-const polygon = (points: readonly Vec2[], proj: Projection, ink?: Ink): string =>
-  drawnPolygon(points.map((pt) => proj.p(pt)), ink ?? { hand: 0, width: 1 });
+/**
+ * The furniture is drawn with the same pen as the body - a mat on paper was drawn
+ * on paper. When there is a hand in the line, a prop comes back as an ink SHAPE
+ * (fill it); when there is not, it is bare geometry (stroke it). `strokeOr` says
+ * which, so no caller has to think about it twice.
+ */
+const polygon = (points: readonly Vec2[], proj: Projection, ink: Ink, close = true): string =>
+  drawnPolygon(points.map((pt) => proj.p(pt)), ink, close);
+
+/** The attributes that turn a drawn path into ink, or a ruled one into a stroke. */
+const strokeOr = (ink: Ink, colour: string, fill = 'none'): Record<string, string | number | undefined> =>
+  ink.hand > 0
+    ? { fill: colour, stroke: 'none' }
+    : { fill, stroke: colour, 'stroke-width': ink.width, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' };
 
 const propPoints = (prop: Prop, skeleton: ViewSkeleton): Vec2[] => {
   const cx = WORLD_X;
@@ -135,26 +139,29 @@ export const propsBounds = (props: readonly Prop[], skeleton: ViewSkeleton): Bou
 const renderProp = (prop: Prop, ctx: RenderContext): SvgNode => {
   const { skeleton, proj, style } = ctx;
   const cx = WORLD_X;
-  const attrs = { stroke: style.props.stroke, 'stroke-width': style.props.strokeWidth * proj.s };
+  const ink: Ink = { hand: style.hand, width: style.props.strokeWidth * proj.s };
+  const colour = style.props.stroke;
 
   switch (prop.type) {
     case 'ground': {
-      const [x1, y1] = proj.p([cx - prop.width / 2, prop.y]);
-      const [x2, y2] = proj.p([cx + prop.width / 2, prop.y]);
-      return el('line', { 'data-prop': 'ground', x1, y1, x2, y2, ...attrs, 'stroke-linecap': 'round' });
+      const line: Vec2[] = [
+        [cx - prop.width / 2, prop.y],
+        [cx + prop.width / 2, prop.y],
+      ];
+      return el('path', {
+        'data-prop': 'ground',
+        d: polygon(line, proj, ink, false),
+        ...strokeOr(ink, colour),
+      });
     }
     case 'mat':
       // Just the mat. The forward arrow belongs in the 3D scene, where you are
       // flying around the thing and can lose your bearings; a flat drawing has
       // a camera, and the camera already told you which way you are looking.
-      // The mat is drawn with the same pen as the body, at the props' own weight.
       return el('path', {
         'data-prop': 'mat',
-        d: polygon(matFace(prop, skeleton).corners, proj),
-        fill: style.props.fill,
-        ...attrs,
-        'stroke-linejoin': 'round',
-        'stroke-linecap': 'round',
+        d: polygon(matFace(prop, skeleton).corners, proj, ink),
+        ...strokeOr(ink, colour, style.props.fill),
       });
     case 'block': {
       const at = resolveAnchor(prop.at, skeleton);
@@ -165,47 +172,61 @@ const renderProp = (prop: Prop, ctx: RenderContext): SvgNode => {
         [-prop.width / 2, prop.height / 2],
       ];
       const corners: Vec2[] = local.map((p) => add(at, rotate(p, prop.rotation)));
-      return el('path', { 'data-prop': 'block', d: polygon(corners, proj), fill: style.props.fill, ...attrs });
+      return el('path', {
+        'data-prop': 'block',
+        d: polygon(corners, proj, ink),
+        ...strokeOr(ink, colour, style.props.fill),
+      });
     }
     case 'strap': {
+      // A strap hangs, so it is walked through its own sag rather than drawn straight.
       const a = resolveAnchor(prop.from, skeleton);
       const b = resolveAnchor(prop.to, skeleton);
       const mid = add(scaleVec(add(a, b), 0.5), [0, -Math.abs(prop.sag)]);
-      const [ax, ay] = proj.p(a);
-      const [mx, my] = proj.p(mid);
-      const [bx, by] = proj.p(b);
-      const p = path();
-      p.moveTo(num(ax), num(ay));
-      p.quadraticCurveTo(num(mx), num(my), num(bx), num(by));
-      return el('path', { 'data-prop': 'strap', d: p.toString(), fill: 'none', ...attrs });
+      const curve: Vec2[] = Array.from({ length: 9 }, (_, i): Vec2 => {
+        const t = i / 8;
+        const u = 1 - t;
+        return [
+          u * u * a[0] + 2 * u * t * mid[0] + t * t * b[0],
+          u * u * a[1] + 2 * u * t * mid[1] + t * t * b[1],
+        ];
+      });
+      return el('path', {
+        'data-prop': 'strap',
+        d: polygon(curve, proj, ink, false),
+        ...strokeOr(ink, colour),
+      });
     }
     case 'wall': {
-      const [x1, y1] = proj.p([prop.x, skeleton.bounds.minY]);
-      const [x2, y2] = proj.p([prop.x, skeleton.bounds.maxY]);
-      return el('line', { 'data-prop': 'wall', x1, y1, x2, y2, ...attrs });
+      const line: Vec2[] = [
+        [prop.x, skeleton.bounds.minY],
+        [prop.x, skeleton.bounds.maxY],
+      ];
+      return el('path', { 'data-prop': 'wall', d: polygon(line, proj, ink, false), ...strokeOr(ink, colour) });
     }
     case 'surfboard': {
       const centre = prop.at ?? add(centroid(prop.under, skeleton), prop.offset);
       const outline = boardOutline(centre, prop.length, prop.rotation, prop.width);
-      const stringerEnd = add(centre, fromPolar(prop.rotation, prop.length / 2));
-      const stringerStart = add(centre, fromPolar(prop.rotation + 180, prop.length / 2));
-      const [sx1, sy1] = proj.p(stringerStart);
-      const [sx2, sy2] = proj.p(stringerEnd);
+      const stringer: Vec2[] = [
+        add(centre, fromPolar(prop.rotation + 180, prop.length / 2)),
+        add(centre, fromPolar(prop.rotation, prop.length / 2)),
+      ];
       return group({ 'data-prop': 'surfboard' }, [
-        el('path', { d: polygon(outline, proj), fill: style.props.fill, ...attrs, 'stroke-linejoin': 'round' }),
-        el('line', { 'data-part': 'stringer', x1: sx1, y1: sy1, x2: sx2, y2: sy2, ...attrs, opacity: 0.5 }),
+        el('path', { d: polygon(outline, proj, ink), ...strokeOr(ink, colour, style.props.fill) }),
+        el('path', {
+          'data-part': 'stringer',
+          d: polygon(stringer, proj, ink, false),
+          ...strokeOr(ink, colour),
+          opacity: 0.5,
+        }),
       ]);
     }
     case 'wave': {
-      const pts = wavePoints(prop, cx).map((p) => proj.p(p));
-      const d = smooth(pts as Vec2[]);
+      const crest: Ink = { ...ink, width: ink.width * 1.5 };
       return el('path', {
         'data-prop': 'wave',
-        d: d ?? '',
-        fill: 'none',
-        ...attrs,
-        'stroke-width': style.props.strokeWidth * 1.5 * proj.s,
-        'stroke-linecap': 'round',
+        d: polygon(wavePoints(prop, cx), proj, crest, false),
+        ...strokeOr(crest, colour),
       });
     }
   }
