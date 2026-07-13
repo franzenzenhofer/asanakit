@@ -33,7 +33,7 @@ export interface Style {
      * the rim as the head turns - and a shade over the back of the skull that
      * grows as the face turns away. Never a face.
      */
-    readonly nose: 'dot' | 'none';
+    readonly nose: 'stroke' | 'none';
     readonly noseRadius: number;
     readonly shade: string;
     readonly shadeOpacity: number;
@@ -88,7 +88,7 @@ const stick: Style = {
     strokeLeft: '#6b6b6b',
     strokeWidth: 0.022,
     lineCap: 'round',
-    joints: 'dots',
+    joints: 'none',
     jointRadius: 0.014,
     torsoWidth: 0,
     fill: 'none',
@@ -101,7 +101,7 @@ const stick: Style = {
     fill: '#ffffff',
     stroke: '#111111',
     strokeWidth: 0.02,
-    nose: 'dot',
+    nose: 'stroke',
     noseRadius: 0.011,
     shade: '#111111',
     shadeOpacity: 0.16,
@@ -132,7 +132,7 @@ const anatomy: Style = {
   ...stick,
   id: 'anatomy',
   label: 'Anatomical infographic',
-  figure: { ...stick.figure, stroke: '#3d3d3d', strokeLeft: '#8f8f8f', strokeWidth: 0.012, joints: 'dots', jointRadius: 0.009 },
+  figure: { ...stick.figure, stroke: '#3d3d3d', strokeLeft: '#8f8f8f', strokeWidth: 0.012, joints: 'none', jointRadius: 0.009 },
   head: { ...stick.head, fill: '#f5efe8', stroke: '#3d3d3d', strokeWidth: 0.012 },
   muscles: {
     show: true,

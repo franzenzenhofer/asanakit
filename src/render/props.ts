@@ -49,8 +49,6 @@ const WAVE_STEPS = 48;
 interface MatFace {
   /** The top face, in the picture plane. */
   readonly corners: readonly [Vec2, Vec2, Vec2, Vec2];
-  /** The forward arrow, lying flat on the mat. */
-  readonly arrow: readonly [Vec2, Vec2, Vec2];
 }
 
 const matFace = (prop: MatProp, skeleton: ViewSkeleton): MatFace => {
@@ -59,10 +57,8 @@ const matFace = (prop: MatProp, skeleton: ViewSkeleton): MatFace => {
     const [x, y] = rotateVec3(q, corner as Vec3);
     return [x, y];
   };
-  const model = matModel(prop, skeleton.source);
   return {
-    corners: model.top.map(flat) as unknown as readonly [Vec2, Vec2, Vec2, Vec2],
-    arrow: model.frontArrow.map(flat) as unknown as readonly [Vec2, Vec2, Vec2],
+    corners: matModel(prop, skeleton.source).top.map(flat) as unknown as readonly [Vec2, Vec2, Vec2, Vec2],
   };
 };
 
@@ -153,28 +149,18 @@ const renderProp = (prop: Prop, ctx: RenderContext): SvgNode => {
       const [x2, y2] = proj.p([cx + prop.width / 2, prop.y]);
       return el('line', { 'data-prop': 'ground', x1, y1, x2, y2, ...attrs, 'stroke-linecap': 'round' });
     }
-    case 'mat': {
-      const face = matFace(prop, skeleton);
-      // A flat arrow lying on the mat, pointing the way the practice faces.
-      // It is drawn in the mat's own ink, not a colour - the body is the
-      // subject, and the mat is only telling you which end is the front.
-      return group({ 'data-prop': 'mat' }, [
-        el('path', {
-          'data-part': 'surface',
-          d: polygon(face.corners, proj),
-          fill: style.props.fill,
-          ...attrs,
-          'stroke-linejoin': 'round',
-          'stroke-linecap': 'round',
-        }),
-        el('path', {
-          'data-part': 'front',
-          d: polygon(face.arrow, proj),
-          fill: style.props.accent,
-          stroke: 'none',
-        }),
-      ]);
-    }
+    case 'mat':
+      // Just the mat. The forward arrow belongs in the 3D scene, where you are
+      // flying around the thing and can lose your bearings; a flat drawing has
+      // a camera, and the camera already told you which way you are looking.
+      return el('path', {
+        'data-prop': 'mat',
+        d: polygon(matFace(prop, skeleton).corners, proj),
+        fill: style.props.fill,
+        ...attrs,
+        'stroke-linejoin': 'round',
+        'stroke-linecap': 'round',
+      });
     case 'block': {
       const at = resolveAnchor(prop.at, skeleton);
       const local: Vec2[] = [

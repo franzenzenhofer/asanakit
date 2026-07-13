@@ -1,7 +1,7 @@
 import type { JSX } from 'preact';
 import { CAMERA_PRESETS, CAMERA_PRESET_IDS, resolveCamera, type CameraAngles } from '@asanakit/core/camera.js';
 import { STYLE_IDS, STYLES } from '@asanakit/render/styles.js';
-import { commitGesture, dispatch, pose, styleId } from '../state/doc.js';
+import { commitGesture, dispatch, pose, showJoints, styleId } from '../state/doc.js';
 import type { RootField } from '../state/actions.js';
 import { SliderRow } from '../ui/slider-row.js';
 
@@ -81,6 +81,14 @@ export const PosePanel = (): JSX.Element => {
             </button>
           ))}
         </div>
+        <label class="check-row">
+          <input
+            type="checkbox"
+            checked={showJoints.value}
+            onChange={(e) => (showJoints.value = (e.target as HTMLInputElement).checked)}
+          />
+          Show joint dots
+        </label>
       </div>
 
       <div class="field">

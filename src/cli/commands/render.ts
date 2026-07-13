@@ -31,6 +31,7 @@ interface CommonOptions {
   title?: boolean;
   caption?: boolean;
   muscles?: boolean;
+  joints?: boolean;
   background?: string;
   optimize?: boolean;
   scale?: string;
@@ -38,12 +39,14 @@ interface CommonOptions {
 }
 
 const figureOverride = (o: CommonOptions): RenderOptions['styleOverride'] =>
-  o.leftColor === undefined && o.rightColor === undefined
+  o.leftColor === undefined && o.rightColor === undefined && o.joints === undefined
     ? undefined
     : {
         figure: {
           ...(o.leftColor === undefined ? {} : { strokeLeft: o.leftColor }),
           ...(o.rightColor === undefined ? {} : { stroke: o.rightColor }),
+          // Joint dots are scaffolding, not the drawing: off unless asked for.
+          ...(o.joints === undefined ? {} : { joints: o.joints ? ('dots' as const) : ('none' as const) }),
         },
       };
 
@@ -84,6 +87,7 @@ const withCommonOptions = (cmd: Command): Command =>
     .option('--settle', 'drop the figure onto the ground with the physics engine before rendering')
     .option('--left-color <color>', 'stroke for LEFT-side bones (default: a dark gray, per style)')
     .option('--right-color <color>', 'stroke for right-side and centre bones')
+    .option('--joints', 'draw a dot at every joint (off by default: they are scaffolding, not the drawing)')
     .option('--title', 'draw the pose name above the figure')
     .option('--caption', 'draw the teaching cues below the figure')
     .option('--muscles', 'force the muscle layer on')

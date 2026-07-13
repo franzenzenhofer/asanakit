@@ -4,7 +4,7 @@ import { parse as parseYamlRaw } from 'yaml';
 import { parsePose, type PoseSpecInput } from '@asanakit/model/index.js';
 import { renderSvg } from '@asanakit/render/scene.js';
 import { collection } from '../state/app.js';
-import { blankPose, loadPose, pose, styleId } from '../state/doc.js';
+import { blankPose, loadPose, pose, styleId, styleOverride } from '../state/doc.js';
 import { parsed } from '../state/preview.js';
 import { toYaml } from '../state/serialize.js';
 import { can } from '../state/entitlements.js';
@@ -21,7 +21,10 @@ export const ExportMenu = ({ onClose }: { onClose: () => void }): JSX.Element =>
 
   const exportSvg = (): string | null => {
     if (spec === undefined) return null;
-    return renderSvg({ ...spec, physics: 'none' }, { style: styleId.value, width: 900, height: 1100, title: true, caption: true });
+    return renderSvg(
+      { ...spec, physics: 'none' },
+      { style: styleId.value, styleOverride: styleOverride(), width: 900, height: 1100, title: true, caption: true },
+    );
   };
 
   const act = (fn: () => void | Promise<void>): void => {

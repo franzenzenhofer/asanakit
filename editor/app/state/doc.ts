@@ -26,6 +26,18 @@ export const selectedBone = signal<BoneId | null>(null);
 export const linkSides = signal(false);
 export const view = signal<'2d' | '3d'>('2d');
 export const styleId = signal<StyleId>('stick');
+
+/**
+ * Joint dots. Off by default: they are scaffolding for an author mid-edit, not
+ * part of the drawing, and a finished figure should not be covered in them.
+ * Whatever is on screen is what exports - the toggle feeds the same style
+ * override both go through.
+ */
+export const showJoints = signal(false);
+
+export const styleOverride = (): { figure: { joints: 'dots' | 'none' } } => ({
+  figure: { joints: showJoints.value ? 'dots' : 'none' },
+});
 export const history = signal<History>(emptyHistory);
 
 let lastWasTransient = false;
