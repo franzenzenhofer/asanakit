@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'preact/hooks';
 import type { JSX } from 'preact';
-import { selectedBone } from '../state/doc.js';
+import { selectedBone, selectedJoint } from '../state/doc.js';
 import { previewSvg } from '../state/preview.js';
 import { attachHitTargets, boneAtPoint, markSelected } from './hit-targets.js';
 
@@ -41,6 +41,7 @@ export const Canvas2d = (): JSX.Element => {
     if (!(root instanceof SVGSVGElement)) return;
     // A miss clears the selection; a hit selects (repeat taps cycle stacked bones).
     selectedBone.value = boneAtPoint(selectedBone.value, event.clientX, event.clientY, root);
+    selectedJoint.value = null;
   };
 
   return <div class="canvas2d" ref={host} onPointerDown={onPointerDown} />;

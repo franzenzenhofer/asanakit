@@ -3,14 +3,14 @@ import { AmbientLight, Color, DirectionalLight, GridHelper, PerspectiveCamera, S
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import type { MuscleId } from '@asanakit/anatomy/muscles.js';
 import type { CameraAngles } from '@asanakit/core/camera.js';
-import type { BoneId, Skeleton } from '@asanakit/core/types.js';
+import type { BoneId, LandmarkId, Skeleton } from '@asanakit/core/types.js';
 import type { Prop } from '@asanakit/model/schema.js';
 import { buildFigureScene } from '@asanakit/three/scene.js';
-import { aimFromPointer, boneOfMesh, jointOfMesh, pickBone, type AimAngles } from './pick.js';
+import { aimFromPointer, boneOfMesh, jointOfMesh, pickHandle, type AimAngles } from './pick.js';
 
 export interface ViewerCallbacks {
-  /** A bone was tapped (null: empty space, clears the selection). */
-  readonly onSelect?: (bone: BoneId | null) => void;
+  /** A bone or a joint handle was tapped (null: empty space, clears the selection). */
+  readonly onSelect?: (bone: BoneId | null, joint: LandmarkId | null) => void;
   /** A bone tip is being dragged toward a new world direction; fires while the finger moves. */
   readonly onAim?: (bone: BoneId, angles: AimAngles) => void;
   /** The aim gesture ended - close the undo step. */
@@ -141,12 +141,13 @@ export const createViewer = (mount: HTMLElement, callbacks: ViewerCallbacks = {}
   const onPointerDown = (event: PointerEvent): void => {
     if (figure === null || skeleton === null || !event.isPrimary) return;
     const rect = renderer.domElement.getBoundingClientRect();
-    const bone = pickBone(event.clientX, event.clientY, { rect, camera, figure });
-    if (bone === null) {
+    const hit = pickHandle(event.clientX, event.clientY, { rect, camera, figure });
+    if (hit === null) {
       // Empty space: OrbitControls owns the gesture; a plain tap clears the selection.
-      if (selected !== null) callbacks.onSelect?.(null);
+      if (selected !== null) callbacks.onSelect?.(null, null);
       return;
     }
+    const bone = hit.bone;
     const segment = skeleton.bones[bone];
     drag = {
       bone,
@@ -158,7 +159,7 @@ export const createViewer = (mount: HTMLElement, callbacks: ViewerCallbacks = {}
     };
     controls.enabled = false;
     renderer.domElement.setPointerCapture(event.pointerId);
-    callbacks.onSelect?.(bone);
+    callbacks.onSelect?.(bone, hit.joint);
   };
 
   const onPointerMove = (event: PointerEvent): void => {
@@ -206,7 +207,7 @@ export const createViewer = (mount: HTMLElement, callbacks: ViewerCallbacks = {}
       if (figure !== null) scene.remove(figure);
       originals.clear();
       skeleton = nextSkeleton;
-      figure = buildFigureScene(nextSkeleton, { engaged: [...engaged], stretched: [...stretched], props: [...props] });
+      figure = buildFigureScene(nextSkeleton, { handles: true, engaged: [...engaged], stretched: [...stretched], props: [...props] });
       scene.add(figure);
       applyHighlight();
     },

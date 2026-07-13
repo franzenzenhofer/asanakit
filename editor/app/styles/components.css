@@ -491,3 +491,12 @@
   .modal { border-radius: var(--radius-lg); }
   .library { padding: 20px 28px; }
 }
+
+/* The joint you are holding, and the limb it moves. */
+.bone-header .bone-sub {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--ink-faint);
+  text-transform: none;
+}

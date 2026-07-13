@@ -64,33 +64,41 @@ const setRay = (x: number, y: number, context: PickContext): void => {
   raycaster.setFromCamera(pointer, context.camera);
 };
 
-const castAt = (x: number, y: number, context: PickContext): BoneId | null => {
+/** What your finger landed on: the bone it will move, and the joint it took hold of. */
+export interface Handle {
+  readonly bone: BoneId;
+  /** The joint you grabbed, if you grabbed one rather than the bone's middle. */
+  readonly joint: LandmarkId | null;
+}
+
+const castAt = (x: number, y: number, context: PickContext): Handle | null => {
   setRay(x, y, context);
   const hits = raycaster.intersectObjects(context.figure.children, false);
 
   // A joint sits ON its bones, so it wins: if your finger is over a knee you meant
   // the knee, not whichever of the thigh and the shin happens to be nearer the eye.
   for (const hit of hits) {
-    const joint = jointOfMesh(hit.object as Mesh);
-    if (joint !== null) return joint;
+    const mesh = hit.object as Mesh;
+    const bone = jointOfMesh(mesh);
+    if (bone !== null) return { bone, joint: landmarkOfMesh(mesh) };
   }
   for (const hit of hits) {
     const bone = boneOfMesh(hit.object as Mesh);
-    if (bone !== null) return bone;
+    if (bone !== null) return { bone, joint: null };
   }
   return null;
 };
 
 /** Fingertip offsets: the exact point first, then a widening cross, so thin capsules are tappable. */
-const TOUCH_SPREAD = [0, 8, 16] as const;
+const TOUCH_SPREAD = [0, 8, 16, 24] as const;
 
-export const pickBone = (x: number, y: number, context: PickContext): BoneId | null => {
+export const pickHandle = (x: number, y: number, context: PickContext): Handle | null => {
   for (const spread of TOUCH_SPREAD) {
     const offsets: readonly [number, number][] =
       spread === 0 ? [[0, 0]] : [[spread, 0], [-spread, 0], [0, spread], [0, -spread]];
     for (const [dx, dy] of offsets) {
-      const bone = castAt(x + dx, y + dy, context);
-      if (bone !== null) return bone;
+      const hit = castAt(x + dx, y + dy, context);
+      if (hit !== null) return hit;
     }
   }
   return null;

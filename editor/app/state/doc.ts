@@ -1,5 +1,5 @@
 import { signal } from '@preact/signals';
-import type { BoneId } from '@asanakit/core/types.js';
+import type { BoneId, LandmarkId } from '@asanakit/core/types.js';
 import { propSchema, type PoseSpecInput } from '@asanakit/model/index.js';
 import type { StyleId } from '@asanakit/render/styles.js';
 import { reduce, type EditorAction } from './actions.js';
@@ -23,6 +23,14 @@ export const blankPose = (): PoseSpecInput => ({
 
 export const pose = signal<PoseSpecInput>(blankPose());
 export const selectedBone = signal<BoneId | null>(null);
+/**
+ * The JOINT you took hold of, when you grabbed a knob rather than a limb. The
+ * sliders still belong to the bone it moves - a knee is not a thing you can set
+ * an angle on, it is the end of a thigh - but the panel says what you are
+ * holding, because otherwise grabbing a knee and being shown "Thigh L" reads as
+ * the app ignoring you.
+ */
+export const selectedJoint = signal<LandmarkId | null>(null);
 export const linkSides = signal(false);
 export const view = signal<'2d' | '3d'>('2d');
 export const styleId = signal<StyleId>('stick');

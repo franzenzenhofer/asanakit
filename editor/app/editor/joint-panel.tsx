@@ -1,8 +1,8 @@
 import { useState } from 'preact/hooks';
 import type { JSX } from 'preact';
 import { channelsOf, isHinge, ROM, termFor, type Channel, type Range } from '@asanakit/anatomy/rom.js';
-import type { BoneId } from '@asanakit/core/types.js';
-import { commitGesture, dispatch, linkSides, pose, selectedBone } from '../state/doc.js';
+import type { BoneId, LandmarkId } from '@asanakit/core/types.js';
+import { commitGesture, dispatch, linkSides, pose, selectedBone, selectedJoint } from '../state/doc.js';
 import { counterpart, readJoint, solvedWorldDirection } from '../state/joints.js';
 import { SliderRow } from '../ui/slider-row.js';
 import { LinkIcon } from '../ui/icons.js';
@@ -15,7 +15,7 @@ const GROUPS: readonly { name: string; bones: readonly BoneId[] }[] = [
   { name: 'Leg R', bones: ['hipR', 'thighR', 'shinR', 'footR'] },
 ];
 
-const label = (bone: BoneId): string => bone.replace(/([A-Z])$/, ' $1').replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase();
+const label = (bone: string): string => bone.replace(/([A-Z])$/, ' $1').replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase();
 
 const WORLD_CHANNELS = [
   { channel: 'azimuth', label: 'Azimuth', min: -180, max: 180 },
@@ -36,6 +36,36 @@ const channelLabel = (bone: BoneId, channel: Channel, value: number): string => 
   // At rest the control names both directions; once it moves, it names the one it is doing.
   return value === 0 ? `${range.positive} / ${range.negative}` : (termFor(bone, channel, value) ?? channel);
 };
+
+/**
+ * What you are holding, and what it moves. Grab a knee and the panel says "Knee L"
+ * - because being shown "Thigh L" when you took hold of a knee reads as the app
+ * ignoring you, even though the thigh is the honest answer to what the sliders set.
+ */
+const Header = ({
+  bone,
+  joint,
+  picking,
+  onPick,
+}: {
+  bone: BoneId;
+  joint: LandmarkId | null;
+  picking: boolean;
+  onPick: () => void;
+}): JSX.Element => (
+  <div class="bone-header">
+    <span class="bone-name serif">
+      {joint === null ? label(bone) : label(joint)}
+      {joint !== null && <span class="bone-sub"> moves {label(bone)}</span>}
+    </span>
+    <button class="chip" onClick={onPick} aria-expanded={picking}>
+      {picking ? 'done' : 'change'}
+    </button>
+    <button class="btn subtle" onClick={() => dispatch({ type: 'reset-bone', bone })}>
+      Reset
+    </button>
+  </div>
+);
 
 const BonePicker = ({ onPick }: { onPick: (bone: BoneId) => void }): JSX.Element => (
   <div class="field">
@@ -106,12 +136,16 @@ const ChannelSliders = ({ bone }: { bone: BoneId }): JSX.Element => {
 export const JointPanel = (): JSX.Element => {
   const [picking, setPicking] = useState(false);
   const bone = selectedBone.value;
+  const joint = selectedJoint.value;
   const doc = pose.value;
 
   if (bone === null) {
     return (
       <div>
-        <p class="panel-hint">Tap a limb on the figure to pose it - or pick a bone:</p>
+        <p class="panel-hint">
+          Tap a limb to pose it - or, in 3D, take hold of one of the knobs at the joints and pull. Everything
+          hanging off it comes with you.
+        </p>
         <BonePicker onPick={(b) => (selectedBone.value = b)} />
       </div>
     );
@@ -122,15 +156,7 @@ export const JointPanel = (): JSX.Element => {
 
   return (
     <div>
-      <div class="bone-header">
-        <span class="bone-name serif">{label(bone)}</span>
-        <button class="chip" onClick={() => setPicking(!picking)} aria-expanded={picking}>
-          {picking ? 'done' : 'change bone'}
-        </button>
-        <button class="btn subtle" onClick={() => dispatch({ type: 'reset-bone', bone })}>
-          Reset
-        </button>
-      </div>
+      <Header bone={bone} joint={joint} picking={picking} onPick={() => setPicking(!picking)} />
       {picking && <BonePicker onPick={(b) => { selectedBone.value = b; setPicking(false); }} />}
 
       <div class="field-row" style="align-items:center; margin-bottom: 10px;">

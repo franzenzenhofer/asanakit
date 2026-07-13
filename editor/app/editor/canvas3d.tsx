@@ -4,7 +4,7 @@ import { resolveCamera } from '@asanakit/core/camera.js';
 import { DEFAULT_RIG } from '@asanakit/core/rig.js';
 import { solveSkeleton } from '@asanakit/core/skeleton.js';
 import { resolveFigure } from '@asanakit/model/index.js';
-import { commitGesture, dispatch, pose, selectedBone } from '../state/doc.js';
+import { commitGesture, dispatch, pose, selectedBone, selectedJoint } from '../state/doc.js';
 import { parsed } from '../state/preview.js';
 import type { ViewerHandle } from '../three/viewer.js';
 
@@ -30,7 +30,10 @@ export const Canvas3d = (): JSX.Element => {
       handle.current = createViewer(
         host.current,
         {
-          onSelect: (bone) => (selectedBone.value = bone),
+          onSelect: (bone, joint) => {
+            selectedBone.value = bone;
+            selectedJoint.value = joint;
+          },
           onAim: (bone, angles) => dispatch({ type: 'aim-bone', bone, ...angles }, { transient: true }),
           onAimEnd: commitGesture,
           onOrbit: (angles) =>

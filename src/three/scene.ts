@@ -15,12 +15,15 @@ import {
 } from 'three';
 import { MUSCLES, type MuscleId } from '../anatomy/muscles.js';
 import { headFrame, NOSE_FORWARD } from '../core/head.js';
-import type { BoneId, Skeleton } from '../core/types.js';
+import { boneEndingAt } from '../core/skeleton.js';
+import type { BoneId, LandmarkId, Skeleton } from '../core/types.js';
 import { midpoint3, sub3, len3, type Vec3 } from '../core/vec3.js';
 import type { Prop } from '../model/schema.js';
 import { buildPropMeshes } from './props.js';
 
 export interface FigureSceneOptions {
+  /** Draw the joints as grabbable HANDLES. The editor wants these; an export does not. */
+  readonly handles?: boolean;
   /** Bone capsule color for the right side and the centre; a light theme's ink. */
   readonly color?: string;
   /** The left side renders its own color, so profiles tell left from right. */
@@ -34,6 +37,14 @@ export interface FigureSceneOptions {
 const BONE_RADIUS = 0.016;
 const HEAD_RADIUS = 0.055;
 const JOINT_RADIUS = 0.02;
+/**
+ * A HANDLE is a joint you can take hold of. It is bigger than the bone it sits on
+ * and a different colour, because a control you cannot see is not a control - and
+ * the old joints were the bone's own colour and barely wider than it, which is
+ * exactly as grabbable as no joint at all.
+ */
+const HANDLE_RADIUS = 0.032;
+const HANDLE_COLOR = '#9aa4d4';
 
 /** Fixed tessellation, so the same skeleton always exports identical bytes. */
 const CAPSULE_SEGMENTS = { cap: 6, radial: 12 } as const;
@@ -143,11 +154,19 @@ const headMesh = (skeleton: Skeleton, mat: MeshStandardMaterial, shadeMat: MeshS
 const addJointSpheres = (
   group: Group,
   skeleton: Skeleton,
-  mats: { left: MeshStandardMaterial; base: MeshStandardMaterial },
+  mats: { left: MeshStandardMaterial; base: MeshStandardMaterial; handle: MeshStandardMaterial },
+  handles: boolean,
 ): void => {
   for (const [id, p] of Object.entries(skeleton.landmarks)) {
     if (id === 'headCenter' || id === 'headTop') continue;
-    const joint = new Mesh(new SphereGeometry(JOINT_RADIUS * skeleton.scale, 12, 8), id.endsWith('L') ? mats.left : mats.base);
+
+    // Only a landmark that ENDS a bone is a handle - the others move nothing, and
+    // offering to grab them would be a lie.
+    const grabbable = handles && boneEndingAt(id as LandmarkId) !== null;
+    const radius = (grabbable ? HANDLE_RADIUS : JOINT_RADIUS) * skeleton.scale;
+    const material = grabbable ? mats.handle : id.endsWith('L') ? mats.left : mats.base;
+
+    const joint = new Mesh(new SphereGeometry(radius, 16, 12), material);
     joint.name = `joint:${id}`;
     joint.position.set(p[0], p[1], p[2]);
     group.add(joint);
@@ -186,7 +205,7 @@ export const buildFigureScene = (skeleton: Skeleton, options: FigureSceneOptions
   }
 
   group.add(headMesh(skeleton, materialFor('head', 'center'), material(OCCIPUT_COLOR)));
-  addJointSpheres(group, skeleton, { left, base });
+  addJointSpheres(group, skeleton, { left, base, handle: material(HANDLE_COLOR) }, options.handles === true);
   for (const mesh of buildPropMeshes(options.props ?? [], skeleton)) group.add(mesh);
 
   return group;
