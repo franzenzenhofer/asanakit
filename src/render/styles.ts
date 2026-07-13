@@ -33,14 +33,7 @@ export interface Style {
     readonly fill: string;
     readonly stroke: string;
     readonly strokeWidth: number;
-    /**
-     * Which way is the figure looking? The convention of hand-drawn asana
-     * notation: a nose mark - a dot when the face is toward you, sliding to
-     * the rim as the head turns - and a shade over the back of the skull that
-     * grows as the face turns away. Never a face.
-     */
-    readonly nose: 'stroke' | 'none';
-    readonly noseRadius: number;
+    /** The back of the skull, greyed - which is what says where the figure is looking. */
     readonly shade: string;
     readonly shadeOpacity: number;
   };
@@ -108,8 +101,6 @@ const stick: Style = {
     fill: '#ffffff',
     stroke: '#111111',
     strokeWidth: 0.02,
-    nose: 'stroke',
-    noseRadius: 0.011,
     shade: '#111111',
     shadeOpacity: 0.16,
   },
@@ -139,6 +130,8 @@ const anatomy: Style = {
   ...stick,
   id: 'anatomy',
   label: 'Anatomical infographic',
+  // A medical plate is drawn, but it is drawn carefully.
+  hand: 0.4,
   figure: { ...stick.figure, stroke: '#3d3d3d', strokeLeft: '#8f8f8f', strokeWidth: 0.012, joints: 'none', jointRadius: 0.009 },
   head: { ...stick.head, fill: '#f5efe8', stroke: '#3d3d3d', strokeWidth: 0.012 },
   muscles: {
@@ -166,8 +159,8 @@ const silhouette: Style = {
     torsoWidth: 0.075,
     fill: '#111111',
   },
-  // A filled silhouette cannot shade its own skull: the nose mark carries the facing alone,
-  // in the ink of the background, the way a cut-paper figure would.
+  // A black silhouette cannot grey its own skull, so the shade is struck in the
+  // paper's own colour instead - the way a cut-paper figure would show it.
   head: {
     ...stick.head,
     rx: 0.05,
@@ -177,7 +170,6 @@ const silhouette: Style = {
     strokeWidth: 0.01,
     shade: '#ffffff',
     shadeOpacity: 0.22,
-    noseRadius: 0.012,
   },
 };
 
@@ -185,6 +177,8 @@ const blueprint: Style = {
   ...stick,
   id: 'blueprint',
   label: 'Blueprint',
+  // A blueprint is drawn with a ruler. That is the entire point of a blueprint.
+  hand: 0,
   background: '#f3f7fb',
   figure: { ...stick.figure, stroke: '#1b3a5c', strokeLeft: '#7591b3', strokeWidth: 0.012, jointRadius: 0.01 },
   head: {
@@ -207,6 +201,7 @@ const ink: Style = {
   ...stick,
   id: 'ink',
   label: 'Brush ink',
+  hand: 1,
   figure: { ...stick.figure, strokeLeft: '#5d5d5d', strokeWidth: 0.038, joints: 'none', jointRadius: 0, torsoWidth: 0.03 },
   head: { ...stick.head, rx: 0.05, ry: 0.064, strokeWidth: 0.032 },
 };
@@ -226,8 +221,9 @@ const minimal: Style = {
   ...stick,
   id: 'minimal',
   label: 'Minimal',
+  hand: 0.45,
   figure: { ...stick.figure, stroke: '#9aa0a6', strokeLeft: '#c6cbd0', strokeWidth: 0.01, joints: 'none', jointRadius: 0 },
-  head: { ...stick.head, stroke: '#9aa0a6', strokeWidth: 0.01, shade: '#9aa0a6', shadeOpacity: 0.18, noseRadius: 0.009 },
+  head: { ...stick.head, stroke: '#9aa0a6', strokeWidth: 0.01, shade: '#9aa0a6', shadeOpacity: 0.18 },
   props: { ...stick.props, stroke: '#9aa0a6', accent: '#9aa0a6' },
   annotation: { ...stick.annotation, stroke: '#9aa0a6', color: '#9aa0a6', accent: '#9aa0a6' },
 };

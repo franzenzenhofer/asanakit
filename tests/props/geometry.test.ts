@@ -161,15 +161,21 @@ describe('props in every output', () => {
 describe('left and right, told apart from the 3D model', () => {
   const pose = parsePose('asanakit: 2\nid: t\nname: T\ndiscipline: yoga\n', 't.pose.yaml');
 
-  test('left bones take the left stroke, right bones the base stroke', () => {
+  // A bone is a PEN MARK now - a filled outline - so its colour is its fill.
+  test('left bones take the left ink, right bones the base ink', () => {
     const svg = renderSvg(pose, { camera: 'side' });
-    expect(svg).toMatch(/data-bone="thighL" data-side="left"[^/]*stroke="#6b6b6b"/);
-    expect(svg).toMatch(/data-bone="thighR" data-side="right"[^/]*stroke="#111111"/);
+    expect(svg).toMatch(/data-bone="thighL" data-side="left"[^/]*fill="#6b6b6b"/);
+    expect(svg).toMatch(/data-bone="thighR" data-side="right"[^/]*fill="#111111"/);
   });
 
   test('the colors are configurable per render', () => {
     const svg = renderSvg(pose, { styleOverride: { figure: { strokeLeft: '#ff0000', stroke: '#00ff00' } } });
-    expect(svg).toMatch(/data-bone="thighL"[^/]*stroke="#ff0000"/);
-    expect(svg).toMatch(/data-bone="thighR"[^/]*stroke="#00ff00"/);
+    expect(svg).toMatch(/data-bone="thighL"[^/]*fill="#ff0000"/);
+    expect(svg).toMatch(/data-bone="thighR"[^/]*fill="#00ff00"/);
+  });
+
+  test('a ruled style still strokes them, as a ruled style should', () => {
+    const svg = renderSvg(pose, { style: 'blueprint', camera: 'side' });
+    expect(svg).toMatch(/data-bone="thighL"[^/]*stroke="#7591b3"/);
   });
 });

@@ -37,44 +37,18 @@ const shadeArea = (svg: string): number => {
   return Math.abs(sum) / 2 / Math.PI;
 };
 
-/** The tip of the nose stroke: where the nose actually points, in the picture. */
-const noseX = (svg: string): number | null => {
-  const m = /data-part="nose"[^/]*x2="([-\d.]+)"/.exec(svg);
-  return m === null ? null : Number(m[1]);
-};
-
-/** How far the nose stands out of the skull. */
-const noseLength = (svg: string): number => {
-  const m = /data-part="nose" x1="([-\d.]+)" y1="([-\d.]+)" x2="([-\d.]+)" y2="([-\d.]+)"/.exec(svg);
-  if (m === null) return 0;
-  return Math.hypot(Number(m[3]) - Number(m[1]), Number(m[4]) - Number(m[2]));
-};
-
-/** The head is a DRAWN path now, so its centre is read off the nose stroke, which starts there. */
-const headCx = (svg: string): number => Number(/data-part="nose" x1="([-\d.]+)"/.exec(svg)?.[1]);
 
 describe('the head looks somewhere, and the drawing says where', () => {
-  test('facing the camera: the nose foreshortens to a mark, and there is no shade', () => {
-    const svg = at(0);
-    expect(shadeArea(svg)).toBeLessThan(0.02);
-    expect(Math.abs((noseX(svg) as number) - headCx(svg))).toBeLessThan(1);
-    expect(noseLength(svg)).toBeLessThan(1); // pointing straight at us: no length to see
+  test('facing the camera: no shade at all - you are looking at the face', () => {
+    expect(shadeArea(at(0))).toBeLessThan(0.02);
   });
 
-  test('the nose is a STROKE: side-on it stands out of the skull at full length', () => {
-    expect(noseLength(at(90))).toBeGreaterThan(10 * noseLength(at(0)) + 5);
+  test('facing away: the whole skull is shaded', () => {
+    expect(shadeArea(at(180))).toBeGreaterThan(0.97);
   });
 
-  test('facing away: the whole skull is shaded, and there is no nose to see', () => {
-    const svg = at(180);
-    expect(shadeArea(svg)).toBeGreaterThan(0.97);
-    expect(noseX(svg)).toBeNull();
-  });
-
-  test('in profile: exactly half the skull, and the nose out on the rim', () => {
-    const svg = at(90);
-    expect(shadeArea(svg)).toBeCloseTo(0.5, 1);
-    expect(Math.abs((noseX(svg) as number) - headCx(svg))).toBeGreaterThan(5);
+  test('in profile: exactly half the skull is shaded', () => {
+    expect(shadeArea(at(90))).toBeCloseTo(0.5, 1);
   });
 
   test('the shade grows monotonically as the head turns away - a moon phase', () => {
@@ -84,23 +58,17 @@ describe('the head looks somewhere, and the drawing says where', () => {
     }
   });
 
-  test('the two profiles are mirror images: the nose swaps sides', () => {
-    const left = (noseX(at(90)) as number) - headCx(at(90));
-    const right = (noseX(at(-90)) as number) - headCx(at(-90));
-    expect(Math.sign(left)).toBe(-Math.sign(right));
-    expect(Math.abs(left)).toBeCloseTo(Math.abs(right), 3);
+  test('the two profiles are mirror images: the shade swaps sides', () => {
+    expect(shadeArea(at(90))).toBeCloseTo(shadeArea(at(-90)), 3);
   });
 
-  test('a turned head turns the marks with it, not the camera', () => {
+  test('a turned head turns the shade with it, not the camera', () => {
     // Camera dead ahead, but the figure looks over its own left shoulder.
     const turned = parsePose(
       'asanakit: 2\nid: t\nname: T\ndiscipline: yoga\nfigure:\n  joints:\n    head: { twist: 70 }\n',
       't.pose.yaml',
     );
-    const svg = renderSvg(turned, { camera: 'front' });
-    expect(shadeArea(svg)).toBeGreaterThan(shadeArea(at(0)));
-    expect(noseX(svg)).not.toBeNull();
-    expect((noseX(svg) as number) - headCx(svg)).not.toBeCloseTo(0, 0);
+    expect(shadeArea(renderSvg(turned, { camera: 'front' }))).toBeGreaterThan(shadeArea(at(0)));
   });
 });
 

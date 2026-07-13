@@ -42,17 +42,25 @@ const torsoDepth = (skeleton: ViewSkeleton): number => {
   return depths.reduce((sum, d) => sum + d, 0) / depths.length;
 };
 
-/** A bone, struck as a drawn stroke rather than ruled between two points. */
+/**
+ * A bone, laid down as a pen mark. perfect-freehand gives back the OUTLINE of
+ * the mark, so it is filled, not stroked - which is what a pen mark is. A style
+ * with no hand in it (`hand: 0`) gets the old ruled line, stroked as before.
+ */
 const boneLine = (bone: ViewBone, farOpacity: number | undefined, ctx: RenderContext): SvgNode => {
   const { proj, style } = ctx;
+  const colour = bone.side === 'left' ? style.figure.strokeLeft : style.figure.stroke;
+  const width = style.figure.strokeWidth * proj.s;
+  const d = drawnLine(proj.p(bone.start), proj.p(bone.end), { hand: style.hand, width });
+
   return el('path', {
     'data-bone': bone.id,
     'data-side': bone.side,
-    d: drawnLine(proj.p(bone.start), proj.p(bone.end), style.hand),
-    fill: 'none',
-    stroke: bone.side === 'left' ? style.figure.strokeLeft : style.figure.stroke,
-    'stroke-width': style.figure.strokeWidth * proj.s,
-    'stroke-linecap': style.figure.lineCap,
+    d,
+    fill: style.hand > 0 ? colour : 'none',
+    stroke: style.hand > 0 ? 'none' : colour,
+    'stroke-width': style.hand > 0 ? undefined : width,
+    'stroke-linecap': style.hand > 0 ? undefined : style.figure.lineCap,
     opacity: farOpacity,
   });
 };

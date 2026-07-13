@@ -3,67 +3,95 @@
  *
  * That is the whole point of it: it is not a screenshot of the 3D model and it
  * is not a CAD plot. It is the picture that goes on paper, and a picture on
- * paper was drawn by a hand - so the lines are not ruled. They bow, they
- * overshoot the corner they were aiming at, and no two of them are quite alike.
+ * paper was drawn with a pen - so a line here is not a line, it is a STROKE. It
+ * has a body: it swells where the pen pressed and tapers where it lifted, and it
+ * wanders a hair off the ruler on the way.
  *
- * The drawing itself is done by rough.js, which is very good at this and which
- * we are not going to reimplement. All this module owns is the two things
- * rough.js cannot know:
+ * `perfect-freehand` lays the ink - the library tldraw draws with - and we are
+ * not going to reimplement it. It takes the points a hand moved through and
+ * gives back the OUTLINE of the mark that hand would leave, which is why these
+ * come back filled rather than stroked: a real pen mark is a shape, not a path
+ * with a width.
  *
- *  - the SEED. rough.js is random unless you give it one, and a library whose
- *    renders are byte-golden cannot have a random anything. So the seed is a
- *    hash of the stroke's own geometry: the same line always draws the same,
- *    on every machine, forever - and two different bones still draw differently,
- *    which is exactly what a hand does.
- *  - `hand`, one number from the style, that says how much of a hand there is in
- *    the line at all. 0 is a ruler; 1 is a pen held loosely.
+ * What this module owns is the two things the ink cannot know:
+ *
+ *  - the WANDER. perfect-freehand will faithfully draw whatever it is given,
+ *    including a perfectly straight line - so the points are nudged first, by a
+ *    hash of the stroke's own geometry. Never a random number: a library whose
+ *    renders are byte-golden cannot have a random anything. The same line draws
+ *    the same on every machine forever, and two different bones still draw
+ *    differently, which is exactly what a hand does.
+ *  - `hand`, one style token: how much of a hand is in the line at all. 0 is a
+ *    ruler, for anyone who wants the technical plot back; 1 is a pen held loosely.
  */
-import type { Drawable, Options } from 'roughjs/bin/core.js';
-import rough from 'roughjs/bundled/rough.esm.js';
 import { path } from 'd3-path';
+import { getStroke } from 'perfect-freehand';
 import type { Vec2 } from '../core/vec2.js';
 import { num } from './svg.js';
 
-/**
- * Bundlers and Node disagree about where a CommonJS-flavoured default export
- * lands, so take it from whichever hand is holding it. This is interop, not
- * cleverness, and it is the whole of it.
- */
-const lib = ((rough as { default?: typeof rough }).default ?? rough);
-const generator = lib.generator();
-
-/** rough.js wants a 32-bit integer seed, and it must fall out of the geometry. */
-const seedOf = (points: readonly Vec2[]): number => {
-  let hash = 0x811c9dc5;
-  for (const [x, y] of points) {
-    // Round first: a coordinate that wobbles in its last float bit must not
-    // change the drawing, or "the same pose" would stop meaning the same picture.
-    for (const value of [num(x), num(y)]) {
-      hash ^= Math.imul(Math.round(value * 1000), 0x01000193);
-      hash = Math.imul(hash, 0x01000193);
-    }
-  }
-  return Math.abs(hash) % 2 ** 31;
+/** A hash, not a random number - see above. Same geometry in, same wander out. */
+const noise = (seed: number, salt: number): number => {
+  const x = Math.sin(seed * 12.9898 + salt * 78.233) * 43758.5453;
+  return (x - Math.floor(x)) * 2 - 1;
 };
 
-/** How loose the pen is, per unit of `hand`. Beyond this it stops being a drawing and starts being a scribble. */
-const ROUGHNESS = 1.1;
-const BOWING = 1.4;
+const seedOf = (points: readonly Vec2[]): number => {
+  let seed = 0;
+  for (const [x, y] of points) seed += num(x) * 0.731 + num(y) * 1.317;
+  return seed;
+};
 
-const options = (points: readonly Vec2[], hand: number): Options => ({
-  seed: seedOf(points),
-  roughness: ROUGHNESS * hand,
-  bowing: BOWING * hand,
-  // The fill and the stroke come from the style, on the node itself. rough.js is
-  // only lending us its hand, not its palette.
-  disableMultiStroke: false,
-});
+/** How far a hand strays from the ruler, as a fraction of the stroke's own length. */
+const WANDER = 0.018;
+/** Points along a stroke: enough for the pen to breathe, few enough that it stays a line. */
+const SAMPLES = 8;
 
-const toPath = (drawable: Drawable): string =>
-  generator
-    .toPaths(drawable)
-    .map((piece) => piece.d)
-    .join(' ');
+/** The pen. Thinning gives the mark a living weight; the easing puts the swell in its middle. */
+const PEN = {
+  thinning: 0.4,
+  smoothing: 0.62,
+  streamline: 0.45,
+  simulatePressure: true,
+  easing: (t: number): number => Math.sin((t * Math.PI) / 2),
+} as const;
+
+/** perfect-freehand hands back the outline of the mark; close it, and it is fillable. */
+const outline = (points: readonly Vec2[], width: number): string => {
+  const stroke = getStroke(
+    points.map(([x, y]) => [x, y]),
+    { size: width, ...PEN },
+  ) as [number, number][];
+  const first = stroke[0];
+  if (first === undefined) return '';
+
+  const p = path();
+  p.moveTo(num(first[0]), num(first[1]));
+  for (const [x, y] of stroke.slice(1)) p.lineTo(num(x), num(y));
+  p.closePath();
+  return p.toString();
+};
+
+/**
+ * Walk from a to b the way a hand walks it: nearly straight, bowing a little.
+ * The ends are pinned - a bone must begin and end exactly at its joint, or the
+ * skeleton would come apart at the seams.
+ */
+const wander = (a: Vec2, b: Vec2, hand: number): Vec2[] => {
+  const dx = b[0] - a[0];
+  const dy = b[1] - a[1];
+  const length = Math.hypot(dx, dy);
+  if (length < 1e-6) return [a, b];
+
+  const seed = seedOf([a, b]);
+  const [nx, ny] = [-dy / length, dx / length];
+  const bow = WANDER * hand * length;
+
+  return Array.from({ length: SAMPLES + 1 }, (_, i): Vec2 => {
+    const t = i / SAMPLES;
+    const off = Math.sin(t * Math.PI) * bow * noise(seed, i);
+    return [a[0] + dx * t + nx * off, a[1] + dy * t + ny * off];
+  });
+};
 
 const ruled = (points: readonly Vec2[], close: boolean): string => {
   const p = path();
@@ -72,49 +100,70 @@ const ruled = (points: readonly Vec2[], close: boolean): string => {
   return p.toString();
 };
 
-/** A drawn line. `hand` 0 gives back an exactly straight path - a ruler, for when you want one. */
-export const drawnLine = (a: Vec2, b: Vec2, hand: number): string => {
-  if (hand <= 0) return ruled([a, b], false);
-  return toPath(generator.line(a[0], a[1], b[0], b[1], options([a, b], hand)));
-};
-
-/** A drawn shape: every edge struck by hand, closing back on itself. */
-export const drawnPolygon = (points: readonly Vec2[], hand: number, close = true): string => {
-  if (points.length < 2) return '';
-  if (hand <= 0) return ruled(points, close);
-
-  const pts = points.map(([x, y]): [number, number] => [x, y]);
-  const drawable = close
-    ? generator.polygon(pts, options(points, hand))
-    : generator.linearPath(pts, options(points, hand));
-  return toPath(drawable);
-};
-
-export interface DrawnEllipse {
-  readonly centre: Vec2;
-  readonly radii: Vec2;
-  /** Degrees clockwise, the way SVG turns. */
-  readonly rotation: number;
+export interface Ink {
+  /** How much of a hand is in the line. 0 is a ruler. */
+  readonly hand: number;
+  /** The width of the pen, in picture units. */
+  readonly width: number;
 }
 
 /**
- * A drawn skull. rough.js draws an axis-aligned ellipse, so the rotation is
- * carried by a transform on the node - which is what the caller does with it.
+ * A drawn stroke: the OUTLINE of the mark a pen would leave. FILL it, do not
+ * stroke it. With `hand: 0` you get the bare geometry back, to stroke as you like.
  */
-export const drawnEllipse = ({ centre, radii }: DrawnEllipse, hand: number): string => {
+export const drawnLine = (a: Vec2, b: Vec2, ink: Ink): string =>
+  ink.hand <= 0 ? ruled([a, b], false) : outline(wander(a, b, ink.hand), ink.width);
+
+/** A drawn shape: the pen goes round it in one movement. */
+export const drawnPolygon = (points: readonly Vec2[], ink: Ink, close = true): string => {
+  if (points.length < 2) return '';
+  if (ink.hand <= 0) return ruled(points, close);
+
+  const walked: Vec2[] = [];
+  const edges = close ? points.length : points.length - 1;
+  for (let i = 0; i < edges; i++) {
+    const a = points[i] as Vec2;
+    const b = points[(i + 1) % points.length] as Vec2;
+    walked.push(...wander(a, b, ink.hand).slice(i === 0 ? 0 : 1));
+  }
+  return outline(walked, ink.width);
+};
+
+export interface Ellipse {
+  readonly centre: Vec2;
+  readonly radii: Vec2;
+}
+
+const RING = 40;
+
+const ring = (ellipse: Ellipse, hand: number): Vec2[] => {
+  const [cx, cy] = ellipse.centre;
+  const [rx, ry] = ellipse.radii;
+  const seed = seedOf([ellipse.centre, ellipse.radii]);
+
+  return Array.from({ length: RING + 1 }, (_, i): Vec2 => {
+    const t = (i / RING) * Math.PI * 2;
+    // The wander rides on the radius, so the skull breathes instead of wobbling.
+    const r = 1 + WANDER * hand * noise(seed, i % RING) * 0.5;
+    return [cx + Math.cos(t) * rx * r, cy + Math.sin(t) * ry * r];
+  });
+};
+
+/** A drawn skull - the pen goes round, and comes back onto its own beginning. */
+export const drawnEllipse = (ellipse: Ellipse, ink: Ink): string =>
+  ink.hand <= 0 ? ruled(ring(ellipse, 0), true) : outline(ring(ellipse, ink.hand), ink.width);
+
+/** The bare ellipse: the FILL that sits under a drawn skull. Four beziers, the circle constant. */
+export const ellipsePath = ({ centre, radii }: Ellipse): string => {
   const [cx, cy] = centre;
   const [rx, ry] = radii;
-  if (hand <= 0) {
-    // A ruled ellipse, four beziers, the classic circle constant.
-    const k = 0.5522847498;
-    const p = path();
-    p.moveTo(num(cx + rx), num(cy));
-    p.bezierCurveTo(num(cx + rx), num(cy + ry * k), num(cx + rx * k), num(cy + ry), num(cx), num(cy + ry));
-    p.bezierCurveTo(num(cx - rx * k), num(cy + ry), num(cx - rx), num(cy + ry * k), num(cx - rx), num(cy));
-    p.bezierCurveTo(num(cx - rx), num(cy - ry * k), num(cx - rx * k), num(cy - ry), num(cx), num(cy - ry));
-    p.bezierCurveTo(num(cx + rx * k), num(cy - ry), num(cx + rx), num(cy - ry * k), num(cx + rx), num(cy));
-    p.closePath();
-    return p.toString();
-  }
-  return toPath(generator.ellipse(cx, cy, rx * 2, ry * 2, options([centre, radii], hand)));
+  const k = 0.5522847498;
+  const p = path();
+  p.moveTo(num(cx + rx), num(cy));
+  p.bezierCurveTo(num(cx + rx), num(cy + ry * k), num(cx + rx * k), num(cy + ry), num(cx), num(cy + ry));
+  p.bezierCurveTo(num(cx - rx * k), num(cy + ry), num(cx - rx), num(cy + ry * k), num(cx - rx), num(cy));
+  p.bezierCurveTo(num(cx - rx), num(cy - ry * k), num(cx - rx * k), num(cy - ry), num(cx), num(cy - ry));
+  p.bezierCurveTo(num(cx + rx * k), num(cy - ry), num(cx + rx), num(cy - ry * k), num(cx + rx), num(cy));
+  p.closePath();
+  return p.toString();
 };

@@ -1,14 +1,11 @@
 /**
  * A head that is looking somewhere.
  *
- * Hand-drawn asana notation never gives the figure a face; it gives it a nose -
- * a stroke out of the skull, standing clear of it in profile and shrinking to a
- * mark as the head turns toward you, and gone when you are looking at the back
- * of it. asanakit draws the same nose, except that it is a real point on the
- * real 3D head frame, so the projection puts it where it belongs at every camera
- * angle by itself, with no per-view special cases.
+ * A drawn figure gets no face - no eyes, no smile, and no nose either: a nose
+ * stuck on a stick figure reads as a mistake, not as a mark.
  *
- * The back of the skull is shaded, and the shape of that shade is the moon's:
+ * What says which way the head is looking is the BACK of it, greyed. And the
+ * shape of that grey is the moon's:
  * the boundary between the face-side and the back-side of a sphere projects to
  * an ellipse whose width collapses as the head turns broadside. Face-on, no
  * shade; in profile, exactly half; facing away, the whole skull. So the two
@@ -17,10 +14,10 @@
 import { headFrame } from '../core/head.js';
 import { rotateVec3 } from '../core/quat.js';
 import type { Vec2 } from '../core/vec2.js';
-import type { Vec3 } from '../core/vec3.js';
+
 import { viewQuat } from './camera.js';
 import type { RenderContext } from './context.js';
-import { drawnEllipse } from './hand.js';
+import { drawnEllipse, ellipsePath } from './hand.js';
 import { el, group, num, type SvgNode } from './svg.js';
 
 /** Below this the head is edge-on to the shade's own axis, and the terminator is drawn as a straight edge. */
@@ -78,8 +75,8 @@ const occiputPath = (dir: Vec2, toward: number): string => {
 };
 
 /**
- * The head: the skull, the shade over its back, and the nose mark. One group,
- * one depth - they are all the same object, and nothing ever sorts between them.
+ * The head: the skull and the shade over the back of it. One group, one depth -
+ * they are the same object, and nothing ever sorts between them.
  */
 export const renderHead = (ctx: RenderContext): SvgNode | null => {
   const { skeleton, proj, style } = ctx;
@@ -95,14 +92,32 @@ export const renderHead = (ctx: RenderContext): SvgNode | null => {
 
   // Drawn, not struck with a compass: a skull on paper is round the way a drawn
   // skull is round, which is nearly.
-  const skull = el('path', {
+  const ellipse = { centre: [cx, cy] as Vec2, radii: [rx, ry] as Vec2 };
+  const spin2 = rotation === 0 ? undefined : `rotate(${num(rotation)} ${num(cx)} ${num(cy)})`;
+
+  // The skull is the paper the head is drawn on - a flat fill - and the RIM is the
+  // pen mark round it, which is an ink shape of its own and therefore filled.
+  const paper = el('path', {
     'data-part': 'head',
-    d: drawnEllipse({ centre: [cx, cy], radii: [rx, ry], rotation }, style.hand),
-    transform: rotation === 0 ? undefined : `rotate(${num(rotation)} ${num(cx)} ${num(cy)})`,
+    d: ellipsePath(ellipse),
+    transform: spin2,
     fill: style.head.fill,
-    stroke: style.head.stroke,
-    'stroke-width': style.head.strokeWidth * proj.s,
+    stroke: style.hand > 0 ? 'none' : style.head.stroke,
+    'stroke-width': style.hand > 0 ? undefined : style.head.strokeWidth * proj.s,
   });
+
+  const rim =
+    style.hand > 0
+      ? el('path', {
+          'data-part': 'head-rim',
+          d: drawnEllipse(ellipse, { hand: style.hand, width: style.head.strokeWidth * proj.s }),
+          transform: spin2,
+          fill: style.head.stroke,
+          stroke: 'none',
+        })
+      : null;
+
+  const skull = rim === null ? paper : group({ 'data-part': 'skull' }, [paper, rim]);
 
   const face = facing(ctx);
   if (face === null || style.head.shadeOpacity <= 0) return group({ 'data-part': 'head-group' }, [skull]);
@@ -121,34 +136,6 @@ export const renderHead = (ctx: RenderContext): SvgNode | null => {
         fill: style.head.shade,
         opacity: style.head.shadeOpacity,
         stroke: 'none',
-      }),
-    );
-  }
-
-  // The nose: a stroke out of the head, from its centre to where the camera
-  // actually sees the tip. The projection does the rest - in profile it stands
-  // out from the skull at full length, face-on it foreshortens to a mark no
-  // bigger than its own width, and behind the head it is not drawn at all.
-  if (style.head.nose === 'stroke' && face.toward >= 0) {
-    const frame = headFrame(skeleton.source);
-    const q = viewQuat(skeleton.camera);
-    const flat = (p: Vec3): Vec2 => {
-      const [x, y] = rotateVec3(q, p);
-      return [x, y];
-    };
-    const [x1, y1] = proj.p(flat(frame.centre));
-    const [x2, y2] = proj.p(flat(frame.nose));
-
-    nodes.push(
-      el('line', {
-        'data-part': 'nose',
-        x1,
-        y1,
-        x2,
-        y2,
-        stroke: style.head.stroke,
-        'stroke-width': style.head.noseRadius * 2 * proj.s * skeleton.scale,
-        'stroke-linecap': 'round',
       }),
     );
   }

@@ -8,7 +8,7 @@ import type { Anchor, Prop } from '../model/schema.js';
 import { BOARD_WIDTH_RATIO, matModel, type MatProp } from '../props/geometry.js';
 import { viewQuat, type ViewSkeleton } from './camera.js';
 import type { RenderContext } from './context.js';
-import { drawnPolygon } from './hand.js';
+import { drawnPolygon, type Ink } from './hand.js';
 import { boundsOfPoints, type Projection } from './project.js';
 import { el, group, num, type SvgNode } from './svg.js';
 
@@ -91,8 +91,8 @@ const boardOutline = (centre: Vec2, length: number, rotationDeg: number, width?:
 };
 
 /** Props are drawn too - a mat on paper was drawn on paper. */
-const polygon = (points: readonly Vec2[], proj: Projection, hand = 0): string =>
-  drawnPolygon(points.map((pt) => proj.p(pt)), hand);
+const polygon = (points: readonly Vec2[], proj: Projection, ink?: Ink): string =>
+  drawnPolygon(points.map((pt) => proj.p(pt)), ink ?? { hand: 0, width: 1 });
 
 const propPoints = (prop: Prop, skeleton: ViewSkeleton): Vec2[] => {
   const cx = WORLD_X;
@@ -147,9 +147,10 @@ const renderProp = (prop: Prop, ctx: RenderContext): SvgNode => {
       // Just the mat. The forward arrow belongs in the 3D scene, where you are
       // flying around the thing and can lose your bearings; a flat drawing has
       // a camera, and the camera already told you which way you are looking.
+      // The mat is drawn with the same pen as the body, at the props' own weight.
       return el('path', {
         'data-prop': 'mat',
-        d: polygon(matFace(prop, skeleton).corners, proj, style.hand),
+        d: polygon(matFace(prop, skeleton).corners, proj),
         fill: style.props.fill,
         ...attrs,
         'stroke-linejoin': 'round',
